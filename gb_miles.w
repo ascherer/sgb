@@ -269,7 +269,7 @@ guarantee that the key value computed here will be between 0 and~$2^{31}$.
 
 @ Once all the nodes have been set up, we can use the |gb_linksort| routine
 to sort them into the desired order. This routine, which is part of
-the \\{gb\_graph} module, builds 128 lists from which the desired nodes
+the \\{GB\_\,SORT} module, builds 128 lists from which the desired nodes
 are readily accessed in decreasing order of weight, using random numbers
 to break ties.
 
