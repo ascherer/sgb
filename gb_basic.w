@@ -877,7 +877,7 @@ inversion. In this case the graph corresponds to a partial ordering that is a
 lattice with interesting properties; see the article by Bennett and Birkhoff
 @^Bennett, Mary Katherine@>
 @^Birkhoff, Garrett@>
-in {\sl Algebra Universalis\/} (1994), to appear.
+in {\sl Algebra Universalis\/ \bf32} (1994), 115--144.
 
 @ The program for |perms| is very similar in structure to the program
 for |simplex| already considered.
