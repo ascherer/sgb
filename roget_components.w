@@ -1,12 +1,15 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{ROGET\_\thinspace COMPONENTS}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
+
+\def\title{ROGET\_\,COMPONENTS}
 \def\<#1>{$\langle${\rm#1}$\rangle$}
 
-\prerequisite{GB\_\thinspace ROGET}
+\prerequisite{GB\_\,ROGET}
 @* Strong components. This demonstration program computes the
 strong components of GraphBase graphs derived from Roget's Thesaurus,
 using a variant of Tarjan's algorithm [R. E. Tarjan, ``Depth-first
+@^Tarjan, Robert Endre@>
 search and linear graph algorithms,'' {\sl SIAM Journal on Computing\/
 \bf1} (1972), 146--160]. We also determine the relationships
 between strong components.
@@ -19,91 +22,96 @@ that is, if |v| is reachable from~|u| but |u| is not reachable
 from~|v|, the strong component containing~|v| will be listed before
 the strong component containing~|u|.
 
-Symbolic references to vertices from the |roget| graph are given
-by both name and category number.
+Vertices from the |roget| graph are identified both by name and by
+category number.
 
-@d specs(v) v->cat_no, v->name /* category number and category name */
+@d specs(v) (filename? v-g->vertices+1L: v->cat_no), v->name
+  /* category number and category name */
 
-
-@ We permit command-line options in \UNIX\ style so that a variety of
+@ We permit command-line options in \UNIX/ style so that a variety of
 graphs can be studied:
 The user can say `\.{-n}\<number>', `\.{-d}\<number>', `\.{-p}\<number>',
 and/or `\.{-s}\<number>' to change the default values of the parameters
-in the graph |roget(n,d,p,s)|.
+in the graph |roget(n,d,p,s)|. Or `\.{-g}\<filename>' to change the
+graph itself.
 @^UNIX dependencies@>
 
 @p
 #include "gb_graph.h" /* the GraphBase data structures */
 #include "gb_roget.h" /* the |roget| routine */
-@#
-@<Global variables@>;
+#include "gb_save.h" /* |restore_graph| */
+@h@#
+@<Global variables@>@;
 main(argc,argv)
   int argc; /* the number of command-line arguments */
   char *argv[]; /* an array of strings containing those arguments */
 {@+Graph *g; /* the graph we will work on */
   register Vertex *v; /* the current vertex of interest */
-  unsigned n=0; /* the desired number of vertices (0 means infinity) */
-  unsigned d=0; /* the minimum distance between categories in arcs */
-  unsigned p=0; /* 65536 times the probability of rejecting an arc */
+  unsigned long n=0; /* the desired number of vertices (0 means infinity) */
+  unsigned long d=0; /* the minimum distance between categories in arcs */
+  unsigned long p=0; /* 65536 times the probability of rejecting an arc */
   long s=0; /* the random number seed */
-  @<Scan the command line options@>;
-  g=roget(n,d,p,s);
+  char *filename=NULL; /* external graph substituted for |roget| */
+  @<Scan the command-line options@>;
+  g=(filename? restore_graph(filename): roget(n,d,p,s));
   if (g==NULL) {
-    fprintf(stderr,"Sorry, can't create the graph! (error code %d)\n",
+    fprintf(stderr,"Sorry, can't create the graph! (error code %ld)\n",
              panic_code);
     return -1;
   }
   printf("Reachability analysis of %s\n\n",g->id);
   @<Perform Tarjan's algorithm on |g|@>;
+  return 0; /* normal exit */
 }
 
-@ @<Scan the command line options@>=
+@ @<Scan the command-line options@>=
 while (--argc) {
 @^UNIX dependencies@>
-  if (sscanf(argv[argc],"-n%u",&n)==1) ;
-  else if (sscanf(argv[argc],"-d%u",&d)==1) ;
-  else if (sscanf(argv[argc],"-p%u",&p)==1) ;
+  if (sscanf(argv[argc],"-n%lu",&n)==1) ;
+  else if (sscanf(argv[argc],"-d%lu",&d)==1) ;
+  else if (sscanf(argv[argc],"-p%lu",&p)==1) ;
   else if (sscanf(argv[argc],"-s%ld",&s)==1) ;
+  else if (strncmp(argv[argc],"-g",2)==0) filename=argv[argc]+2;
   else {
-    fprintf(stderr,"Usage: %s [-nN][-dN][-pN][-sN]\n",argv[0]);
+    fprintf(stderr,"Usage: %s [-nN][-dN][-pN][-sN][-gfoo]\n",argv[0]);
     return -2;
   }
 }
 
 @ Tarjan's algorithm is inherently recursive. We will implement
-the recursion explicitly via linked lists, instead of using \Cee's runtime
+the recursion explicitly via linked lists, instead of using \CEE/'s runtime
 stack, because some computer systems
 bog down in the presence of deeply nested recursion.
 
 Each vertex goes through three stages during the algorithm: First it is
-`unseen'; then it is `active'; finally it becomes `settled', when it
+``unseen''; then it is ``active''; finally it becomes ``settled,'' when it
 has been assigned to a strong component.
 
 The data structures that represent the current state of the algorithm
 are implemented by using five of the utility fields in each vertex:
-|rank|, |parent|, |untagged|, |link|, and |min|. We will describe each of
+|rank|, |parent|, |untagged|, |link|, and |min|. We will consider each of
 these in turn.
 
 @ First is the integer |rank| field, which is zero when a vertex is unseen.
 As soon as the vertex is first examined, it becomes active and its |rank|
-becomes and remains nonzero. Indeed, the |k|th vertex to become active
-will receive rank~|k|. When a vertex finally becomes settled its rank
+becomes and remains nonzero. Indeed, the $k$th vertex to become active
+will receive rank~$k$. When a vertex finally becomes settled, its rank
 is reset to infinity.
 
 It's convenient to think of Tarjan's algorithm as a simple adventure
-game, in which we want to explore all rooms of a cave. Passageways between
+game in which we want to explore all the rooms of a cave. Passageways between
 the rooms allow one-way travel only. When we come
 into a room for the first time, we assign a new number to that room;
-this is its rank. Later on we may happen to come into the same room
-again, and we will notice that it has nonzero rank; then we'll be able
+this is its rank. Later on we might happen to enter the same room
+again, and we will notice that it has nonzero rank. Then we'll be able
 to make a quick exit, saying ``we've already been here.'' (The extra
 complexities of computer games, like dragons that might need to be
 vanquished, do not arise.)
 
-@d rank z.i /* the |rank| of a vertex is stored in utility field |z| */
+@d rank z.I /* the |rank| of a vertex is stored in utility field |z| */
 
 @<Glob...@>=
-int nn; /* the number of vertices that have been seen */
+long nn; /* the number of vertices that have been seen */
 
 @ The active vertices will always form an oriented tree, whose arcs are
 a subset of the arcs in the original graph. A tree arc from |u| to~|v|
@@ -111,20 +119,20 @@ will be represented by |v->parent==u|. Every active vertex has a
 parent, which is usually another active vertex; the only exception is
 the root of the tree, whose |parent| is |NULL|.
 
-In the cave analogy, the `parent' of room |v| is the room we were in
+In the cave analogy, the ``parent'' of room |v| is the room we were in
 immediately before entering |v| the first time. By following parent
 pointers, we will be able to leave the cave whenever we want.
 
 As soon as a vertex becomes settled, its |parent| field changes
 significance.  Then |v->parent| is set equal to the unique
-representative of the strong component containing vertex~|v|. Thus,
+representative of the strong component containing vertex~|v|. Thus
 two settled vertices will belong to the same strong component if and only
 if they have the same |parent|.
 
-@d parent y.v /* the |parent| of a vertex is stored in utility field |y| */
+@d parent y.V /* the |parent| of a vertex is stored in utility field |y| */
 
 @ All arcs in the original directed graph are explored systematically during
-a depth-first search. Whenever we look at an arc, we `tag' it so that
+a depth-first search. Whenever we look at an arc, we tag it so that
 we won't need to explore it again. In a cave, for example, we might
 mark each passageway between rooms once we've tried to go through it.
 
@@ -133,16 +141,17 @@ each vertex |v| has a pointer |v->untagged| that leads to all
 hitherto-unexplored arcs from~|v|. The arcs of the list that appear
 between |v->arcs| and |v->untagged| are the ones already examined.
 
-@d untagged x.a /* the |untagged| field points to an |Arc| record, or |NULL| */ 
+@d untagged x.A
+ /* the |untagged| field points to an |Arc| record, or |NULL| */ 
 
 @ The algorithm maintains two special stacks: |active_stack| contains
 all the currently active vertices, and |settled_stack| contains all the
 currently settled vertices. Each vertex has a |link| field that points
-to the vertex next lower on its stack, or to |NULL| if the vertex is
+to the vertex that is next lower on its stack, or to |NULL| if the vertex is
 at the bottom. The vertices on |active_stack| always appear in increasing
 order of rank from bottom to top.
 
-@d link w.v /* the |link| field of a vertex occupies utility field |w| */
+@d link w.V /* the |link| field of a vertex occupies utility field |w| */
 
 @<Glob...@>=
 Vertex * active_stack; /* the top of the stack of active vertices */
@@ -151,9 +160,9 @@ Vertex * settled_stack; /* the top of the stack of settled vertices */
 @ Finally there's a |min| field, which is the tricky part that makes
 everything work. If vertex~|v| is unseen or settled, its |min| field is
 irrelevant. Otherwise |v->min| points to the active vertex~|u|
-of smallest rank having the property that
-either |u==v| or there is a directed path from |v| to |u| consisting of
-zero or more `mature' tree arcs followed by a single non-tree arc.
+of smallest rank having the following property:
+Either |u==v| or there is a directed path from |v| to |u| consisting of
+zero or more mature tree arcs followed by a single non-tree arc.
 
 What is a tree arc, you ask. And what is a mature arc? Good questions. At the
 moment when arcs of the graph are tagged, we classify them either as tree
@@ -166,11 +175,11 @@ no longer on that path. All arcs from a mature vertex have been tagged.
 We said before that every vertex is initially unseen, then active, and
 finally settled. With our new definitions, we see further that every arc starts
 out untagged, then it becomes either a non-tree arc or a tree arc. In the
-latter case it begins as an immature tree arc and eventually matures.
+latter case, the arc begins as an immature tree arc and eventually matures.
 
 Just believe these definitions, for now. All will become clear soon.
 
-@d min v.v /* the |min| field of a vertex occupies utility field |v| */
+@d min v.V /* the |min| field of a vertex occupies utility field |v| */
 
 @ Depth-first search explores a graph by systematically visiting all
 vertices and seeing what they can lead to. In Tarjan's algorithm, as
@@ -192,16 +201,18 @@ component. Indeed, this condition turns out to be true if and only if
 |v->min==v|; a proof appears below. If so, |v| and all its descendants
 become settled, and they leave the tree. If not, the tree arc from
 |v|'s parent~|u| to~|v| becomes mature, so the value of |v->min| is
-used to update the value of |u->min|. In both cases |v| becomes mature,
+used to update the value of |u->min|. In both cases, |v| becomes mature
 and the new current vertex will be the parent of~|v|. Notice that only the
 value of |u->min| needs to be updated, when the arc from |u| to~|v|
 matures; all other values |w->min| stay the same, because a newly
 mature arc has no mature predecessors.
 
-In the cave analogy, a room |v| and its descendants will become a
-strong component when there's no outlet from the subcave starting at~|v|
-without coming back through |v| itself. Once such a strong component
-is identified, we close it off and don't explore that subcave any further.
+The cave analogy helps to clarify the situation: If there's no way out
+of the subcave starting at~|v| unless we come back through |v| itself,
+and if we can get back to |v| from all its descendants, then
+room~|v| and its descendants will become a strong component. Once
+such a strong component is identified, we close it off and don't
+explore that subcave any further.
 
 If |v| is the root of the tree, it always has |v->min==v|,
 so it will always define a new strong component at the moment it matures.
@@ -272,12 +283,12 @@ to a new child, or backtracks to a parent.
     if (u->rank) { /* we've seen |u| already */
       if (u->rank < v->min->rank)
         v->min=u; /* non-tree arc, just update |v->min| */
-    } else { /* |u| is presently unseen */
+    }@+else { /* |u| is presently unseen */
       u->parent = v; /* the arc from |v| to |u| is a new tree arc */
       v = u; /* |u| will now be the current vertex */
       @<Make vertex |v| active@>;
     }
-  } else { /* all arcs from |v| are tagged, so |v| matures */
+  }@+else { /* all arcs from |v| are tagged, so |v| matures */
     u=v->parent; /* prepare to backtrack in the tree */
     if (v->min==v) @<Remove |v| and all its successors on the active stack
          from the tree, and mark them as a strong component of the graph@>@;
@@ -292,10 +303,10 @@ to a new child, or backtracks to a parent.
 @ The elements of the active stack are always in order
 by rank, and all children of a vertex~|v| in the tree have rank higher
 than~|v|. Tarjan's algorithm relies on a converse property: {\sl All
-active nodes whose rank exceeds that of the current vertex~|v|
-are descendants of~|v|.} (This holds because the algorithm has constructed
+active nodes whose rank exceeds that of the current vertex~|v| are
+descendants of~|v|.} (This property holds because the algorithm has constructed
 the tree by assigning ranks in preorder, ``the order of succession to the
-throne''. First come |v|'s firstborn and descendants, then the nextborn,
+throne.'' First come |v|'s firstborn and descendants, then the nextborn,
 and so on.) Therefore the descendants of the current vertex always appear
 consecutively at the top of the stack.
 
@@ -306,7 +317,7 @@ have |u->min->rank<u->rank|.  If some active vertex does not lead to the
 current vertex~|v|,
 let |u| be the counterexample with smallest rank. Then |u| isn't an
 ancestor of~|v|, hence |u| must be mature; hence it leads to the
-active vertex |u->min|, from which there {\it is\/} a path to~|v|,
+active vertex |u->min|, from which there {\sl is\/} a path to~|v|,
 contradicting our assumption.
 
 Therefore |v| and its active descendants are all reachable from each
@@ -323,8 +334,8 @@ components.
 
 Therefore we are justified in settling |v| and its active descendants now.
 Removing them from the tree of active vertices does not remove any
-vertex from which there is a path to a vertex of rank less than
-|v->rank|; hence it does not affect the validity of the |u->min| value
+vertex from which there is a path to a vertex of rank less than |v->rank|.
+Hence their removal does not affect the validity of the |u->min| value
 for any vertex~|u| that remains active.
 
 We print out enough information for a reader to verify the
@@ -340,13 +351,13 @@ strength of the claimed component easily.
   active_stack=v->link;
   v->link=settled_stack;
   settled_stack=t;  /* we've moved the top of one stack to the other */
-  printf("Strong component `%d %s'", specs(v));
+  printf("Strong component `%ld %s'", specs(v));
   if (t==v) putchar('\n'); /* single vertex */
   else {
     printf(" also includes:\n");
     while (t!=v) {
-      printf(" %d %s (from %d %s; ..to %d %s)\n", specs(t), specs(t->parent),
-              specs(t->min));
+      printf(" %ld %s (from %ld %s; ..to %ld %s)\n",
+              specs(t), specs(t->parent), specs(t->min));
       t->rank=infinity; /* now |t| is settled */
       t->parent=v; /* and |v| represents the new strong component */
       t=t->link;
@@ -359,15 +370,15 @@ strength of the claimed component easily.
 @ After all the strong components have been found, we can also compute the
 relations between them, without mentioning any cross-connection more than
 once. In fact, we built the |settled_stack| precisely so that this task
-could be done easily without sorting or searching; if only the components
-themselves were of interest, this part of the algorithm wouldn't be
-necessary.
+could be done easily without sorting or searching. If only the strong
+components themselves were of interest, this part of the algorithm wouldn't
+be necessary.
 
 For this step we use the name |arc_from| for the field we previously
 called |untagged|. The trick here relies on the fact that all vertices of the
 same strong component appear together in |settled_stack|.
 
-@d arc_from x.v /* utility field |x| will now point to a vertex */
+@d arc_from x.V /* utility field |x| will now point to a vertex */
 
 @<Print out one representative of each arc that runs between...@>=
 printf("\nLinks between components:\n");
@@ -377,7 +388,7 @@ for (v=settled_stack; v; v=v->link) {@+register Vertex *u=v->parent;
   for (a=v->arcs; a; a=a->next) {@+register Vertex *w=a->tip->parent;
     if (w->arc_from!=u) {
       w->arc_from=u;
-      printf("%d %s -> %d %s (e.g., %d %s -> %d %s)\n",
+      printf("%ld %s -> %ld %s (e.g., %ld %s -> %ld %s)\n",
               specs(u),specs(w),specs(v),specs(a->tip));
     }
   }
@@ -385,7 +396,3 @@ for (v=settled_stack; v; v=v->link) {@+register Vertex *u=v->parent;
 
 @* Index. We close with a list that shows where the identifiers of this
 program are defined and used.
-
-@f Vertex int
-@f Arc int
-@f Graph int

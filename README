@@ -1,4 +1,6 @@
-The Stanford GraphBase is copyright 1992 by Stanford University
+LATE-BREAKING NEWS APPEARS AT THE END OF THIS FILE!
+
+The Stanford GraphBase is copyright 1993 by Stanford University
 
 These files may be freely copied and distributed, provided that
 no changes whatsoever are made. All users are asked to help keep
@@ -23,8 +25,8 @@ The standard Stanford GraphBase consists of the following files:
       homer.dat    The Iliad (used by gb_books)
       huck.dat     Huckleberry Finn (used by gb_books)
       jean.dat     Les Miserables (used by gb_books)
+      lisa.dat     Mona Lisa pixels (used by gb_lisa)
       miles.dat    Mileage between North American cities (used by gb_miles)
-      mona.dat     Mona Lisa pixels (used by gb_mona)
       roget.dat    Cross references in Roget's Thesaurus (used by gb_roget)
       words.dat    Five-letter words of English (used by (gb_words)
 2) CWEB program files
@@ -39,15 +41,15 @@ The standard Stanford GraphBase consists of the following files:
       gb_econ.w    Graphs based on US inter-industry flow
       gb_games.w   Graphs based on college football games
       gb_gates.w   Graphs based on combinational logic
+      gb_lisa.w    Graphs based on Leonardo's Mona Lisa
       gb_miles.w   Graphs based on highway distances
-      gb_mona.w    Graphs based on Leonardo's Mona Lisa
       gb_plane.w   Planar graphs
       gb_raman.w   Ramanujan graphs (expanders)
       gb_rand.w    Random graphs
       gb_roget.w   Graphs based on Roget's Thesaurus
       gb_words.w   Graphs based on 5-letter words of English
    c) Demonstration routines
-      assign_mona.w      The assignment problem, using Mona Lisa
+      assign_lisa.w      The assignment problem, using Mona Lisa
       book_components.w  Biconnected components, using the plots of books
       econ_order.w       Heuristic solution to an optimum permutation problem
       football.w         Heuristic solution to a longest-path problem
@@ -63,6 +65,7 @@ The standard Stanford GraphBase consists of the following files:
       boilerplate.w      Legalese incorporated into all GraphBase programs
       gb_dijk.w          Variants of Dijkstra's algorithm for shortest paths
       gb_save.w          Converting graphs to ASCII files and vice versa
+      gb_types.w         GraphBase reserved word formatting (used with @i)
       test_sample.w      Test routine for GraphBase installation
 3) Miscellaneous files
       Makefile           Instructions to build everything with UNIX
@@ -73,18 +76,199 @@ The standard Stanford GraphBase consists of the following files:
       sample.correct     Correct primary output of test_sample
       test.correct       Correct secondary output of test_sample
       test.dat           Weird data used to test gb_io
+      word_giant.ch      Another demonstration changefile
+      blank.w            Template to copy when writing a new CWEB program
+      +The+Stanford+GraphBase+  Empty file at beginning of directory listing
 
 TO INSTALL THESE PROGRAMS
 
-First install CWEB (version 2.4 or greater), which can be found in
-various archives; the master files reside at labrea.stanford.edu.
-Then, on a UNIX-like system, edit the Makefile as instructed there,
-and "make install".
+First install CWEB (version 3.0 or greater), which can be found in various
+archives; the master files reside at labrea.stanford.edu.  Then, on a
+UNIX-like system, edit the Makefile as Makefile instructs you, take a deep
+breath, and "make tests". After you get the message
+      Congratulations --- the tests have all been passed
+you can then say "make install" (possibly changing to superuser if the
+directories are protected). On other systems, build the programs yourself
+by following the recipes in Makefile as closely as you can.
 
-Complete instructions will appear in a book by D. E. Knuth entitled
-  The Stanford GraphBase: A Platform for Combinatorial Algorithms.
+On a UNIX-like system, the process of building everything should produce
+roughly the following actions (possibly with harmless warning messages):
+ctangle gb_io.w
+cc -g -I$INCLUDEDIR  -DDATA_DIRECTORY=\"$DATADIR/\" -c gb_io.c
+cc -g -I$INCLUDEDIR  test_io.c gb_io.o -o test_io
+ctangle gb_graph.w
+cc -g -I$INCLUDEDIR  -c  gb_graph.c
+cc -g -I$INCLUDEDIR  test_graph.c gb_graph.o -o test_graph
+ctangle gb_flip.w
+cc -g -I$INCLUDEDIR  -c  gb_flip.c
+cc -g -I$INCLUDEDIR  test_flip.c gb_flip.o -o test_flip
+test_io
+OK, the gb_io routines seem to work!
+test_graph
+Hey, I allocated 10000000 bytes successfully. Terrific...
+OK, the gb_graph routines seem to work!
+test_flip
+OK, the gb_flip routines seem to work!
+ctangle gb_sort.w
+cc -g -I$INCLUDEDIR  -c  gb_sort.c
+ctangle gb_basic.w
+cc -g -I$INCLUDEDIR  -c  gb_basic.c
+ctangle gb_books.w
+cc -g -I$INCLUDEDIR  -c  gb_books.c
+ctangle gb_econ.w
+cc -g -I$INCLUDEDIR  -c  gb_econ.c
+ctangle gb_games.w
+cc -g -I$INCLUDEDIR  -c  gb_games.c
+ctangle gb_gates.w
+cc -g -I$INCLUDEDIR  -c  gb_gates.c
+ctangle gb_lisa.w
+cc -g -I$INCLUDEDIR  -c  gb_lisa.c
+ctangle gb_miles.w
+cc -g -I$INCLUDEDIR  -c  gb_miles.c
+ctangle gb_plane.w
+cc -g -I$INCLUDEDIR  -c  gb_plane.c
+ctangle gb_raman.w
+cc -g -I$INCLUDEDIR  -c  gb_raman.c
+ctangle gb_rand.w
+cc -g -I$INCLUDEDIR  -c  gb_rand.c
+ctangle gb_roget.w
+cc -g -I$INCLUDEDIR  -c  gb_roget.c
+ctangle gb_words.w
+cc -g -I$INCLUDEDIR  -c  gb_words.c
+ctangle gb_dijk.w
+cc -g -I$INCLUDEDIR  -c  gb_dijk.c
+ctangle gb_save.w
+cc -g -I$INCLUDEDIR  -c  gb_save.c
+rm -rf certified
+ar rcv libgb.a gb_flip.o gb_graph.o gb_io.o gb_sort.o gb_basic.o gb_books.o \
+  gb_econ.o gb_games.o gb_gates.o  gb_lisa.o gb_miles.o gb_plane.o gb_raman.o \
+  gb_rand.o gb_roget.o  gb_words.o gb_dijk.o gb_save.o
+ranlib libgb.a
+ctangle test_sample.w
+cc -g -I$INCLUDEDIR   -L. -L$LIBDIR -o test_sample test_sample.c -lgb
+test_sample > sample.out
+diff test.gb test.correct
+diff sample.out sample.correct
+rm test.gb sample.out test_io test_graph test_flip test_sample
+echo "Congratulations --- the tests have all been passed."
+touch certified
+mkdir $SGBDIR
+mkdir $DATADIR
+cp -p anna.dat david.dat econ.dat games.dat homer.dat huck.dat jean.dat \
+  lisa.dat miles.dat roget.dat words.dat $DATADIR
+mkdir $LIBDIR
+cp libgb.a $LIBDIR
+mkdir $CWEBINPUTS
+cp -p boilerplate.w gb_types.w $CWEBINPUTS
+mkdir $INCLUDEDIR
+cp -p gb_flip.h gb_graph.h gb_io.h gb_sort.h gb_basic.h gb_books.h gb_econ.h \
+  gb_games.h gb_gates.h  gb_lisa.h gb_miles.h gb_plane.h gb_raman.h gb_rand.h \
+  gb_roget.h  gb_words.h gb_dijk.h gb_save.h Makefile $INCLUDEDIR
 
-Note: The system is presently in alpha-test state, meaning that everything
-appears to work on at least one system; but experience on a broad range
-of computers is lacking. Please communicate all suggested improvements to
-winkler@sunburn.stanford.edu, with subject line "GraphBase Alpha Test".
+Here "ctangle foo" is actually an abbreviation for the shell command
+ "if test -r foo.ch; then ctangle foo.w foo.ch; else ctangle foo; fi"
+which supplies a change file to ctangle if you have prepared one.
+
+(The actions following "touch certified" are those of "make install", assuming
+that "make tests" was done first; these are the only actions that may need
+to be done as superuser. It's generally best not to be superuser until AFTER
+the tests have been passed; otherwise who knows what might happen?)
+
+If you want to install all the demonstration programs as well as the
+GraphBase library, say "make installdemos" after "make install". This
+causes the following sequence of actions to occur:
+ctangle assign_lisa.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o assign_lisa assign_lisa.c -lgb
+make book_components.c
+ctangle book_components.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o book_components book_components.c -lgb
+ctangle econ_order.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o econ_order econ_order.c -lgb
+ctangle football.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o football football.c -lgb
+ctangle girth.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o girth girth.c -lgb
+ctangle ladders.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o ladders ladders.c -lgb
+ctangle miles_span.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o miles_span miles_span.c -lgb
+ctangle multiply.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o multiply multiply.c -lgb
+ctangle queen.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o queen queen.c -lgb
+ctangle roget_components.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o roget_components roget_components.c -lgb
+ctangle take_risc.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o take_risc take_risc.c -lgb
+ctangle word_components.w
+cc -g -I$INCLUDEDIR -L. -L$LIBDIR -o word_components word_components.c -lgb
+mkdir $BINDIR
+mv assign_lisa book_components econ_order football girth ladders miles_span \
+  multiply queen roget_components  take_risc word_components $BINDIR
+
+Complete instructions appear in the book by D. E. Knuth entitled
+ The Stanford GraphBase: A Platform for Combinatorial Computing
+published jointly by ACM Press and Addison-Wesley (1993), ISBN 0-201-54275-7.
+
+IF ALL ELSE FAILS send trouble reports to sgb@cs.stanford.edu.
+IF YOU LIKE THE STANFORD GRAPHBASE send thanks to sgb@cs.stanford.edu.
+
+******LATE-BREAKING NEWS:
+
+* The master sources at labrea.stanford.edu contain all the files listed above
+(uncompressed), as well as a compressed file sgb.tar.gz that generates them on
+a UNIX system if you say "zcat sgb.tar.gz | tar xvpf -" using GNU's excellent
+new compression/decompression scheme.
+
+* The master sources also contain an ERRATA file listing all known errors
+in the GraphBase book. (A reward of $2.56 is paid to the first finder of
+an error; the errors listed in ERRATA are no longer worth anything.)
+
+* Although several of the GraphBase programs have changed since the system
+was first released, only one of those changes has affected the generated
+graphs. (This was an embarrassing correction to gb_rand.w, noted in
+the errata for page 388; it affects some instances of random_graph
+and random_bigraph, which therefore are no longer identical to the
+graphs of the same identifier obtained before June 1999.) Otherwise,
+corrections were only made to improve comments or to remove anomalies
+in cases where some compilers had difficulty.
+
+* The demonstration programs sometimes return a negative value to the
+operating system environment. For example, an error message about improper
+"Usage:" is often followed by "return -2". The actual number received by
+a shell script or makefile running such programs will differ on different
+operating systems (and in particular a negative number will often be converted
+to a nonnegative 8-bit integer). The returned values have no great importance;
+they are intended only for debugging.
+
+* It is planned to have subdirectories that contain change files for systems
+that are particularly hard to accommodate. For example, a "DOS" subdirectory
+might be provided for a certain well-known operating system. We will try
+to give UPPERCASE names to such subdirectories so that they are easily spotted.
+
+* Important note: The Stanford GraphBase programs do not obey the ANSI C
+standard restriction on comparison of pointers. In fact, the author (Knuth)
+confesses to being unaware until recently that such a restriction was
+part of the standard; he wrote the code under the assumption that
+pointers were essentially machine addresses. No problem occurs with
+respect to |==| and |!=| comparison, but the code sometimes has a loop
+like |for (p=hi;p>=lo;p--)| where |lo| is the base address of a
+dynamically allocated array. Strictly speaking, |lo-1| is undefined.
+In other places (e.g., sections 23 and 26 of GB_SAVE) we explicitly test
+if one pointer is less than another; this code effectively sorts a set of
+pointers of unknown origin by magnitude, so it assumes that |<| defines a
+total ordering on pointers. In GB_GATES section 2 we cast a pointer
+to unsigned long and test whether the result is |<=1|; conversely, the
+constant 1 is read as a pointer via a union type in GB_SAVE section 10.
+
+None of this is likely to cause any trouble unless your environment has
+segmented architecture and 16-bit offsets within each segment. If you do
+have such a system, your best bet is probably to get one of the free
+and excellent ports of the GCC compiler. For example, DJ Delorie has
+succeeded in porting GCC to the MSDOS environment. Alternatively,
+a set of change files appears on directory sgb/ANSI.
+
+* The code also assumes throughout that NULL is equivalent to zero (for
+example, that pointer arrays delivered by |calloc| are full of NULLs).
+It would be almost impossible to remove this assumption; don't even
+think about it.

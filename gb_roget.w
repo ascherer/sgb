@@ -1,21 +1,25 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace ROGET}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
 
-\prerequisites{GB\_\thinspace GRAPH}{GB\_\thinspace IO}
+\def\title{GB\_\,ROGET}
+
+\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
 @* Introduction. This GraphBase module contains the |roget| subroutine,
 which creates a family of graphs based on Roget's Thesaurus. An example
 of the use of this procedure can be found in the demo program
-|roget_components|.
+{\sc ROGET\_\,COMPONENTS}.
 
 @(gb_roget.h@>=
 extern Graph *roget();
 
-@ The subroutine call `|roget(n,min_distance,prob,seed)|'
+@ The subroutine call |roget(n,min_distance,prob,seed)|
 constructs a graph based on the information in \.{roget.dat}.
 Each vertex of the graph corresponds to one of the 1022 categories in
-the 1882 edition of Peter Mark Roget's {\sl Thesaurus of English Words
-and Phrases}. An arc goes from one category to another if Roget gave a
+the 1879 edition of Peter Mark Roget's {\sl Thesaurus of English Words
+@^Roget, Peter Mark@>@^Roget, John Lewis@>
+and Phrases}, edited by John Lewis Roget.
+An arc goes from one category to another if Roget gave a
 reference to the latter among the words and phrases of the former,
 or if the two categories were directly related to each other by their
 positions in Roget's book. For example, the vertex for category 312
@@ -29,10 +33,10 @@ default value |n=1022| is substituted when |n=0|. If |n| is less
 than 1022, the |n| categories will be selected at random,
 and all arcs to unselected categories will be omitted.
 Arcs will also be omitted if they correspond to categories whose
-nuumbers differ by less than |min_distance|. For example, if
+numbers differ by less than |min_distance|. For example, if
 |min_distance>1|, the arc between categories 312 and~313 will not
 be included. (Roget sometimes formed clusters of three interrelated
-categories; to avoid cross-references among these, you can set
+categories; to avoid cross-references within all such clusters, you can set
 |min_distance=3|.)
 
 If |prob>0|, arcs that would ordinarily be included in the graph are
@@ -55,38 +59,35 @@ nor the vertex order.
 (\.{NULL}), after putting a code number into the external variable
 |panic_code|. This code number identifies the type of failure.
 Otherwise |roget| returns a pointer to the newly created graph, which
-will be represented with the data structures explained in |gb_graph|.
-(The external variable |@!panic_code| is itself defined in |gb_graph|.)
+will be represented with the data structures explained in {\sc GB\_\,GRAPH}.
+(The external variable |panic_code| is itself defined in {\sc GB\_\,GRAPH}.)
 
-@d panic(c) @+{@+panic_code=c;@+gb_alloc_trouble=0;@+return NULL;@+}
-@#
-@f Graph int /* |gb_graph| defines the |Graph| type and a few others */
-@f Vertex int
-@f Arc int
+@d panic(c) @+{@+panic_code=c;@+gb_trouble_code=0;@+return NULL;@+}
 
-@ The \Cee\ file \.{gb\_roget.c} has the following general shape:
+@ The \CEE/ file \.{gb\_roget.c} has the following general shape:
 
 @p
-#include "gb_io.h" /* we will use the |gb_io| routines for input */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 #include "gb_flip.h"
- /* we will use the |gb_flip| routines for random numbers */
-#include "gb_graph.h" /* and we will use the |gb_graph| data structures */
-@#
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h"
+ /* and we will use the {\sc GB\_\,GRAPH} data structures */
+@h@#
 @<Private variables@>@;
 @#
 Graph *roget(n,min_distance,prob,seed)
-  unsigned n; /* number of vertices desired */
-  unsigned min_distance; /* smallest inter-category distance allowed
+  unsigned long n; /* number of vertices desired */
+  unsigned long min_distance; /* smallest inter-category distance allowed
                             in an arc */
   unsigned long prob; /* 65536 times the probability of rejecting an arc */
   long seed; /* random number seed */
-{@+@<Local variables@>@;
+{@+@<Local variables@>@;@#
   gb_init_rand(seed);
   if (n==0 || n>MAX_N) n=MAX_N;
   @<Set up a graph with |n| vertices@>;
   @<Determine the |n| categories to use in the graph@>;
   @<Input \.{roget.dat} and build the graph@>;
-  if (gb_alloc_trouble) {
+  if (gb_trouble_code) {
     gb_recycle(new_graph);
     panic(alloc_fault); /* oops, we ran out of memory somewhere back there */
   }
@@ -102,22 +103,25 @@ Graph *new_graph; /* the graph constructed by |roget| */
 new_graph=gb_new_graph(n);
 if (new_graph==NULL)
   panic(no_room); /* out of memory before we're even started */
-sprintf(new_graph->id,"roget(%u,%u,%lu,%ld)",n,min_distance,prob,seed);
-strcpy(new_graph->format,"IZZZZZZZZZZZZZ");
+sprintf(new_graph->id,"roget(%lu,%lu,%lu,%ld)",n,min_distance,prob,seed);
+strcpy(new_graph->util_types,"IZZZZZZZZZZZZZ");
 
 @ The first nontrivial thing we need to do is find a random selection and
 permutation of |n| vertices. We will compute a |mapping| table such that
-|mapping[k]| will be non-|NULL| for exactly |n| randomly selected
-category numbers~|k|, i.e., values of~|k| in the range |1<=k<=MAX_N|.
+|mapping[k]| is non-|NULL| for exactly |n| randomly selected
+category numbers~|k|.
 Moreover, these non-|NULL| values will be a random permutation of the
 vertices of the graph.
 
 @<Priv...@>=
-Vertex *mapping[MAX_N+1]; /* the vertex corresponding to a given category */
-int cats[MAX_N]; /* table of category numbers that have not yet been used */
+static Vertex *mapping[MAX_N+1];
+ /* the vertex corresponding to a given category */
+static long cats[MAX_N];
+ /* table of category numbers that have not yet been used */
 
-@ In the loop on |v| below, |k| is the number of categories whose |mapping|
-value is still |NULL|. The first |k| entries of |cats| will contain
+@ During the loop on |v| in this step, |k| is the number of categories
+whose |mapping| value is still~|NULL|.
+The first |k| entries of |cats| will contain
 those category numbers in some order.
 
 @<Determine the |n| categories to use in the graph@>=
@@ -129,15 +133,16 @@ for (v=new_graph->vertices+n-1; v>=new_graph->vertices; v--) {
 }
 
 @ @<Local...@>=
-register int j,k; /* all-purpose indices */
+register long j,k; /* all-purpose indices */
 register Vertex *v; /* current vertex */
 
 @* Arcs. The data in \.{roget.dat} appears in 1022 lines, one for each
 category. For example, the line
 $$\hbox{\tt 312ascent:224 313 316}$$
-specifies the arcs from category 312 as explained above. First comes the
+specifies the arcs from category 312 as explained earlier. First comes the
 category number, then the category name, then a colon, then zero or more
-numbers specifying arcs to other categories, separated by spaces.
+numbers specifying arcs to other categories; the numbers are
+separated by spaces.
 
 Some categories have too many arcs to fit on a single line; the data
 for these categories can be found on two lines, the first line ending
@@ -156,13 +161,13 @@ if (gb_close()!=0)
 if (k!=MAX_N+1) panic(impossible);
   /* we don't have the right value of |MAX_N| */
 
-@ We want to check that the data isn't garbled, except that we don't
+@ We check that the data isn't garbled, except that we don't
 bother to look at unselected categories.
 
 The original category number is stored in vertex utility field |cat_no|,
 in case anybody wants to see it.
 
-@d cat_no u.i /* utility field |u| of each vertex holds the category number */
+@d cat_no u.I /* utility field |u| of each vertex holds the category number */
 
 @<Read the data for category |k|, and put it in the graph if it
    has been selected@>=
@@ -176,11 +181,11 @@ in case anybody wants to see it.
     v->cat_no=k;
     @<Add arcs from |v| for every category that's both listed on the line
           and selected@>;
-  } else @<Skip past the data for one category@>;
+  }@+else @<Skip past the data for one category@>;
 }
 
 @ @(gb_roget.h@>=
-#define cat_no @t\quad@> u.i
+#define cat_no @t\quad@> u.I
  /* definition of |cat_no| is repeated in the header file */
 
 @ @d iabs(x) ((x)<0? -(x): (x))
@@ -188,11 +193,11 @@ in case anybody wants to see it.
 @<Add arcs from |v| for every...@>=
 j=gb_number(10);
 if (j==0) goto done; /* some categories lead to no arcs at all */
-while (1) {@+Arc *a;
+while (1) {
   if (j>MAX_N) panic(syntax_error+2); /* category code out of range */
   if (mapping[j] && iabs(j-k)>=min_distance &&
        (prob==0 || ((gb_next_rand()>>15)>=prob)))
-    gb_new_arc(v,mapping[j],1);
+    gb_new_arc(v,mapping[j],1L);
   switch (gb_char()) {
   case '\\': gb_newline();
     if (gb_char()!=' ')

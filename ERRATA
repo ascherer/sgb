@@ -1,0 +1,371 @@
+I had promised that the *.dat files would never change, but I learned later
+that miles.dat as originally distributed used the wrong two-letter state
+codes for Nebraska and Saskatchewan. This was politically incorrect.
+I decided to change to the correct codes, since this won't affect any
+of the data that's critical for the graph structure. Please replace your
+copies of miles.dat (and cities.texmap) if they are dated earlier than 1995.
+
+----------------------------------------
+
+Here is a list of all changes known to date that will appear in the fourth
+printing of The Stanford GraphBase book. Most of these corrections were
+already made in the second printing, and almost all were in the third. If you
+know of an error not listed here, chances are good that you can earn a reward
+by reporting it to sgb@cs.stanford.edu. [Note that comparison between pointers
+from differently calloc'd regions of memory is not considered erroneous; see
+the README file.]  Many thanks to the readers who reported these glitches.
+
+Page 1, line 17: should say The eleven data files *.dat occupy 355,155 bytes
+
+Page 7, line -11: change "rough, black, empty" to "chump, given, flaky"
+
+Page 7, line -8: change "alphabet." to "alphabet. One solution, namely
+ {murky, qophs, vixen, waltz}, hit 14 of the last 16."
+
+Page 10, line 9: should say John Lewis Roget
+
+Page 14, line 6: change "it is" to "is"
+
+Page 20, line 1: change "&" to "\&"
+
+Page 21, lines 16, 15, 2, and -1: change 11519, 17090, 14650, 23098 to
+ 11736, 17770, 14919, 23901, respectively
+
+Pages 22 and 24: the illustrations are too low on the page
+
+Page 22: should say Regina, SK and Scottsbluff, NE
+
+Page 23, lines 6 and 7: change 91256 to 91953 and 274127 to 290169
+
+Page 26, insert at beginning of line 17: (In rare cases, the triangle
+inequality will fail.)
+
+Page 26, line 17: $2^14$ is, of course, 16384
+
+Page 28, line 2: should say "is much more difficult than the"
+
+Pages 29 and 30: change "dominos" to "dominoes" (7 times)
+
+Page 33, line 14: insert thin space before "..."
+
+Page 34: remove extra comma in the caption to Figure 11
+
+Page 34, caption to Figure 12: change "(28,4,8,4,0,0)" to "(8,4,8,4,0,0,0)"
+
+Page 40: remove the first "poset," on line 19
+
+Page 43, line 5: change "1982 and 1984" to "1984 and 1986"
+
+Page 43, line 7: change "1988" to "1989"
+
+Page 45, line 12: change "under under" to "under"
+
+Page 45, line 23: change "279" to "239"
+
+Page 46, line 4 from the bottom: industry $j$, not industry $k$
+
+Page 52, line 5: change "the vertices" to "two vertices"
+
+Page 58: numbered line 61 should end "+The+Stanford+GraphBase+"
+
+Page 58: numbered lines 69 and 70 should end with double quotes
+
+Page 59: insert change "test" to "./test" on numbered lines 87, 88, 89, 93
+
+Page 60: change "-o foo" to "-o foo foo.c" in both displayed command lines
+
+Page 60, line 7 from bottom: change "/usr" to "`/usr"
+
+Page 61, line 5 from bottom: change "CHANGEFILE" to "CHANGEFILES"
+
+Page 62: line 25: change "lines 92--96" to "lines 73--77"
+
+Page 63, line 15: change "gb_graph.o" to "gb_graph.o,"
+
+Page 75: remove semicolon at end of line 2
+
+Page 78, line 8: The accent in K\"onig should actually be the long
+Hungarian accent, K\H{o}nig. (Also on line 6 from the bottom,
+and on page 79 lines 1 and 11, and in the index on page 573.)
+
+Page 78: the long-double-dash notation used on lines 15 and following is
+changed to a heavy bar
+
+Page 78: in display (*) and the following lines, use notation like $r^{(0)$
+and $c^{(1)}$ instead of $r_0$ and $c_1$
+
+Page 78, line 7 from bottom: change "matrix" to "matrix, of size $n\times n$"
+
+Page 81, line 14: change "row $l$" to "column $l$"
+
+Page 90, lines -10 and -9: remove the semicolons
+
+Page 99, line 6: change "x --- y" to "y --- z"
+
+Page 121, line 4 should say: "assume that |BUF_SIZE| is rather large,
+but in cases of doubt they ensure that |BUF_SIZE| will never be exceeded."
+
+Page 124, line 11 from bottom: change "x_k+\delta_k" to "x_d+\delta_d"
+
+Page 138, line 15 should reverse the order of the tests:
+    if (ss<UL_BITS && (size_bits&(((unsigned long)1)<<ss))) {
+
+Page 156, lines 16 and 17 should be replaced by the following:
+removed. Regardless of the value of |copy|, information that might
+have been present in the utility fields will not be copied, and arc
+lengths will all be set to 1.
+
+Page 160, line -5: change "panic(no_room+1)" to "panic(missing_operand)"
+
+Page 163, line 19: change "panic(no_room+1)" to "panic(missing_operand)"
+
+Page 168, line 9: change "panic(no_room+1)" to "panic(missing_operand)"
+
+Page 182, line -9: change "their weights" to "their statistics"
+
+Page 184, line -6: change "their weights" to "their statistics"
+
+Page 184, line -2: change "check sum" to "checksum"
+
+Page 194, line 15: change "awhile" to "a while"
+
+Page 194, line -7: change "hh==NULL" to "!hh"
+(i.e., change $hh\equiv\Lambda$ to $\lnot hh$)
+
+Page 194, line 23: change "long dummy(v)" to "static long dummy(v)"
+
+Page 198, line 17: change "Vertex head[128]" to "static Vertex head[128]"
+
+Page 200, line 9: change "long master_key" to "static long master_key"
+
+Page 200, line 17: change "logical-anding" to "bitwise-anding"
+
+Page 213, line 5: change "obtaining" to "obtained"
+
+Page 216, lines 8 and 9: The period length of the generated numbers is
+$2^{85}-2^{30}$.
+
+Page 217, line 3: the recurrence should be $a_n=(a_{n-55}-a_{n-24})\bmod m$
+
+Page 217, insert a new paragraph at the beginning of section 6:
+The numbers generated by |gb_next_rand()| seem to be satisfactory for most
+purposes, but they do fail a stringent test called the ``birthday spacings
+test,'' devised by George Marsaglia. [See, for example, {\sl Statistics and
+Probability Letters\/ \bf8} (1990), 35--39.] One way to get numbers that
+pass the birthday test is to discard half of the values, for example
+by changing `|gb_flip_cycle()|' to `|gb_flip_cycle(),gb_flip_cycle()|'
+in the definition of |gb_next_rand()|. Users who wish to make such a change
+should define their own substitute macro.
+
+Page 218, line 5: change "mod" to "divided by"; also
+change "logical-and" to "bitwise-and"
+
+Page 222, line 10 of section 2: change "copy" to "complement"
+
+Page 282, after #include <stdio.h>: also say #include <stdlib.h> (twice)
+
+Page 287, insert a new paragraph after line 4, to wit: {\sl Important Note:\/}
+Programs of the Stanford GraphBase implicitly assume that all memory allocated
+by |calloc| comes from a single underlying memory array.  Therefore pointer
+values are compared to each other in many places, even when the objects
+pointed to have been allocated at different times. Strictly speaking, this
+liberal use of pointer comparisons fails to conform to the restrictions of
+ANSI Standard \CEE/, when the comparison involves a less-than or greater-then
+relation. Users whose system supports only the strict standard will need to
+make several dozen changes.
+
+Page 288, section 18, line 11: replace "g->uu.I++;" by the code
+   { g->uu.I++; printf("."); fflush(stdout); }
+and make entries for fflush and stdout in the mini-index on page 289
+
+Page 303, line 2: change "check sum" to "checksum"
+
+Page 304, line 8: change "is none" to "if none"
+
+Page 304, line 20: change "81" to "sizeof(buffer)"
+
+Page 305, line 15: change 100 to |unexpected_char|
+
+Page 306, bottom line: change "icode[*p]" to "imap_ord(*p)"
+
+Page 308, replacement for 3rd line from bottom:
+  icode[0]=d; /* make sure '\0' is a nondigit */
+  if (imap_ord(*cur_pos)<d) return icode[*cur_pos++];
+
+Page 309, line 5: change "icode[*cur_pos]" to "imap_ord(*cur_pos)"
+
+Page 312, line 12: change "#endif DATA_DIRECTORY" to "#endif"
+
+Page 312, line 18: change "19" to "sizeof(file_name)-1"
+
+Page 312, line 9 from the bottom: change "5-letter" to "five-letter"
+
+Page 312, bottom line: the comma should be in typewriter type
+
+Page 320, line 14: we want to compute $\langle 2a_0, a_0+a_1, 2a_1 \rangle$
+
+Page 323, line 16: change "check sum" to "checksum"
+
+Page 332, line -7: change "decidegrees" to "centidegrees"
+
+Page 330, line 17: change "util_types[6]" to "util_types[7]"
+
+Page 335, section 10: the variables should all be declared static
+(this affects the mini-indexes on pages 337, 339, 341)
+
+Page 336, lines 22 and 23: change "SA" to "SK" and delete the sentence
+about New Brunswick vs Nebraska (Nebraska changed from NB to NE long ago!)
+
+Page 346, line 14 (display): insert ")" before final comma
+
+Page 346, line 5 of section 9: the sentence should begin "The utility
+field |z_coord| must contain a unique ID number"
+
+Page 348, line 2, change "void new_euclid_edge(u,v)" to
+                  "static void new_euclid_edge(u,v)"
+
+Similarly, the declarations of int_sqrt (page 349), sign_test (page 350),
+ ccw (page 352), incircle (page 353), ff, gg, hh, jj (page 355), flip (page
+ 363), and new_mile_edge (page 365) should all be prefixed by "static"
+
+Page 352, line 7, change "that that" to "that"
+
+Page 354, section 23. The displayed formulas should define functions
+ff, gg, hh, and jj (not f, g, h, and j)
+
+Page 366, section 2, line 6: should say {1,3,4,9,10,12}
+
+Page 374: this commentary was not precisely correct; the revised version
+can be found in file gb_raman.w in the current sources
+
+Page 376, line 12: change "$p-a^2-2c^2$" to "$p-a^2-b^2-2c^2$"
+
+Page 385, new paragraph to follow line 4:
+    Warning: Users need to initialize the random number generator before
+  calling |random_graph|, or any other GraphBase procedure that
+  consumes random numbers. (See GB_FLIP.)
+
+Page 386, line 21: change (25,m,...) to (31,m,...)
+
+Page 387, line 14: change "of of" to "of"
+
+Page 388, line 17: change "max_len-min_len" to "max_len-min_len+1"
+
+Page 400, section 7: the variables should both be declared static
+(this affects the mini-index on page 403)
+
+Page 410, replacement for the four last lines:
+
+  13. define buffer (&item_buf[MAX_SV_STRING+3])
+                          /* the last 81 chars of |item_buf| */
+  <Private variables  8>=
+   static char item_buf[MAX_SV_STRING+3+81]; /* an item to be output */
+
+Page 413, line 10: change "output; in" to "output; the value $-3$ will be
+returned if memory is exhausted. In"
+
+Page 414, line 5: remove the semicolon
+
+Page 414, swap lines 7--8 with with lines 9--10
+
+Page 414: last line should end ", or if comparisons between pointers are
+undefined."
+
+Page 415: new line of code to follow line 12:
+ if (blocks==NULL) return -3; /* out of memory */
+
+Page 426, line 13: change "common words" to "common five-letter words"
+
+Page 430: the bottom few lines should move to page 431
+
+Page 436, section 17: node_blocks should be declared static
+(this affects the mini-indexes on pages 433 and 439)
+
+Page 442, line 23: change "3,675,808" to "3,674,808"
+
+Page 444, section 6, line 4: insert "n-vertex" before "regular"
+
+Page 444, section 7, line 3: should be superscript g, not subscript
+
+Page 445, line -6: change "4*q*2" to "4*q*q"
+
+Pages 452 and 453: change "rand" to "randm" (six times)
+
+Page 456, lines 8 and 9 of section 18: change "u->arcs->len" to
+  "(u->arcs-1)->len" and vice versa
+
+Page 461, line 16: remove the semicolon
+
+Page 466, line 12 from the bottom: remove the semicolon
+
+Page 481, line 12: change "u->parent" to "o,u->parent"
+
+Page 490, line 19: remove the semicolon
+
+Page 494, line 5 of section 65: change "t->rsib" to "o,t->rsib"
+
+Page 495, line 5: change "o,k" to "oo,k"
+
+Page 497, line 2: change "respect" to "respect to"
+
+Page 497, line 18: change "1000" to "100"
+
+Page 497, lines 16, 17, 29, 30: change "11519" to "11736", "17090" to "17770",
+"58544" to "59050", and "165749" to "175519"             
+
+Page 512, section 2, line 9: remove the semicolon
+
+Page 537: add "GB_GRAPH 18," to the index listings for fflush
+
+Page 543: section numbers in the index listings for panic_code should not
+be underlined except in GB_GRAPH
+
+Page 545: add "GB_GRAPH 18," to the index listings for stdout
+
+Page 547: add section 10 to the index listings for unexpected_char in GB_IO
+
+Page 555: move the prototype for gb_number to page 554, where it belongs
+in alphabetic order
+
+Page 557: "all_parts(10)" should be "all_parts(10,0)"
+
+Page 558: "all_perms(5)" should be "all_perms(5,0)"
+
+Page 559: "book("homer",280,0,1,0,0,1,1,0)" should be
+          "book("homer",280,0,0,0,1,1,0)"
+
+Page 561: "all_perms(7)" should be "all_perms(7,0)"
+
+Page 561, last two lines: change "multiple edges" to "multiple arcs"
+
+Page 562, lines 7 and 11: change "multiple edges" to "multiple arcs"
+
+Page 568, line 5: change ". 15" to ", 15"
+
+Pages 568 and 569: insert thin space after the comma when giving issue
+numbers, in references [5], [9], [15], [16], [23], [30], [31].
+
+Page 572: "Jarn{\'\i}, k" should be "Jarn{\'\i}k"
+
+Page 573: "K\"onig" should be "K\H{o}nig"
+
+Page 573: should say "literate programming" not "literate programmming"
+
+Page 573, Marsaglia, George, 217
+
+Page 574: permutations, random, 104
+
+Page 574: should say Roget, John Lewis
+
+Page 575: should say "Tolsto\u\i, Lev Nikolaevich"
+
+Page 575: add page 26 under triangle inequality
+
+Page 575: Voronoi's correct name is "Vorono\u\i, Georgi\u\i\ Feodos'evich"
+
+Page 575: Walker's full name is "Walker, Alistair John"
+
+Refinements to spacing between lines, relevant to section names like
+<Local variables>, have also been made on pages 75, 124, 131, 137, 140,
+146, 150, 156, 158, 160, 163, 168, 174, 182, 204, 225, 318, 324, 329,
+334, 367, 399, 414, 433, 466, 490.

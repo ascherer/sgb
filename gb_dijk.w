@@ -1,15 +1,18 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace DIJK}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
 
-\prerequisite{GB\_\thinspace GRAPH}
+\def\title{GB\_\,DIJK}
+
+\prerequisite{GB\_\,GRAPH}
 @* Introduction. The GraphBase demonstration routine |dijkstra(uu,vv,gg,hh)|
 finds a shortest path from vertex~|uu| to vertex~|vv| in graph~|gg|, with the
 aid of an optional heuristic function~|hh|. This function implements a
 version of Dijkstra's algorithm, a general procedure for determining
 shortest paths in a directed graph that has nonnegative arc lengths
-[E.~W. Dijkstra, ``A note a two problems in connexion with graphs,''
+[E.~W. Dijkstra, ``A note on two problems in connexion with graphs,''
 {\sl Numerische Mathematik\/ \bf1} (1959), 269--271].
+@^Dijkstra, Edsger Wijbe@>
 
 If |hh| is null, the length of
 every arc in |gg| must be nonnegative. If |hh| is non-null, |hh| should be
@@ -17,8 +20,8 @@ a function defined on the vertices of the graph such that the
 length |d| of an arc from |u| to~|v| always satisfies the condition
 $$ d \ge |hh|(u)-|hh|(v)\,. $$
 In such a case, we can effectively replace each arc length |d| by
-|d-hh(u)+hh(v)|, obtaining a graph with nonnegative arc lengths;
-the shortest paths between vertices in this modified graph
+|d-hh(u)+hh(v)|, obtaining a graph with nonnegative arc lengths.
+The shortest paths between vertices in this modified graph
 are the same as they were in the original graph.
 
 The basic idea of Dijkstra's algorithm is to explore the vertices of
@@ -27,44 +30,43 @@ proceeding until |vv| is encountered. If the distances have been
 modified by a heuristic function |hh| such that |hh(u)| happens to equal
 the true distance from |u| to~|vv|, for all~|u|,
 then all of the modified distances on
-shortest paths to |vv| will be zero; this means that the algorithm
-will explore all of the most useful arcs first, so it will not waste
-time wandering off in unfruitful directions. In practice we usually
+shortest paths to |vv| will be zero. This means that the algorithm
+will explore all of the most useful arcs first, without
+wandering off in unfruitful directions. In practice we usually
 don't know the exact distances to |vv| in advance, but we can often
 compute an approximate value |hh(u)| that will help focus the search.
 
 If the external variable |verbose| is nonzero, |dijkstra| will record
-its activities, by printing the distances from |uu| to all vertices
-it visits on the standard output file.
+its activities on the standard output file by printing the distances
+from |uu| to all vertices it visits.
 
 After |dijkstra| has found a shortest path, it returns the length of
 that path. If no path from |uu| to~|vv| exists (in particular, if
 |vv| is~|NULL|), it returns |-1|; in such a case, the shortest distances from
-|uu| to all vertices reachable from it will have been computed and
-they can be found in the graph.
+|uu| to all vertices reachable from~|uu| will have been computed and
+stored in the graph.
 An auxiliary function, |print_dijkstra_result(vv)|, can be used
 to display the actual path found, if one exists.
 
-Examples of the use of |dijkstra| appear in the |ladders| demonstration module.
+Examples of the use of |dijkstra| appear in the {\sc LADDERS}
+demonstration module.
 
-@f Vertex int
-@f Arc int
-@f Graph int
-
-@ This \Cee\ module is meant to be loaded as part of another program.
+@ This \CEE/ module is meant to be loaded as part of another program.
 It has the following simple structure:
 
 @p
 #include "gb_graph.h" /* define the standard GraphBase data structures */
+@h@#
 @<Priority queue procedures@>@;
 @<Global declarations@>@;
 @<The |dijkstra| procedure@>@;
 @<The |print_dijkstra_result| procedure@>@;
 
-@ Users of |gb_dijk| should include the header file \.{gb\_dijk.h}:
+@ Users of {\sc GB\_\,DIJK} should include the header file \.{gb\_dijk.h}:
 
 @(gb_dijk.h@>=
 extern long dijkstra(); /* procedure to calculate shortest paths */
+#define print_dijkstra_result p_dijkstra_result /* shorthand for linker */
 extern void print_dijkstra_result(); /* procedure to display the answer */
 
 @* The main algorithm.
@@ -79,7 +81,7 @@ adjacent to a vertex that's known.
 
 The algorithm proceeds by learning to know all vertices in a greater
 and greater radius from the starting point. Thus, if |v|~is a known
-vertex at distance~|d| from~|uu|, every vertex at distance |<d| from
+vertex at distance~|d| from~|uu|, every vertex at distance less than~|d| from
 |uu| will also be known.  (Throughout this discussion the word
 ``distance'' actually means ``distance modified by the heuristic
 function''; we omit mentioning the heuristic because we can assume that
@@ -98,8 +100,8 @@ assumption of nonnegative arc length is crucial to the algorithm's validity.)
 
 @ To implement the ideas just sketched, we use several of the utility
 fields in vertex records. Each vertex~|v| has a |dist| field |v->dist|,
-representing its true distance from |uu| if |v| is known, otherwise
-representing the shortest distance from |uu| discovered so far.
+which represents its true distance from |uu| if |v| is known; otherwise
+|v->dist| represents the shortest distance from |uu| discovered so far.
 
 Each vertex |v| also has a |backlink| field |v->backlink|, which is non-|NULL|
 if and only if |v| has been seen. In that case |v->backlink| is a vertex one
@@ -109,16 +111,17 @@ Vertex~|uu| has a backlink pointing to itself.) The backlink
 fields thereby allow us to construct shortest paths from |uu| to all the
 known vertices, if desired.
 
-@d dist z.i /* distance from |uu|, modified by |hh|,
+@d dist z.I /* distance from |uu|, modified by |hh|,
                  appears in vertex utility field |z| */
-@d backlink y.v /* pointer to previous vertex appears in utility field |y| */
+@d backlink y.V /* pointer to previous vertex appears in utility field |y| */
 
 @(gb_dijk.h@>=
-#define dist @[z.i@]
-#define backlink @[y.v@]
+#define dist @[z.I@]
+#define backlink @[y.V@]
 
 @ The priority queue is implemented by four procedures:
 
+\begingroup
 \def\]#1 {\smallskip\hangindent2\parindent \hangafter1 \indent #1 }
 
 \]|init_queue(d)| makes the queue empty and prepares for subsequent keys |>=d|.
@@ -129,33 +132,34 @@ value |v->dist=d|.
 \]|requeue(v,d)| takes vertex |v| out of the queue and enters it again
 with the smaller key value |v->dist=d|.
 
-\]|delete_min()| removes a vertex with minimum key from the queue and
+\]|del_min()| removes a vertex with minimum key from the queue and
 returns a pointer to that vertex. If the queue is empty, |NULL| is returned.
 
-\smallskip\noindent
-These procedures are accessed via external pointers,
-so that the user of |gb_dijk| can supply alternate queueing methods if desired.
+\endgroup\smallskip\noindent
+These procedures are accessed via external pointers, so that the user
+of {\sc GB\_\,DIJK} can supply alternate queueing methods if desired.
 
 @(gb_dijk.h@>=
-extern void (*init_queue)(); /* create an empty priority queue for |dijkstra| */
-extern void (*enqueue)(); /* insert a new element in the priority queue */
-extern void (*requeue)(); /* decrease the key of an element in the queue */
-extern Vertex *(*delete_min)(); /* remove an element with smallest key */
+extern void @[@] (*init_queue)();
+ /* create an empty priority queue for |dijkstra| */
+extern void @[@] (*enqueue)(); /* insert a new element in the priority queue */
+extern void @[@] (*requeue)(); /* decrease the key of an element in the queue */
+extern Vertex *(*del_min)(); /* remove an element with smallest key */
 
-@ The heuristic function may take awhile to compute, so we avoid recomputation
-by storing |hh(v)| in another utility field |v->hh_val| once we've
-evaluated it. 
+@ The heuristic function might take a while to compute, so we avoid
+recomputation by storing |hh(v)| in another utility field |v->hh_val|
+once we've evaluated it. 
 
-@d hh_val x.i /* computed value of |hh(u)| */
+@d hh_val x.I /* computed value of |hh(v)| */
 
 @(gb_dijk.h@>=
-#define hh_val @[x.i@]
+#define hh_val @[x.I@]
 
 @ If no heuristic function is supplied by the user, we replace it by a
 dummy function that simply returns 0 in all cases.
 
 @<Global...@>=
-long dummy(v)
+static long dummy(v)
   Vertex *v;
 {@+return 0;@+}
 
@@ -166,19 +170,19 @@ long dijkstra(uu,vv,gg,hh)
   Vertex *uu; /* the starting point */
   Vertex *vv; /* the ending point */
   Graph *gg; /* the graph they belong to */
-  long (*hh)(); /* heuristic function */
+  long @[@] (*hh)(); /* heuristic function */
 {@+register Vertex *t; /* current vertex of interest */
-  if (hh==NULL)
-    hh=dummy; /* change to default heuristic */
+  if (!hh) hh=dummy; /* change to default heuristic */
   @<Make |uu| the only vertex seen; also make it known@>;
   t=uu;
   if (verbose) @<Print initial message@>;
   while (t!=vv) {
     @<Put all unseen vertices adjacent to |t| into the queue,
        and update the distances of other vertices adjacent to~|t|@>;
-    t=(*delete_min)();
+    t=(*del_min)();
     if (t==NULL)
-      return -1; /* if the queue becomes, there's no way to get to |vv| */
+      return -1; /* if the queue becomes empty,
+                      there's no way to get to |vv| */
     if (verbose) @<Print the distance to |t|@>;
   }
   return vv->dist-vv->hh_val+uu->hh_val; /* true distance from |uu| to |vv| */
@@ -192,9 +196,9 @@ for (t=gg->vertices+gg->n-1; t>=gg->vertices; t--) t->backlink=NULL;
 uu->backlink=uu;
 uu->dist=0;
 uu->hh_val=(*hh)(uu);
-(*init_queue)(0); /* make the priority queue empty */
+(*init_queue)(0L); /* make the priority queue empty */
 
-@ Here we help the \Cee\ compiler in case it hasn't got a great optimizer.
+@ Here we help the \CEE/ compiler in case it hasn't got a great optimizer.
 
 @<Put all unseen vertices adjacent to |t| into the queue...@>=
 {@+register Arc *a; /* an arc leading from |t| */
@@ -207,7 +211,7 @@ uu->hh_val=(*hh)(uu);
         v->backlink = t;
         (*requeue)(v,dd); /* we found a better way to get there */
       }
-    } else { /* |v| hasn't been seen before */
+    }@+else { /* |v| hasn't been seen before */
       v->hh_val = (*hh)(v);
       v->backlink = t;
       (*enqueue)(v, d + a->len + v->hh_val);
@@ -242,63 +246,67 @@ direction, so we reverse the links.
 
 We also unreverse them again, just in case the user didn't want the backlinks
 to be trashed. Indeed, this procedure can be used for any vertex |vv| whose
-backlink is nonnull, not only the |vv| that was a parameter to |dijkstra|.
+backlink is non-null, not only the |vv| that was a parameter to |dijkstra|.
 
 List reversal is conveniently regarded as a process of popping off one stack
 and pushing onto another.
 
+@d print_dijkstra_result p_dijkstra_result /* shorthand for linker */
+
 @<The |print_dijkstra_result| procedure@>=
 void print_dijkstra_result(vv)
-  Vertex *vv; /* ending vertices */
+  Vertex *vv; /* ending vertex */
 {@+register Vertex *t, *p, *q; /* registers for reversing links */
   t=NULL, p=vv;
   if (!p->backlink) {
     printf("Sorry, %s is unreachable.\n",p->name);
     return;
   }
-  do { /* pop an item from |p| to |t| */
+  do@+{ /* pop an item from |p| to |t| */
     q=p->backlink;
     p->backlink=t;
     t=p;
     p=q;
-  } while (t!=p); /* the loop stops with |t==p==uu| */
-  do {
+  }@+while (t!=p); /* the loop stops with |t==p==uu| */
+  do@+{
     printf("%10ld %s\n", t->dist-t->hh_val+p->hh_val, t->name);
     t=t->backlink;
-  } while (t);
+  }@+while (t);
   t=p;
-  do { /* pop an item from |t| to |p| */
+  do@+{ /* pop an item from |t| to |p| */
     q=t->backlink;
     t->backlink=p;
     p=t;
     t=q;
-  } while (p!=vv);
+  }@+while (p!=vv);
 }
 
 @* Priority queues. Here we provide a simple doubly linked list
 for queueing; this is a convenient default, good enough for applications
-that aren't too large. (See |miles_span| for implementations of
+that aren't too large. (See {\sc MILES\_\,SPAN} for implementations of
 other schemes that are more efficient when the queue gets large.)
 
-@<Glob...@>=
-void (*init_queue)() = init_dlist; /* create an empty dlist */
-void (*enqueue)() = enlist; /* insert a new element in dlist */
-void (*requeue)() = reenlist ; /* decrease the key of an element in dlist */
-Vertex *(*delete_min)() = delete_first; /* remove element with smallest key */
+The two queue links occupy two of a vertex's remaining utility fields.
 
-@ The two queue links will occupy two of a vertex's remaining utility fields.
-There's a special list head, from which we get to everything else in the
+@d llink v.V /* |llink| is stored in utility field |v| of a vertex */
+@d rlink w.V /* |rlink| is stored in utility field |w| of a vertex */
+
+@<Glob...@>=
+void @[@] (*init_queue)() = init_dlist; /* create an empty dlist */
+void @[@] (*enqueue)() = enlist; /* insert a new element in dlist */
+void @[@] (*requeue)() = reenlist ;
+  /* decrease the key of an element in dlist */
+Vertex *(*del_min)() = del_first; /* remove element with smallest key */
+
+@ There's a special list head, from which we get to everything else in the
 queue in decreasing order of keys by following |llink| fields.
 
 The following declaration actually provides for 128 list heads. Only the first
-of these will be used here, but we'll find something to do with the
+of these is used here, but we'll find something to do with the
 other 127 later.
 
-@d llink v.v /* |llink| is stored in utility field |v| of a vertex */
-@d rlink w.v /* |rlink| is stored in utility field |w| of a vertex */
-
 @<Prior...@>=
-Vertex head[128]; /* list-head elements that are always present */
+static Vertex head[128]; /* list-head elements that are always present */
 @#
 void init_dlist(d)
   long d;
@@ -312,9 +320,9 @@ first time will tend to have a larger key than the other elements.
 
 Indeed, in the special case that all arcs in the graph have the same
 length, this strategy turns out to be quite fast. For in that case,
-every vertex will be added to the end of the queue and deleted from the
-front, without any requeueing; the algorithm will produce a strict
-first-in-first-one queueing discipline.
+every vertex is added to the end of the queue and deleted from the
+front, without any requeueing; the algorithm produces a strict
+first-in-first-out queueing discipline and performs a breadth-first search.
 
 @<Prior...@>=
 void enlist(v,d)
@@ -342,7 +350,7 @@ void reenlist(v,d)
 }
 
 @ @<Prior...@>=
-Vertex *delete_first()
+Vertex *del_first()
 {@+Vertex *t;
   t=head->rlink;
   if (t==head) return NULL;
@@ -351,7 +359,7 @@ Vertex *delete_first()
 }
 
 @* A special case. When the arc lengths in the graph are all fairly small,
-we can substitute another queuing discipline that does each operation
+we can substitute another queueing discipline that does each operation
 quickly. Suppose the only lengths are 0, 1, \dots,~|k-1|; then we can
 prove easily that the priority queue will never contain more than |k|
 different values at once. Moreover, we can implement it by maintaining
@@ -361,7 +369,7 @@ For example, let |k=128|.  Here is an alternate set of queue commands,
 to be used when the arc lengths are known to be less than~128.
 
 @ @<Prior...@>=
-long master_key; /* smallest key that may be present in the priority queue */
+static long master_key; /* smallest key that may be present in the priority queue */
 @#
 void init_128(d)
   long d;
@@ -372,10 +380,10 @@ void init_128(d)
 }
 
 @ If the number of lists were not a power of 2, we would calculate a remainder
-by division instead of by logical-anding with |0x7f|.
+by division instead of by bitwise-anding.
 
 @<Prior...@>=
-Vertex *delete_from_128()
+Vertex *del_128()
 {@+long d;
   register Vertex *u, *t;
   for (d=master_key; d<master_key+128; d++) {
@@ -391,7 +399,7 @@ Vertex *delete_from_128()
 }
 
 @ @<Prior...@>=
-void enqueue_128(v,d)
+void enq_128(v,d)
   Vertex *v; /* new vertex for the queue */
   long d; /* its |dist| */
 {@+register Vertex *u=head+(d&0x7f);
@@ -410,11 +418,11 @@ its list. And we do seem to need two links for that.
 
 In the application to Dijkstra's algorithm, the new |d| will always
 be |master_key| or more. But we want to implement requeueing in general,
-so that this procedure can be used also for other algorithms,
-such as the calculation of minimum spanning trees (see |miles_span|).
+so that this procedure can be used also for other algorithms
+such as the calculation of minimum spanning trees (see {\sc MILES\_\,SPAN}).
 
 @<Prior...@>=
-void requeue_128(v,d)
+void req_128(v,d)
   Vertex *v; /* vertex to be moved to another list */
   long d; /* its new |dist| */
 {@+register Vertex *u=head+(d&0x7f);
@@ -426,19 +434,19 @@ void requeue_128(v,d)
   if (d<master_key) master_key=d; /* not needed for Dijkstra's algorithm */
 }
 
-@ The user of |gb_dijk| needs to know the names of these queueing procedures
-if changes to the defaults are made, so we'd better put the necessary info
-into the header file.
+@ The user of {\sc GB\_\,DIJK} needs to know the names of these
+queueing procedures if changes to the defaults are made, so we'd
+better put the necessary info into the header file.
 
 @(gb_dijk.h@>=
 extern void init_dlist();
 extern void enlist();
 extern void reenlist();
-extern Vertex *delete_first();
+extern Vertex *del_first();
 extern void init_128();
-extern Vertex *delete_from_128();
-extern void enqueue_128();
-extern void requeue_128();
+extern Vertex *del_128();
+extern void enq_128();
+extern void req_128();
 
 @* Index. Here is a list that shows where the identifiers of this program are
 defined and used.

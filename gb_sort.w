@@ -1,14 +1,15 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace SORT}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+
+\def\title{GB\_\,SORT}
 
 @* Introduction. This short GraphBase module provides a simple utility
 routine called |gb_linksort|, which is used in many of the other programs.
 
-@d NULL 0 /* |NULL| */
-
 @p
+#include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
 #include "gb_flip.h" /* we need to use the random number generator */
+@h@#
 @<Declarations@>@;
 @<The |gb_linksort| routine@>
 
@@ -17,42 +18,47 @@ so that different effects can be obtained easily from the same
 underlying body of information. In many cases the desired graph
 is determined by selecting the ``heaviest'' vertices according to some
 notion of ``weight,'' and/or by taking a random sample of vertices. For
-example, the GraphBase routine |words(n,wt_vector,wt_threshold,seed)| creates a
-graph based on the |n| most common words of English, where common-ness is
-determined by a given weight vector. When several words have equal weight,
-we want to choose between them at random. In particular, this means that
-we can obtain a completely random choice of words if the weight vector
-assigns the same weight to each word.
+example, the GraphBase routine |words(n,wt_vector,wt_threshold,seed)| creates
+a graph based on the |n| most common five-letter words of English, where
+common-ness is determined by a given weight vector. When several words have
+equal weight, we want to choose between them at random. In particular, this
+means that we can obtain a completely random choice of words if the weight
+vector assigns the same weight to each word.
 
 The |gb_linksort| routine is a convenient tool for this purpose. It takes a
 given linked list of nodes and shuffles their link fields so that the
 nodes can be read in decreasing order of weight, and so that equal-weight
 nodes appear in random order. {\sl Note: The random number generator of
-|gb_flip| must be initialized before |gb_linksort| is called.}
+{\sc GB\_\,FLIP} must be initialized before |gb_linksort| is called.}
 
 The nodes sorted by |gb_linksort| can be records of any structure type,
 provided only that the first field is `|long| |key|' and the second field
 is `|struct| \\{this\_struct\_type} |*link|'. Further fields are not
-examined. The |node| type defined below is the simplest possible
+examined. The |node| type defined in this section is the simplest possible
 example of such a structure.
 
 Sorting is done by means of the |key| fields, which must each contain
 nonnegative integers less than $2^{31}$.
 
 After sorting is complete, the data will appear in 128 linked lists:
-|gb_sorted[127]|, |gb_sorted[126]|, \dots, |gb_sorted[0]|. Reading through
+|gb_sorted[127]|, |gb_sorted[126]|, \dots, |gb_sorted[0]|. To
+examine the nodes in decreasing order of weight, one can read through
 these lists with a routine such as
 $$\vcenter{\halign{#\hfil\cr
-|{@+int j; @+node *p;|\cr
+|{|\cr
+\quad|int j;|\cr
+\quad|node *p;|\cr
+\noalign{\smallskip}
 \quad|for (j=127; j>=0; j--)|\cr
 \qquad|for (p=(node*)gb_sorted[j]; p; p=p->link)|\cr
 \qquad\qquad\\{look\_at}|(p)|;\cr
-}}$$
-will look at the nodes in decreasing order of weight, as desired. In fact,
-all nodes whose keys are in the range $j\cdot2^{24}\le|key|<(j+1)\cdot2^{24}$
+|}|\cr}}$$
+All nodes whose keys are in the range $j\cdot2^{24}\le|key|<(j+1)\cdot2^{24}$
 will appear in list |gb_sorted[j]|. Therefore the results will all be found
 in the single list |gb_sorted[0]|, if all the keys are strictly less
 than~$2^{24}$.
+
+@f node int
 
 @<Declarations@>=
 typedef struct node_struct {
@@ -88,7 +94,7 @@ static node *alt_sorted[256];
 @<The |gb_linksort| routine@>=
 void gb_linksort(l)
   node *l;
-{@+register int k; /* index to destination list */
+{@+register long k; /* index to destination list */
   register node **pp; /* current place in list of pointers */
   register node *p, *q; /* pointers for list manipulation */
   @<Partition the given list into 256 random sublists |alt_sorted|@>;
@@ -160,7 +166,7 @@ for (pp=gb_sorted+255; pp>=gb_sorted; pp--)
 @ The most significant bits will lie between 0 and 127, because we assumed
 that the keys are nonnegative and less than $2^{31}$. (A similar routine
 would be able to sort signed integers, or unsigned long integers, but
-the \Cee\ code would not then be portable.)
+the \CEE/ code would not then be portable.)
 
 @<Partition the |alt_sorted| lists into |gb_sorted| by high-order byte@>=
 for (pp=gb_sorted+255; pp>=gb_sorted; pp--) *pp=NULL;

@@ -1,0 +1,363 @@
+#   This file, ./PROTOTYPES/SMakefile, is NOT part of the standard
+#   distribution of the Stanford GraphBase.
+
+#   The following copyright notice extends to this file only, not to any
+#   part of the standard distribution of the Stanford GraphBase (which is
+#   copyright (c) 1993 by Stanford University).
+
+#   Copyright (c) 1994 Andreas Scherer
+
+#   Permission is granted to make and distribute verbatim copies of this
+#   document provided that the copyright notice and this permission notice
+#   are preserved on all copies.
+
+#   Permission is granted to copy and distribute modified versions of this
+#   document under the conditions for verbatim copying, provided that the
+#   entire resulting derived work is distributed under the terms of a
+#   permission notice identical to this one.
+
+#   This file is a Makefile for installing the Stanford GraphBase on the
+#   Commodore AMIGA using SAS/C++ 6.56 with SAS/SMake 6.55.
+
+#   Be sure that CWEB version 3.0 or greater is installed before proceeding!
+
+#   Change SGBDIR to the directory where all GraphBase files will go:
+SGBDIR = Local:sgb
+
+#   Change DATADIR to the directory where GraphBase data files will go:
+DATADIR = $(SGBDIR)/data
+
+#   Change INCLUDEDIR to the directory where GraphBase header files will go:
+INCLUDEDIR = $(SGBDIR)/include
+
+#   Change LIBDIR to the directory where GraphBase library routines will go:
+LIBDIR = $(SGBDIR)/lib
+
+#   Change BINDIR to the directory where installdemos will put demo programs:
+BINDIR = $(SGBDIR)/demos
+
+#   Change CWEBINPUTS to the directory where CWEB include files will go:
+CWEBINPUTS = $(SGBDIR)/cwebinputs
+
+#   Uncomment the next line if your C uses <string.h> but not <strings.h>:
+SYS = DEFINE=SYSV
+
+#   If you prefer optimization to debugging, change DEBUG=full to OPTIMIZE.
+#   Adapt CPU and MATH to your system's hardware, e.g., CPU=68030 and
+#   MATH=68882 in connection with MATHLIB=LIB:scm881.lib:
+CFLAGS = DEBUG=full INCLUDEDIR=$(SGBDIR) INCLUDEDIR=$(INCLUDEDIR) $(SYS) \
+	CPU=any MATH=standard DEFINE=_STRICT_ANSI IGNORE=93 NOICONS
+MATHLIB = LIB:scm.lib
+
+MAKE=SMake
+
+########## You shouldn't have to change anything after this point ##########
+# (Well, this is NOT true, when you do this for the first time.
+# SMake is totally different compared to UNIX make, especially most
+# default productions and rules are missing, so the implicit dependencies
+# have to be resolved by hand.  Also the compilation and linkage stages are
+# different compared to those of UNIX cc.  Maybe it would be a good idea to
+# use GNU cc and GNU make?)
+
+LIBS = LIB $(LIBDIR)/libgb.lib $(MATHLIB)
+
+.SUFFIXES: .dvi .tex .w
+
+.c.o:
+	$(CC) $(CFLAGS) $*.c
+
+.tex.dvi:
+	tex "\language=\USenglish \input " $*.tex
+
+.w.c:
+	ctangle $*.w $*.ch
+
+.w.tex:
+	cweave $*.w $*.ch
+
+.w.o:
+	$(MAKE) $*.c
+	$(MAKE) $*.o
+
+.w:
+	$(MAKE) $*.c
+	$(MAKE) $*
+
+.w.dvi:
+	$(MAKE) $*.tex
+	$(MAKE) $*.dvi
+
+PATCH = assign_lisa.ch book_components.ch econ_order.ch football.ch \
+	gb_basic.ch gb_books.ch gb_dijk.ch gb_econ.ch gb_flip.ch \
+	gb_games.ch gb_gates.ch gb_graph.ch gb_io.ch gb_lisa.ch \
+	gb_miles.ch gb_plane.ch gb_raman.ch gb_rand.ch gb_roget.ch \
+	gb_save.ch gb_sort.ch gb_words.ch girth.ch ladders.ch \
+	miles_span.ch multiply.ch queen.ch README.PROTOTYPES \
+	roget_components.ch SMakefile take_risc.ch test_sample.ch \
+	word_components.ch
+
+DATAFILES = anna.dat david.dat econ.dat games.dat homer.dat huck.dat \
+        jean.dat lisa.dat miles.dat roget.dat words.dat
+KERNELFILES = gb_flip.w gb_graph.w gb_io.w gb_sort.w
+KERNELOBJECTS = gb_flip.o gb_graph.o gb_io.o gb_sort.o
+KERNELHEADERS = gb_flip.h gb_graph.h gb_io.h gb_sort.h
+GENERATORFILES = gb_basic.w gb_books.w gb_econ.w gb_games.w gb_gates.w \
+        gb_lisa.w gb_miles.w gb_plane.w gb_raman.w gb_rand.w gb_roget.w \
+        gb_words.w
+GENERATOROBJECTS = gb_basic.o gb_books.o gb_econ.o gb_games.o gb_gates.o \
+	gb_lisa.o gb_miles.o gb_plane.o gb_raman.o gb_rand.o gb_roget.o \
+	gb_words.o
+GENERATORHEADERS = gb_basic.h gb_books.h gb_econ.h gb_games.h gb_gates.h \
+	gb_lisa.h gb_miles.h gb_plane.h gb_raman.h gb_rand.h gb_roget.h \
+	gb_words.h
+DEMOFILES = assign_lisa.w book_components.w econ_order.w football.w \
+        girth.w ladders.w miles_span.w multiply.w queen.w roget_components.w \
+        take_risc.w word_components.w
+DEMOPROGS = assign_lisa book_components econ_order football \
+	girth ladders miles_span multiply queen roget_components \
+	take_risc word_components
+MISCWEBS = boilerplate.w gb_dijk.w gb_save.w gb_types.w test_sample.w
+CHANGEFILES = queen_wrap.ch word_giant.ch
+MISCFILES = Makefile README abstract.plaintex cities.texmap blank.w \
+        sample.correct test.correct test.dat +The+Stanford+GraphBase+
+ALL = $(DATAFILES) $(KERNELFILES) $(KERNELOBJECTS) \
+	$(GENERATORFILES) $(GENERATOROBJECTS) \
+	$(DEMOFILES) $(DEMOPROGS) \
+        $(MISCWEBS) $(CHANGEFILES) $(MISCFILES)
+
+OBJS = $(KERNELOBJECTS) $(GENERATOROBJECTS) gb_dijk.o gb_save.o
+HEADERS = $(KERNELHEADERS) $(GENERATORHEADERS) gb_dijk.h gb_save.h
+DEMOS = $(DEMOPROGS)
+
+help:
+	@echo "First 'make tests';"
+	@echo "then 'make install';"
+	@echo "then (optionally) 'make installdemos';"
+	@echo "then (optionally) 'make clean'."
+
+lib: libgb.lib
+
+libgb.lib: $(OBJS)
+	#delete certified force
+	oml libgb.lib R $(OBJS)
+
+gb_graph.o: gb_graph.c
+gb_graph.c: gb_graph.w gb_graph.ch
+gb_graph.dvi: gb_graph.tex
+gb_graph.tex: gb_graph.w gb_graph.ch
+gb_flip.o: gb_flip.c
+gb_flip.c: gb_flip.w gb_flip.ch
+gb_flip.dvi: gb_flip.tex
+gb_flip.tex: gb_flip.w gb_flip.ch
+gb_sort.o: gb_sort.c
+gb_sort.c: gb_sort.w gb_sort.ch
+gb_sort.dvi: gb_sort.tex
+gb_sort.tex: gb_sort.w gb_sort.ch
+
+gb_basic.o: gb_basic.c
+gb_basic.c: gb_basic.w gb_basic.ch
+gb_basic.dvi: gb_basic.tex
+gb_basic.tex: gb_basic.w gb_basic.ch
+gb_books.o: gb_books.c
+gb_books.c: gb_books.w gb_books.ch
+gb_books.dvi: gb_books.tex
+gb_books.tex: gb_books.w gb_books.ch
+gb_econ.o: gb_econ.c
+gb_econ.c: gb_econ.w gb_econ.ch
+gb_econ.dvi: gb_econ.tex
+gb_econ.tex: gb_econ.w gb_econ.ch
+gb_games.o: gb_games.c
+gb_games.c: gb_games.w gb_games.ch
+gb_games.dvi: gb_games.tex
+gb_games.tex: gb_games.w gb_games.ch
+gb_gates.o: gb_gates.c
+gb_gates.c: gb_gates.w gb_gates.ch
+gb_gates.dvi: gb_gates.tex
+gb_gates.tex: gb_gates.w gb_gates.ch
+gb_lisa.o: gb_lisa.c
+gb_lisa.c: gb_lisa.w gb_lisa.ch
+gb_lisa.dvi: gb_lisa.tex
+gb_lisa.tex: gb_lisa.w gb_lisa.ch
+gb_miles.o: gb_miles.c
+gb_miles.c: gb_miles.w gb_miles.ch
+gb_miles.dvi: gb_miles.tex
+gb_miles.tex: gb_miles.w gb_miles.ch
+gb_plane.o: gb_plane.c
+gb_plane.c: gb_plane.w gb_plane.ch
+gb_plane.dvi: gb_plane.tex
+gb_plane.tex: gb_plane.w gb_plane.ch
+gb_raman.o: gb_raman.c
+gb_raman.c: gb_raman.w gb_raman.ch
+gb_raman.dvi: gb_raman.tex
+gb_raman.tex: gb_raman.w gb_raman.ch
+gb_rand.o: gb_rand.c
+gb_rand.c: gb_rand.w gb_rand.ch
+gb_rand.dvi: gb_rand.tex
+gb_rand.tex: gb_rand.w gb_rand.ch
+gb_roget.o: gb_roget.c
+gb_roget.c: gb_roget.w gb_roget.ch
+gb_roget.dvi: gb_roget.tex
+gb_roget.tex: gb_roget.w gb_roget.ch
+gb_words.o: gb_words.c
+gb_words.c: gb_words.w gb_words.ch
+gb_words.dvi: gb_words.tex
+gb_words.tex: gb_words.w gb_words.ch
+
+assign_lisa: assign_lisa.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+assign_lisa.o: assign_lisa.c
+assign_lisa.c: assign_lisa.w assign_lisa.ch
+assign_lisa.dvi: assign_lisa.tex
+assign_lisa.tex: assign_lisa.w assign_lisa.ch
+book_components: book_components.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+book_components.o: book_components.c
+book_components.c: book_components.w book_components.ch
+book_components.dvi: book_components.tex
+book_components.tex: book_components.w book_components.ch
+econ_order: econ_order.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+econ_order.o: econ_order.c
+	$(CC) $(CFLAGS) DATA=far $?
+econ_order.c: econ_order.w econ_order.ch
+econ_order.dvi: econ_order.tex
+econ_order.tex: econ_order.w econ_order.ch
+football: football.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+football.o: football.c
+football.c: football.w football.ch
+football.dvi: football.tex
+football.tex: football.w football.ch
+girth: girth.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+girth.o: girth.c
+girth.c: girth.w girth.ch
+girth.dvi: girth.tex
+girth.tex: girth.w girth.ch
+ladders: ladders.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+ladders.o: ladders.c
+ladders.c: ladders.w ladders.ch
+ladders.dvi: ladders.tex
+ladders.tex: ladders.w ladders.ch
+miles_span: miles_span.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+miles_span.o: miles_span.c
+miles_span.c: miles_span.w miles_span.ch
+miles_span.dvi: miles_span.tex
+miles_span.tex: miles_span.w miles_span.ch
+multiply: multiply.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+multiply.o: multiply.c
+multiply.c: multiply.w multiply.ch
+multiply.dvi: multiply.tex
+multiply.tex: multiply.w multiply.ch
+queen: queen.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+queen.o: queen.c
+queen.c: queen.w queen.ch
+queen.dvi: queen.tex
+queen.tex: queen.w queen.ch
+roget_components: roget_components.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+roget_components.o: roget_components.c
+roget_components.c: roget_components.w roget_components.ch
+roget_components.dvi: roget_components.tex
+roget_components.tex: roget_components.w roget_components.ch
+take_risc: take_risc.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+take_risc.o: take_risc.c
+take_risc.c: take_risc.w take_risc.ch
+take_risc.dvi: take_risc.tex
+take_risc.tex: take_risc.w take_risc.ch
+word_components: word_components.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ $(LIBS)
+word_components.o: word_components.c
+word_components.c: word_components.w word_components.ch
+word_components.dvi: word_components.tex
+word_components.tex: word_components.w word_components.ch
+
+gb_dijk.o: gb_dijk.c
+gb_dijk.c: gb_dijk.w gb_dijk.ch
+gb_dijk.dvi: gb_dijk.tex
+gb_dijk.tex: gb_dijk.w gb_dijk.ch
+gb_save.o: gb_save.c
+gb_save.c: gb_save.w gb_save.ch
+gb_save.dvi: gb_save.tex
+gb_save.tex: gb_save.w gb_save.ch
+gb_types.o: gb_types.c
+gb_types.c: gb_types.w
+	ctangle gb_types.w
+gb_types.dvi: gb_types.tex
+gb_types.tex: gb_types.w
+	cweave gb_types.w
+
+gb_io.o: gb_io.c
+	$(CC) $(CFLAGS) DEFINE=DATA_DIRECTORY="$(DATADIR)/" gb_io.c
+gb_io.c: gb_io.w gb_io.ch
+gb_io.dvi: gb_io.tex
+gb_io.tex: gb_io.w gb_io.ch
+
+test_io: gb_io.o
+	$(CC) $(CFLAGS) LINK FROM test_io.c gb_io.o TO test_io
+
+test_graph: gb_graph.o
+	$(CC) $(CFLAGS) LINK FROM test_graph.c gb_graph.o TO test_graph
+
+test_flip: gb_flip.o
+	$(CC) $(CFLAGS) LINK FROM test_flip.c gb_flip.o TO test_flip
+
+test_sample: test_sample.o
+	$(CC) $(CFLAGS) LINK FROM $? TO $@ LIB libgb.lib $(MATHLIB)
+test_sample.o: test_sample.c
+test_sample.c: test_sample.w test_sample.ch
+test_sample.dvi: test_sample.tex
+test_sample.tex: test_sample.w test_sample.ch
+
+tests: test_io test_graph test_flip
+	test_io
+	test_graph
+	test_flip
+	$(MAKE) gb_sort.o
+	$(MAKE) lib
+	$(MAKE) test_sample
+	- test_sample > sample.out
+	diff test.gb test.correct
+	diff sample.out sample.correct
+	delete test.gb sample.out test_io test_graph test_flip test_sample
+	@echo "Congratulations --- the tests have all been passed."
+	# touch certified
+
+install: lib
+	#if test ! -r certified; then echo "Please run 'make tests' first!"; fi
+	#test -r certified
+	$(MAKE) installdata
+	- makedir $(LIBDIR)
+	- copy libgb.lib $(LIBDIR)
+	- makedir $(CWEBINPUTS)
+	- copy boilerplate.w gb_types.w $(CWEBINPUTS)
+	- makedir $(INCLUDEDIR)
+	- copy $(HEADERS) Makefile $(INCLUDEDIR)
+
+installdata: $(DATAFILES)
+	- makedir $(SGBDIR)
+	- makedir $(DATADIR)
+	- copy $(DATAFILES) $(DATADIR)
+
+installdemos: $(DEMOS)
+	- makedir $(BINDIR)
+	- copy $(DEMOPROGS) $(BINDIR)
+	- delete $(DEMOPROGS)
+
+uninstalldemos:
+	- delete $(BINDIR)/$(DEMOPROGS) force
+
+doc:
+	tex "\language=\USenglish \input " abstract.plaintex
+
+clean:
+	- delete \#?.(o|c|h|tex|log|dvi|toc|idx|scn|bak|lnk) libgb.lib certified
+
+veryclean: clean
+	- delete $(DEMOPROGS) force
+	- delete $(PATCH) force

@@ -1,17 +1,19 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace IO}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
 
-@* Introduction. This is |gb_io|, the input/output module used by all GraphBase
-routines to access data~files. It doesn't actually do any output; but somehow
-`input/output' sounds like a more useful title than just `input'.
+\def\title{GB\_\,IO}
+
+@* Introduction. This is {\sc GB\_\,IO}, the input/output module used
+by all GraphBase routines to access data~files. It doesn't actually do
+any output; but somehow `input/output' sounds like a more useful title
+than just `input'.
 
 All files of GraphBase data are designed to produce identical results on
 almost all existing computers and operating systems. Each line of each file
 contains at most 79 characters. Each character is either a blank or a
 digit or an uppercase letter or a lowercase letter or a standard punctuation
-mark. Blank characters at the end of each line are ``invisible''; they
-have no perceivable effect, hence identical results will be obtained on
+mark. Blank characters at the end of each line are ``invisible''; that is,
+they have no perceivable effect. Hence identical results will be obtained on
 record-oriented systems that pad every line with blanks.
 
 The data is carefully sum-checked so that defective input files have little
@@ -21,34 +23,30 @@ chance of being accepted.
 systems. Sections of the program that are most likely to require such changes
 are listed under `system dependencies' in the index.
 
-A validation program is provided so that installers can tell if |gb_io|
-is working properly. To make the test, simply run |test_io|.
+A validation program is provided so that installers can tell if {\sc GB\_\,IO}
+is working properly. To make the test, simply run \.{test\_io}.
 
 @(test_io.c@>=
-#include <stdio.h>
-#ifdef SYSV
-#include <string.h>
-#else
-#include <strings.h>
-#endif
-#include "gb_io.h"   /* all users of |gb_io| should include this header file */
-#define exit_test(m) /* we invoke this macro if something goes wrong */@+@=\@>
+#include "gb_io.h"
+  /* all users of {\sc GB\_\,IO} should include this header file */
+#define exit_test(m) /* we invoke this macro if something goes wrong */\
  {@+fprintf(stderr,"%s!\n(Error code = %ld)\n",m,io_errors);@+return -1;@+}
 @t\2@>@/
-main()
+int main()
 {
   @<Test the |gb_open| routine; exit if there's trouble@>;
   @<Test the sample data lines; exit if there's trouble@>;
   @<Test the |gb_close| routine; exit if there's trouble@>;
   printf("OK, the gb_io routines seem to work!\n");
+  return 0;
 }
 
 @ The external variable |io_errors| mentioned in the previous section
 will be set nonzero if any anomalies are detected. Errors won't occur
 in normal use of GraphBase programs, so no attempt has been made to
 provide a user-friendly way to decode the nonzero values that
-|io_errors| may assume.  Information is simply gathered in binary
-form; system wizards who may need to do a bit of troubleshooting
+|io_errors| might assume.  Information is simply gathered in binary
+form; system wizards who might need to do a bit of troubleshooting
 should be able to decode |io_errors| without great pain.
 
 @d cant_open_file 0x1 /* bit set in |io_errors| if |fopen| fails */
@@ -60,32 +58,36 @@ should be able to decode |io_errors| without great pain.
 @d file_ended_prematurely 0x40 /* bit set if |fgets| fails */
 @d missing_newline 0x80 /* bit set if line is too long or |'\n'| is missing */
 @d wrong_number_of_lines 0x100 /* bit set if the line count is wrong */
-@d wrong_checksum 0x200 /* bit set if the check sum is wrong */
+@d wrong_checksum 0x200 /* bit set if the checksum is wrong */
 @d no_file_open 0x400 /* bit set if user tries to close an unopened file */
 @d bad_last_line 0x800 /* bit set if final line has incorrect form */
 
-@ The \Cee\ code for |gb_io| doesn't have a main routine; it's just a
-bunch of subroutines to be incorporated into programs at a higher level,
+@ The \CEE/ code for {\sc GB\_\,IO} doesn't have a main routine; it's just a
+bunch of subroutines to be incorporated into programs at a higher level
 via the system loading routine. Here is the general outline of \.{gb\_io.c}:
 
 @p
 @<Header files to include@>@;
+@h
 @<External declarations@>@;
 @<Private declarations@>@;
 @<Internal functions@>@;
 @<External functions@>
 
 @ Every external variable is declared twice in this \.{CWEB} file:
-once for |gb_io| itself (the ``real'' declaration for storage allocation
-purposes), and once in \.{gb\_io.h} (for cross-references by |gb_io| users).
+once for {\sc GB\_\,IO} itself (the ``real'' declaration for storage
+allocation purposes) and once in \.{gb\_io.h} (for cross-references
+by {\sc GB\_\,IO} users).
 
 @<External declarations@>=
-long io_errors; /* record of anomalies noted by |gb_io| routines */
+long io_errors; /* record of anomalies noted by {\sc GB\_\,IO} routines */
 
 @ @(gb_io.h@>=
-extern long io_errors; /* record of anomalies noted by |gb_io| routines */
+@<Header...@>@;
+extern long io_errors;
+ /* record of anomalies noted by {\sc GB\_\,IO} routines */
 
-@ We will stick to standard \Cee-type input conventions. We'll also have
+@ We will stick to standard \CEE/-type input conventions. We'll also have
 occasion to use some of the standard string operations.
 
 @<Header...@>=
@@ -96,30 +98,31 @@ occasion to use some of the standard string operations.
 #include <strings.h>
 #endif
 
-@* Inputting a line. The |gb_io| routines get their input from an array called
-|buffer|. This array is internal to |gb_io|---its contents are hidden from
-user programs. We make it 81 characters long, since the data is supposed to have
-at most 79 characters per line, followed by newline and null.
+@* Inputting a line. The {\sc GB\_\,IO} routines get their input from
+an array called |buffer|. This array is internal to {\sc
+GB\_\,IO}---its contents are hidden from user programs. We make it 81
+characters long, since the data is supposed to have at most 79
+characters per line, followed by newline and null.
 
 @<Private...@>=
 static char buffer[81]; /* the current line of input */
 static char *cur_pos=buffer; /* the current character of interest */
-static FILE *cur_file; /* current file, or |NULL| is none is open */
+static FILE *cur_file; /* current file, or |NULL| if none is open */
 
 @ Here's a basic subroutine to fill the |buffer|. The main feature of interest
 is the removal of trailing blanks. We assume that |cur_file| is open.
 
 Notice that a line of 79 characters (followed by |'\n'|) will just fit into
-the buffer, and will cause no errors. A line of 80 characters will also
-fit; but it will be split into two lines and the |missing_newline|
+the buffer, and will cause no errors. A line of 80 characters will
+be split into two lines and the |missing_newline|
 message will occur, because of the way |fgets| is defined. A |missing_newline|
 error will also occur if the file ends in the middle of a line, or if
 a null character (|'\0'|) occurs within a line.
 
 @<Internal...@>=
-static fill_buf()
+static void fill_buf()
 {@+register char *p;
-  if (!fgets(buffer,81,cur_file)) {
+  if (!fgets(buffer,sizeof(buffer),cur_file)) {
     io_errors |= file_ended_prematurely; buffer[0]=more_data=0;
   }
   for (p=buffer; *p; p++) ; /* advance to first null character */
@@ -132,14 +135,14 @@ static fill_buf()
 }
 
 @* Checksums. Each data file has a ``magic number,'' which is defined to be
-$$\biggl(\sum_l 2^l c_l\biggr) \bmod p\,;$$
-here $p$ is a large prime number, and $c_l$ denotes the internal code
+$$\biggl(\sum_l 2^l c_l\biggr) \bmod p\,.$$
+Here $p$ is a large prime number, and $c_l$ denotes the internal code
 corresponding to the $l$th-from-last
 data character read (including newlines but not nulls).
 
 The ``internal codes'' $c_l$ are computed in a system-independent way:
 Each character |c| in the actual encoding scheme being used has a
-corresponding |icode| which is the same on all systems. For example,
+corresponding |icode|, which is the same on all systems. For example,
 the |icode| of |'0'| is zero, regardless of whether |'0'| is actually
 represented in ASCII or EBCDIC or some other scheme. (We assume that
 every modern computer system is capable of printing at least 95
@@ -150,10 +153,10 @@ lines and ends with the proper magic number.
 
 @<Private...@>=
 static char icode[256]; /* mapping of characters to internal codes */
-static long checksum_prime=(1<<30)-83;
-  /* large prime such that $2p+100$ won't overflow */
+static long checksum_prime=(1L<<30)-83;
+  /* large prime such that $2p+|unexpected_char|$ won't overflow */
 static long magic; /* current checksum value */
-static int line_no; /* current line number in file */
+static long line_no; /* current line number in file */
 static long final_magic; /* desired final magic number */
 static long tot_lines; /* total number of data lines */
 static char more_data; /* is there data still waiting to be read? */
@@ -165,7 +168,7 @@ and newline. If EBCDIC code is used instead of ASCII, the
 cents sign \rlap{\.{\kern.05em/}}\.c should take the place of single-left-quote
 \.{\char`\`}, and \.{\char5}~should take the place of\/~\.{\char`\~}.
 
-Characters that do not appear in |imap| all are given the same |icode|
+All characters that don't appear in |imap| are given the same |icode|
 value, called |unexpected_char|. Such characters should be avoided in
 GraphBase files whenever possible. (If they do appear, they can still
 get into a user's data, but we don't distinguish them from each other
@@ -173,69 +176,56 @@ for checksumming purposes.)
 
 The |icode| table actually plays a dual role, because we've rigged it so that
 codes 0--15 come from the characters |"0123456789ABCDEF"|. This facilitates
-conversion of decimal and hexadecimal data, and we can also use it for
+conversion of decimal and hexadecimal data. We can also use it for
 radices higher than 16.
 
-@d unexpected_char 100 /* default |icode| value */
+@d unexpected_char 127 /* default |icode| value */
 
 @<Private...@>=
 static char *imap="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 abcdefghijklmnopqrstuvwxyz_^~&@@,;.:?!%#$+-*/|\\<=>()[]{}`'\" \n";
 
-@ Users of |gb_io| can look at the |imap|, but they can't change it.
+@ Users of {\sc GB\_\,IO} can look at the |imap|, but they can't change it.
 
 @<External fun...@>=
 char imap_chr(d)
-  int d;
+  long d;
 {
   return d<0 || d>strlen(imap)? '\0': imap[d];
 }
 @#
-int imap_ord(c)
+long imap_ord(c)
   char c;
 {
   @<Make sure that |icode| has been initialized@>;
-  return icode[c];
+  return (c<0||c>255)? unexpected_char: icode[c];
 }
 
 @ @(gb_io.h@>=
-#define unexpected_char @t\quad@> 100
-extern char imap_chr(); /* the character that maps to |d| */
-extern int imap_ord(); /* the ordinal number of a given character */
+#define unexpected_char @t\quad@> 127
+extern char imap_chr(); /* the character that maps to a given character */
+extern long imap_ord(); /* the ordinal number of a given character */
 
 @ @<Make sure that |icode| has been initialized@>=
 if (!icode['1']) icode_setup();
 
 @ @<Internal...@>=
-static icode_setup()
-{@+register int k;
+static void icode_setup()
+{@+register long k;
   register char *p;
   for (k=0;k<256;k++) icode[k]=unexpected_char;
   for (p=imap,k=0; *p; p++,k++) icode[*p]=k;
 }
 
-@ Now we're ready to specify the first external subroutine for |gb_io| users.
-Calling |gb_newline()| will read the next line of data into |buffer| and
-update the magic number accordingly.
+@ Now we're ready to specify some external subroutines that do
+input.  Calling |gb_newline()| will read the next line of
+data into |buffer| and update the magic number accordingly.
 
 @(gb_io.h@>=
 extern void gb_newline(); /* advance to next line of the data file */
 extern long new_checksum(); /* compute change in magic number */
 
-@ The magic checksum is not affected by lines that begin with \.*.
-
-@<External f...@>=
-gb_newline()
-{
-  if (++line_no>tot_lines) more_data=0;
-  if (more_data) {
-    fill_buf();
-    if (buffer[0]!='*')
-      magic=new_checksum(buffer,magic);
-  }
-}
-
-@ Users can compute checksums like |gb_newline| does, but they can't
+@ Users can compute checksums as |gb_newline| does, but they can't
 change the (private) value of |magic|.
 
 @<External f...@>=
@@ -245,18 +235,31 @@ long new_checksum(s,old_checksum)
 {@+register long a=old_checksum;
   register char*p;
   for (p=s; *p; p++)
-    a=(a+a+icode[*p]) % checksum_prime;
+    a=(a+a+imap_ord(*p)) % checksum_prime;
   return a;
+}
+
+@ The magic checksum is not affected by lines that begin with \.*.
+
+@<External f...@>=
+void gb_newline()
+{
+  if (++line_no>tot_lines) more_data=0;
+  if (more_data) {
+    fill_buf();
+    if (buffer[0]!='*')
+      magic=new_checksum(buffer,magic);
+  }
 }
 
 @ Another simple routine allows a user to read (but not write) the
 variable |more_data|.
 
 @(gb_io.h@>=
-extern int gb_eof(); /* has the data all been read? */
+extern long gb_eof(); /* has the data all been read? */
 
 @ @<External f...@>=
-int gb_eof() { return !more_data; }
+long gb_eof() { return !more_data; }
 
 @* Parsing a line. The user can input characters from the buffer in several
 ways. First, there's a basic |gb_char()| routine, which returns
@@ -280,7 +283,7 @@ char gb_char()
   return '\n';
 }
 @#
-gb_backup()
+void gb_backup()
 {
   if (cur_pos>buffer)
     cur_pos--;
@@ -289,7 +292,8 @@ gb_backup()
 @ There are two ways to read numerical data. The first, |gb_digit(d)|,
 expects to read a single character in radix~|d|, using |icode| values
 to specify digits greater than~9. (Thus, for example, |'A'| represents
-the digit 10.) If the next character is a valid |d|-git,
+the hexadecimal digit for decimal~10.)
+If the next character is a valid |d|-git,
 |cur_pos| moves to the next character and the numerical value is returned.
 Otherwise |cur_pos| stays in the same place and $-1$ is returned.
 
@@ -300,18 +304,19 @@ No errors are possible with this routine, because it uses
 |unsigned long| arithmetic.
 
 @(gb_io.h@>=
-extern int gb_digit(); /* |gb_digit(d)| reads a digit between 0 and |d-1| */
+extern long gb_digit(); /* |gb_digit(d)| reads a digit between 0 and |d-1| */
 extern unsigned long gb_number(); /* |gb_number(d)| reads a radix-|d| number */
 
 @ The value of |d| should be at most 127, if users want their programs to be
-portable, because \Cee\ does not treat larger |char| values in a
+portable, because \CEE/ does not treat larger |char| values in a
 well-defined manner. In most applications, |d| is of course either 10 or 16.
 
 @<External f...@>=
-int gb_digit(d)
+long gb_digit(d)
     char d;
 {
-  if (icode[*cur_pos]<d) return icode[*cur_pos++];
+  icode[0]=d; /* make sure |'\0'| is a nondigit */
+  if (imap_ord(*cur_pos)<d) return icode[*cur_pos++];
   return -1;
 }
 @#
@@ -319,7 +324,7 @@ unsigned long gb_number(d)
     char d;
 {@+register unsigned long a=0;
   icode[0]=d; /* make sure |'\0'| is a nondigit */
-  while (icode[*cur_pos]<d)
+  while (imap_ord(*cur_pos)<d)
     a=a*d+icode[*cur_pos++];
   return a;
 }
@@ -363,50 +368,50 @@ char *gb_string(p,c)
   return p;
 }
 
-@ Here's how we test those routines in |io_test|: The first line of test
+@ Here's how we test those routines in \.{test\_io}: The first line of test
 data consists of 79 characters, beginning with 64 zeroes and ending with
 `\.{123456789ABCDEF}'. The second line is completely blank. The third
 and final line says `\.{Oops:(intentional mistake)}'.
 
 @<Test the sample data lines...@>=
 if (gb_number(10)!=123456789)
-  io_errors |= 1<<20; /* decimal number not working */
+  io_errors |= 1L<<20; /* decimal number not working */
 if (gb_digit(16)!=10)
-  io_errors |= 1<<21; /* we missed the \.A following the decimal number */
+  io_errors |= 1L<<21; /* we missed the \.A following the decimal number */
 gb_backup();@+ gb_backup(); /* get set to read `\.{9A}' again */
 if (gb_number(16)!=0x9ABCDEF)
-  io_errors |= 1<<22; /* hexadecimal number not working */
+  io_errors |= 1L<<22; /* hexadecimal number not working */
 gb_newline(); /* now we should be scanning a blank line */
 if (gb_char()!='\n')
-  io_errors |= 1<<23; /* newline not inserted at end */
+  io_errors |= 1L<<23; /* newline not inserted at end */
 if (gb_char()!='\n')
-  io_errors |= 1<<24; /* newline not implied after end */
+  io_errors |= 1L<<24; /* newline not implied after end */
 if (gb_number(60)!=0)
-  io_errors |= 1<<25; /* number should stop at null character */
+  io_errors |= 1L<<25; /* number should stop at null character */
 {@+char temp[100];
   if (gb_string(temp,'\n')!=temp+1)
-    io_errors |= 1<<26; /* string should be null after end of line */
+    io_errors |= 1L<<26; /* string should be null after end of line */
   gb_newline();
   if (gb_string(temp,':')!=temp+5 || strcmp(temp,"Oops"))
-    io_errors |= 1<<27; /* string not read properly */
+    io_errors |= 1L<<27; /* string not read properly */
 }
 if (io_errors)
   exit_test("Sorry, it failed. Look at the error code for clues");
 if (gb_digit(10)!=-1) exit_test("Digit error not detected");
 if (gb_char()!=':')
-  io_errors |= 1<<28; /* lost synch after |gb_string| and |gb_digit| */
+  io_errors |= 1L<<28; /* lost synch after |gb_string| and |gb_digit| */
 if (gb_eof())
-  io_errors |= 1<<29; /* premature end-of-file indication */
+  io_errors |= 1L<<29; /* premature end-of-file indication */
 gb_newline();
 if (!gb_eof())
-  io_errors |= 1<<30; /* postmature end-of-file indication */
+  io_errors |= 1L<<30; /* postmature end-of-file indication */
 
-@* Opening a file. The call |gb_weak_open("foo")| will open file |"foo"| and
+@* Opening a file. The call |gb_raw_open("foo")| will open file |"foo"| and
 initialize the checksumming process. If the file cannot be opened,
 |io_errors| will be set to |cant_open_file|, otherwise
 |io_errors| will be initialized to zero.
 
-The call |gb_open("foo")| is a stronger version of |gb_weak_open|, which
+The call |gb_open("foo")| is a stronger version of |gb_raw_open|, which
 is used for standard GraphBase data files like |"words.dat"| to make
 doubly sure that they have not been corrupted. It returns the current value
 of |io_errors|, which will be nonzero if any problems were detected
@@ -416,12 +421,15 @@ at the beginning of the file.
 if (gb_open("test.dat")!=0)
   exit_test("Can't open test.dat");
 
-@ @(gb_io.h@>=
-extern void gb_weak_open(); /* open a file for GraphBase input */
-extern int gb_open(); /* open a GraphBase data file; return 0 if OK */
+@ @d gb_raw_open gb_r_open /* abbreviation for Procrustean external linkage */
+
+@(gb_io.h@>=
+#define gb_raw_open gb_r_open
+extern void gb_raw_open(); /* open a file for GraphBase input */
+extern long gb_open(); /* open a GraphBase data file; return 0 if OK */
 
 @ @<External f...@>=
-void gb_weak_open(f)
+void gb_raw_open(f)
     char *f;
 {
   @<Make sure that |icode|...@>;
@@ -432,33 +440,33 @@ void gb_weak_open(f)
     line_no=magic=0;
     tot_lines=0x7fffffff; /* allow ``infinitely many'' lines */
     fill_buf();
-  } else io_errors=cant_open_file;
+  }@+else io_errors=cant_open_file;
 }
 
 @ Here's a possibly system-dependent part of the code: We try first to
 open the data file by using the file name itself as the path name;
 failing that, we try to prefix the file name with the name of the
-standard directory for GraphBase data, found in
-the header file \.{localdefs.h}.
+standard directory for GraphBase data, if the program has been compiled
+with |DATA_DIRECTORY| defined.
 @^system dependencies@>
 
-@<Header...@>=
-#include "localdefs.h"
-
-@ @<Try to open |f|@>=
+@<Try to open |f|@>=
 cur_file=fopen(f,"r");
 @^system dependencies@>
+#ifdef DATA_DIRECTORY
 if (!cur_file && (strlen(DATA_DIRECTORY)+strlen(f)<STR_BUF_LENGTH)) {
   sprintf(str_buf,"%s%s",DATA_DIRECTORY,f);
   cur_file=fopen(str_buf,"r");
 }
+#endif
 
 @ @<External f...@>=
-int gb_open(f)
+long gb_open(f)
     char *f;
 {
-  strncpy(file_name,f,19); /* save the name for use by |gb_close| */
-  gb_weak_open(f);
+  strncpy(file_name,f,sizeof(file_name)-1);
+     /* save the name for use by |gb_close| */
+  gb_raw_open(f);
   if (cur_file) {
     @<Check the first line; return if unsuccessful@>;
     @<Check the second line; return if unsuccessful@>;
@@ -474,18 +482,18 @@ static char file_name[20]; /* name of the data file, without a prefix */
 
 @ The first four lines of a typical data file should look something like this:
 $$\halign{\hskip5em\.{#}\hfill\cr
-  * File "words.dat" from the Stanford GraphBase (C) 1992 Stanford University\cr
-  * A database of English 5-letter words\cr
-  * This file may be freely copied but please do not change it in any way!\cr
-  * (Checksum parameters 5678,78934448)\cr}$$
+ * File "words.dat" from the Stanford GraphBase (C) 1993 Stanford University\cr
+ * A database of English five-letter words\cr
+ * This file may be freely copied but please do not change it in any way!\cr
+ * (Checksum parameters 5757,526296596)\cr}$$
 We actually verify only that the first four lines of a data file named |"foo"|
-begin with the characters
+begin respectively with the characters
 $$\halign{\hskip5em\.{#}\hfill\cr
-  * File "foo"\cr
-  *\cr
-  *\cr
-  * (Checksum parameters $l,m$)\cr}$$
-respectively, where $l$ and $m$ are decimal numbers. The values of $l$ and~$m$
+ * File "foo"\cr
+ *\cr
+ *\cr
+ * (Checksum parameters $l$,$m$)\cr}$$
+where $l$ and $m$ are decimal numbers. The values of $l$ and~$m$
 are stored away as |tot_lines| and |final_magic|, to be matched at the
 end of the file.
 
@@ -514,10 +522,10 @@ final_magic=gb_number(10);
 if (gb_char()!=')')
   return (io_errors |= bad_fourth_line);
 
-@* Closing a file. At the end, we check that the file was open
-and that it had the correct number of lines, the correct magic number,
-and a correct final line.
-The subroutine |gb_close|, like |gb_open|, returns the value of
+@* Closing a file. After all data has been input, or should have been input,
+we check that the file was open and that it had the correct number of
+lines, the correct magic number, and a correct final line.  The
+subroutine |gb_close|, like |gb_open|, returns the value of
 |io_errors|, which will be nonzero if at least one problem was noticed.
 
 @<Test the |gb_close| routine; exit if there's trouble@>=
@@ -525,7 +533,7 @@ if (gb_close()!=0)
   exit_test("Bad checksum, or difficulty closing the file");
 
 @ @<External f...@>=
-int gb_close()
+long gb_close()
 {
   if (!cur_file)
     return (io_errors |= no_file_open);
@@ -534,7 +542,7 @@ int gb_close()
   if (strncmp(buffer,str_buf,strlen(str_buf)))
     io_errors |= bad_last_line;
   more_data=buffer[0]=0;
-   /* now the |gb_io| routines are effectively shut down */
+   /* now the {\sc GB\_\,IO} routines are effectively shut down */
    /* we have |cur_pos=buffer| */
   if (fclose(cur_file)!=0)
     return (io_errors |= cant_close_file);
@@ -546,20 +554,23 @@ int gb_close()
   return io_errors;
 }
 
-@ There is also a less paranoid routine, |gb_weak_close|, that
+@ There is also a less paranoid routine, |gb_raw_close|, that
 closes user-generated files. It simply closes the current file, if any,
 and returns the value of the |magic| checksum.
 
-Example: The |restore_graph| subroutine in module |gb_save| uses
-|gb_weak_open| and |gb_weak_close| to provide system-independent input
+Example: The |restore_graph| subroutine in {\sc GB\_\,SAVE} uses
+|gb_raw_open| and |gb_raw_close| to provide system-independent input
 that is almost as foolproof as the reading of standard GraphBase data.
 
-@ @(gb_io.h@>=
-extern int gb_close(); /* close a GraphBase data file; return 0 if OK */
-extern long gb_weak_close(); /* close file and return the checksum */
+@ @d gb_raw_close gb_r_close /* for Procrustean external linkage */
+
+@(gb_io.h@>=
+#define gb_raw_close gb_r_close
+extern long gb_close(); /* close a GraphBase data file; return 0 if OK */
+extern long gb_raw_close(); /* close file and return the checksum */
 
 @ @<External f...@>=
-long gb_weak_close()
+long gb_raw_close()
 {
   if (cur_file) {
     fclose(cur_file);

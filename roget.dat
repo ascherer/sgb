@@ -1,7 +1,7 @@
-* File "roget.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* File "roget.dat" from the Stanford GraphBase (C) 1993 Stanford University
 * Cross-references in Roget's Thesaurus, 1879
 * This file may be freely copied but please do not change it in any way!
-* (Checksum parameters 1033,184851240)
+* (Checksum parameters 1033,644995539)
 1existence:2 69 125 149 156 166 193 455 506 527
 2inexistence:1 4 167 192 194 368 458 526 527 771
 3substantiality:4 323 325
@@ -102,8 +102,8 @@
 98quaternity:
 99quadruplication:100
 100quadrisection:99
-101five:102
-102quinquesection:101
+101five or more:102
+102quinquesection or finer:101
 103plurality:90 104 105 106
 104fraction:54 103
 105zero:4 103 194
@@ -442,14 +442,14 @@
 438achromatism:437 439
 439whiteness:440
 440blackness:429 430 439 441
-441gray:440 442
-442brown:441
+441grayness:440 442
+442brownness:441
 443redness:444
 444greenness:443
 445yellowness:446
-446purple:445
+446purpleness:445
 447blueness:448
-448orange:447
+448orangeness:447
 449variegation:
 450vision:193 451 452 453 455 465 467 469 510 519
 451blindness:450 452 540

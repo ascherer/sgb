@@ -1,22 +1,24 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace BOOKS}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
+
+\def\title{GB\_\,BOOKS}
 \def\<#1>{\hbox{$\langle$\rm#1$\rangle$}}
 
-\prerequisites{GB\_\thinspace GRAPH}{GB\_\thinspace IO}
+\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
 @* Introduction. This GraphBase module contains the |book|
 subroutine, which creates a family of undirected graphs that are based on
 classic works of literature.  It also contains the |bi_book|
 subroutine, which creates a related family of bipartite graphs.
 An example of the use of |book| can be found in the demonstration
-program |book_components|.
+program {\sc BOOK\_\kern.05emCOMPONENTS}.
 
 @(gb_books.h@>=
 extern Graph *book();
 extern Graph *bi_book();
 
-@ The subroutine call `|book(@t\<title>@>,n,x,first_chapter,last_chapter,
-in_weight,out_weight,seed)|'
+@ The subroutine call |book(@[@t\<title>@>@],n,x,first_chapter,last_chapter,
+in_weight,out_weight,seed)|
 constructs a graph based on the information in \<title>\.{.dat},
 where \<title> is either \.{"anna"} (for {\sl Anna Karenina\/}),
 \.{"david"} (for {\sl David Copperfield\/}),
@@ -30,14 +32,14 @@ those characters. The length of each edge is~1.
 Subsets of the book can be selected by specifying that the edge data should be
 restricted to chapters between |first_chapter| and |last_chapter|,
 inclusive. If |first_chapter=0|, the result is the same as if
-|first_chapter=1|. If |last_chapter=0|, or if |last_chapter| exceeds
+|first_chapter=1|. If |last_chapter=0| or if |last_chapter| exceeds
 the total number of chapters in the book, the result is the same as
 if |last_chapter| were the number of the book's final chapter.
 
-The constructed graph will have $\min(n,m)-x$ vertices, where |m| is the
+The constructed graph will have $\min(n,N)-x$ vertices, where $N$ is the
 total number of characters in the selected book.
 However, if |n| is zero, |n| is automatically made equal to the maximum
-possible value,~|m|. If |n| is less than~|m|, the |n-x| characters will be
+possible value,~$N$. If |n| is less than~$N$, the |n-x| characters will be
 selected by assigning  a weight to each character and choosing the |n| with
 largest weight, then excluding the largest~|x| of these,
 using random numbers to break ties in case of equal weights.
@@ -59,8 +61,8 @@ all computers when identical parameters have been specified.
 Any |seed| value between 0 and $2^{31}-1$ is permissible.
 
 @ Examples: The call |book("anna",0,0,0,0,0,0,0)| will construct a
-graph on 138 vertices, representing all 138 characters of Tolstoy's
-{\sl Anna Karenina\/} that are recorded in \.{anna.dat}. Two vertices will
+graph on 138 vertices that represent all 138 characters of Tolstoy's
+{\sl Anna Karenina\/}, as recorded in \.{anna.dat}. Two vertices will
 be adjacent if the corresponding characters
 encounter each other anywhere in the book. The call
 |book("anna",50,0,0,0,1,1,0)| is similar, but it is restricted to
@@ -88,7 +90,7 @@ characters in {\sl David Copperfield\/}; the call
 |book("david",0,1,0,0,1,1,0)| produces a graph with 86 vertices, one
 for every character except David Copperfield himself.
 
-@ The subroutine call |bi_book(@t\<title>@>,n,x,first_chapter,last_chapter,
+@ The subroutine call |bi_book(@[@t\<title>@>@],n,x,first_chapter,last_chapter,
 in_weight,out_weight,seed)| produces a bipartite graph in which the
 vertices of the first part are exactly the same as the vertices of the
 graph returned by |book|, while the vertices of the second part are
@@ -109,21 +111,21 @@ turns out to be equivalent to selecting chapters 1.10 through 4.19
 a graph, the external integer variable |chapters| will contain the total
 number of chapters, and |chap_name| will be an array of strings
 containing the structured chapter numbers. For example, after
-|book("jean",@t\dots@>)|, we will have |chapters=356|,
+|book("jean",@[@t\dots@>@])|, we will have |chapters=356|,
 |chap_name[1]="1.1.1"|, \dots, |chap_name[356]="5.9.6"|;
 |chap_name[0]| will be~|""|.
 
 @d MAX_CHAPS 360 /* no book will have this many chapters */
 
 @<External variables@>=
-int chapters; /* the total number of chapters in the selected book */
+long chapters; /* the total number of chapters in the selected book */
 char *chap_name[MAX_CHAPS]={""}; /* string names of those chapters */
 
 @ As usual, we put declarations of the external variables into the header file
-for user to {\bf include}.
+for users to {\bf include}.
 
 @(gb_books.h@>=
-extern int chapters; /* the total number of chapters in the selected book */
+extern long chapters; /* the total number of chapters in the selected book */
 extern char *chap_name[]; /* string names of those chapters */
 
 @ If the |book| or |bi_book| routine encounters a problem, it
@@ -131,51 +133,49 @@ returns |NULL| (\.{NULL}),
 after putting a code number into the external variable
 |panic_code|. This code number identifies the type of failure.
 Otherwise |book| returns a pointer to the newly created graph, which
-will be represented with the data structures explained in |gb_graph|.
-(The external variable |@!panic_code| is itself defined in |gb_graph|.)
+will be represented with the data structures explained in {\sc GB\_\,GRAPH}.
+(The external variable |panic_code| is itself defined in {\sc GB\_\,GRAPH}.)
 
-@d panic(c) @+{@+panic_code=c;@+gb_alloc_trouble=0;@+return NULL;@+}
+@d panic(c) @+{@+panic_code=c;@+gb_trouble_code=0;@+return NULL;@+}
 @#
-@f Graph int /* |gb_graph| defines the |Graph| type and a few others */
-@f Vertex int
-@f Arc int
-@f Area int
-@f node int /* the \&{node} type is defined below */
+@f node long /* the \&{node} type is defined below */
 
-@ The \Cee\ file \.{gb\_books.c} has the overall shape shown here.
+@ The \CEE/ file \.{gb\_books.c} has the overall shape shown here.
 It makes use of an internal subroutine
 called |bgraph|, which combines the work of |book| and |bi_book|.
+
 @p
-#include "gb_io.h" /* we will use the |gb_io| routines for input */
-#include "gb_flip.h" /* we will use the |gb_flip| routines
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
                         for random numbers */
-#include "gb_graph.h" /* we will use the |gb_graph| data structures */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 #include "gb_sort.h" /* and the |gb_linksort| routine */
-@#
+@h@#
 @<Type declarations@>@;
 @<Private variables@>@;
 @<External variables@>@;
 @#
 static Graph *bgraph(bipartite,
     title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
-  int bipartite; /* should we make the graph bipartite? */
+  long bipartite; /* should we make the graph bipartite? */
   char *title; /* identification of the selected book */
-  unsigned n; /* number of vertices desired before exclusion */
-  unsigned x; /* number of vertices to exclude */
-  unsigned first_chapter, last_chapter;
+  unsigned long n; /* number of vertices desired before exclusion */
+  unsigned long x; /* number of vertices to exclude */
+  unsigned long first_chapter, last_chapter;
     /* interval of chapters leading to edges */
   long in_weight; /* weight coefficient pertaining to chapters
                           in that interval */
   long out_weight; /* weight coefficient pertaining to chapters
                           not in that interval */
   long seed; /* random number seed */
-{@+@<Local variables@>@;
+{@+@<Local variables@>@;@#
   gb_init_rand(seed);
   @<Check that the parameters are valid@>;
-  @<Skim the data file, recording the characters and computing their weights@>;
+  @<Skim the data file, recording the characters and computing their
+    statistics@>;
   @<Choose the vertices and put them into an empty graph@>;
   @<Read the data file more carefully and fill the graph as instructed@>;
-  if (gb_alloc_trouble) {
+  if (gb_trouble_code) {
     gb_recycle(new_graph);
     panic(alloc_fault); /* (expletive deleted)
                      we ran out of memory somewhere back there */
@@ -185,22 +185,22 @@ static Graph *bgraph(bipartite,
 @#
 Graph *book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
   char *title;
-  unsigned n, x, first_chapter, last_chapter;
+  unsigned long n, x, first_chapter, last_chapter;
   long in_weight,out_weight,seed;
-{@+return bgraph(0,title,n,x,first_chapter,last_chapter,
+{@+return bgraph(0L,title,n,x,first_chapter,last_chapter,
   in_weight,out_weight,seed);@+}
 Graph *bi_book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
   char *title;
-  unsigned n, x, first_chapter, last_chapter;
+  unsigned long n, x, first_chapter, last_chapter;
   long in_weight,out_weight,seed;
-{@+return bgraph(1,title,n,x,first_chapter,last_chapter,
+{@+return bgraph(1L,title,n,x,first_chapter,last_chapter,
     in_weight,out_weight,seed);@+}
 
 @ @<Local var...@>=
 Graph *new_graph; /* the graph constructed by |book| or |bi_book| */
-register int j,k; /* all-purpose indices */
-register node *p;
-int characters; /* the total number of characters in the selected book */
+register long j,k; /* all-purpose indices */
+long characters; /* the total number of characters in the selected book */
+register node *p; /* information about the current character */
 
 @ @d MAX_CHARS 600 /* there won't be more characters than this */
 
@@ -217,7 +217,6 @@ if (gb_open(file_name)!=0)
 
 @ @<Priv...@>=
 static char file_name[]="xxxxxx.dat";
-static char null_string[1]; /* a null string constant */
 
 @*Vertices.
 Each character in a book has been given a two-letter code name for
@@ -231,18 +230,18 @@ The \<name> does not contain a comma; the \<description> might.
 A blank line follows the cast of characters.
 
 Internally, we will think of the two-letter code as a radix-36 integer.
-Thus, \.{AA} will be the number $10\times36+10$, and \.{ZZ} will be
-$35\times36+35$. The |gb_number| routine in |gb_io| is set up to
+Thus \.{AA} will be the number $10\times36+10$, and \.{ZZ} will be
+$35\times36+35$. The |gb_number| routine in {\sc GB\_\,IO} is set up to
 input radix-36 integers just as it does hexadecimal ones.
 In {\sl The Iliad}, many of the minor characters have numeric digits
-in their code names, because the total number of characters is too
+in their code names because the total number of characters is too
 large to permit mnemonic codes for everybody.
 
 @d MAX_CODE 1296 /* $36\times36$, the number of two-digit codes in radix 36 */
 
 @ In order to choose the vertices, we want to represent each character
 as a node whose key corresponds to its weight; then the |gb_linksort|
-routine of |gb_sort| will provide the desired rank-ordering. We will
+routine of {\sc GB\_\,SORT} will provide the desired rank-ordering. We will
 find it convenient to use these nodes for all the data processing that
 |bgraph| has to do.
 
@@ -250,11 +249,11 @@ find it convenient to use these nodes for all the data processing that
 typedef struct node_struct { /* records to be sorted by |gb_linksort| */
   long key; /* the nonnegative sort key (weight plus $2^{30}$) */
   struct node_struct *link; /* pointer to next record */
-  int code; /* code number of this character */
-  int in; /* number of occurrences in selected chapters */
-  int out; /* number of occurrences in unselected chapters */
-  int chap; /* seen most recently in this chapter */
-  Vertex *v; /* vertex corresponding to this character */
+  long code; /* code number of this character */
+  long in; /* number of occurrences in selected chapters */
+  long out; /* number of occurrences in unselected chapters */
+  long chap; /* seen most recently in this chapter */
+  Vertex *vert; /* vertex corresponding to this character */
 } node;
 
 @ Not only do nodes point to codes, we also want codes to point to nodes.
@@ -267,18 +266,18 @@ static node *xnode[MAX_CODE]; /* the node, if any, having a given code */
 and once more thoroughly (to record detailed information). Here is the
 quick version.
 
-@<Skim the data file, recording the characters and computing their weights@>=
+@<Skim the data file, recording the characters...@>=
 @<Read the character codes at the beginning of the data file, and
   prepare a node for each one@>;
 @<Skim the chapter information, counting the number of chapters in
   which each character appears@>;
 if (gb_close()!=0)
   panic(late_data_fault);
-    /* check sum or other failure in data file; see |io_errors| */
+    /* checksum or other failure in data file; see |io_errors| */
 
 @ @<Read the character codes...@>=
 for (k=0;k<MAX_CODE;k++) xnode[k]=NULL;
-{@+register int c; /* current code entering the system */
+{@+register long c; /* current code entering the system */
   p=node_block; /* current node entering the system */
   while ((c=gb_number(36))!=0) { /* note that \.{00} is not a legal code */
     if (c>=MAX_CODE || gb_char()!=' ') panic(syntax_error);
@@ -289,7 +288,7 @@ for (k=0;k<MAX_CODE;k++) xnode[k]=NULL;
     p->code=c;
     xnode[c]=p;
     p->in=p->out=p->chap=0;
-    p->v=NULL;
+    p->vert=NULL;
     p++;
     gb_newline();
   }
@@ -304,21 +303,23 @@ in case anybody cares to look at it. The |in| and |out| statistics
 are also made available in utility fields called |in_count| and |out_count|.
 The code value is placed in the |short_code| field.
 
-@d desc z.s /* utility field |z| points to the \<description> string */
-@d in_count y.i /* utility field |y| counts appearances in selected chapters */
-@d out_count x.i /* utility field |x| counts appearances in other chapters */
-@d short_code u.i /* utility field |u| contains a radix-36 number */
+@d desc z.S /* utility field |z| points to the \<description> string */
+@d in_count y.I /* utility field |y| counts appearances in selected chapters */
+@d out_count x.I /* utility field |x| counts appearances in other chapters */
+@d short_code u.I /* utility field |u| contains a radix-36 number */
 
 @<Read the data about characters again, noting vertex names and the
   associated descriptions@>=
-{@+register int c; /* current code entering the system a second time */
-  while ((c=gb_number(36))!=0) {@+register Vertex *v=xnode[c]->v;
+{@+register long c; /* current code entering the system a second time */
+  while ((c=gb_number(36))!=0) {@+register Vertex *v=xnode[c]->vert;
     if (v) {
       if (gb_char()!=' ') panic(impossible); /* can't happen */
       gb_string(str_buf,','); /* scan the \<name> part */
       v->name=gb_save_string(str_buf);
       if (gb_char()!=',')
         panic(syntax_error+2); /* missing comma after \<name> */
+      if (gb_char()!=' ')
+        panic(syntax_error+3); /* missing space after comma */
       gb_string(str_buf,'\n'); /* scan the \<description> part */
       v->desc=gb_save_string(str_buf);
       v->in_count=xnode[c]->in;
@@ -331,14 +332,14 @@ The code value is placed in the |short_code| field.
 }  
 
 @ @(gb_books.h@>=
-#define desc @t\quad@> z.s /* utility field definitions for the header file */
-#define in_count @t\quad@> y.i
-#define out_count @t\quad@> x.i
-#define short_code @t\quad@> u.i
+#define desc @t\quad@> z.S /* utility field definitions for the header file */
+#define in_count @t\quad@> y.I
+#define out_count @t\quad@> x.I
+#define short_code @t\quad@> u.I
 
 @*Edges.
 The second part of the data file has a line for each chapter, containing
-``cliques of encouters.'' For example, the line
+``cliques of encounters.'' For example, the line
 $$\hbox{\tt3.22:AA,BB,CC,DD;CC,DD,EE;AA,FF}$$
 means that, in chapter 22 of book 3, there were encounters between the pairs
 $$\def\\{{\rm,} }
@@ -354,7 +355,7 @@ in sort of a soliloquy.
 A chapter might contain no references to characters at all. In such a case
 the `\.:' following the chapter number is omitted.
 
-There may be more encounters than will fit on a single line. In such cases,
+There might be more encounters than will fit on a single line. In such cases,
 continuation lines begin with `\.{\&:}'. This convention turns out to be
 needed only in \.{homer.dat}; chapters in {\sl The Iliad\/} are
 substantially more complex than the chapters in other GraphBase books.
@@ -368,12 +369,11 @@ commas and semicolons.
 for (k=1; k<MAX_CHAPS && !gb_eof(); k++) {
   gb_string(str_buf,':'); /* read past the chapter number */
   if (str_buf[0]=='&') k--; /* continuation of previous chapter */
-  while (gb_char()!='\n') {@+register int c=gb_number(36);
-    register node *p;
+  while (gb_char()!='\n') {@+register long c=gb_number(36);
     if (c>=MAX_CODE)
-      panic(syntax_error+3); /* missing punctuation between characters */
+      panic(syntax_error+4); /* missing punctuation between characters */
     p=xnode[c];
-    if (p==NULL) panic(syntax_error+4); /* unknown character */
+    if (p==NULL) panic(syntax_error+5); /* unknown character */
     if (p->chap!=k) {
       p->chap=k;
       if (k>=first_chapter && k<=last_chapter) p->in++;
@@ -382,8 +382,8 @@ for (k=1; k<MAX_CHAPS && !gb_eof(); k++) {
   }
   gb_newline();
 }
-if (k==MAX_CHAPS) panic(syntax_error+5); /* too many chapters */
-chapters=k;
+if (k==MAX_CHAPS) panic(syntax_error+6); /* too many chapters */
+chapters=k-1;
 
 @ Our second pass over the data is very similar to the first, if we
 are simply computing a bipartite graph. In that case we add an edge
@@ -394,7 +394,7 @@ vertex such that |chap_base+k| is the vertex corresponding to chapter~|k|.
 The |in_count| of a chapter vertex is the degree of that vertex, i.e., the
 number of selected characters that appear in the corresponding chapter.
 The |out_count| is the number of characters that appear in the
-chapter but were omitted from the graph. Thus, the |in_count| and
+chapter but were omitted from the graph. Thus the |in_count| and
 |out_count| for chapters are analogous to the |in_count| and |out_count|
 for characters.
 
@@ -412,14 +412,14 @@ for characters.
         u->desc=null_string;
         u->in_count=u->out_count=0;
       }
-      while (gb_char()!='\n') {@+register int c=gb_number(36);
+      while (gb_char()!='\n') {@+register long c=gb_number(36);
         p=xnode[c];
-        if (p->chap!=k) {@+register Vertex *v=p->v;
+        if (p->chap!=k) {@+register Vertex *v=p->vert;
           p->chap=k;
-          if (v) {
-            gb_new_edge(v,u,1);
+          if (v) {@+
+            gb_new_edge(v,u,1L);
             u->in_count++;
-          } else u->out_count++;
+          }@+else u->out_count++;
         }
       }
     }
@@ -436,21 +436,24 @@ encounters from cliques, but the logic isn't difficult really.
 We insert a reference to the first chapter that generated each edge, in
 utility field |chap_no| of the corresponding |Arc| record.
 
-@d chap_no a.i /* utility field |a| holds a chapter number */
+@d chap_no a.I /* utility field |a| holds a chapter number */
 
 @<Read the chapter information a second time and create the
   appropriate edges for encounters@>=
-for (k=1; !gb_eof(); k++) {
-  gb_string(str_buf,':'); /* read the chapter number */
+for (k=1; !gb_eof(); k++) {@+char *s;
+  s=gb_string(str_buf,':'); /* read the chapter number */
   if (str_buf[0]=='&') k--;
-  else chap_name[k]=gb_save_string(str_buf);
-  if (k>=first_chapter && k<=last_chapter) {@+register int c=gb_char();
+  else {@+if (*(s-2)=='\n') *(s-2)='\0';
+    chap_name[k]=gb_save_string(str_buf);
+  }
+  if (k>=first_chapter && k<=last_chapter) {@+register long c=gb_char();
     while (c!='\n') {@+register Vertex **pp=clique_table;
       register Vertex **qq,**rr; /* pointers within the clique table */
-      do@+{
+      do@+{@+
         c=gb_number(36); /* set |c| to code for next character of clique */
-        if (xnode[c]->v) /* is that character a selected vertex? */
-          *pp++=xnode[c]->v; /* if so, that vertex joins the current clique */
+        if (xnode[c]->vert) /* is that character a selected vertex? */
+          *pp++=xnode[c]->vert;
+            /* if so, that vertex joins the current clique */
         c=gb_char();
       }@+while (c==','); /* repeat until end of the clique */
       for (qq=clique_table;qq+1<pp;qq++)
@@ -463,7 +466,7 @@ for (k=1; !gb_eof(); k++) {
 }
 
 @ @(gb_books.h@>=
-#define chap_no @[a.i@] /* utility field definition in the header file */
+#define chap_no @[a.I@] /* utility field definition in the header file */
 
 @ @<Priv...@>=
 static Vertex *clique_table[30];
@@ -474,7 +477,7 @@ static Vertex *clique_table[30];
   register Arc *a;
   for (a=u->arcs; a; a=a->next)
     if (a->tip==v) goto found;
-  gb_new_edge(u,v,1); /* not found, so they weren't already adjacent */
+  gb_new_edge(u,v,1L); /* not found, so they weren't already adjacent */
   if (u<v) a=u->arcs;
   else a=v->arcs; /* the new edge consists of arcs |a| and |a+1| */
   a->chap_no=(a+1)->chap_no=k;
@@ -496,9 +499,9 @@ if (last_chapter>chapters) last_chapter=chapters;
 if (first_chapter>last_chapter) first_chapter=last_chapter+1;
 new_graph=gb_new_graph(n-x+(bipartite?last_chapter-first_chapter+1:0));
 if (new_graph==NULL) panic(no_room); /* out of memory already */
-strcpy(new_graph->format,"IZZIISIZZZZZZZ");
+strcpy(new_graph->util_types,"IZZIISIZZZZZZZ");
               /* declare the types of utility fields */
-sprintf(new_graph->id,"%sbook(\"%s\",%u,%u,%u,%u,%ld,%ld,%ld)",
+sprintf(new_graph->id,"%sbook(\"%s\",%lu,%lu,%lu,%lu,%ld,%ld,%ld)",
   bipartite?"bi_":"",title,n,x,first_chapter,last_chapter,
   in_weight,out_weight,seed);
 if (bipartite) {
@@ -516,7 +519,7 @@ k=n; /* we will look at this many nodes */
   for (j=127; j>=0; j--)
     for (p=(node*)gb_sorted[j]; p; p=p->link) {
       if (x>0) x--; /* ignore this node */
-      else p->v=v++; /* choose this node */
+      else p->vert=v++; /* choose this node */
       if (--k==0) goto done;
     }
 }

@@ -1,14 +1,14 @@
-* File "words.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* File "words.dat" from the Stanford GraphBase (C) 1993 Stanford University
 * A database of English five-letter words
 * This file may be freely copied but please do not change it in any way!
-* (Checksum parameters 5678,99373046)
+* (Checksum parameters 5757,526296596)
 aargh
 abaca 2
 abaci+1
 aback*2,2,3
 abaft
 abase+,,,,3
-abash*
+abash+
 abate*,,2,,2
 abbey*3,1,3
 abbot*3,1
@@ -26,6 +26,7 @@ above*2298,295,296,24,174,181,31
 absit ,,2
 abuse*9,16,10,12,13,1,3
 abuts+,,1,,,1
+abuzz
 abyss*5,4,4,,7
 ached*27,3,7
 aches*10,1
@@ -34,6 +35,7 @@ acids*59,7,1
 acing*
 acked
 acmes+
+acned
 acnes*
 acorn*10,,1
 acres*159,42,31,,1
@@ -86,12 +88,14 @@ agree*262,51,107,23,15,14,1
 agues+
 ahead*639,109,92,17,23,35,2
 ahhhh+,,1
+ahold+
 ahoys
 aided*25,11,8,,3
 aider
 aides*6,4,1
 ailed*1
 aimed*45,24,21,8,1
+aimer+
 aioli
 aired*,2,3
 airer
@@ -220,6 +224,7 @@ armed*103,35,22,8,49,1,1
 armor*60,4,,,32
 aroma*9,3,5,,2
 arose*77,18,20,2,153,2
+arras
 array*57,11,3,,20,12,16
 arrow*193,13,1,,25,13
 arses
@@ -236,6 +241,7 @@ asker
 askew*2,1,2
 aspen*9,2
 aspic*1
+assai
 assay*,1,3,,1
 assed
 asses*6,2,,,64
@@ -279,6 +285,7 @@ aways+2
 awful*2,17,19,1,1,4
 awing
 awoke*54,9,6,,19
+axels
 axial+2,2
 axing+
 axiom+10,1,5
@@ -309,6 +316,7 @@ baked*93,8,5,,16,1
 baker*19,10,2,,9
 bakes*10,1,,,1
 balds
+baldy
 baled*3
 baler+1,,1
 bales*21,3,8
@@ -335,6 +343,7 @@ bares*1,,1
 barfs
 barfy
 barge*35,7,11
+baric
 barks*19,,1
 barky
 barms
@@ -431,6 +440,7 @@ betas+
 betel+1
 beths
 bevel*27,2,1
+bezel
 bhang
 bhoys ,,1
 bibbs+
@@ -540,6 +550,7 @@ bogus+1,3,4
 boils*23,2,1,1,6,1,2
 bolas 2
 bolls+9
+bolos
 bolts*37,1,4,2,7
 bombe+
 bombs*38,35,16
@@ -577,6 +588,7 @@ borne+25,8,13,,44
 boron+6
 bosky
 bosom*16,8,6,,42
+boson
 bossa+
 bossy*8,,1
 bosun+
@@ -609,6 +621,7 @@ brant
 brash+2,1,3
 brass*191,18,33,1,11
 brats*,,4
+brava
 brave*282,20,20,1,13,2
 bravo*7
 brawl*3,1,1
@@ -619,7 +632,7 @@ bread*515,41,41,2,347
 break*516,88,75,6,141,183,1
 bream ,,23
 breed*47,16,21,1,4
-brent ,,1,,,,1
+brent ,,1
 breve+2,,,,,3
 brews*3,,1
 briar*2,,3
@@ -649,6 +662,7 @@ broth*16,3,8,,4
 brown*557,68,68,3,,1
 brows*12,5,6
 bruin+
+bruit
 brung 4
 brunt*2,1,1
 brush*251,42,14,2,1,1
@@ -686,11 +700,12 @@ bunks*11,17,2
 bunny*5
 bunts*
 buoys*7,1
+buret
 burgs+
 burls+
 burly*10,3,5
 burns*91,16,2,1,20,1
-burnt+43,5,11,,334
+burnt*43,5,11,,334
 burps+
 burro*55
 burrs*8,1
@@ -708,8 +723,9 @@ butte*4
 butts*3,5,2
 butyl+
 buxom*,1,1
-buyer+30,2,6,1,5
+buyer*30,2,6,1,5
 buzzy
+bwana
 bylaw*
 byres ,,1
 bytes+,,,,,12
@@ -869,6 +885,7 @@ chore*13,7,1,,,1
 chose*171,37,17,3,65,3,3
 chows*
 chuck*21,11,3
+chuff
 chugs*4
 chump+,1
 chums*3,,1
@@ -1030,6 +1047,7 @@ coupe+25,2
 coups+,2,2
 court*236,122,166,35,137,1
 couth
+coven
 cover*604,87,92,9,77,12,11
 coves*3,1
 covet*4,1,2,,11
@@ -1104,6 +1122,7 @@ cruel*95,15,16,,24
 cruet*
 cruft
 crumb*7,,1
+crump
 cruse+,,,,3
 crush*23,3,1,,3
 crust*160,1,4
@@ -1179,6 +1198,7 @@ dates*109,30,29,,,1
 datum*1,1,1
 daubs*,,1
 daunt*,1,1
+davit
 dawns*2,1,,,4
 dazed*,4,10,,1
 dazes*
@@ -1207,6 +1227,8 @@ deeps+4,1,1,,7
 defer*,1,3,3,3,3,2
 defog
 defun
+degas
+degum
 deice+
 deify+
 deign*,,1,,1
@@ -1219,6 +1241,7 @@ delis+
 dells*1
 delta*25,,1,,,1,1
 delve*,,2,,,1
+demit
 demon*17,5,9,,28
 demos+
 demur+1,,1
@@ -1295,7 +1318,7 @@ ditty*2,1,1
 divan*,6,1
 divas+
 dived*62,5,6
-diver+87,1,4
+diver*87,1,4
 dives*15,4,1
 divot+1
 divvy+
@@ -1387,7 +1410,7 @@ dress*396,67,76,,3,1,1
 dribs
 dried*218,28,32,1,28
 drier*23,3,4
-dries+26,1,,,4
+dries*26,1,,,4
 drift*71,18,28,3,1,3
 drill*136,33,53
 drily+
@@ -1408,11 +1431,13 @@ drugs*96,28,47,12
 druid+
 drums*128,15,8,,1
 drunk*29,36,18,1,52
+dryad
 dryer*8,4,1
 dryly*8,4,2
 duals+
 ducal+1,,1
 ducat+1
+duces
 duchy+
 ducks*149,4,2
 ducky+,,1
@@ -1425,6 +1450,7 @@ duffs+
 dukes*3
 dulls*1,1
 dully*8,3,4
+dulse
 dummy*7,3,22,,,2
 dumps*8,1,1
 dumpy*6
@@ -1434,6 +1460,7 @@ dungs
 dungy
 dunks*
 dunno+5,,,,,,1
+duomo
 duped*1,1
 duper+
 dupes*
@@ -1466,7 +1493,7 @@ easel*10,5,3
 eases*3,,1,,1
 easts
 eaten*251,12,24,,91
-eater+24,,,,3
+eater*24,,,,3
 eaves*11,,1
 ebbed+1,,3,1
 ebony*4,3,3,,1
@@ -1491,7 +1518,7 @@ eject*1,1,,,,3
 eking*
 eland
 elans
-elate*
+elate+
 elbow*52,7,11
 elder*30,9,20,,18
 elect*43,8,11,5,2
@@ -1574,6 +1601,7 @@ exist*135,59,30,1,20,13,24
 exits*14,1,,,4
 expat
 expel*3,2,1
+expos
 extol*4,,1,,12
 extra*284,50,71,12,,118,13
 exude+
@@ -1592,7 +1620,9 @@ facto 2,7,2,2
 facts*519,87,86,5,3,11,18
 faddy+
 faded*63,18,20,,2
+fader
 fades*9,,,1,5
+faery
 fagot+2
 fails*24,14,19,3,13,13,12
 faint*117,25,28,,44
@@ -1631,6 +1661,7 @@ fauna*19,1,1
 fauns
 favor*107,78,1,13,156,1,1
 fawns*6,,,,3
+fawny
 faxed+
 faxer
 faxes+
@@ -1705,6 +1736,7 @@ fines*3,2,11
 finif
 finis
 finks+
+finny
 fiord*7
 fired*131,44,23,,2
 firer
@@ -1794,6 +1826,8 @@ foggy*37,3
 foils*1,,3
 foist+
 folds*51,3,5,,7
+folia
+folic
 folio+,,1,1,,2
 folks*153,19,6,,,1
 folky ,,2
@@ -1824,6 +1858,7 @@ fouls*3
 found*3362,536,625,27,456,78,59
 fount+2
 fours*47,2,1,,4
+fovea
 fowls*10,,1,,1
 foxed*,,2
 foxes*57,,3,,5
@@ -1927,6 +1962,7 @@ gasps*8,5,4
 gassy+,1
 gated+
 gates*67,13,24,,148
+gator
 gaudy*8,7,3
 gauge*53,12,15,1
 gaunt*20,6,6,1,7
@@ -2016,6 +2052,7 @@ gloss*8,1,4,2
 glove*42,9,2,1
 glows*12,1
 glued*17,19,12
+gluer
 glues*4,,,,1,1
 gluey 2
 gluon
@@ -2152,6 +2189,7 @@ gulps*6,1,2
 gumbo*1
 gummy*3,2
 gunks
+gunky
 gunny+2,2
 guppy*11
 gurus+,,,,,1
@@ -2185,6 +2223,7 @@ haler
 hales+
 hallo 3,,3
 halls*47,3,11,1,,2,1
+halma
 halos*3,1
 halts*9,1,,,,1
 halve*3,,1
@@ -2249,6 +2288,7 @@ heels*109,22,22,,5
 heerd 3
 hefts*
 hefty*5,1,2
+heigh
 heirs*13,2,7,,11
 heist+
 helix+1
@@ -2285,7 +2325,7 @@ hiker+1,,1
 hikes*4,4
 hilar ,4
 hills*410,37,21,5,77
-hilly+55,,3
+hilly*55,,3
 hilts*
 hilum ,5
 himbo
@@ -2457,12 +2497,14 @@ inlay+1
 inlet*12,4,7
 inner*128,53,48,10,75,29,11
 inode
-input+35,20,1,2,,241,1
+input*35,20,1,2,,241,1
 inset+4,1
 inter+3,2,4
 intra ,,1
 intro+
 inure+,1
+ioctl
+iodic
 ionic+,4,6
 iotas+
 irate*1,1,2
@@ -2568,6 +2610,7 @@ keels*1
 keens
 keeps*288,21,16,3,55,24,3
 kefir+
+kelly+
 kelps*2
 kelpy
 kenaf
@@ -2616,6 +2659,7 @@ knees*213,38,28,,29
 knell*1,,1
 knelt*59,8,9,,13
 knife*318,74,38,1,4,2,1
+knish+
 knits*6
 knobs*24,1
 knock*85,15,18,1,4
@@ -2638,6 +2682,7 @@ krona
 krone
 kudos*,,1
 kudzu
+kulak
 kyrie ,,1
 label*184,19,17,1,,26,1
 labia
@@ -2723,7 +2768,6 @@ leash*16,3,1,,1
 least*878,343,314,49,40,71,71
 leave*964,205,216,20,147,31,16
 ledge*61,4,5,,8
-ledes
 leech*4,,,,1
 leeks*,,,,1
 leers*1
@@ -2793,17 +2837,20 @@ lions*128,5,4,,58
 lipid+
 lippy
 liras
+lisle
 lisps*
 lists*98,34,15,,,91,19
 liter*6,2,3
 lites 1
 lithe*6,4
+litho
 litre ,,1,1
 lived*1372,115,118,7,150,3,1
 liven+2
 liver*51,16,7,,17
 lives*742,81,97,8,171,1
 livid*8,1,2
+livre
 llama*18
 loads*80,10,7,,4,4
 loafs*
@@ -2828,6 +2875,7 @@ lofty*32,5,1,,21
 loges
 loggy
 logic*21,16,19,3,1,3,3
+login
 logos+1,,,,,2
 loins*4,2,,,62
 lolls*
@@ -2853,6 +2901,7 @@ lores*,,1
 lorry+,,1
 loser*9,1,,2,,,1
 loses*70,15,14,4,10,3,4
+lossy
 lotsa
 lotta 2
 lotto+
@@ -2887,6 +2936,7 @@ lunch*357,33,63
 lunes
 lunge*7,1,1
 lungs*207,20,14
+lupus
 lurch*4,3,1
 lured*6,3,1,,1
 lurer
@@ -2917,6 +2967,7 @@ mafia+,,,1
 magic*279,37,15,,8,9,5
 magma+44
 magna ,,1,,,,1
+magus
 mahua ,1
 maids*21,12,2,,23
 mails*8,7,2
@@ -2924,7 +2975,7 @@ maims*
 mains*8,1,5,1
 maize*8,,7
 major*597,229,110,18,,6
-maker+36,12,7,,7
+maker*36,12,7,,7
 makes*1311,172,147,25,168,207,43
 males*44,19,8,1,18
 malls*
@@ -3074,6 +3125,7 @@ mitts*1,,1
 mixed*324,37,60,4,58,4
 mixer+9,2,4
 mixes*16,,2,,1,2
+mixup+
 moans*3,1,1,,3
 moats*1,,1
 mocha*
@@ -3081,7 +3133,7 @@ mocks*4,,1,,5
 modal+8,3
 model*332,63,116,3,2,1
 modem+
-modes+19,8,14,,,70,1
+modes*19,8,14,,,70,1
 modus 1,1
 mogul+,,,1
 mohel
@@ -3097,6 +3149,7 @@ molls+
 molly 1,1
 molto 1
 molts*9
+momma
 mommy+2
 monad
 mondo+
@@ -3383,12 +3436,14 @@ opine+
 opium*5,16,1
 opted+,2,2
 optic*3
+orals+
 orate ,1
 orbed
 orbit*233,16,9,3,,,1
 orcas+
 order*1507,363,336,32,187,181,82
 organ*90,12,17,1,2
+oring
 orlon+1
 ortho 1
 osier
@@ -3419,7 +3474,8 @@ owing*20,4,29,2,1
 owlet+
 owned*198,34,21,5,1
 owner*172,33,42,1,24,,2
-oxbow*
+oxbow+
+oxeye
 oxide*51,3,2
 oxlip
 ozone*2,3,2
@@ -3477,6 +3533,7 @@ parse+
 parts*2331,110,122,9,65,49,47
 party*625,195,400,209,12
 pasha
+passe
 pasta*1
 paste*96,10,6,,,3
 pasts
@@ -3525,6 +3582,7 @@ pekoe+
 pelts*15,9
 penal+1,1,3,2
 pence*4,,5
+pends
 penes
 pengo
 penis*1
@@ -3619,6 +3677,7 @@ plash
 plasm 1,1
 plate*346,20,37,1,21
 plats 1
+playa
 plays*304,66,54,2,2,3,9
 plaza*12
 plead*7,5,5,1,12
@@ -3738,7 +3797,7 @@ prise
 prism*80,,1
 privy+2,1
 prize*173,18,28,3,1
-probe+31,6,11,1,,,5
+probe*31,6,11,1,,,5
 prods*1,,1
 proem
 profs+
@@ -3783,6 +3842,8 @@ pumas*3
 pumps*51,5,1
 punch*54,5,8,1,,,4
 punks*1,1
+punky
+punny
 punts*,,1
 pupae*19
 pupal
@@ -3940,6 +4001,7 @@ refer*202,27,50,2,,43,1
 refit*1,,1
 refix+
 refly
+refry
 regal*5,2,1,,1
 rehab+
 reify+
@@ -3949,6 +4011,8 @@ relax*40,18,12,3,2,9,2
 relay*44,2,6
 relet
 relic*4,6,3,,1
+reman
+remap
 remit*,,1,,,1
 remix+
 renal ,1,3
@@ -3976,7 +4040,7 @@ revel*3,3,1,,3
 revet
 revue+3,,6
 rewed+
-rheas*
+rheas+
 rheum 1,1
 rhino+14,,1
 rhumb
@@ -4135,7 +4199,7 @@ salve*1,3,3,,1
 salvo+2,2
 samba+2
 sands*43,7,11,,1
-sandy+117,6,11,,1
+sandy*117,6,11,,1
 saner*1,1,1
 sappy+,1
 saran
@@ -4242,7 +4306,7 @@ semen ,,,,6
 semis+
 sends*82,4,7,,26,5
 sense*556,311,265,32,25,26,27
-sepal*
+sepal+
 sepia+,1
 sepoy
 septa ,6
@@ -4267,6 +4331,7 @@ shaft*69,11,13,,12
 shags+
 shahs+
 shake*143,17,17,,32
+shako
 shaky*19,5,3,3
 shale*19,,3,1
 shall*1051,266,355,11,6976,113,7
@@ -4774,7 +4839,7 @@ summa 1
 sumps+,,1
 sunny*116,12,12,1
 sunup*12
-super+21,7,10,,,3,3
+super*21,7,10,,,3,3
 supes
 supra ,3
 suras+
@@ -4904,6 +4969,7 @@ tease*28,6,3
 teats 1,2
 techs+,,1
 techy
+tecum
 teddy*4,2
 teems*1,1,,,2
 teens*35,5,1,1
@@ -5054,12 +5120,14 @@ topic*370,9,12,1,,6,1
 topoi
 topos
 toque ,,2
+torah
 torch*28,2,10,,6
 toric
 torsi
 torso*1,7,2
 torte+
 torts+
+torus+
 total*531,211,197,17,3,45,62
 toted*2
 totem*11,,1
@@ -5121,6 +5189,7 @@ tripe*2,,1
 trips*152,29,8,4,,,3
 trite*1,2,,1
 troll*9
+tromp+
 troop*35,9,3,,3
 troth+1,,,,1
 trots*6
@@ -5202,7 +5271,7 @@ types*334,116,92,5,1,75,2
 typos+,,,,,1
 tyres ,,2
 tyros+
-tzars*
+tzars+
 udder*3
 ukase ,,1
 ulcer*5,5,2
@@ -5239,8 +5308,11 @@ union*104,83,148,45,3,2,2
 unite*29,10,6,,2
 units*483,87,79,2,1,122,1
 unity*64,66,44,2,4,3,8
+unjam+
 unlit+,,1
 unman
+unmap
+unmet+
 unpeg
 unpin+1
 unrig
@@ -5265,7 +5337,7 @@ urger
 urges*7,8,2,,1
 urine*20,1,7,,2
 usage*42,14,9,4,,19
-users+13,6,15,2,,46
+users*13,6,15,2,,46
 usher*7,2,2
 using*1825,143,167,9,5,249,123
 usual*313,96,118,5,,45,16
@@ -5303,6 +5375,7 @@ vegan+
 veils*7,3,4,,3
 veins*79,6,16
 veiny+
+velar
 velds
 veldt+9,1
 venal+
@@ -5334,6 +5407,7 @@ vigor*27,14,,,6
 viler*
 villa*5,3,6
 ville
+villi
 vinca
 vined
 vines*66,8,3,,15
@@ -5447,6 +5521,7 @@ wears*74,5,8,1,3,1
 weary*104,16,18,,48,1
 weave*53,4,3,,4
 webby
+weber
 wedge*34,4,1,1,1
 wedgy
 weeds*105,5,8,,12
@@ -5536,6 +5611,7 @@ winds*367,19,16,,32,,1
 windy*53,2,4,1,2
 wined+
 wines*20,24,25,,1
+winey
 wings*514,25,29,2,102
 winks*3,,,,4
 winos+,1
@@ -5562,6 +5638,7 @@ woman*750,217,243,5,409
 wombs*,,,,2
 women*592,184,198,14,251,,1
 wonks
+wonky
 wonts
 woods*557,24,12,,4,1
 woody*24
@@ -5604,7 +5681,7 @@ wrong*606,129,162,20,101,29,12
 wrote*877,181,120,5,103,6,1
 wroth ,,,,1
 wrung*7,,1,1,2
-wryer*
+wryer+
 wryly*3,3,4
 wurst+
 xenon+3,1
@@ -5643,6 +5720,7 @@ yoked*2,,,,3
 yokel+1,1
 yokes*4,,,,2
 yolks+12,,1
+yolky
 yores
 young*1920,367,485,22,358
 yourn 1
@@ -5669,6 +5747,7 @@ zetas+
 zilch+
 zincs
 zings+
+zingy+
 zippy+
 zloty
 zombi

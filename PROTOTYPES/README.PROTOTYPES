@@ -1,0 +1,107 @@
+This file, ./PROTOTYPES/README.PROTOTYPES, is NOT part of the standard
+distribution of the Stanford GraphBase.
+
+
+COPYRIGHT NOTICE FOR ./PROTOTYPES
+
+The following copyright notice extends to all files in the ./PROTOTYPES
+subdirectory, but not to any part of the standard distribution of the
+Stanford GraphBase (which is copyright (c) 1993 by Stanford University).
+
+Copyright (c) 1994, 1996 Andreas Scherer
+
+Permission is granted to make and distribute verbatim copies of this
+document provided that the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+document under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+
+PURPOSE OF THIS FILE
+
+It describes the contents of the subdirectory ./PROTOTYPES, where `.'
+denotes the root directory of the standard installation of SGB.
+
+
+PURPOSE OF ./PROTOTYPES
+
+The additional subdirectory ./PROTOTYPES contains a set of change files for
+improved ANSI support, including all changes by Marc van Leeuwen as
+provided in the ./ANSI subdirectory, by implementing function declarations
+and function definitions in the form of `prototypes'.
+
+Normally I dislike to ignore or suppress warning messages from the compiler
+and/or the linker.  For the sake of simplicity, the first attempt to
+install SGB on the Commodore AMIGA resulted in the ./AMIGA subdirectory,
+which contains only two (2) extra files.  BUT:  The CFLAGS macro in
+./AMIGA/SMakefile has the entry "IGNORE=85+93+100+132+154+161" because of
+the missing prototypes in the original source files.
+
+The independent change files in ./PROTOTYPES take care of all these
+omissions, thus reducing the IGNORE variable to the single value `93';
+this effects the section @<Vanilla local variables@> in ./gb_basic.w only.
+
+The patches in ./PROTOTYPES effect all of the kernel and library modules and
+some demonstration programs.  To make use of these patches a special version
+of ./AMIGA/SMakefile is provided (development and test of these patches were
+done on a Commodore AMIGA with the help of SAS/C++ 6.56).
+
+./PROTOTYPES/assign_lisa.ch
+./PROTOTYPES/book_components.ch
+./PROTOTYPES/econ_order.ch
+./PROTOTYPES/football.ch
+./PROTOTYPES/gb_basic.ch
+./PROTOTYPES/gb_books.ch
+./PROTOTYPES/gb_dijk.ch
+./PROTOTYPES/gb_econ.ch
+./PROTOTYPES/gb_flip.ch
+./PROTOTYPES/gb_games.ch
+./PROTOTYPES/gb_gates.ch
+./PROTOTYPES/gb_graph.ch
+./PROTOTYPES/gb_io.ch
+./PROTOTYPES/gb_lisa.ch
+./PROTOTYPES/gb_miles.ch
+./PROTOTYPES/gb_plane.ch
+./PROTOTYPES/gb_raman.ch
+./PROTOTYPES/gb_rand.ch
+./PROTOTYPES/gb_roget.ch
+./PROTOTYPES/gb_save.ch
+./PROTOTYPES/gb_sort.ch
+./PROTOTYPES/gb_words.ch
+./PROTOTYPES/girth.ch
+./PROTOTYPES/ladders.ch
+./PROTOTYPES/miles_span.ch
+./PROTOTYPES/multiply.ch
+./PROTOTYPES/queen.ch
+./PROTOTYPES/README.PROTOTYPES
+./PROTOTYPES/roget_components.ch
+./PROTOTYPES/SMakefile
+./PROTOTYPES/take_risc.ch
+./PROTOTYPES/test_sample.ch
+./PROTOTYPES/word_components.ch
+
+
+HOW TO USE THESE PATCHES
+
+Copy the contents of ./PROTOTYPES to the root directory of the standard SGB
+installation.  Care has been taken to avoid any collisions with existing
+files in the root directory.  Then say "make tests", "make install",
+"make installdemos", and "make clean", in this order as described in
+./README.  To date this holds for AMIGA users only, but support of other
+operating systems and compilers is easy; the original UNIX ./Makefile
+already contains provisions for the presence of change files and will
+acknowledge the files from ./PROTOTYPES automatically.
+
+
+TROUBLE SHOOTING
+
+Should you encounter problems with this patch for SGB or should you have
+ideas for further improvements contact the author of this contribution
+
+Andreas Scherer
+Rochusstraﬂe 22-24
+52062 Aachen, Germany
+<andreas.scherer@pobox.com>

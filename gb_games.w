@@ -1,18 +1,20 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace GAMES}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
 
-\prerequisites{GB\_\thinspace GRAPH}{GB\_\thinspace IO}
+\def\title{GB\_\,GAMES}
+
+\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
 @* Introduction. This GraphBase module contains the |games| subroutine,
 which creates a family of undirected graphs based on college football
 scores. An example of the use of this procedure can be
-found in the demo program |football|.
+found in the demo program {\sc FOOTBALL}.
 
 @(gb_games.h@>=
 extern Graph *games();
 
-@ The subroutine call `|games|(|n|, |ap0_weight|, |upi0_weight|, |ap1_weight|,
-|upi1_weight|, |first_day|, |last_day|, |seed|)'
+@ The subroutine call |games|(|n|, |ap0_weight|, |upi0_weight|, |ap1_weight|,
+|upi1_weight|, |first_day|, |last_day|, |seed|)
 constructs a graph based on the information in \.{games.dat}.
 Each vertex of the graph corresponds to one of 120 football teams
 at American colleges and universities (more precisely, to the 106 college
@@ -22,11 +24,11 @@ Each edge of the graph corresponds to one of the 638 games played
 between those teams during the 1990 season.
 
 An arc from vertex~|u| to vertex~|v| is assigned a length representing
-the number of points scored by |u| when playing~|v|. Thus, the graph
+the number of points scored by |u| when playing~|v|. Thus the graph
 isn't really ``undirected,'' although it is true that its arcs are
 paired (i.e., that |u| played~|v| if and only if |v| played~|u|).
 A truly undirected graph with the same vertices and edges can be obtained
-by applying the |copy| routine of |gb_basic|.
+by applying the |complement| routine of {\sc GB\_\,BASIC}.
 
 The constructed graph will have $\min(n,120)$ vertices. If |n| is less
 than 120, the |n| teams will be selected by assigning a weight to
@@ -40,8 +42,9 @@ Associated Press and United Press International polls at the beginning
 of the season, and |ap1| and |upi1| are the similar scores given at
 the end of the season. (The \\{ap} scores were obtained by asking 60
 sportswriters to choose and rank the top 25 teams, assigning 25 points
-to a team ranked 1st and 1 point to a team ranked 25th; thus, the
-total of each of the \\{ap} scores is 19500. The \\{upi} scores were
+to a team ranked 1st and 1 point to a team ranked 25th; thus the
+total of each of the \\{ap} scores, summed over all teams,
+is 19500. The \\{upi} scores were
 obtained by asking football coaches to choose and rank the top 15
 teams, assigning 15 points to a team ranked 1st and 1 point to a team
 ranked 15th. In the case of \\{upi0}, there were 48 coaches voting,
@@ -54,9 +57,10 @@ Parameters |first_day| and |last_day| can be used to vary the number of
 edges; only games played between |first_day| and |last_day|, inclusive,
 will be included in the constructed graph. Day~0 was August~26, 1990,
 when Colorado and Tennessee competed in the Disneyland Pigskin Classic.
-Day~128 was January~1, 1991, when the final end-of-season Bowl games
+Day~128 was January~1, 1991, when the final end-of-season bowl games
 were played. About half of each team's games were played between day~0 and
-day~50. If |last_day=0|, it is automatically increased to~128.
+day~50. If |last_day=0|, the value of |last_day| is automatically
+increased to~128.
 
 As usual in GraphBase routines, you can set |n=0| to get the default
 situation where |n| has its maximum value. For example, either
@@ -86,30 +90,28 @@ at most $2^{17}=131072$ in absolute value.
 @d MAX_N 120
 @d MAX_DAY 128
 @d MAX_WEIGHT 131072
-@d ap0 u.i /* Associated Press score before the season */
-@d upi0 v.i /* United Press International score before the season */
-@d ap1 w.i /* Associated Press score after the season */
-@d upi1 x.i /* United Press International score after the season */
+@d ap u.I /* Associated Press scores: |(ap0<<16)+ap1| */
+@d upi v.I /* United Press International scores |(upi0<<16)+upi1| */
 
 @ Most of the teams belong to a ``conference,'' and they play against
 almost every other team that belongs to the same conference. For
 example, Stanford and nine other teams belong to the
 Pacific Ten conference. Eight of Stanford's eleven games were against
 other teams of the Pacific Ten; the other three were played against
-Colorado (from the Big Eight), San Jose State (from the Big West)
+Colorado (from the Big Eight), San Jos\'e State (from the Big West)
 and Notre Dame (which is independent). The graphs produced by |games|
 therefore illustrate ``cliquey'' patterns of social interaction.
 
 Eleven different conferences are included in \.{games.dat}. Utility
-field |z.s| of a vertex is the name of a team's conference, or |NULL|
+field |z.S| of a vertex is set to the name of a team's conference, or to |NULL|
 if that team is independent. (Exactly 24 of the I-A football teams
 were independent in 1990.) Two teams |u| and |v| belong to the same
 conference if and only if |u->conference==v->conference| and
 |u->conference!=NULL|.
 
-@d conference z.s
+@d conference z.S
 
-@ Each team has a nickname, which is recorded in utility field |y.s|.
+@ Each team has a nickname, which is recorded in utility field |y.S|.
 For example, Georgia Tech's team is called the Yellow Jackets.
 Six teams (Auburn, Clemson, Memphis State, Missouri, Pacific, and
 Princeton) are called the Tigers, and five teams
@@ -117,72 +119,69 @@ Princeton) are called the Tigers, and five teams
 Yale) are called the Bulldogs. But most of the teams have a unique
 nickname, and 94 distinct nicknames exist.
 
-@d nickname y.s
+A shorthand code for team names is also provided, in the |abbr| field.
 
-@ If |a| points to an arc from |u| to |v|, utility field |a->a.i| contains
+@d nickname y.S
+@d abbr x.S
+
+@ If |a| points to an arc from |u| to |v|, utility field |a->a.I| contains
 the value 3 if |u| was the home team, 1 if |v| was the home team, and 2 if both
 teams played on neutral territory. The date of that game, represented
 as a integer number of days after August~26, 1990, appears in utility
-field |a->b.i|. The arcs in each vertex list |v->arcs| appear in reverse order
+field |a->b.I|. The arcs in each vertex list |v->arcs| appear in reverse order
 of their dates: last game first and first game last.
 
 @d HOME 1
 @d NEUTRAL 2 /* this value is halfway between |HOME| and |AWAY| */
 @d AWAY 3
-@d venue a.i
-@d date b.i
+@d venue a.I
+@d date b.I
 
 @(gb_games.h@>=
-#define ap0 @[u.i@] /* repeat the definitions in the header file */
-#define upi0 @[v.i@]
-#define ap1 @[w.i@]
-#define upi1 @[x.i@]
-#define nickname @[y.s@]
-#define conference @[z.s@]
+#define ap @[u.I@] /* repeat the definitions in the header file */
+#define upi @[v.I@]
+#define abbr @[x.S@]
+#define nickname @[y.S@]
+#define conference @[z.S@]
 #define HOME 1
 #define NEUTRAL 2
 #define AWAY 3
-#define venue @[a.i@]
-#define date @[b.i@]
+#define venue @[a.I@]
+#define date @[b.I@]
 
 @ If the |games| routine encounters a problem, it returns |NULL|
 (\.{NULL}), after putting a code number into the external variable
 |panic_code|. This code number identifies the type of failure.
 Otherwise |games| returns a pointer to the newly created graph, which
-will be represented with the data structures explained in |gb_graph|.
-(The external variable |@!panic_code| is itself defined in |gb_graph|.)
+will be represented with the data structures explained in {\sc GB\_\,GRAPH}.
+(The external variable |panic_code| is itself defined in {\sc GB\_\,GRAPH}.)
 
-@d panic(c) @+{@+panic_code=c;@+gb_alloc_trouble=0;@+return NULL;@+}
-@#
-@f Graph int /* |gb_graph| defines the |Graph| type and a few others */
-@f Vertex int
-@f Arc int
-@f Area int
+@d panic(c) @+{@+panic_code=c;@+gb_trouble_code=0;@+return NULL;@+}
 
-@ The \Cee\ file \.{gb\_games.c} has the following overall shape:
+@ The \CEE/ file \.{gb\_games.c} has the following overall shape:
 
 @p
-#include "gb_io.h" /* we will use the |gb_io| routines for input */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 #include "gb_flip.h"
- /* we will use the |gb_flip| routines for random numbers */
-#include "gb_graph.h" /* we will use the |gb_graph| data structures */
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 #include "gb_sort.h" /* and |gb_linksort| for sorting */
-@#
+@h@#
 @<Type declarations@>@;
 @<Private variables@>@;
 @<Private functions@>@;
 @#
 Graph *games(n,ap0_weight,upi0_weight,ap1_weight,upi1_weight,
      first_day,last_day,seed)
-  unsigned n; /* number of vertices desired */
+  unsigned long n; /* number of vertices desired */
   long ap0_weight; /* coefficient of |ap0| in the weight function */
   long ap1_weight; /* coefficient of |ap1| in the weight function */
   long upi0_weight; /* coefficient of |upi0| in the weight function */
   long upi1_weight; /* coefficient of |upi1| in the weight function */
-  int first_day; /* lower cutoff for games to be considered */
-  int last_day; /* upper cutoff for games to be considered */
+  long first_day; /* lower cutoff for games to be considered */
+  long last_day; /* upper cutoff for games to be considered */
   long seed; /* random number seed */
-{@+@<Local variables@>@;
+{@+@<Local variables@>@;@#
   gb_init_rand(seed);
   @<Check that the parameters are valid@>;
   @<Set up a graph with |n| vertices@>;
@@ -193,7 +192,7 @@ Graph *games(n,ap0_weight,upi0_weight,ap1_weight,upi1_weight,
     panic(late_data_fault);
       /* something's wrong with |"games.dat"|; see |io_errors| */
   gb_free(working_storage);
-  if (gb_alloc_trouble) {
+  if (gb_trouble_code) {
     gb_recycle(new_graph);
     panic(alloc_fault); /* oops, we ran out of memory somewhere back there */
   }
@@ -202,7 +201,7 @@ Graph *games(n,ap0_weight,upi0_weight,ap1_weight,upi1_weight,
 
 @ @<Local var...@>=
 Graph *new_graph; /* the graph constructed by |games| */
-register int j,k; /* all-purpose indices */
+register long j,k; /* all-purpose indices */
 
 @ @<Check that the parameters are valid@>=
 if (n==0 || n>MAX_N) n=MAX_N;
@@ -218,9 +217,9 @@ if (last_day==0 || last_day>MAX_DAY) last_day=MAX_DAY;
 new_graph=gb_new_graph(n);
 if (new_graph==NULL)
   panic(no_room); /* out of memory before we're even started */
-sprintf(new_graph->id,"games(%u,%ld,%ld,%ld,%ld,%d,%d,%ld)",
+sprintf(new_graph->id,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
   n,ap0_weight,upi0_weight,ap1_weight,upi1_weight,first_day,last_day,seed);
-strcpy(new_graph->format,"IIIISSIIZZZZZZ");
+strcpy(new_graph->util_types,"IIZSSSIIZZZZZZ");
 
 @* Vertices.
 As we read in the data, we construct a list of nodes, each of which contains
@@ -234,11 +233,11 @@ typedef struct node_struct { /* records to be sorted by |gb_linksort| */
   struct node_struct *link; /* pointer to next record */
   char name[24]; /* |"College Name"| */
   char nick[22]; /* |"Team Nickname"| */
-  char abbr[6]; /* |"ABBR"| */
-  int a0,u0,a1,u1; /* team scores in press polls */
+  char abb[6]; /* |"ABBR"| */
+  long a0,u0,a1,u1; /* team scores in press polls */
   char *conf; /* pointer to conference name */
   struct node_struct *hash_link; /* pointer to next \.{ABBR} in hash list */
-  Vertex *v; /* vertex corresponding to this team */
+  Vertex *vert; /* vertex corresponding to this team */
 } node;
 
 @ The data in \.{games.dat} appears in two parts. The first 120 lines
@@ -249,11 +248,11 @@ and they give basic information about the teams. An internal abbreviation code
 
 The second part presents scores of the games, and it
 contains two kinds of lines. If the first character of a line is
-`\.>', it means ``change the current date,''
-and it gives a date as a one-letter month code followed by the day
+`\.>', it means ``change the current date,'' and the remaining
+characters specify a date as a one-letter month code followed by the day
 of the month. Otherwise the line gives scores of a game, using the
 \.{ABBR} codes for two teams. The scores are separated by `\.@@' if
-the second team was the home team, by `\.,' if both teams were on
+the second team was the home team and by `\.,' if both teams were on
 neutral territory.
 
 For example, two games were played on December 8, namely the annual Army-Navy
@@ -264,7 +263,7 @@ $$\vbox{\halign{\tt#\hfil\cr
 NAVY20@@ARMY30\cr
 SJSU48,CMICH24\cr}}$$
 We deduce that Navy played at Army's home stadium, losing 20 to~30;
-San Jose State played Central Michigan on neutral territory and
+moreover, San Jos\'e State played Central Michigan on neutral territory and
 won, 48 to~24. (The California Raisin Bowl is traditionally a playoff between
 the champions of the Big West and Mid-American conferences.)
 
@@ -278,21 +277,21 @@ because this routine is not intended to be perfectly general.
 @d HASH_PRIME 1009
 
 @<Private v...@>=
-static int ma0=1451,mu0=666,ma1=1475,mu1=847;
+static long ma0=1451,mu0=666,ma1=1475,mu1=847;
              /* maximum poll values in the data */
 static node *node_block; /* array of nodes holding team info */
 static node **hash_block; /* array of heads of hash code lists */
 static Area working_storage; /* memory needed only while |games| is working */
 static char **conf_block; /* array of conference names */
-static int m; /* the number of conference names known so far */
+static long m; /* the number of conference names known so far */
 
 @ @<Read the first part of \.{games.dat} and compute team weights@>=
-node_block=gb_alloc_type(MAX_N+2,@[node@],working_storage);
+node_block=gb_typed_alloc(MAX_N+2,node,working_storage);
  /* leave room for string overflow */
-hash_block=gb_alloc_type(HASH_PRIME,@[node*@],working_storage);
-conf_block=gb_alloc_type(MAX_N,@[char*@],working_storage);
+hash_block=gb_typed_alloc(HASH_PRIME,node*,working_storage);
+conf_block=gb_typed_alloc(MAX_N,char*,working_storage);
 m=0;
-if (gb_alloc_trouble) {
+if (gb_trouble_code) {
   gb_free(working_storage);
   panic(no_room+1); /* nowhere to copy the data */
 }
@@ -306,10 +305,10 @@ for (k=0; k<MAX_N; k++) @<Read and store data for team |k|@>;
   register char *q;
   p=node_block+k;
   if (k) p->link=p-1;
-  q=gb_string(p->abbr,' ');
-  if (q>&p->abbr[6] || gb_char()!=' ')
+  q=gb_string(p->abb,' ');
+  if (q>&p->abb[6] || gb_char()!=' ')
     panic(syntax_error); /* out of sync in \.{games.dat} */
-  @<Enter |p->abbr| in the hash table@>;
+  @<Enter |p->abb| in the hash table@>;
   q=gb_string(p->name,'(');
   if (q>&p->name[24] || gb_char()!='(')
     panic(syntax_error+1); /* team name too long */
@@ -321,16 +320,16 @@ for (k=0; k<MAX_N; k++) @<Read and store data for team |k|@>;
   gb_newline();
 }
 
-@ @<Enter |p->abbr| in the hash table@>=
-{@+int h=0; /* the hash code */
-  for (q=p->abbr;*q;q++)
+@ @<Enter |p->abb| in the hash table@>=
+{@+long h=0; /* the hash code */
+  for (q=p->abb;*q;q++)
     h=(h+h+*q)%HASH_PRIME;
   p->hash_link=hash_block[h];
   hash_block[h]=p;
 }
 
 @ @<Read the conference name for |p|@>=
-{@+int j;
+{
   gb_string(str_buf,';');
   if (gb_char()!=';') panic(syntax_error+3); /* conference name clobbered */
   if (strcmp(str_buf,"Independent")!=0) {
@@ -347,16 +346,16 @@ the bound we've imposed on the weight parameters.
 @<Read the press poll scores for |p| and compute |p->key|@>=
 p->a0=gb_number(10);
 if (p->a0>ma0 || gb_char()!=',') panic(syntax_error+4);
-  /* first AP number clobbered */
+  /* first AP score clobbered */
 p->u0=gb_number(10);
 if (p->u0>mu0 || gb_char()!=';') panic(syntax_error+5);
-  /* first UPI number clobbered */
+  /* first UPI score clobbered */
 p->a1=gb_number(10);
 if (p->a1>ma1 || gb_char()!=',') panic(syntax_error+6);
-  /* second AP number clobbered */
+  /* second AP score clobbered */
 p->u1=gb_number(10);
 if (p->u1>mu1 || gb_char()!='\n') panic(syntax_error+7);
-  /* second UPI number clobbered */
+  /* second UPI score clobbered */
 p->key=ap0_weight*(p->a0)+upi0_weight*(p->u0)
         +ap1_weight*(p->a1)+upi1_weight*(p->u1)+0x40000000;
 
@@ -375,32 +374,31 @@ games involving that team will be excluded when edges are generated below.
   for (j=127; j>=0; j--)
     for (p=(node*)gb_sorted[j]; p; p=p->link) {
       if (v<new_graph->vertices+n) @<Add team |p| to the graph@>@;
-      else p->abbr[0]='\0'; /* this team is not being used */
+      else p->abb[0]='\0'; /* this team is not being used */
     }
 }
 
 @ @<Add team |p| to the graph@>=
 {
-  v->ap0=p->a0;
-  v->upi0=p->u0;
-  v->ap1=p->a1;
-  v->upi1=p->u1;
+  v->ap=((long)(p->a0)<<16)+p->a1;
+  v->upi=((long)(p->u0)<<16)+p->u1;
+  v->abbr=gb_save_string(p->abb);
   v->nickname=gb_save_string(p->nick);
   v->conference=p->conf;
   v->name=gb_save_string(p->name);
-  p->v=v++;
+  p->vert=v++;
 }
 
 @* Arcs.
 Finally, we read through the rest of \.{games.dat}, adding a pair of
-arcs for each game that belongs to the selected time interval,
-if it was played by two of the selected teams.
+arcs for each game that belongs to the selected time interval
+and was played by two of the selected teams.
 
 @<Put the appropriate edges into the graph@>=
 {@+register Vertex *u,*v;
-  register int today; /* current day of play */
-  int su,sv; /* points scored by each team */
-  int ven; /* |HOME| if |v| is home team, |NEUTRAL| if on neutral ground */
+  register long today=0; /* current day of play */
+  long su,sv; /* points scored by each team */
+  long ven; /* |HOME| if |v| is home team, |NEUTRAL| if on neutral ground */
   while (!gb_eof()) {
     if (gb_char()=='>') @<Change the current date@>@;
     else gb_backup();
@@ -421,9 +419,9 @@ if it was played by two of the selected teams.
 }
 
 @ @<Change the current...@>=
-{@+register char q=gb_char(); /* month code */
-  register int d; /* day of football season */
-  switch(q) {
+{@+register char c=gb_char(); /* month code */
+  register long d; /* day of football season */
+  switch(c) {
   case 'A': d=-26;@+break; /* August */
   case 'S': d=5;@+break; /* thirty days hath September */
   case 'O': d=35;@+break; /* October */
@@ -441,7 +439,7 @@ if it was played by two of the selected teams.
 @ @<Private f...@>=
 static Vertex *team_lookup() /* read and decode an abbreviation */
 {@+register char *q=str_buf; /* position in |str_buf| */
-  register int h=0; /* hash code */
+  register long h=0; /* hash code */
   register node *p; /* position in hash list */
   while (gb_digit(10)<0) {
    *q=gb_char();
@@ -451,16 +449,16 @@ static Vertex *team_lookup() /* read and decode an abbreviation */
   gb_backup(); /* prepare to re-scan the digit following the abbreviation */
   *q='\0'; /* null-terminate the abbreviation just scanned */
   for (p=hash_block[h];p;p=p->hash_link)
-    if (strcmp(p->abbr,str_buf)==0) return p->v;
+    if (strcmp(p->abb,str_buf)==0) return p->vert;
   return NULL; /* not found */
 }
 
-@ We retain the convention of |gb_graph| that the arc from |v| to |u|
+@ We retain the convention of {\sc GB\_\,GRAPH} that the arc from |v| to |u|
 appears immediately after a matching arc from |u| to |v| when |u<v|.
 
 @<Enter a new edge@>=
 {@+register Arc *a;
-  if (u>v) {@+register Vertex *w; register int sw;
+  if (u>v) {@+register Vertex *w; register long sw;
     w=u;@+u=v;@+v=w;
     sw=su;@+su=sv;@+sv=sw;
     ven=HOME+AWAY-ven;
@@ -468,7 +466,7 @@ appears immediately after a matching arc from |u| to |v| when |u<v|.
   gb_new_arc(u,v,su);
   gb_new_arc(v,u,sv);
   a=u->arcs; /* a pointer to the new arc */
-  if (v->arcs!=a+1) panic (99); /* can't happen */
+  if (v->arcs!=a+1) panic (impossible+9); /* can't happen */
   a->venue=ven;@+(a+1)->venue=HOME+AWAY-ven;
   a->date=(a+1)->date=today;
 }

@@ -1,4 +1,4 @@
-* GraphBase graph (format ZZZZZZZZZZVZZZ,8V,102A)
+* GraphBase graph (util_types ZZZZZZZZZZVZZZ,8V,102A)
 "complement(random_graph(3,10,1,1,0,0,dist,1,2,1),1,1,0)",3,10,V7
 * Vertices
 "0",A4

@@ -1,12 +1,16 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{BOOK\_\kern.05emCOMPONENTS}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
+
+\def\title{BOOK\_\kern.05emCOMPONENTS}
 \def\<#1>{$\langle${\rm#1}$\rangle$}
 
-\prerequisite{GB\_\thinspace BOOKS}
+\prerequisite{GB\_\,BOOKS}
 @* Bicomponents. This demonstration program computes the
 biconnected components of GraphBase graphs derived from world literature,
 using a variant of Hopcroft and Tarjan's algorithm [R. E. Tarjan, ``Depth-first
+@^Hopcroft, John Edward@>
+@^Tarjan, Robert Endre@>
 search and linear graph algorithms,'' {\sl SIAM Journal on Computing\/
 \bf1} (1972), 146--160]. Articulation points and ordinary (connected)
 components are also obtained as byproducts of the computation.
@@ -14,17 +18,17 @@ components are also obtained as byproducts of the computation.
 Two edges belong to the same  biconnected component---or ``bicomponent''
 for short---if and only if they are identical or both belong to a
 simple cycle. This defines an equivalence relation on edges.
-The bicomponents of a connected graph with more than one vertex form a
+The bicomponents of a connected graph form a
 free tree, if we say that two bicomponents are adjacent when they have
 a common vertex (i.e., when there is a vertex belonging to at least one edge
-in each of the bicomponents). Such a vertex is called an articulation
-point; there is a unique articulation point between any two adjacent
+in each of the bicomponents). Such a vertex is called an {\sl articulation
+point\/}; there is a unique articulation point between any two adjacent
 bicomponents. If we choose one bicomponent to be the ``root'' of the
 free tree, the other bicomponents can be represented conveniently as
 lists of vertices, with the articulation point that leads toward the root
 listed last. This program displays the bicomponents in exactly that way.
 
-@ We permit command-line options in typical \UNIX\ style so that a variety of
+@ We permit command-line options in typical \UNIX/ style so that a variety of
 graphs can be studied: The user can say `\.{-t}\<title>',
 `\.{-n}\<number>', `\.{-x}\<number>', `\.{-f}\<number>',
 `\.{-l}\<number>', `\.{-i}\<number>', `\.{-o}\<number>', and/or
@@ -37,70 +41,78 @@ An explanation of these codes will appear first if the \.{-v} or \.{-V} option
 is specified. The \.{-V} option prints a fuller explanation than~\.{-v}; it
 also shows each character's weighted number of appearances.
 
+The special command-line option \.{-g}$\langle\,$filename$\,\rangle$
+overrides all others. It substitutes an external graph previously saved by
+|save_graph| for the graphs produced by |book|. 
+
 @^UNIX dependencies@>
 
 @p
 #include "gb_graph.h" /* the GraphBase data structures */
 #include "gb_books.h" /* the |book| routine */
 #include "gb_io.h" /* the |imap_chr| routine */
-@#
-@<Global variables@>;
-@<Subroutines@>;
+#include "gb_save.h" /* |restore_graph| */
+@h@#
+@<Global variables@>@;
+@<Subroutines@>@;
 main(argc,argv)
   int argc; /* the number of command-line arguments */
   char *argv[]; /* an array of strings containing those arguments */
 {@+Graph *g; /* the graph we will work on */
   register Vertex *v; /* the current vertex of interest */
   char *t="anna"; /* the book to use */
-  unsigned n=0; /* the desired number of vertices (0 means infinity) */
-  unsigned x=0; /* the number of major characters to exclude */
-  unsigned f=0; /* the first chapter to include */
-  unsigned l=0; /* the last chapter to include (0 means infinity) */
+  unsigned long n=0; /* the desired number of vertices (0 means infinity) */
+  unsigned long x=0; /* the number of major characters to exclude */
+  unsigned long f=0; /* the first chapter to include */
+  unsigned long l=0; /* the last chapter to include (0 means infinity) */
   long i=1; /* the weight for appearances in selected chapters */
   long o=1; /* the weight for appearances in unselected chapters */
   long s=0; /* the random number seed */
-  @<Scan the command line options@>;
-  g=book(t,n,x,f,l,i,o,s);
+  @<Scan the command-line options@>;
+  if (filename) g=restore_graph(filename);
+  else g=book(t,n,x,f,l,i,o,s);
   if (g==NULL) {
-    fprintf(stderr,"Sorry, can't create the graph! (error code %d)\n",
+    fprintf(stderr,"Sorry, can't create the graph! (error code %ld)\n",
              panic_code);
     return -1;
   }
   printf("Biconnectivity analysis of %s\n\n",g->id);
   if (verbose) @<Print the cast of selected characters@>;
   @<Perform the Hopcroft-Tarjan algorithm on |g|@>;
+  return 0; /* normal exit */
 }
 
-@ @<Scan the command line options@>=
+@ @<Scan the command-line options@>=
 while (--argc) {
 @^UNIX dependencies@>
   if (strncmp(argv[argc],"-t",2)==0) t=argv[argc]+2;
-  else if (sscanf(argv[argc],"-n%u",&n)==1) ;
-  else if (sscanf(argv[argc],"-x%u",&x)==1) ;
-  else if (sscanf(argv[argc],"-f%u",&f)==1) ;
-  else if (sscanf(argv[argc],"-l%u",&l)==1) ;
+  else if (sscanf(argv[argc],"-n%lu",&n)==1) ;
+  else if (sscanf(argv[argc],"-x%lu",&x)==1) ;
+  else if (sscanf(argv[argc],"-f%lu",&f)==1) ;
+  else if (sscanf(argv[argc],"-l%lu",&l)==1) ;
   else if (sscanf(argv[argc],"-i%ld",&i)==1) ;
   else if (sscanf(argv[argc],"-o%ld",&o)==1) ;
   else if (sscanf(argv[argc],"-s%ld",&s)==1) ;
   else if (strcmp(argv[argc],"-v")==0) verbose=1;
   else if (strcmp(argv[argc],"-V")==0) verbose=2;
+  else if (strncmp(argv[argc],"-g",2)==0) filename=argv[argc]+2;
   else {
-    fprintf(stderr,"Usage: %s [-ttitle][-xN][-fN][-lN][-iN][-oN][-sN][-v]\n",
-             argv[0]);
+    fprintf(stderr,
+         "Usage: %s [-ttitle][-nN][-xN][-fN][-lN][-iN][-oN][-sN][-v][-gfoo]\n",
+         argv[0]);
     return -2;
   }
 }
+if (filename) verbose=0;
 
-@ @f Vertex int /* |gb_graph| defines these data types */
-@f Arc int
-@f Graph int
-
-@<Subroutines@>=
+@ @<Subroutines@>=
+char *filename=NULL; /* external graph to be restored */
 char code_name[3][3];
 char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
   Vertex *v;
-  int i; /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
+  char i; /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
 {
+  if (filename) return v->name; /* not a |book| graph */
   code_name[i][0]=imap_chr(v->short_code/36);
   code_name[i][1]=imap_chr(v->short_code%36);
   return code_name[i];
@@ -110,7 +122,7 @@ char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
 {
   for (v=g->vertices;v<g->vertices+g->n;v++) {
     if (verbose==1) printf("%s=%s\n",vertex_name(v,0),v->name);
-    else printf("%s=%s,%s [weight %d]\n",vertex_name(v,0),v->name,v->desc,@|
+    else printf("%s=%s, %s [weight %ld]\n",vertex_name(v,0),v->name,v->desc,@|
      i*v->in_count+o*v->out_count);
   }
   printf("\n");
@@ -119,37 +131,37 @@ char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
 @*The algorithm.
 The Hopcroft-Tarjan algorithm is inherently recursive. We will
 implement the recursion explicitly via linked lists, instead of using
-\Cee's runtime stack, because some computer systems bog down in the
+\CEE/'s runtime stack, because some computer systems bog down in the
 presence of deeply nested recursion.
 
 Each vertex goes through three stages during the algorithm. First it is
-`unseen'; then it is `active'; finally it becomes `settled', when it
+``unseen''; then it is ``active''; finally it becomes ``settled,'' when it
 has been assigned to a bicomponent.
 
 The data structures that represent the current state of the algorithm
 are implemented by using five of the utility fields in each vertex:
-|rank|, |parent|, |untagged|, |link|, and |min|. We will describe each of
+|rank|, |parent|, |untagged|, |link|, and |min|. We will consider each of
 these in turn.
 
 @ First is the integer |rank| field, which is zero when a vertex is unseen.
 As soon as the vertex is first examined, it becomes active and its |rank|
-becomes and remains nonzero. Indeed, the |k|th vertex to become active
-will receive rank~|k|.
+becomes and remains nonzero. Indeed, the $k$th vertex to become active
+will receive rank~$k$.
 
 It's convenient to think of the Hopcroft-Tarjan algorithm as a simple adventure
-game, in which we want to explore all rooms of a cave. Passageways between
+game in which we want to explore all the rooms of a cave. Passageways between
 the rooms allow two-way travel. When we come
 into a room for the first time, we assign a new number to that room;
-this is its rank. Later on we may happen to come into the same room
-again, and we will notice that it has nonzero rank; then we'll be able
+this is its rank. Later on we might happen to come into the same room
+again, and we will notice that it has nonzero rank. Then we'll be able
 to make a quick exit, saying ``we've already been here.'' (The extra
 complexities of computer games, like dragons that might need to be
 vanquished, do not arise.)
 
-@d rank z.i /* the |rank| of a vertex is stored in utility field |z| */
+@d rank z.I /* the |rank| of a vertex is stored in utility field |z| */
 
 @<Glob...@>=
-int nn; /* the number of vertices that have been seen */
+long nn; /* the number of vertices that have been seen */
 
 @ The active vertices will always form an oriented tree, whose arcs are
 a subset of the arcs in the original graph. A tree arc from |u| to~|v|
@@ -158,19 +170,19 @@ parent, which is usually another active vertex; the only exception is
 the root of the tree, whose |parent| is a dummy vertex called |dummy|.
 The dummy vertex has rank zero.
 
-In the cave analogy, the `parent' of room |v| is the room we were in
+In the cave analogy, the ``parent'' of room |v| is the room we were in
 immediately before entering |v| the first time. By following parent
 pointers, we will be able to leave the cave whenever we want.
 
-@d parent y.v /* the |parent| of a vertex is stored in utility field |y| */
+@d parent y.V /* the |parent| of a vertex is stored in utility field |y| */
 
 @<Glob...@>=
 Vertex dummy; /* imaginary parent of the root vertex */
 
 @ All edges in the original undirected graph are explored systematically during
-a depth-first search. Whenever we look at an edge, we `tag' it so that
+a depth-first search. Whenever we look at an edge, we tag it so that
 we won't need to explore it again. In a cave, for example, we might
-mark each passageway between rooms once we've tried to go through it.
+mark each passageway between rooms once we've tried to go through~it.
 
 In a GraphBase graph, undirected edges are represented as a pair of directed
 arcs. Each of these arcs will be examined and eventually tagged.
@@ -180,15 +192,16 @@ each vertex |v| has a pointer |v->untagged| that leads to all
 hitherto-unexplored arcs from~|v|. The arcs of the list that appear
 between |v->arcs| and |v->untagged| are the ones already examined.
 
-@d untagged x.a /* the |untagged| field points to an |Arc| record, or |NULL| */ 
+@d untagged x.A
+ /* the |untagged| field points to an |Arc| record, or |NULL| */ 
 
 @ The algorithm maintains a special stack, the |active_stack|, which contains
 all the currently active vertices. Each vertex has a |link| field that points
-to the vertex next lower on its stack, or to |NULL| if the vertex is
+to the vertex that is next lower on its stack, or to |NULL| if the vertex is
 at the bottom. The vertices on |active_stack| always appear in increasing
 order of rank from bottom to top.
 
-@d link w.v /* the |link| field of a vertex occupies utility field |w| */
+@d link w.V /* the |link| field of a vertex occupies utility field |w| */
 
 @<Glob...@>=
 Vertex * active_stack; /* the top of the stack of active vertices */
@@ -196,9 +209,9 @@ Vertex * active_stack; /* the top of the stack of active vertices */
 @ Finally there's a |min| field, which is the tricky part that makes
 everything work. If vertex~|v| is unseen or settled, its |min| field is
 irrelevant. Otherwise |v->min| points to the active vertex~|u|
-of smallest rank having the property that
-there is a directed path from |v| to |u| consisting of
-zero or more `mature' tree arcs followed by a single non-tree arc.
+of smallest rank having the following property:
+There is a directed path from |v| to |u| consisting of
+zero or more mature tree arcs followed by a single non-tree arc.
 
 What is a tree arc, you ask. And what is a mature arc? Good questions. At the
 moment when arcs of the graph are tagged, we classify them either as tree
@@ -212,10 +225,10 @@ no longer on that path. All arcs from a mature vertex have been tagged.
 We said before that every vertex is initially unseen, then active, and
 finally settled. With our new definitions, we see further that every arc starts
 out untagged, then it becomes either a non-tree arc or a tree arc. In the
-latter case it begins as an immature tree arc and eventually matures.
+latter case, the arc begins as an immature tree arc and eventually matures.
 
 The dummy vertex is considered to be active, and we assume that
-there is a non-tree arc from the root vertex back to |dummy|. Thus,
+there is a non-tree arc from the root vertex back to |dummy|. Thus
 there is a non-tree arc from |v| to |v->parent| for all~|v|, and |v->min|
 will always point to a vertex whose rank is less than or equal to
 |v->parent->rank|. It will turn out that |v->min| is always an ancestor
@@ -223,7 +236,7 @@ of~|v|.
 
 Just believe these definitions, for now. All will become clear soon.
 
-@d min v.v /* the |min| field of a vertex occupies utility field |v| */
+@d min v.V /* the |min| field of a vertex occupies utility field |v| */
 
 @ Depth-first search explores a graph by systematically visiting all
 vertices and seeing what they can lead to. In the Hopcroft-Tarjan algorithm, as
@@ -246,17 +259,19 @@ form a bicomponent, together with |v->parent|.
 |v->min==v->parent|; a proof appears below. If so, |v| and all its descendants
 become settled, and they leave the tree. If not, the tree arc from
 |v|'s parent~|u| to~|v| becomes mature, so the value of |v->min| is
-used to update the value of |u->min|. In both cases |v| becomes mature,
+used to update the value of |u->min|. In both cases, |v| becomes mature
 and the new current vertex will be the parent of~|v|. Notice that only the
 value of |u->min| needs to be updated, when the arc from |u| to~|v|
 matures; all other values |w->min| stay the same, because a newly
 mature arc has no mature predecessors.
 
-In the cave analogy, a room |v| and its descendants will become a
-bicomponent together with the room~|u| from which we entered~|v|
-when there's no outlet from the subcave starting at~|v|
-without coming back through |u| itself. Once such a bicomponent
-is identified, we close it off and don't explore that subcave any further.
+The cave analogy helps to clarify the situation: Suppose we enter
+room~|v| from room~|u|. If there's no way out of the subcave starting
+at~|v| unless we come back through~|u|, and if we can get to~|u| from
+all of |v|'s descendants without passing through~|v|, then room~|v|
+and its descendants will become a bicomponent together with~|u|.  Once
+such a bicomponent is identified, we close it off and don't explore
+that subcave any further.
 
 If |v| is the root of the tree, it always has |v->min==dummy|, so it
 will always define a new bicomponent at the moment it matures.  Then
@@ -326,12 +341,12 @@ to a new child, or backtracks to a parent.
     if (u->rank) { /* we've seen |u| already */
       if (u->rank < v->min->rank)
         v->min=u; /* non-tree arc, just update |v->min| */
-    } else { /* |u| is presently unseen */
+    }@+else { /* |u| is presently unseen */
       u->parent = v; /* the arc from |v| to |u| is a new tree arc */
       v = u; /* |u| will now be the current vertex */
       @<Make vertex |v| active@>;
     }
-  } else { /* all arcs from |v| are tagged, so |v| matures */
+  }@+else { /* all arcs from |v| are tagged, so |v| matures */
     u=v->parent; /* prepare to backtrack in the tree */
     if (v->min==u) @<Remove |v| and all its successors on the active stack
          from the tree, and report them as a bicomponent of the graph
@@ -344,36 +359,36 @@ to a new child, or backtracks to a parent.
   }
 }
 
-@ The elements of the active stack are always in order
-by rank, and all children of a vertex~|v| in the tree have rank higher
-than~|v|. The Hopcroft-Tarjan algorithm relies on a converse property: {\sl All
-active nodes whose rank exceeds that of the current vertex~|v|
-are descendants of~|v|.} (This holds because the algorithm has constructed
-the tree by assigning ranks in preorder, ``the order of succession to the
-throne''. First come |v|'s firstborn and descendants, then the nextborn,
-and so on.) Therefore the descendants of the current vertex always appear
-consecutively at the top of the stack.
+@ The elements of the active stack are always in order by rank, and
+all children of a vertex~|v| in the tree have rank higher than~|v|.
+The Hopcroft-Tarjan algorithm relies on a converse property:
+{\sl All active nodes whose rank exceeds that of the current vertex~|v|
+are descendants of~|v|.} (This property holds because the algorithm has
+constructed the tree by assigning ranks in preorder, ``the order of
+succession to the throne.'' First come |v|'s firstborn and descendants,
+then the nextborn, and so on.) Therefore the descendants of the
+current vertex always appear consecutively at the top of the stack.
 
 Suppose |v| is a mature, active vertex with |v->min==v->parent|, and
 let |u=v->parent|. We want to prove that |v| and its descendants,
 together with~|u| and all edges between these vertices, form a
-biconnected graph.  Call this subgraph~|H|. The parent links
-define a subtree of~|H|, rooted at~|u|, and |v| is the only vertex
+biconnected graph.  Call this subgraph~$H$. The parent links
+define a subtree of~$H$, rooted at~|u|, and |v| is the only vertex
 having |u| as a parent (because all other vertices are descendants
-of~|v|). If |x| is any vertex of~|H| different from |u| and |v|,
-there is a path from |x| to |x->min| that does not touch~|x->parent|,
+of~|v|). Let |x| be any vertex of~$H$ different from |u| and |v|.
+Then there is a path from |x| to |x->min| that does not touch~|x->parent|,
 and |x->min| is a proper ancestor of |x->parent|. This property
-is sufficient to establish the biconnectedness of~|H|. (A proof appears
+is sufficient to establish the biconnectedness of~$H$. (A proof appears
 at the conclusion of this program.) Moreover, we cannot add any
-more vertices to~|H| without losing biconnectivity; if |w|~is another
-vertex, |w| has either been output already as a non-articulation point
+more vertices to~$H$ without losing biconnectivity. If |w|~is another
+vertex, either |w| has been output already as a non-articulation point
 of a previous biconnected component, or we can prove that
 there is no path from |w| to~|v| that avoids the vertex~|u|.
 
-Therefore we are justified in settling |v| and its active descendants now.
+@ Therefore we are justified in settling |v| and its active descendants now.
 Removing them from the tree of active vertices does not remove any
-vertex from which there is a path to a vertex of rank less than
-|u->rank|; hence it does not affect the validity of the |w->min| value
+vertex from which there is a path to a vertex of rank less than |u->rank|.
+Hence their removal does not affect the validity of the |w->min| value
 for any vertex~|w| that remains active.
 
 A slight technicality arises with respect to whether or not
@@ -382,7 +397,7 @@ When |u| is the dummy vertex, we have already printed the final bicomponent
 of a connected component of the original graph, unless |v| was
 an isolated vertex. Otherwise |u| is an
 articulation point that will occur in subsequent bicomponents,
-unless this is the final bicomponent of a connected component.
+unless the new bicomponent is the final bicomponent of a connected component.
 (This aspect of the algorithm is probably its most subtle point;
 consideration of an example or two should clarify everything.)
 
@@ -396,7 +411,7 @@ if (u==&dummy) { /* |active_stack| contains just |v| */
               vertex_name(artic_pt,0));
   else printf("Isolated vertex %s\n",vertex_name(v,0));
   active_stack=artic_pt=NULL;
-} else {@+register Vertex *t; /* runs through the vertices of the
+}@+else {@+register Vertex *t; /* runs through the vertices of the
                         new bicomponent */
   if (artic_pt)
     printf(" and articulation point %s\n",vertex_name(artic_pt,0));
@@ -422,7 +437,7 @@ Vertex *artic_pt; /* articulation point to be printed if the current
   bicomponent isn't the last in its connected component */
 
 @*Proofs.
-The program is done but we still should prove that it works.
+The program is done, but we still should prove that it works.
 First we want to clarify the informal definition by verifying that
 the cycle relation between edges, as stated in the introduction, is indeed an
 equivalence relation.
@@ -430,7 +445,7 @@ equivalence relation.
 \def\dash{\mathrel-\joinrel\joinrel\mathrel-}
 Suppose $u\dash v$ and $w\dash x$ are edges of a simple cycle~$C$, while
 $w\dash x$ and $y\dash z$ are edges of a simple cycle~$D$. We want to show
-that there is a simple cycle containing the edges $u\dash v$ and $x\dash y$.
+that there is a simple cycle containing the edges $u\dash v$ and $y\dash z$.
 There are vertices $a,b\in C$ such that $a\dash^\ast y\dash z\dash^\ast b$
 is a subpath of~$D$ containing no other vertices of $C$ besides $a$ and~$b$.
 Join this subpath to the subpath in $C$ that runs from $b$ to~$a$ through
@@ -442,7 +457,7 @@ A graph is biconnected if it contains a single vertex, or if each of
 its vertices is adjacent to at least one other vertex and any two edges are
 equivalent.
 
-@ Next we prove the well known fact that a graph is biconnected if and
+@ Next we prove the well-known fact that a graph is biconnected if and
 only if it is connected and, for any three distinct vertices $x$,
 $y$,~$z$, it contains a path from $x$ to~$y$ that does not touch~$z$.
 Call the latter condition property~P.

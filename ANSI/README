@@ -1,0 +1,8 @@
+The change files in this directory make the GraphBase sources conform better to
+ANSI C restrictions. Thanks to Marc van Leeuwen (maavl@cwi.nl) for contributing
+them. Additional corrections of this kind may be needed as more problems with
+the ANSI standard are noticed; if you develop any well-tested change files that
+improve on these, please submit them to sgb@cs.standard.edu.
+
+[To use these change files, just "mv *.ch $SGBDIR", where SGBDIR is the
+directory with your GraphBase sources.]

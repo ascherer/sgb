@@ -7,7 +7,7 @@
 \font\ninett=cmtt9
 \def\botofcontents{\vskip 0pt plus 1filll
     \ninerm\baselineskip10pt
-    \noindent\copyright\ 1992 Stanford University
+    \noindent\copyright\ 1993 Stanford University
     \bigskip\noindent
     This file may be freely copied and distributed, provided that
     no changes whatsoever are made. All users are asked to help keep

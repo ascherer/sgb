@@ -1,0 +1,341 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "assign_lisa"=.\assign_lisa.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "book_components"=.\book_components.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "econ_order"=.\econ_order.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "examples"=.\examples.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name assign_lisa
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name book_components
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name econ_order
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name football
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name girth
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ladders
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name miles_span
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name multiply
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name queen
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name roget_components
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name take_risc
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name word_components
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "football"=.\football.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "girth"=.\girth.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ladders"=.\ladders.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "libgb"=.\libgb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "miles_span"=.\miles_span.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "multiply"=.\multiply.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "queen"=.\queen.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "roget_components"=.\roget_components.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "take_risc"=.\take_risc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test_flip"=.\test_flip.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test_graph"=.\test_graph.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test_io"=.\test_io.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test_sample"=.\test_sample.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "tests"=.\tests.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name test_sample
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name test_io
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name test_flip
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name test_graph
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "word_components"=.\word_components.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libgb
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

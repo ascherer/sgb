@@ -2,112 +2,176 @@
 #   Makefile for the Stanford GraphBase
 #
 
-#   Change DATADIR to the directory where the data files will go (425K bytes)
-DATADIR = /usr/local/lib
+#   Be sure that CWEB version 3.0 or greater is installed before proceeding!
 
-#   Uncomment the next line if your C uses <string.h> but not <strings.h>
-# SYS = -DSYSV
+#   Skip down to "SHORTCUT" if you're going to work only from the
+#   current directory. (Not recommended for serious users.)
 
-#   If you prefer optimization to debugging, change CFLAGS to something like -O
-CFLAGS = -g
+#   Change SGBDIR to the directory where all GraphBase files will go:
+SGBDIR = /usr/local/sgb
 
-#   Change MLIB, if necessary, to the code that loads the C math library
-MLIB = -lm
+#   Change DATADIR to the directory where GraphBase data files will go:
+DATADIR = $(SGBDIR)/data
 
-install:
-	- mkdir $(DATADIR)
-	install -c -m 444 *.dat $(DATADIR)
+#   Change INCLUDEDIR to the directory where GraphBase header files will go:
+INCLUDEDIR = $(SGBDIR)/include
 
-%.c: %.w
-	ctangle $*
+#   Change LIBDIR to the directory where GraphBase library routines will go:
+LIBDIR = /usr/local/lib
 
-%.o: %.c
-	cc $(CFLAGS) -c $*.c
+#   Change BINDIR to the directory where installdemos will put demo programs:
+BINDIR = /usr/local/bin
 
-IFGS = gb_io.o gb_flip.o gb_graph.o gb_sort.o
-IFG = gb_io.o gb_flip.o gb_graph.o
-IG = gb_io.o gb_graph.o
-FG = gb_flip.o gb_graph.o
+#   Change CWEBINPUTS to the directory where CWEB include files will go:
+CWEBINPUTS = /usr/local/lib/cweb
 
-assign_mona: assign_mona.c $(IG) gb_mona.o
-	cc $(CFLAGS) assign_mona.c $(IG) gb_mona.o -o assign_mona
+#   SHORTCUT: Uncomment these lines, for single-directory installation:
+#DATADIR = .
+#INCLUDEDIR = .
+#LIBDIR = .
+#BINDIR = .
+#CWEBINPUTS = .
 
-book_components: book_components.c $(IFGS) gb_books.o
-	cc $(CFLAGS) book_components.c $(IFGS) gb_books.o -o book_components
+#   Uncomment the next line if your C uses <string.h> but not <strings.h>:
+#SYS = -DSYSV
 
-econ_order: econ_order.c $(IFG) gb_econ.o
-	cc $(CFLAGS) econ_order.c $(IFG) gb_econ.o -o econ_order
+#   If you prefer optimization to debugging, change -g to something like -O:
+CFLAGS = -g -I$(INCLUDEDIR) $(SYS)
 
-football: football.c $(IFGS) gb_games.o
-	cc $(CFLAGS) football.c $(IFGS) gb_games.o -o football
+########## You shouldn't have to change anything after this point ##########
 
-gb_graph.o: gb_graph.c
-	cc $(CFLAGS) $(SYS) -c $*.c
+LDFLAGS = -L. -L$(LIBDIR)
+LDLIBS = -lgb
+LOADLIBES = $(LDLIBS)
+
+.SUFFIXES: .dvi .tex .w
+
+.tex.dvi:
+	tex $*.tex
+
+.w.c:
+	if test -r $*.ch; then ctangle $*.w $*.ch; else ctangle $*.w; fi
+
+.w.tex:
+	if test -r $*.ch; then cweave $*.w $*.ch; else cweave $*.w; fi
+
+.w.o:
+	make $*.c
+	make $*.o
+
+.w:
+	make $*.c
+	make $*
+
+.w.dvi:
+	make $*.tex
+	make $*.dvi
+
+DATAFILES = anna.dat david.dat econ.dat games.dat homer.dat huck.dat \
+        jean.dat lisa.dat miles.dat roget.dat words.dat
+KERNELFILES = gb_flip.w gb_graph.w gb_io.w gb_sort.w
+GENERATORFILES = gb_basic.w gb_books.w gb_econ.w gb_games.w gb_gates.w \
+        gb_lisa.w gb_miles.w gb_plane.w gb_raman.w gb_rand.w gb_roget.w \
+        gb_words.w
+DEMOFILES = assign_lisa.w book_components.w econ_order.w football.w \
+        girth.w ladders.w miles_span.w multiply.w queen.w roget_components.w \
+        take_risc.w word_components.w
+MISCWEBS = boilerplate.w gb_dijk.w gb_save.w gb_types.w test_sample.w
+CHANGEFILES = queen_wrap.ch word_giant.ch
+MISCFILES = Makefile README abstract.plaintex cities.texmap blank.w \
+        sample.correct test.correct test.dat +The+Stanford+GraphBase+
+ALL = $(DATAFILES) $(KERNELFILES) $(GENERATORFILES) $(DEMOFILES) \
+        $(MISCWEBS) $(CHANGEFILES) $(MISCFILES)
+
+OBJS = $(KERNELFILES:.w=.o) $(GENERATORFILES:.w=.o) gb_dijk.o gb_save.o
+HEADERS = $(OBJS:.o=.h)
+DEMOS = $(DEMOFILES:.w=)
+
+help:
+	@ echo "First 'make tests';"
+	@ echo "then (optionally) become superuser;"
+	@ echo "then 'make install';"
+	@ echo "then (optionally) 'make installdemos';"
+	@ echo "then (optionally) 'make clean'."
+
+lib: libgb.a
+
+libgb.a: $(OBJS)
+	rm -f certified
+	ar rcv libgb.a $(OBJS)
+	- ranlib libgb.a
 
 gb_io.o: gb_io.c
-	echo "#define DATA_DIRECTORY \"$(DATADIR)/\"" >localdefs.h
-	cc $(CFLAGS) $(SYS) -c $*.c
-	rm localdefs.h
-
-gb_plane.o: gb_miles.o
-
-girth: girth.c $(FG) gb_raman.o
-	cc $(CFLAGS) girth.c $(FG) gb_raman.o -o girth $(MLIB)
-
-miles_span: miles_span.c $(IFGS) gb_miles.o
-	cc $(CFLAGS) miles_span.c $(IFGS) gb_miles.o -o miles_span
-
-multiply: multiply.c $(FG) gb_gates.o
-	cc $(CFLAGS) multiply.c $(FG) gb_gates.o -o multiply
-
-queen: queen.c $(IG) gb_basic.o gb_save.o
-	cc $(CFLAGS) queen.c $(IG) gb_basic.o gb_save.o -o queen
-
-queen_wrap.c: queen.w queen_wrap.ch
-	ctangle queen_wrap.w queen_wrap.ch queen_wrap.c
-
-queen_wrap: queen_wrap.c $(IG) gb_basic.o gb_save.o
-	cc $(CFLAGS) queen_wrap.c $(IG) gb_basic.o gb_save.o -o queen_wrap
-
-roget_components: roget_components.c $(IFG) gb_roget.o
-	cc $(CFLAGS) roget_components.c $(IFG) gb_roget.o -o roget_components
-
-take_risc: take_risc.c $(FG) gb_gates.o
-	cc $(CFLAGS) take_risc.c $(FG) gb_gates.o -o take_risc
-
-word_components: word_components.c $(IFGS) gb_words.o
-	cc $(CFLAGS) word_components.c $(IFGS) gb_words.o -o word_components
-
-ladders: ladders.c $(IFGS) gb_words.o gb_dijk.o
-	cc $(CFLAGS) ladders.c $(IFGS) gb_words.o gb_dijk.o -o ladders
+	$(CC) $(CFLAGS) -DDATA_DIRECTORY=\"$(DATADIR)/\" -c gb_io.c
 
 test_io: gb_io.o
-	cc $(CFLAGS) test_io.c gb_io.o -o test_io
+	$(CC) $(CFLAGS) test_io.c gb_io.o -o test_io
 
 test_graph: gb_graph.o
-	cc $(CFLAGS) test_graph.c gb_graph.o -o test_graph
+	$(CC) $(CFLAGS) test_graph.c gb_graph.o -o test_graph
 
 test_flip: gb_flip.o
-	cc $(CFLAGS) test_flip.c gb_flip.o -o test_flip
+	$(CC) $(CFLAGS) test_flip.c gb_flip.o -o test_flip
 
-test_sample: test_sample.c $(IFGS) gb_basic.o gb_books.o gb_econ.o \
-	  gb_games.o gb_gates.o gb_miles.o gb_mona.o gb_plane.o gb_raman.o \
-	  gb_rand.o gb_roget.o gb_save.o gb_words.o
-	cc $(CFLAGS) test_sample.c $(IFGS) gb_basic.o gb_books.o gb_econ.o \
-	gb_games.o gb_gates.o gb_miles.o gb_mona.o gb_plane.o gb_raman.o \
-	gb_rand.o gb_roget.o gb_save.o gb_words.o -o test_sample
-
-test_all: test_io test_graph test_flip test_sample
-	test_io
-	test_graph
-	test_flip
-	test_sample > sample.out
+tests: test_io test_graph test_flip
+	./test_io
+	./test_graph
+	./test_flip
+	make gb_sort.o
+	make lib
+	make test_sample
+	- ./test_sample > sample.out
 	diff test.gb test.correct
 	diff sample.out sample.correct
 	rm test.gb sample.out test_io test_graph test_flip test_sample
+	echo "Congratulations --- the tests have all been passed."
+	touch certified
 
-veryclean:
-	rm -f *.o *.c *.h \
-	       assign_mona book_components econ_order football \
-	       girth ladders miles_span multiply roget_components \
-	       take_risc word_components
+install: lib
+	if test ! -r certified; then echo "Please run 'make tests' first!"; fi
+	test -r certified
+	make installdata
+	- mkdir $(LIBDIR)
+	- cp libgb.a $(LIBDIR)
+	- mkdir $(CWEBINPUTS)
+	- cp -p boilerplate.w gb_types.w $(CWEBINPUTS)
+	- mkdir $(INCLUDEDIR)
+	- cp -p $(HEADERS) Makefile $(INCLUDEDIR)
+
+installdata: $(DATAFILES)
+	- mkdir $(SGBDIR)
+	- mkdir $(DATADIR)
+	- cp -p $(DATAFILES) $(DATADIR)
+
+installdemos: lib $(DEMOS)
+	- mkdir $(BINDIR)
+	- mv $(DEMOS) $(BINDIR)
+
+uninstalldemos:
+	- cd $(BINDIR); rm -f $(DEMOS)
+
+doc:
+	tex abstract.plaintex
+
+clean:
+	rm -f *~ *.o *.c *.h libgb.a certified \
+	         *.tex *.log *.dvi *.toc *.idx *.scn core
+
+veryclean: clean
+	rm -f $(DEMOS)
+
+sgb.tar: $(ALL)
+	tar cvf sgb.tar $(ALL)
+
+floppy: $(ALL)
+	bar cvf /dev/rfd0 $(ALL)
+	bar tvf /dev/rfd0
+	eject
+
+fullfloppy: $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
+	bar cvf /dev/rfd0 $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
+	bar tvf /dev/rfd0
+	eject
+
+fulltar: $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
+	tar cvf sgb.tar $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC

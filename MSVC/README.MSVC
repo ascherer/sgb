@@ -1,0 +1,113 @@
+This file, ./MSVC/README.MSVC, is NOT part of the standard distribution of the
+Stanford GraphBase.
+
+
+COPYRIGHT NOTICE FOR ./MSVC
+
+The following copyright notice extends to all files in the ./MSVC
+subdirectory, but not to any part of the standard distribution of the
+Stanford GraphBase (which is copyright (C) 1993 by Stanford University).
+
+Copyright (C) 1999, Andreas Scherer
+
+Permission is granted to make and distribute verbatim copies of this document
+provided that the copyright notice and this permission notice are preserved on
+all copies.
+
+Permission is granted to copy and distribute modified versions of this
+document under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission notice
+identical to this one.
+
+
+PURPOSE OF THIS FILE
+
+The standard distribution of SGB is assumed to be installed on your computer.
+In the following we assume that `computer' is some general-purpose calculating
+device running any operating system that supports the Microsoft Visual C++ 6.0
+compiler, which is the mandatory tool for using the files described here.
+`Installed' means that all source files from the original archive are present
+in a root directory (denoted by `.' in this file) and, if appropriate, one or
+more subdirectories, on your machine.  If you don't have SGB yet, go out and
+get it from labrea.stanford.edu, where it resides in the directory `/pub/sgb',
+or possibly from some other host location.
+
+The original source files are totally left untouched (as this is expressly
+prohibited by the copyright notice included in every single file of SGB).  For
+the installation, the test, and the usage of SGB on your computer, a set of 21
+additional files is coming with this patch. They should be added to the local
+SGB installation in a new subdirectory `./MSVC'.
+
+./MSVC/README.MSVC              This file.
+
+./MSVC/sgb.dsw                 `Developer Studio Workspace' for MSVC6,
+                                covering all `Developer Studio Projects.'
+
+./MSVC/libgb.dsp               `Developer Studio Project' for the proper
+                                SGB library used by all tests and examples.
+
+./MSVC/tests.dsp               `Developer Studio Project' covering the
+                                four test programs.
+./MSVC/test_flip.dsp
+./MSVC/test_graph.dsp
+./MSVC/test_io.dsp
+./MSVC/test_sample.dsp
+
+./MSVC/examples.dsp            `Developer Studio Project' covering the
+                                twelve example programs.
+./MSVC/assign_lisa.dsp
+./MSVC/book_components.dsp
+./MSVC/econ_order.dsp
+./MSVC/football.dsp
+./MSVC/girth.dsp
+./MSVC/ladders.dsp
+./MSVC/miles_span.dsp
+./MSVC/multiply.dsp
+./MSVC/queen.dsp
+./MSVC/roget_components.dsp
+./MSVC/take_risc.dsp
+./MSVC/word_components.dsp
+
+
+HOW TO INSTALL SGB FOR MSVC
+
+First read the ./README file that comes with the standard distribution of the
+Stanford GraphBase, but don't follow the instructions for building the targets
+yet.  Some points are overwritten by what follows.  Details of the
+installation process are described in ./README, though.
+
+Then install CWEB (version 3.0 or greater), which can be found in various
+archives; the master files reside at labrea.stanford.edu; a complete Win32
+installation of CWEB can be found at http://www.literateprogramming.com.
+
+Now launch Microsoft Visual C++ 6.0 by double-clicking on the file "sgb.dsw".
+Select the menu "Project/Settings" for "All Configurations" and set the
+"Working Directory" on the "Debug" panel to the value ".." and press "OK".
+Then choose "tests" as the active project and press <F7>.  This will
+automagically compile four test programs for "The Stanford GraphBase".
+(Note that the CTANGLE executable must be found by MSVC in one of the
+"executable" paths specified in "Tools/Options/Directories".)  Run the four
+test programs and compare the results with the expected output.
+
+Choose "examples" as the active project and press <F7> again.  This will
+automagically compile the example programs shipped with "The Stanford
+GraphBase".  You may, of course, compile each of the separate projects by
+setting it as the active project and pressing <F7>.
+
+
+TROUBLE SHOOTING
+
+This version of SGB was tested with the following setup:
+
+   Pentium II/350 PC
+	Microsoft Windows NT 4 (sp5)
+	Microsoft Visual C++ 6.0 (sp3)
+	CWEBbin 3.63 (patch level 19)
+
+Should you encounter problems with this MSVC port of SGB or should you have
+ideas for further improvements, contact the author of this contribution.
+
+Andreas Scherer
+Rochusstraﬂe 22-24
+52062 Aachen, Germany
+<andreas.scherer@pobox.com>

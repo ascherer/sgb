@@ -1,8 +1,10 @@
-% This file is part of the Stanford GraphBase (c) Stanford University 1992
-\def\title{GB\_\thinspace GATES}
+% This file is part of the Stanford GraphBase (c) Stanford University 1993
 @i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
+@i gb_types.w
 
-\prerequisite{GB\_\thinspace GRAPH}
+\def\title{GB\_\,GATES}
+
+\prerequisite{GB\_\,GRAPH}
 @* Introduction. This GraphBase module provides six external subroutines:
 $$\vbox{\hsize=.8\hsize \everypar{\hangindent3em}
 \noindent|risc|, a routine that creates a directed acyclic graph based on the
@@ -18,18 +20,19 @@ $$\vbox{\hsize=.8\hsize \everypar{\hangindent3em}
 \noindent|run_risc|, a routine that can be used to play with the output
   of |risc|.}$$
 Examples of the use of these routines can be found in the demo programs
-|take_risc| and |multiply|.
+{\sc TAKE\_\,RISC} and {\sc MULTIPLY}.
 
 @(gb_gates.h@>=
+#define print_gates p_gates /* abbreviation for Procrustean linkers */
 extern Graph *risc(); /* make a network for a microprocessor */
 extern Graph *prod(); /* make a network for high-speed multiplication */
 extern void print_gates(); /* write a network to standard output file */
-extern int gate_eval(); /* evaluate a network */
+extern long gate_eval(); /* evaluate a network */
 extern Graph *partial_gates(); /* reduce network size */
-extern int run_risc(); /* simulate the microprocessor */
-extern unsigned risc_state[]; /* the output of |run_risc| */
+extern long run_risc(); /* simulate the microprocessor */
+extern unsigned long risc_state[]; /* the output of |run_risc| */
 
-@ The directed acyclic graphs produced by |gb_gates| are GraphBase
+@ The directed acyclic graphs produced by {\sc GB\_\,GATES} are GraphBase
 graphs with special conventions related to logical networks. Each vertex
 represents a gate of a network, and utility field |val| is a boolean
 value associated with that gate. Utility field |typ| is an ASCII code
@@ -81,10 +84,10 @@ evaluation: The |tip| fields in the output list either point to a
 vertex or hold one of the constant values 0 or~1 when regarded as an
 unsigned long integer.
 
-@d val x.i /* the field containing a boolean value */
-@d typ y.i /* the field containing the gate type */
-@d alt z.v /* the field pointing to another related gate */
-@d outs z.a /* the field pointing to the list of output gates */
+@d val x.I /* the field containing a boolean value */
+@d typ y.I /* the field containing the gate type */
+@d alt z.V /* the field pointing to another related gate */
+@d outs zz.A /* the field pointing to the list of output gates */
 @d is_boolean(v) ((unsigned long)(v)<=1) /* is a |tip| field constant? */
 @d the_boolean(v) ((long)(v)) /* if so, this is its value */
 @d tip_value(v) (is_boolean(v)? the_boolean(v): (v)->val)
@@ -92,17 +95,12 @@ unsigned long integer.
 @d OR '|'
 @d NOT '~'
 @d XOR '^'
-@#
-@f Graph int /* |gb_graph| defines the |Graph| type and a few others */
-@f Vertex int
-@f Arc int
-@f Area int
 
 @(gb_gates.h@>=
-#define val @t\quad@> x.i /* the definitions are repeated in the header file */
-#define typ @t\quad@> y.i
-#define alt @t\quad@> z.v
-#define outs @t\quad@> z.a
+#define val @t\quad@> x.I /* the definitions are repeated in the header file */
+#define typ @t\quad@> y.I
+#define alt @t\quad@> z.V
+#define outs @t\quad@> zz.A
 #define is_boolean(v) @t\quad@> ((unsigned long)(v)<=1)
 #define the_boolean(v) @t\quad@> ((long)(v))
 #define tip_value(v) @t\quad@> (is_boolean(v)? the_boolean(v): (v)->val)
@@ -129,12 +127,11 @@ If |gate_eval| encounters an unknown gate type, it terminates execution
 prematurely and returns the value |-1|. Otherwise it returns~0.
 
 @<The |gate_eval| routine@>=
-int gate_eval(g,in_vec,out_vec)
+long gate_eval(g,in_vec,out_vec)
   Graph *g; /* graph with gates as vertices */
   char *in_vec; /* string for input values, or |NULL| */
   char *out_vec; /* string for output values, or |NULL| */
 {@+register Vertex *v; /* the current vertex of interest */
-  Vertex *u, *uu; /* additional vertices being examined */
   register Arc *a; /* the current arc of interest */
   register char t; /* boolean value being computed */
   if (!g) return -2; /* no graph supplied! */
@@ -144,7 +141,7 @@ int gate_eval(g,in_vec,out_vec)
     switch (v->typ) { /* branch on type of gate */
     case 'I': continue; /* this input gate's value should be externally set */
     case 'L': t=v->alt->val;@+break;
-    @t\4\4@>@;@+@<Compute the value |t| of a classical logic gate@>;
+    @t\4\4@>@<Compute the value |t| of a classical logic gate@>;
     default: return -1; /* unknown gate type! */
     }
     v->val=t; /* assign the computed value */
@@ -180,46 +177,48 @@ case XOR: t=0;
 case NOT: t=1-v->arcs->tip->val;
   break;
 
-@ Here now is an outline of the entire |gb_gates| module, as seen by
-the \Cee\ compiler:
+@ Here now is an outline of the entire {\sc GB\_\,GATES} module, as seen by
+the \CEE/ compiler:
 
 @p
-#include "gb_flip.h" /* we will use the |gb_flip| routines for random numbers */
-#include "gb_graph.h" /* and we will use the |gb_graph| data structures */
-@#
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h"
+ /* and we will use the {\sc GB\_\,GRAPH} data structures */
+@h@#
 @<Private variables@>@;
 @<Global variables@>@;
 @<Internal subroutines@>@;
 @<The |gate_eval| routine@>@;
-@<The |print_gates| routine@>@>;
+@<The |print_gates| routine@>@;
 @<The |risc| routine@>@;
 @<The |run_risc| routine@>@;
 @<The |prod| routine@>@;
 @<The |partial_gates| routine@>@;
 
-@* The RISC netlist. The subroutine call `|risc(regs)|' creates a
+@* The RISC netlist. The subroutine call |risc(regs)| creates a
 gate graph having |regs| registers; the value of |regs| must be
 between 2 and~16, inclusive, otherwise |regs| is set to~16.
 This gate graph describes the circuitry for a small RISC computer, defined
 below. The total number of gates turns out to be |1400+115*regs|;
 thus it lies between 1630 (when |regs=2|) and 3240 (when |regs=16|).
-Exclusive-or gates are not used; the effect of xoring is obtained where
+{\sc EXCLUSIVE-OR} gates are not used; the effect of xoring is obtained where
 needed by means of {\sc AND}s, {\sc OR}s, and inverters.
 
 If |risc| cannot do its thing, it returns |NULL| (\.{NULL})
  and sets |panic_code|
 to indicate the problem. Otherwise |risc| returns a pointer to the graph.
 
-@d panic(c) @+{@+panic_code=c;@+gb_alloc_trouble=0;@+return NULL;@+}
+@d panic(c) @+{@+panic_code=c;@+gb_trouble_code=0;@+return NULL;@+}
 
 @<The |risc| routine@>=
 Graph *risc(regs)
-  unsigned regs; /* number of registers supported */
+  unsigned long regs; /* number of registers supported */
 {@+@<Local variables for |risc|@>@;
   @#
   @<Initialize |new_graph| to an empty graph of the appropriate size@>;
   @<Add the RISC data to |new_graph|@>;
-  if (gb_alloc_trouble) {
+  if (gb_trouble_code) {
     gb_recycle(new_graph);
     panic(alloc_fault); /* oops, we ran out of memory somewhere back there */
   }
@@ -228,20 +227,20 @@ Graph *risc(regs)
 
 @ @<Local variables for |risc|@>=
 Graph *new_graph; /* the graph constructed by |risc| */
-register int k,r; /* all-purpose indices */
+register long k,r; /* all-purpose indices */
 
 @ This RISC machine works with 16-bit registers and 16-bit data words.
 It cannot write into memory, but it assumes the existence of an
 external read-only memory. The circuit has 16 outputs, representing
-the 16 bits of a memory address register; it also has 17 inputs, the
+the 16 bits of a memory address register. It also has 17 inputs, the
 last 16 of which are supposed to be set to the contents of the memory
-address computed on the previous cycle. Thus, we can run the machine
+address computed on the previous cycle. Thus we can run the machine
 by accessing memory between calls of |gate_eval|.  The first input
 bit, called \.{RUN}, is normally set to~1; if it is~0, the other
 inputs are effectively ignored and all registers and outputs will be
 cleared to~0. Input bits for the memory appear in ``little-endian
-order,'' i.e., least significant bit first; but the output bits for
-the memory address register appear in ``big-endian order,'' i.e., most
+order,'' that is, least significant bit first; but the output bits for
+the memory address register appear in ``big-endian order,'' most
 significant bit first.
 
 Words read from memory are interpreted as instructions having the following
@@ -276,13 +275,14 @@ The \.{DST} field specifies the number of the destination register. This
 register receives a new value based on its previous value and the source
 value, as prescribed by the operation defined in the \.{OP} and \.{MOD}
 fields. For example, when $\.{OP}=0$, a general logical operation is
-performed: Suppose the bits of \.{MOD} are called $\mu_{11}\mu_{10}\mu_{01}
-\mu_{00}$ from left to right; then if the $k$th bit of the destination register
+performed, as follows:
+Suppose the bits of \.{MOD} are called $\mu_{11}\mu_{10}\mu_{01}
+\mu_{00}$ from left to right. Then if the $k$th bit of the destination register
 currently is equal to~$i$ and the $k$th bit of the source value is
 equal to~$j$, the general logical operator changes the $k$th bit of
 the destination register to~$\mu_{ij}$. If the \.{MOD} bits are,
 for example, $1010$, the source value is simply copied to the
-destination register; if $\.{MOD}=0110$, an exclusive or is done;
+destination register; if $\.{MOD}=0110$, an exclusive-or is done;
 if $\.{MOD}=0011$, the destination register is complemented and the
 source value is effectively ignored.
 
@@ -291,7 +291,7 @@ The machine contains four status bits called \.S (sign), \.N (nonzero),
 \.S equal to the sign of the new result transferred to the destination
 register; this is bit~15, the most significant bit. A general logical
 operation also sets \.N to~1 if any of the other 15 bits are~1, to~0
-if all of the other bits are~0. Thus, \.S and \.N both become zero if and
+if all of the other bits are~0. Thus \.S and \.N both become zero if and
 only if the new result is entirely zero. Logical operations do not change
 the values of \.K and~\.V; the latter are affected only by the arithmetic
 operations described below.
@@ -303,10 +303,10 @@ $\mu_{ij}=1$, where $i$ and~$j$ are the current values of \.S and~\.N,
 respectively. For example, if $\.{MOD}=0011$, the source value is
 loaded if and only if $\.S=0$, which means that the last value
 affecting \.S and~\.N was greater than or equal to zero. If
-$\.{MOD}=1111$, loading is always done; this is a way to move source
-to destination without affecting \.S or~\.N.
+$\.{MOD}=1111$, loading is always done; this option provides a way
+to move source to destination without affecting \.S or~\.N.
 
-A second conditional load operator, $\.{OP}=3$, is similar but
+A second conditional load operator, $\.{OP}=3$, is similar, but
 it is used for testing the status of \.K and~\.V instead of
 \.S and~\.N. For example, a command having $\.{MOD}=1010$,
 $\.{OP}=3$, $\.A=1$, and $\.{SRC}=1$ adds the current overflow bit to the
@@ -315,14 +315,14 @@ this is true.)
 
 We have now described all the operations except those that
 are performed when $\.{OP}=1$.
-As you might expect, our machine is able to do rudimentary arithmetic,
-and the general addition and subtraction operators can be found here,
+As you might expect, our machine is able to do rudimentary arithmetic.
+The general addition and subtraction operators belong to this final case,
 together with various shift operators, depending on the value of \.{MOD}.
 
 Eight of the $\.{OP}=1$ operations set the destination register to a shifted
 version of the source value: $\.{MOD}=0$ means ``shift left~1,''
 which is equivalent to multiplying the source by~2; $\.{MOD}=1$ means
-``cyclic shift left~1,'' which is the same but also adding the
+``cyclic shift left~1,'' which is the same except that it also adds the
 previous sign bit to the result; $\.{MOD}=2$ means ``shift left~4,''
 which is equivalent to multiplying by~16; $\.{MOD}=3$ means ``cyclic
 shift left~4''; $\.{MOD}=4$ means ``shift right~1,'' which is
@@ -347,8 +347,8 @@ shifts as from ordinary shifts.
 
 When $\.{OP}=1$ and $\.{MOD}=8$, the source value is added to the
 destination register. This sets \.S, \.N, and \.V as you would expect;
-and it sets \.K to the carry you would get if treating the values as
-16-bit unsigned integers. Another addition operation, having
+and it sets \.K to the carry you would get if you were treating the operands
+as 16-bit unsigned integers. Another addition operation, having
 $\.{MOD}=9$, is similar, but the current value of \.K is also added to
 the result; in this case, the new value of \.N will be zero if and only if
 the 15 non-sign bits of the result are zero and the previous values of
@@ -366,14 +366,13 @@ An auxiliary subtraction operation, having $\.{MOD}=11$, subtracts
 also the current value of \.K, thereby allowing for correct 32-bit subtraction.
 
 The operations for $\.{OP}=1$ and $\.{MOD}=12$, 13, and~14 are
-``reserved for future expansion.'' Actually they will never change,
-since this RISC chip is merely academic; if you check out the logic
-below you will find that they simply set the destination register and
+``reserved for future expansion.'' Actually they will never change, however,
+since this RISC chip is purely academic. If you check out the logic
+below, you will find that they simply set the destination register and
 the four status bits all to zero.
 
-There is one further operation, having $\.{OP}=1$ and $\.{MOD}=15$;
-this is the special \.{JUMP} operation described below. It does not
-affect \.S, \.N, \.K, or~\.V.
+A final operation, called \.{JUMP}, will be explained momentarily.
+It has $\.{OP}=1$ and $\.{MOD}=15$. It does not affect \.S, \.N, \.K, or~\.V.
 
 If the RISC is made with fewer than 16 registers, the higher-numbered ones
 will effectively contain zero whenever their values are fetched.
@@ -385,22 +384,22 @@ of the current instruction. Therefore if you change the contents of
 register~0, you are changing the control flow of the program. If you
 do not change register~0, it automatically increases by~1.
 
-Special treatment occurs when $\.A=3$ and $\.{SRC}=0$:
+Special treatment occurs when $\.A=3$ and $\.{SRC}=0$.
 In such a case, the normal rules given above say that the source value
 should be the contents of the memory location specified by register~0. But
 that memory location holds the current instruction; so the machine
-uses the {\it following\/} location instead, as a 16-bit source
+uses the {\sl following\/} location instead, as a 16-bit source
 operand. If the contents of register~0 are not changed by such a
 two-word instruction, register~0 will increase by~2 instead of~1.
 
-We have now learned everything about the machine except the operation
+We have now discussed everything about the machine except the operation
 of the \.{JUMP} command. This command moves the source value to
-register~0, thereby changing the flow of control; furthermore, if $\.{DST}\ne0$,
-it also sets register \.{DST} to the location of the instruction
-following the \.{JUMP}. Assembly language programmers will recognize
-this as a convenient way to jump to a subroutine.
+register~0, thereby changing the flow of control. Furthermore, if
+$\.{DST}\ne0$, it also sets register \.{DST} to the location of the
+instruction following the \.{JUMP}. Assembly language programmers will
+recognize this as a convenient way to jump to a subroutine.
 
-Example programs can be found in the |take_risc| module, which includes
+Example programs can be found in the {\sc TAKE\_\,RISC} module, which includes
 a simple subroutine for multiplication and division.
 
 @ A few auxiliary functions will ameliorate the task of constructing
@@ -416,7 +415,7 @@ static Vertex* new_vert(t)
   v=next_vert++;
   if (count<0) v->name=gb_save_string(prefix);
   else {
-    sprintf(name_buf,"%s%d",prefix,count);
+    sprintf(name_buf,"%s%ld",prefix,count);
     v->name=gb_save_string(name_buf);
     count++;
   }
@@ -425,21 +424,22 @@ static Vertex* new_vert(t)
 }
 
 @ @d start_prefix(s) strcpy(prefix,s);@+count=0
-@d numeric_prefix(a,b) sprintf(prefix,"%c%d:",a,b);@+count=0;
+@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,b);@+count=0;
 
 @<Private...@>=
 static Vertex* next_vert; /* the first vertex not yet assigned a name */
 static char prefix[5]; /* prefix string for vertex names */
-static int count; /* serial number for vertex names */
+static long count; /* serial number for vertex names */
 static char name_buf[100]; /* place to form vertex names */
 
 @ Here are some trivial routines to create gates with 2, 3, or more
-arguments. The arcs from a gate to its inputs are assigned length 100;
-below we will assign length~1 to the arcs between an inverter and its
-unique input. This makes the lengths of shortest paths in the resulting
+arguments. The arcs from such a gate to its inputs are assigned length 100.
+Other routines, defined below,
+assign length~1 to the arc between an inverter and its unique
+input. This convention makes the lengths of shortest paths in the resulting
 network a bit more interesting than they would otherwise be.
 
-@d DELAY 100
+@d DELAY 100L
 
 @<Internal...@>=
 static Vertex* make2(t,v1,v2)
@@ -484,13 +484,13 @@ static Vertex* make5(t,v1,v2,v3,v4,v5)
   return v;
 }
 
-@ We will use utility field |w.v| to store a pointer to the complement
-of a gate, if that complement has been formed; this will prevent the creation
-of a lot of gates that are equivalent to each other. The following subroutine
+@ We use utility field |w.V| to store a pointer to the complement
+of a gate, if that complement has been formed. This trick prevents the creation
+of excessive gates that are equivalent to each other. The following subroutine
 returns a pointer to the complement of a given gate.
 
-@d bar w.v /* field pointing to complement, if known to exist */
-@d signed(s,v) ((s)&1? v: comp(v))
+@d bar w.V /* field pointing to complement, if known to exist */
+@d even_comp(s,v) ((s)&1? v: comp(v))
 
 @<Internal...@>=
 static Vertex* comp(v)
@@ -502,12 +502,12 @@ static Vertex* comp(v)
   sprintf(name_buf,"%s~",v->name);
   u->name=gb_save_string(name_buf);
   u->typ=NOT;
-  gb_new_arc(u,v,1);
+  gb_new_arc(u,v,1L);
   return u;
 }
 
 @ To create a gate for the {\sc EXCLUSIVE-OR} of two arguments, we can
-either construct the {\sc OR} of two {\sc AND}s, or the {\sc AND} of two
+either construct the {\sc OR} of two {\sc AND}s or the {\sc AND} of two
 {\sc OR}s. We choose the former alternative:
 
 @<Internal...@>=
@@ -526,8 +526,8 @@ if (regs<2 || regs>16) regs=16;
 new_graph=gb_new_graph(1400+115*regs);
 if (new_graph==NULL)
   panic(no_room); /* out of memory before we're even started */
-sprintf(new_graph->id,"risc(%u)",regs);
-strcpy(new_graph->format,"ZZZIIVZZZZZZZA");
+sprintf(new_graph->id,"risc(%lu)",regs);
+strcpy(new_graph->util_types,"ZZZIIVZZZZZZZA");
 next_vert=new_graph->vertices;
 
 @ @<Add the RISC data to |new_graph|@>=
@@ -541,7 +541,7 @@ next_vert=new_graph->vertices;
 if (next_vert!=new_graph->vertices+new_graph->n)
   panic(impossible); /* oops, we miscounted; this should be impossible */
 
-@ We will want to assign internal names to many of the most important
+@ Internal names will make it convenient to refer to the most important
 gates. Here are the names of inputs and latches.
 
 @<Local variables for |risc|@>=
@@ -571,7 +571,7 @@ for (r=0;r<regs;r++) {
   reg[r]=first_of(16,'L');
 }
 
-@ The order of evaluation of function arguments is not defined in \Cee,
+@ The order of evaluation of function arguments is not defined in \CEE/,
 so we introduce a few macros that force left-to-right order.
 
 @d do2(result,t,v1,v2)
@@ -631,15 +631,15 @@ for (k=0;k<16;k++)@/
     make2(AND,dir,old_src[k]),
     make2(AND,extra,mem[k]));
 
-@ Here and in the immediately following section we create {\sc OR} gates
-|old_dest[k]| and |old_src[k]| that might have as many as 16~inputs. (The actual
-number of inputs is |regs|.) All of the
-other gates in the network will have at most five inputs.
+@ Here and in the immediately following section we create {\sc OR}
+gates |old_dest[k]| and |old_src[k]| that might have as many as
+16~inputs. (The actual number of inputs is |regs|.) All other
+gates in the network will have at most five inputs.
 
 @<Set |old_dest| to the present value of the destination register@>=
 for (r=0;r<regs;r++) @/
-  do4(dest_match[r],AND,signed(r,dest[0]),signed(r>>1,dest[1]),@|
-                          signed(r>>2,dest[2]),signed(r>>3,dest[3]));
+  do4(dest_match[r],AND,even_comp(r,dest[0]),even_comp(r>>1,dest[1]),@|
+                          even_comp(r>>2,dest[2]),even_comp(r>>3,dest[3]));
 for (k=0;k<16;k++) {
   for (r=0;r<regs;r++)@/
     tmp[r]=make2(AND,dest_match[r],reg[r]+k);
@@ -650,8 +650,8 @@ for (k=0;k<16;k++) {
 @ @<Set |old_src| to the present value of the source register@>=
 for (k=0;k<16;k++) {
   for (r=0;r<regs;r++)@/
-    do5(tmp[r],AND,reg[r]+k,signed(r,mem[0]),signed(r>>1,mem[1]),
-                            signed(r>>2,mem[2]),signed(r>>3,mem[3]));
+    do5(tmp[r],AND,reg[r]+k,even_comp(r,mem[0]),even_comp(r>>1,mem[1]),
+                            even_comp(r>>2,mem[2]),even_comp(r>>3,mem[3]));
   old_src[k]=new_vert(OR);
   for (r=0;r<regs;r++) gb_new_arc(old_src[k],tmp[r],DELAY);
 }
@@ -673,23 +673,23 @@ Vertex *result[18]; /* result of operating on |old_dest| and |source| */
 @ @<Create gates for the general logic operation@>=
 start_prefix("L");
 for (k=0;k<16;k++)@/
-  do4(log[k],OR,@t}\3{-5@>
-    make3(AND,mod[0],comp(old_dest[k]),comp(source[k])),@t}\3{-5@>
-    make3(AND,mod[1],comp(old_dest[k]),source[k]),@t}\3{-5@>
-    make3(AND,mod[2],old_dest[k],comp(source[k])),@t}\3{-5@>
+  do4(log[k],OR,@|
+    make3(AND,mod[0],comp(old_dest[k]),comp(source[k])),@|
+    make3(AND,mod[1],comp(old_dest[k]),source[k]),@|
+    make3(AND,mod[2],old_dest[k],comp(source[k])),@|
     make3(AND,mod[3],old_dest[k],source[k]));
 
 @ @<Create gates for the conditional load operations@>=
 start_prefix("C");
-do4(tmp[0],OR,@t}\3{-5@>
-  make3(AND,mod[0],comp(sign),comp(nonzero)),@t}\3{-5@>
-  make3(AND,mod[1],comp(sign),nonzero),@t}\3{-5@>
-  make3(AND,mod[2],sign,comp(nonzero)),@t}\3{-5@>
+do4(tmp[0],OR,@|
+  make3(AND,mod[0],comp(sign),comp(nonzero)),@|
+  make3(AND,mod[1],comp(sign),nonzero),@|
+  make3(AND,mod[2],sign,comp(nonzero)),@|
   make3(AND,mod[3],sign,nonzero));
-do4(tmp[1],OR,@t}\3{-5@>
-  make3(AND,mod[0],comp(carry),comp(overflow)),@t}\3{-5@>
-  make3(AND,mod[1],comp(carry),overflow),@t}\3{-5@>
-  make3(AND,mod[2],carry,comp(overflow)),@t}\3{-5@>
+do4(tmp[1],OR,@|
+  make3(AND,mod[0],comp(carry),comp(overflow)),@|
+  make3(AND,mod[1],comp(carry),overflow),@|
+  make3(AND,mod[2],carry,comp(overflow)),@|
   make3(AND,mod[3],carry,overflow));
 do3(change,OR,comp(cond),make2(AND,tmp[0],comp(op)),make2(AND,tmp[1],op));
 
@@ -722,20 +722,20 @@ for (t5=reg[0]+1,k=2;k<16;t5=make2(AND,t5,reg[0]+k++)) {
 @ @<Create gates for the |result| bits@>=
 jump=make5(AND,op,mod[0],mod[1],mod[2],mod[3]); /* assume |cond=0| */
 for (k=0;k<16;k++) {
-  do5(result[k],OR,@t}\3{-5@>
-    make2(AND,comp(op),log[k]),@t}\3{-5@>
-    make2(AND,jump,next_loc[k]),@t}\3{-5@>
-    make3(AND,op,comp(mod[3]),shift[k]),@t}\3{-5@>
-    make5(AND,op,mod[3],comp(mod[2]),comp(mod[1]),sum[k]),@t}\3{-5@>
+  do5(result[k],OR,@|
+    make2(AND,comp(op),log[k]),@|
+    make2(AND,jump,next_loc[k]),@|
+    make3(AND,op,comp(mod[3]),shift[k]),@|
+    make5(AND,op,mod[3],comp(mod[2]),comp(mod[1]),sum[k]),@|
     make5(AND,op,mod[3],comp(mod[2]),mod[1],diff[k]));
-  do2(result[k],OR,@t}\3{-5@>
-    make3(AND,cond,change,source[k]),@t}\3{-5@>
+  do2(result[k],OR,@|
+    make3(AND,cond,change,source[k]),@|
     make2(AND,comp(cond),result[k]));
 }
 for (k=16;k<18;k++) /* carry and overflow bits of the result */
-  do3(result[k],OR,@t}\3{-5@>
-    make3(AND,op,comp(mod[3]),shift[k]),@t}\3{-5@>
-    make5(AND,op,mod[3],comp(mod[2]),comp(mod[1]),sum[k]),@t}\3{-5@>
+  do3(result[k],OR,@|
+    make3(AND,op,comp(mod[3]),shift[k]),@|
+    make5(AND,op,mod[3],comp(mod[2]),comp(mod[1]),sum[k]),@|
     make5(AND,op,mod[3],comp(mod[2]),mod[1],diff[k]));
 
 @ The program register |prog| and the |extra| bit are needed for
@@ -776,68 +776,70 @@ for (r=1;r<regs;r++) {
 }
 
 @ @<Create gates for the new values of \.S, \.N, \.K, and \.V@>=
-do4(t5,OR,@t}\3{-5@>
-  make2(AND,sign,cond),@t}\3{-5@>
-  make2(AND,sign,jump),@t}\3{-5@>
-  make2(AND,sign,ind),@t}\3{-5@>
+do4(t5,OR,@|
+  make2(AND,sign,cond),@|
+  make2(AND,sign,jump),@|
+  make2(AND,sign,ind),@|
   make4(AND,result[15],comp(cond),comp(jump),comp(ind)));
 latchit(t5,sign);
-do4(t5,OR,@t}\3{-5@>
-  make4(OR,result[0],result[1],result[2],result[3]),@t}\3{-5@>
-  make4(OR,result[4],result[5],result[6],result[7]),@t}\3{-5@>
-  make4(OR,result[8],result[9],result[10],result[11]),@t}\3{-5@>
-  make4(OR,result[12],result[13],result[14],@t}\3{-5@>
+do4(t5,OR,@|
+  make4(OR,result[0],result[1],result[2],result[3]),@|
+  make4(OR,result[4],result[5],result[6],result[7]),@|
+  make4(OR,result[8],result[9],result[10],result[11]),@|
+  make4(OR,result[12],result[13],result[14],@|
 @t\hskip5em@>make5(AND,make2(OR,nonzero,sign),op,mod[0],comp(mod[2]),mod[3])));
-do4(t5,OR,@t}\3{-5@>
-  make2(AND,nonzero,cond),@t}\3{-5@>
-  make2(AND,nonzero,jump),@t}\3{-5@>
-  make2(AND,nonzero,ind),@t}\3{-5@>
+do4(t5,OR,@|
+  make2(AND,nonzero,cond),@|
+  make2(AND,nonzero,jump),@|
+  make2(AND,nonzero,ind),@|
   make4(AND,t5,comp(cond),comp(jump),comp(ind)));
 latchit(t5,nonzero);
-do5(t5,OR,@t}\3{-5@>
-  make2(AND,overflow,cond),@t}\3{-5@>
-  make2(AND,overflow,jump),@t}\3{-5@>
-  make2(AND,overflow,comp(op)),@t}\3{-5@>
-  make2(AND,overflow,ind),@t}\3{-5@>
+do5(t5,OR,@|
+  make2(AND,overflow,cond),@|
+  make2(AND,overflow,jump),@|
+  make2(AND,overflow,comp(op)),@|
+  make2(AND,overflow,ind),@|
   make5(AND,result[17],comp(cond),comp(jump),comp(ind),op));
 latchit(t5,overflow);
-do5(t5,OR,@t}\3{-5@>
-  make2(AND,carry,cond),@t}\3{-5@>
-  make2(AND,carry,jump),@t}\3{-5@>
-  make2(AND,carry,comp(op)),@t}\3{-5@>
-  make2(AND,carry,ind),@t}\3{-5@>
+do5(t5,OR,@|
+  make2(AND,carry,cond),@|
+  make2(AND,carry,jump),@|
+  make2(AND,carry,comp(op)),@|
+  make2(AND,carry,ind),@|
   make5(AND,result[16],comp(cond),comp(jump),comp(ind),op));
 latchit(t5,carry);
 
 @ As usual, we have left the hardest case for last, hoping that we will
 have learned enough tricks to handle it when the time of reckoning
-finally arrives. The most subtle part of the logic here
-is perhaps the case of a \.{JUMP} command with $\.A=3$;
-we want to increase register~0 by~1 during the first cycle of
+finally arrives.
+
+The most subtle part of the logic here is perhaps the case of a
+\.{JUMP} command with $\.A=3$. We want to increase register~0 by~1
+during the first cycle of
 such a command, if $\.{SRC}=0$, so that the |result| will be
 correct on the next cycle.
 
 @<Create gates for the new values of register 0...@>=
 skip=make2(AND,cond,comp(change)); /* false conditional? */
 hop=make2(AND,comp(cond),jump); /* \.{JUMP} command? */
-do4(normal,OR,@t}\3{-5@>
-  make2(AND,skip,comp(ind)),@t}\3{-5@>
-  make2(AND,skip,nzs),@t}\3{-5@>
-  make3(AND,comp(skip),ind,comp(nzs)),@t}\3{-5@>
+do4(normal,OR,@|
+  make2(AND,skip,comp(ind)),@|
+  make2(AND,skip,nzs),@|
+  make3(AND,comp(skip),ind,comp(nzs)),@|
   make3(AND,comp(skip),comp(hop),nzd));
 special=make3(AND,comp(skip),ind,nzs);
 for (k=0;k<16;k++) {
-  do4(t5,OR,@t}\3{-5@>
-    make2(AND,normal,next_loc[k]),@t}\3{-5@>
-    make4(AND,skip,ind,comp(nzs),next_next_loc[k]),@t}\3{-5@>
-    make3(AND,hop,comp(ind),source[k]),@t}\3{-5@>
+  do4(t5,OR,@|
+    make2(AND,normal,next_loc[k]),@|
+    make4(AND,skip,ind,comp(nzs),next_next_loc[k]),@|
+    make3(AND,hop,comp(ind),source[k]),@|
     make5(AND,comp(skip),comp(hop),comp(ind),comp(nzd),result[k]));
-  do2(t4,OR,@t}\3{-5@>
-    make2(AND,special,reg[0]+k),@t}\3{-5@>
+  do2(t4,OR,@|
+    make2(AND,special,reg[0]+k),@|
     make2(AND,comp(special),t5));
   latchit(t4,reg[0]+k);
-  do2(t4,OR,@t}\3{-5@>
-    make2(AND,special,old_src[k]),@t}\3{-5@>
+  do2(t4,OR,@|
+    make2(AND,special,old_src[k]),@|
     make2(AND,comp(special),t5));
   {@+register Arc *a=gb_virgin_arc();
     a->tip=make2(AND,t4,run_bit);
@@ -871,29 +873,29 @@ The handy identity $x-y=\overline{\overline x+y}$ is used to reduce
 subtraction to addition.
 
 @<Internal...@>=
-static make_adder(n,x,y,z,carry,add)
-  unsigned n; /* number of bits */
+static void make_adder(n,x,y,z,carry,add)
+  unsigned long n; /* number of bits */
   Vertex *x[],*y[]; /* input gates */
   Vertex *z[]; /* output gates */
   Vertex *carry; /* add this to |y|, unless it's null */
   char add; /* should we add or subtract? */
-{@+register int k;
+{@+register long k;
   Vertex *t1,*t2,*t3,*t4; /* temporary storage used by |do4| */
   if (!carry) {
     z[0]=make_xor(x[0],y[0]);
-    carry=make2(AND,signed(add,x[0]),y[0]);
+    carry=make2(AND,even_comp(add,x[0]),y[0]);
     k=1;
-  } else k=0;
+  }@+else k=0;
   for (;k<n;k++) {
     comp(x[k]);@+comp(y[k]);@+comp(carry); /* generate inverse gates */
-    do4(z[k],OR,@t}\3{-5@>
-      make3(AND,x[k],comp(y[k]),comp(carry)),@t}\3{-5@>
-      make3(AND,comp(x[k]),y[k],comp(carry)),@t}\3{-5@>
-      make3(AND,comp(x[k]),comp(y[k]),carry),@t}\3{-5@>
+    do4(z[k],OR,@|
+      make3(AND,x[k],comp(y[k]),comp(carry)),@|
+      make3(AND,comp(x[k]),y[k],comp(carry)),@|
+      make3(AND,comp(x[k]),comp(y[k]),carry),@|
       make3(AND,x[k],y[k],carry));
-    do3(carry,OR,@t}\3{-5@>
-      make2(AND,signed(add,x[k]),y[k]),@t}\3{-5@>
-      make2(AND,signed(add,x[k]),carry),@t}\3{-5@>
+    do3(carry,OR,@|
+      make2(AND,even_comp(add,x[k]),y[k]),@|
+      make2(AND,even_comp(add,x[k]),carry),@|
       make2(AND,y[k],carry));
   }
   z[n]=carry;
@@ -905,19 +907,19 @@ significant bits of $|old_dest|+\.{SRC}$. The other 12 bits of that
 sum are simpler.
 
 @<Set |inc_dest| to |old_dest| plus \.{SRC}@>=
-make_adder(4,old_dest,mem,inc_dest,NULL,1);
+make_adder(4L,old_dest,mem,inc_dest,NULL,1);
 up=make2(AND,inc_dest[4],comp(mem[3])); /* remaining bits must increase */
 down=make2(AND,comp(inc_dest[4]),mem[3]); /* remaining bits must decrease */
 for (k=4;;k++) {
   comp(up);@+comp(down);
-  do3(inc_dest[k],OR,@t}\3{-5@>
-    make2(AND,comp(old_dest[k]),up),@t}\3{-5@>
-    make2(AND,comp(old_dest[k]),down),@t}\3{-5@>
+  do3(inc_dest[k],OR,@|
+    make2(AND,comp(old_dest[k]),up),@|
+    make2(AND,comp(old_dest[k]),down),@|
     make3(AND,old_dest[k],comp(up),comp(down)));
   if (k<15) {
     up=make2(AND,up,old_dest[k]);
     down=make2(AND,down,comp(old_dest[k]));
-  } else break;
+  }@+else break;
 }
 
 @ @<Local variables for |risc|@>=
@@ -929,47 +931,47 @@ for the four addition/subtraction commands.
 @<Create gates for the arithmetic operations@>=
 start_prefix("A");
 @<Create gates for the shift operations@>;
-make_adder(16,old_dest,source,sum,make2(AND,carry,mod[0]),1); /* adder */
-make_adder(16,old_dest,source,diff,make2(AND,carry,mod[0]),0); /* subtracter */
-do2(sum[17],OR,@t}\3{-5@>
-  make3(AND,old_dest[15],source[15],comp(sum[15])),@t}\3{-5@>
+make_adder(16L,old_dest,source,sum,make2(AND,carry,mod[0]),1); /* adder */
+make_adder(16L,old_dest,source,diff,make2(AND,carry,mod[0]),0); /* subtracter */
+do2(sum[17],OR,@|
+  make3(AND,old_dest[15],source[15],comp(sum[15])),@|
   make3(AND,comp(old_dest[15]),comp(source[15]),sum[15])); /* overflow */
-do2(diff[17],OR,@t}\3{-5@>
-  make3(AND,old_dest[15],comp(source[15]),comp(diff[15])),@t}\3{-5@>
+do2(diff[17],OR,@|
+  make3(AND,old_dest[15],comp(source[15]),comp(diff[15])),@|
   make3(AND,comp(old_dest[15]),source[15],diff[15])); /* overflow */
 
 @ @<Create gates for the shift operations@>=
 for (k=0;k<16;k++)@/
-  do4(shift[k],OR,@t}\3{-5@>
-    (k==0? make4(AND,source[15],mod[0],comp(mod[1]),comp(mod[2])):@t}\3{-5@>
-     @t\hskip5em@>make3(AND,source[k-1],comp(mod[1]),comp(mod[2]))),@t}\3{-5@>
-    (k<4? make4(AND,source[k+12],mod[0],mod[1],comp(mod[2])):@t}\3{-5@>
-     @t\hskip5em@>make3(AND,source[k-4],mod[1],comp(mod[2]))),@t}\3{-5@>
-    (k==15? make4(AND,source[15],comp(mod[0]),comp(mod[1]),mod[2]):@t}\3{-5@>
-     @t\hskip5em@>make3(AND,source[k+1],comp(mod[1]),mod[2])),@t}\3{-5@>
-    (k>11? make4(AND,source[15],comp(mod[0]),mod[1],mod[2]):@t}\3{-5@>
+  do4(shift[k],OR,@|
+    (k==0? make4(AND,source[15],mod[0],comp(mod[1]),comp(mod[2])):@|
+     @t\hskip5em@>make3(AND,source[k-1],comp(mod[1]),comp(mod[2]))),@|
+    (k<4? make4(AND,source[k+12],mod[0],mod[1],comp(mod[2])):@|
+     @t\hskip5em@>make3(AND,source[k-4],mod[1],comp(mod[2]))),@|
+    (k==15? make4(AND,source[15],comp(mod[0]),comp(mod[1]),mod[2]):@|
+     @t\hskip5em@>make3(AND,source[k+1],comp(mod[1]),mod[2])),@|
+    (k>11? make4(AND,source[15],comp(mod[0]),mod[1],mod[2]):@|
      @t\hskip5em@>make3(AND,source[k+4],mod[1],mod[2])));
-do4(shift[16],OR,@t}\3{-5@>
-  make2(AND,comp(mod[2]),source[15]),@t}\3{-5@>
+do4(shift[16],OR,@|
+  make2(AND,comp(mod[2]),source[15]),@|
   make3(AND,comp(mod[2]),mod[1],
-    make3(OR,source[14],source[13],source[12])),@t}\3{-5@>
-  make3(AND,mod[2],comp(mod[1]),source[0]),@t}\3{-5@>
+    make3(OR,source[14],source[13],source[12])),@|
+  make3(AND,mod[2],comp(mod[1]),source[0]),@|
   make3(AND,mod[2],mod[1],source[3])); /* ``carry'' */
-do3(shift[17],OR,@t}\3{-5@>
+do3(shift[17],OR,@|
   make3(AND,comp(mod[2]),comp(mod[1]),
-   make_xor(source[15],source[14])),@t}\3{-5@>
-  make4(AND,comp(mod[2]),mod[1],@t}\3{-5@>
+   make_xor(source[15],source[14])),@|
+  make4(AND,comp(mod[2]),mod[1],@|
    @t\hskip5em@>make5(OR,source[15],source[14],
-      source[13],source[12],source[11]),@t}\3{-5@>
+      source[13],source[12],source[11]),@|
    @t\hskip5em@>make5(OR,comp(source[15]),comp(source[14]),
-      comp(source[13]),@t}\3{-5@>
-    @t\hskip10em@>comp(source[12]),comp(source[11]))),@t}\3{-5@>
+      comp(source[13]),@|
+    @t\hskip10em@>comp(source[12]),comp(source[11]))),@|
   make3(AND,mod[2],mod[1],
       make3(OR,source[0],source[1],source[2]))); /* ``overflow'' */
 
-@* RISC management. The |run_risc| procedure takes a gate graph output by |risc|
-and simulates its behavior, given the contents of its read-only memory.
-(See the demonstration program |take_risc|, which appears in a module
+@* RISC management. The |run_risc| procedure takes a gate graph output by
+|risc| and simulates its behavior, given the contents of its read-only memory.
+(See the demonstration program {\sc TAKE\_\,RISC}, which appears in a module
 by itself, for a typical illustration of how |run_risc| might be used.)
 
 This procedure clears the simulated machine and begins executing the program
@@ -987,20 +989,20 @@ Or, if |g| was not a decent graph, |run_risc| returns a negative value and
 leaves |risc_state| untouched.
 
 @<The |run_risc|...@>=
-int run_risc(g,rom,size,trace_regs)
+long run_risc(g,rom,size,trace_regs)
   Graph *g; /* graph output by |risc| */
-  unsigned rom[]; /* contents of read-only memory */
-  unsigned size; /* length of |rom| vector */
-  unsigned trace_regs; /* if nonzero, this many registers will be traced */
-{@+register unsigned l; /* memory address */
-  register unsigned m; /* memory or register contents */
+  unsigned long rom[]; /* contents of read-only memory */
+  unsigned long size; /* length of |rom| vector */
+  unsigned long trace_regs; /* if nonzero, this many registers will be traced */
+{@+register unsigned long l; /* memory address */
+  register unsigned long m; /* memory or register contents */
   register Vertex *v; /* the current gate of interest */
   register Arc *a; /* the current output list element of interest */
-  register int k,r; /* general-purpose indices */
-  int x,s,n,c,o; /* status bits */
+  register long k,r; /* general-purpose indices */
+  long x,s,n,c,o; /* status bits */
   if (trace_regs) @<Print a headline@>;
-  m=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
-  if (m<0) return m; /* not a valid gate graph! */
+  r=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
+  if (r<0) return r; /* not a valid gate graph! */
   g->vertices->val=1; /* turn the \.{RUN} bit on */
   while (1) {
     for (a=g->outs,l=0;a;a=a->next) l=2*l+a->tip->val;
@@ -1020,12 +1022,12 @@ int run_risc(g,rom,size,trace_regs)
 
 @<Print a headline@>=
 {
-  for (r=0;r<trace_regs;r++) printf(" r%-2d ",r); /* register names */
+  for (r=0;r<trace_regs;r++) printf(" r%-2ld ",r); /* register names */
   printf(" P XSNKV MEM\n"); /* |prog|, |extra|, status bits, memory */
 }
 
 @ @<Print a footline@>=
-printf("Execution terminated with memory address %04x.\n",l);
+printf("Execution terminated with memory address %04lx.\n",l);
 
 @ Here we peek inside the circuit to see what values are about to
 be latched.
@@ -1036,7 +1038,7 @@ be latched.
     m=0;
     if (v->typ=='L')
       for (k=0,m=0;k<16;k++,v--) m=2*m+v->alt->val;
-    printf("%04x ",m);
+    printf("%04lx ",m);
   }
   for (k=0,m=0,v=g->vertices+26;k<10;k++,v--) m=2*m+v->alt->val; /* |prog| */
   x=(g->vertices+31)->alt->val; /* |extra| */
@@ -1044,10 +1046,10 @@ be latched.
   n=(g->vertices+28)->alt->val; /* |nonzero| */
   c=(g->vertices+29)->alt->val; /* |carry| */
   o=(g->vertices+30)->alt->val; /* |overflow| */
-  printf("%03x%c%c%c%c%c ",m<<2,
+  printf("%03lx%c%c%c%c%c ",m<<2,
      x?'X':'.', s?'S':'.', n?'N':'.', c?'K':'.', o?'V':'.');
   if (l>=size) printf("????\n");
-  else printf("%04x\n",rom[l]);
+  else printf("%04lx\n",rom[l]);
 }
 
 @ @<Dump...@>=
@@ -1065,16 +1067,17 @@ m=2*m+(g->vertices+28)->alt->val; /* |nonzero| */
 m=2*m+(g->vertices+29)->alt->val; /* |carry| */
 m=2*m+(g->vertices+30)->alt->val; /* |overflow| */
 risc_state[16]=m; /* program register and status bits go here */
-risc_state[17]=l; /* this is the out-of-range address that caused termination */
+risc_state[17]=l;
+ /* this is the out-of-range address that caused termination */
 
 @ @<Global variables@>=
-unsigned risc_state[18];
+unsigned long risc_state[18];
 
-@*Generalized gate graphs. For intermediate computations it is
+@*Generalized gate graphs. For intermediate computations, it is
 convenient to allow two additional types of gates:
 {\advance\parindent 2em
 \smallskip
-\item{|'C'|} denotes a constant gate of value |z.i|.
+\item{|'C'|} denotes a constant gate of value |z.I|.
 
 \smallskip
 \item{|'='|} denotes a copy of a previous gate; utility field |alt|
@@ -1087,13 +1090,13 @@ the inputs and latches.
 Here is a simple subroutine that prints a symbolic representation of
 a generalized gate graph on the standard output file:
 
-@d bit z.i /* field containing the constant value of a |'C'| gate */
+@d bit z.I /* field containing the constant value of a |'C'| gate */
+@d print_gates p_gates /* abbreviation makes chopped-off name unique */
 
 @<The |print_gates| routine@>=
-static print_gate(v)
+static void pr_gate(v)
   Vertex *v;
-{@+register int t;
-  register Arc *a;
+{@+register Arc *a;
   printf("%s = ",v->name);
   switch(v->typ) {
   case 'I':printf("input");@+break;
@@ -1101,30 +1104,31 @@ static print_gate(v)
     if (v->alt) printf("ed %s",v->alt->name);
     break;
   case '~':printf("~ ");@+break;
-  case 'C':printf("constant %d",v->bit); break;
+  case 'C':printf("constant %ld",v->bit); break;
   case '=':printf("copy of %s",v->alt->name);
   }
   for (a=v->arcs;a;a=a->next) {
-    if (a!=v->arcs) printf(" %c ",v->typ);
+    if (a!=v->arcs) printf(" %c ",(char)v->typ);
     printf(a->tip->name);
   }
   printf("\n");
 }
 @#
-print_gates(g)
+void print_gates(g)
   Graph *g;
 {@+register Vertex *v;
   register Arc *a;
-  for (v=g->vertices;v<g->vertices+g->n;v++) print_gate(v);
+  for (v=g->vertices;v<g->vertices+g->n;v++) pr_gate(v);
   for (a=g->outs;a;a=a->next)
-    if (is_boolean(a->tip)) printf("Output %d\n",the_boolean(a->tip));
+    if (is_boolean(a->tip)) printf("Output %ld\n",the_boolean(a->tip));
     else printf("Output %s\n",a->tip->name);
 }
 
 @ @(gb_gates.h@>=
-#define bit @t\quad@> z.i
+#define bit @t\quad@> z.I
 
 @ The |reduce| routine takes a generalized graph |g| and uses the identities
+$\overline{\overline x}=x$ and
 $$\openup1\jot
 \vbox{\halign{\hfil$x#0=\null$&$#$,\hfil\quad
              &\hfil$x#1=\null$&$#$,\hfil\quad
@@ -1133,7 +1137,7 @@ $$\openup1\jot
 \land&0&\land&x&\land&x&\land&0\cr
 \lor&x&\lor&1&\lor&x&\lor&1\cr
 \oplus&x&\oplus&\overline x&\oplus&0&\oplus&1\cr}}$$
-and $\overline{\overline x}=x$ to create an equivalent graph having no
+to create an equivalent graph having no
 |'C'| or |'='| or obviously redundant gates. The reduced graph also excludes
 any gates that are not used directly or indirectly in the computation of
 the output values.
@@ -1164,11 +1168,11 @@ static Graph* reduce(g)
   return new_graph;
 }
 
-@ We will link latches together via their |v.v| fields.
+@ We will link latches together via their |v.V| fields.
 
 @<Check to see if any latch has become constant; if not, |break|@>=
 {@+char no_constants_yet=1;
-  for (v=latch_ptr;v;v=v->v.v) {
+  for (v=latch_ptr;v;v=v->v.V) {
     u=v->alt; /* the gate whose value will be latched */
     if (u->typ=='=')
       v->alt=u->alt;
@@ -1179,12 +1183,12 @@ static Graph* reduce(g)
   if (no_constants_yet) break;
 }
 
-@ @d foo x.v /* link field used to find all the gates later */
+@ @d foo x.V /* link field used to find all the gates later */
 
 @<Reduce gate |v|, if possible, or put it on the latch list@>=
 {
   switch(v->typ) {
-    case 'L': v->v.v=latch_ptr;@+latch_ptr=v;@+break;
+    case 'L': v->v.V=latch_ptr;@+latch_ptr=v;@+break;
     case 'I': case 'C': break;
     case '=': u=v->alt;
       if (u->typ=='=')
@@ -1193,14 +1197,13 @@ static Graph* reduce(g)
         v->bit=u->bit;@+goto make_v_constant;
       }
       break;
+    case NOT:@<Try to reduce an inverter, then |goto done|@>;
     case AND:@<Try to reduce an {\sc AND} gate@>;@+goto test_single_arg;
     case OR:@<Try to reduce an {\sc OR} gate@>;@+goto test_single_arg;
     case XOR:@<Try to reduce an {\sc EXCLUSIVE-OR} gate@>;
-      @+goto test_single_arg;
-    case NOT:@<Try to reduce an inverter@>;@+break;
   test_single_arg: if (v->arcs->next) break;
     v->alt=v->arcs->tip;
-  make_v_eq: v->typ='='; goto make_v_arcless;
+  make_v_eq: v->typ='=';@+goto make_v_arcless;
   make_v_1: v->bit=1;@+goto make_v_constant;
   make_v_0: v->bit=0;
   make_v_constant: v->typ='C';
@@ -1210,15 +1213,15 @@ v->bar=NULL; /* this field will point to the complement, if computed later */
 done: v->foo=v+1; /* this field will link all the vertices together */
 }
 
-@ @<Try to reduce an inverter@>=
+@ @<Try to reduce an inverter...@>=
 u=v->arcs->tip;
 if (u->typ=='=')
   u=v->arcs->tip=u->alt;
 if (u->typ=='C') {
   v->bit=1-u->bit;@+goto make_v_constant;
-} else if (u->bar) { /* this inverse already computed */
+}@+else if (u->bar) { /* this inverse already computed */
   v->alt=u->bar;@+goto make_v_eq;
-} else {
+}@+else {
   u->bar=v;@+v->bar=u;@+goto done;
 }
 
@@ -1229,13 +1232,13 @@ for (a=v->arcs,aa=NULL;a;a=a->next) {
     u=a->tip=u->alt;
   if (u->typ=='C') {
     if (u->bit==0) goto make_v_0;
-    goto bypass_arg_of_and;
-  } else for (b=v->arcs;b!=a;b=b->next) {
-    if (b->tip==u) goto bypass_arg_of_and;
+    goto bypass_and;
+  }@+else@+for (b=v->arcs;b!=a;b=b->next) {
+    if (b->tip==u) goto bypass_and;
     if (b->tip==u->bar) goto make_v_0;
   }
   aa=a;@+continue;
-bypass_arg_of_and: if (aa) aa->next=a->next;
+bypass_and: if (aa) aa->next=a->next;
   else v->arcs=a->next;
 }
 if (v->arcs==NULL) goto make_v_1;
@@ -1247,27 +1250,27 @@ for (a=v->arcs,aa=NULL;a;a=a->next) {
     u=a->tip=u->alt;
   if (u->typ=='C') {
     if (u->bit) goto make_v_1;
-    goto bypass_arg_of_or;
-  } else for (b=v->arcs;b!=a;b=b->next) {
-    if (b->tip==u) goto bypass_arg_of_or;
+    goto bypass_or;
+  }@+else@+for (b=v->arcs;b!=a;b=b->next) {
+    if (b->tip==u) goto bypass_or;
     if (b->tip==u->bar) goto make_v_1;
   }
   aa=a;@+continue;
-bypass_arg_of_or: if (aa) aa->next=a->next;
+bypass_or: if (aa) aa->next=a->next;
   else v->arcs=a->next;
 }
 if (v->arcs==NULL) goto make_v_0;
 
 @ @<Try to reduce an {\sc EXCLUSIVE-OR} gate@>=
-{@+int cmp=0;
+{@+long cmp=0;
   for (a=v->arcs,aa=NULL;a;a=a->next) {
     u=a->tip;
     if (u->typ=='=')
       u=a->tip=u->alt;
     if (u->typ=='C') {
       if (u->bit) cmp=1-cmp;
-      goto bypass_arg_of_xor;
-    } else for (bb=NULL,b=v->arcs;b!=a;b=b->next) {
+      goto bypass_xor;
+    }@+else@+for (bb=NULL,b=v->arcs;b!=a;b=b->next) {
       if (b->tip==u) goto double_bypass;
       if (b->tip==u->bar) {
         cmp=1-cmp;
@@ -1276,12 +1279,12 @@ if (v->arcs==NULL) goto make_v_0;
       bb=b;@+ continue;
     double_bypass: if (bb) bb->next=b->next;
       else v->arcs=b->next;
-      goto bypass_arg_of_xor;
+      goto bypass_xor;
     }
     aa=a;@+ continue;
-  bypass_arg_of_xor: if (aa) aa->next=a->next;
+  bypass_xor: if (aa) aa->next=a->next;
     else v->arcs=a->next;
-    a->a.a=avail_arc;
+    a->a.A=avail_arc;
     avail_arc=a;
   }
   if (v->arcs==NULL) {
@@ -1304,17 +1307,17 @@ if (v->arcs==NULL) goto make_v_0;
   a->tip=u->bar;
 }
 
-@ Here we've come to a subtle point: The ``reduced'' graph might
-actually be larger than the original, in the sense of having more
-vertices (although fewer arcs), if there are a lot of |XOR| gates
-involving an input that is set to the constant value~1. Therefore
-we must have the ability to allocate new vertices during the
-reduction phase of |reduce|. At least one arc has been added to
-the |avail_arc| list whenever we reach this portion of the program.
+@ Here we've come to a subtle point: If a lot of |XOR| gates involve
+an input that is set to the constant value~1, the ``reduced'' graph
+might actually be larger than the original, in the sense of having
+more vertices (although fewer arcs).  Therefore we must have the
+ability to allocate new vertices during the reduction phase of
+|reduce|. At least one arc has been added to the |avail_arc| list
+whenever we reach this portion of the program.
 
 @<Create a new vertex for complement of |u|@>=
 if (next_vert==max_next_vert) {
-  next_vert=gb_alloc_type(7,@[Vertex@],g->aux_data);
+  next_vert=gb_typed_alloc(7,Vertex,g->aux_data);
   if (next_vert==NULL) {
     gb_recycle(g);
     panic(no_room+1); /* can't get auxiliary storage! */
@@ -1326,18 +1329,18 @@ sprintf(name_buf,"%s~",u->name);
 next_vert->name=gb_save_string(name_buf);
 next_vert->arcs=avail_arc; /* this is known to be non-|NULL| */
 avail_arc->tip=u;
-avail_arc=avail_arc->a.a;
+avail_arc=avail_arc->a.A;
 next_vert->arcs->next=NULL;
 next_vert->bar=u;
 next_vert->foo=u->foo;
 u->foo=u->bar=next_vert++;
 
-@ During the marking phase, we will use the |w.v| field to link the
+@ During the marking phase, we will use the |w.V| field to link the
 list of nodes-to-be-marked. That field will turn out to be non-|NULL|
 only in the marked nodes. (We no longer use its former meaning related
 to complementation, so we call it |lnk| instead of |bar|.)
 
-@d lnk w.v /* stack link for marking */
+@d lnk w.V /* stack link for marking */
 
 @<Mark all gates that are used in some output@>=
 {
@@ -1357,8 +1360,9 @@ to complementation, so we call it |lnk| instead of |bar|.)
 
 @ @<Mark all gates that are used to compute |v|@>=
 if (v->lnk==NULL) {
-  v->lnk=sentinel; /* |v| will now be the top of stack of nodes to be marked */
-  do {
+  v->lnk=sentinel;
+   /* |v| now represents the top of the stack of nodes to be marked */
+  do@+{
     n++;
     b=v->arcs;
     if (v->typ=='L') {
@@ -1367,8 +1371,8 @@ if (v->lnk==NULL) {
       if (u->lnk==NULL) {
         u->lnk=v->lnk;
         v=u;
-      } else v=v->lnk;
-    } else v=v->lnk;
+      }@+else v=v->lnk;
+    }@+else v=v->lnk;
     for (;b;b=b->next) {
       u=b->tip;
       if (u->lnk==NULL) {
@@ -1376,7 +1380,7 @@ if (v->lnk==NULL) {
         v=u;
       }
     }
-  } while (v!=sentinel);
+  }@+while (v!=sentinel);
 }
 
 @ It is easier to copy a directed acyclic graph than to copy a general graph,
@@ -1396,7 +1400,7 @@ if (new_graph==NULL) {
   panic(no_room+2); /* out of memory */
 }
 strcpy(new_graph->id,g->id);
-strcpy(new_graph->format,"ZZZIIVZZZZZZZA");
+strcpy(new_graph->util_types,"ZZZIIVZZZZZZZA");
 next_vert=new_graph->vertices;
 for (v=g->vertices,latch_ptr=NULL;v!=sentinel;v=v->foo) {
   if (v->lnk) { /* yes, |v| is marked */
@@ -1434,10 +1438,10 @@ while (latch_ptr) {
 
 @ Suppose we had a latch whose value was originally the {\sc AND} of
 two inputs, where one of those inputs has now been set to~1. Then the
-latch should still refer to a subsequent gate, equal to value of the
+latch should still refer to a subsequent gate, equal to the value of the
 other input on the previous cycle. We create such a gate here, making
-it an {\sc OR} of two identical inputs, because we're not supposed to
-leave any |'='| in the result of |reduce|, and because every {\sc OR}
+it an {\sc OR} of two identical inputs. We do this because we're not supposed
+to leave any |'='| in the result of |reduce|, and because every {\sc OR}
 is supposed to have at least two inputs.
 
 @<Replace |u->alt| by a new gate that copies an input@>=
@@ -1453,7 +1457,7 @@ is supposed to have at least two inputs.
 
 @* Parallel multiplication. Now comes the |prod| routine,
 which constructs a rather different network of gates, based this time
-on a divide-and-conquer paradigm. Let's take a breater before we tackle it.
+on a divide-and-conquer paradigm. Let's take a breather before we tackle it.
 
 (Deep breath.)
 
@@ -1473,22 +1477,22 @@ routine are avoided.
 All of the |AND|, |OR|, and |XOR| gates of the network returned by
 |prod| have exactly two inputs. The depth of the circuit (i.e., the
 length of its longest path) is $3\log m/\!\log 1.5 + \log(m+n)/\!\log\phi
-+O(1)$, where $\phi=(1+\sqrt5\,)/2$ is the golden ratio. The total number
-of gates is $6mn+5m^2+O\bigl((m+n)\log(m+n)\bigr)$.
++O(1)$, where $\phi=(1+\sqrt5\,)/2$ is the golden ratio. The grand total
+number of gates is $6mn+5m^2+O\bigl((m+n)\log(m+n)\bigr)$.
 
-There is a demonstration program called |multiply| that uses |prod| to
+There is a demonstration program called {\sc MULTIPLY} that uses |prod| to
 compute products of large integers.
 
 @<The |prod| routine@>=
 Graph* prod(m,n)
-  unsigned m,n; /* lengths of the binary numbers to be multiplied */
+  unsigned long m,n; /* lengths of the binary numbers to be multiplied */
 {@+@<Local variables for |prod|@>@;
 @#
   if (m<2) m=2;
   if (n<2) n=2;
   @<Allocate space for a temporary graph |g| and for auxiliary tables@>;
   @<Fill |g| with generalized gates that do parallel multiplication@>;
-  if (gb_alloc_trouble) {
+  if (gb_trouble_code) {
     gb_recycle(g);@+panic(alloc_fault); /* too big */
   }
   g=reduce(g);
@@ -1497,10 +1501,10 @@ Graph* prod(m,n)
 
 @ The divide-and-conquer recurrences used in this network lead to interesting
 patterns. First we use a method for parallel column addition that reduces
-the sum of three numbers to the sum of two numbers; repeated use of this
+the sum of three numbers to the sum of two numbers. Repeated use of this
 reduction makes it possible to reduce the sum of |m| numbers to a sum of
 just two numbers, with a total circuit depth that satisfies the
-recurrence $T(3N)=T(2N)+O(1)$. Secondly, when the result has been reduced
+recurrence $T(3N)=T(2N)+O(1)$. Then when the result has been reduced
 to a sum of two numbers, we use a parallel addition scheme based on
 recursively ``golden sectioning the data''; in other words, the recursion
 partitions the data into two parts such that the ratio of the larger part
@@ -1510,6 +1514,7 @@ for small values of~$m+n$.
 
 \def\flog{\mathop{\rm flog}\nolimits}
 We define $\flog N$, the Fibonacci logarithm of~$N$, to be the smallest
+@^Fibonacci, Leonardo, numbers@>
 nonnegative integer~$k$ such that $N\le F_{k+1}$. Let $N=m+n$. Our parallel
 adder for two numbers of $N$ bits will turn out to have depth at most
 $2+\flog N$. The unreduced graph~|g| in our circuit for multiplication
@@ -1519,18 +1524,18 @@ will have fewer than $(6m+3\flog N)N$ gates.
 m_plus_n=m+n;@+@<Compute $f=\flog(m+n)$@>;
 g=gb_new_graph((6*m-7+3*f)*m_plus_n);
 if (g==NULL) panic(no_room); /* out of memory before we're even started */
-sprintf(g->id,"prod(%u,%u)",m,n);
-strcpy(g->format,"ZZZIIVZZZZZZZA");
-long_tables=gb_alloc_type(2*m_plus_n+f,@[long@],g->aux_data);
-vert_tables=gb_alloc_type(f*m_plus_n,@[Vertex*@],g->aux_data);
-if (gb_alloc_trouble) {
+sprintf(g->id,"prod(%lu,%lu)",m,n);
+strcpy(g->util_types,"ZZZIIVZZZZZZZA");
+long_tables=gb_typed_alloc(2*m_plus_n+f,long,g->aux_data);
+vert_tables=gb_typed_alloc(f*m_plus_n,Vertex*,g->aux_data);
+if (gb_trouble_code) {
   gb_recycle(g);
   panic(no_room+1); /* out of memory trying to create auxiliary tables */
 }
 
 @ @<Local variables for |prod|@>=
-unsigned m_plus_n; /* guess what this variable holds */
-int f; /* initially $\flog(m+n)$, later flog of other things */
+unsigned long m_plus_n; /* guess what this variable holds */
+long f; /* initially $\flog(m+n)$, later flog of other things */
 Graph *g; /* graph of generalized gates, to be reduced eventually */
 long *long_tables; /* beginning of auxiliary array of |long| numbers */
 Vertex **vert_tables; /* beginning of auxiliary array of gate pointers */
@@ -1562,10 +1567,13 @@ numbers $A_m$, $A_{m+1}$, \dots,~$A_{3m-5}$ by the scheme
 $$A_{m+2j}+A_{m+2j+1}=A_{3j}+A_{3j+1}+A_{3j+2}\,,\qquad 0\le j\le m-3.$$
 [A similar but slightly less efficient scheme was used by Pratt and
 Stockmeyer in {\sl Journal of Computer and System Sciences \bf12} (1976),
+@^Pratt, Vaughan Ronald@>
+@^Stockmeyer, Larry Joseph@>
 Proposition~5.3. The recurrence used here is related to the Josephus
+@^Josephus, Flavius, problem@>
 problem with step-size~3; see {\sl Concrete Mathematics},
 {\mathhexbox278}3.3.]
-For this purpose we compute intermediate results $P_j$, $Q_j$, and~$R_j$
+For this purpose, we compute intermediate results $P_j$, $Q_j$, and~$R_j$
 by the rules
 $$\eqalign{P_j&=A_{3j}\oplus A_{3j+1}\,;\cr
            Q_j&=A_{3j}\land A_{3j+1}\,;\cr
@@ -1597,7 +1605,7 @@ start_prefix("Y");@+y=first_of(n,'I');
 @<Compute the final result $Z$ by parallel addition@>;
 
 @ @<Local variables for |prod|@>=
-register int i,j,k,l; /* all-purpose indices */
+register long i,j,k,l; /* all-purpose indices */
 register Vertex *v; /* current vertex of interest */
 Vertex *x,*y; /* least-significant bits of the input gates */
 Vertex *alpha,*beta; /* least-significant bits of arguments */
@@ -1632,7 +1640,7 @@ for (j=0; j<m-2; j++) {
     make2(AND,alpha+k,beta+k);
   alpha=next_vert-2*m_plus_n;
   beta=g->vertices+(a_pos(3*j+2)*m_plus_n);
-  numeric_prefix('A',m+2*j);
+  numeric_prefix('A',(long)m+2*j);
   for (k=0; k<m_plus_n; k++)
     make2(XOR,alpha+k,beta+k);
   numeric_prefix('R',j);
@@ -1640,7 +1648,7 @@ for (j=0; j<m-2; j++) {
     make2(AND,alpha+k,beta+k);
   alpha=next_vert-3*m_plus_n;
   beta=next_vert-m_plus_n;
-  numeric_prefix('A',m+2*j+1);
+  numeric_prefix('A',(long)m+2*j+1);
   v=new_vert('C');@+v->bit=0; /* another 0, it multiplies $Q\lor R$ by 2 */
   for (k=0; k<m_plus_n-1; k++)
     make2(OR,alpha+k,beta+k);
@@ -1660,9 +1668,9 @@ start_prefix("V");
 for (k=0; k<m_plus_n; k++)
   make2(AND,alpha+k,beta+k);
 
-@* Parallel addition. It's time now to take a deep breath; we have finished the
-parallel multiplier except for one last step, the design of a parallel
-adder.
+@* Parallel addition. It's time now to take another deep breath. We
+have finished the parallel multiplier except for one last step, the
+design of a parallel adder.
 
 The adder is based on the following theory:
 We want to perform the binary addition
@@ -1690,14 +1698,14 @@ to do the evaluation.
 It turns out that this recursion behaves very nicely if we choose
 $i=\down[j]$, where $\down[j]$ is defined for $j>1$ by the formula
 $$\down[j]\;=\;j-F_{(\flog j)-1}\,.$$
-For example, we have $\flog18=7$ because $F_7=13<18\le21=F_8$,
+For example, $\flog18=7$ because $F_7=13<18\le21=F_8$,
 hence $\down[18]=18-F_6=10$.
 
 Let us write $j\to\down[j]$, and consider the oriented tree on the set
 of all positive integers that is defined by this relation. One of the
-paths in this tree is, for example, $18\to10\to5\to3\to2\to1$. Our
+paths in this tree, for example, is $18\to10\to5\to3\to2\to1$. Our
 recurrence for $w_{18}=c_{18}^{18}$ involves $c_{18}^{10}$, which
-involves $c_{18}^5$, which involves $c_{18}^3$, and so on; in general,
+involves $c_{18}^5$, which involves $c_{18}^3$, and so on. In general,
 we will compute $c_k^{\,j}$ for all $j$ with $k\to^*j$, and we will
 compute $d_k^{\,j}$ for all $j$ with $k\to^+j$. It is not difficult to
 prove that $$k\;\to^*\;j\;\to\;i\qquad\hbox{implies}\qquad
@@ -1707,7 +1715,7 @@ have been evaluated. (Indeed, one can prove more: Let $l=\flog k$. If
 the complete path from $k$ to~$1$ in the tree is $k=k_0\to
 k_1\to\cdots\to k_t=1$, then the differences $k_0-k_1$, $k_1-k_2$,
 \dots, $k_{t-2}-k_{t-1}$ will consist of precisely the Fibonacci
-numbers $F_{l-1}$, $F_{l-2}$, \dots,~$F_2$ except for the numbers that
+numbers $F_{l-1}$, $F_{l-2}$, \dots,~$F_2$, except for the numbers that
 appear when $F_{l+1}-k$ is written as a sum of non-consecutive
 Fibonacci numbers.)
 
@@ -1729,12 +1737,13 @@ gates in the parallel addition portion of the circuit.
   as outputs of the network@>;
 g->n=next_vert-g->vertices; /* reduce to the actual number of gates used */
 
-@ When we have created a gate for $w_k$, we will store its address as
-the value of $w[k]$ in an auxiliary table. When we've created a gate
-for $c_k^{\,i}$ where $i<k$ is a Fibonacci number~$F_{l+1}$ and $l=\flog i\ge2$,
-we will store its address as the value of $c[k+(l-2)N]$; the gate 
-$d_k^{\,i}$ will immediately follow this one. Tables of $\flog j$ and $\down[j]$
-will facilitate all these manipulations.
+@ After we have created a gate for $w_k$, we will store its address as
+the value of $w[k]$ in an auxiliary table. After we've created a gate
+for $c_k^{\,i}$ where $i<k$ is a Fibonacci number~$F_{l+1}$ and
+$l=\flog i\ge2$, we will store its address as the value of
+$c[k+(l-2)N]$; the gate $d_k^{\,i}$ will immediately follow this one.
+Tables of $\flog j$ and $\down[j]$ will facilitate all these
+manipulations.
 
 @<Set up auxiliary tables to handle Fibonacci-based recurrences@>=
 w=vert_tables;
@@ -1791,7 +1800,7 @@ for (k=2;k<m_plus_n;k++) {
   w[k]=v;
 }
 
-@ If $k\to j$ we call $j$ an ``ancestor'' of $k$ because we are thinking
+@ If $k\to j$, we call $j$ an ``ancestor'' of $k$ because we are thinking
 of the tree defined by `$\to$'; this tree is rooted at $2\to1$.
 
 @<Set the |anc| table to a list of the ancestors of |k| in decreasing order,
@@ -1803,7 +1812,7 @@ for (l=0,j=k;;l++,j=down[j]) {
 
 @ @d spec_gate(v,a,k,j,t)
     v=next_vert++;
-    sprintf(name_buf,"%c%d:%d",a,k,j);
+    sprintf(name_buf,"%c%ld:%ld",a,k,j);
     v->name=gb_save_string(name_buf);
     v->typ=t;
 
@@ -1816,9 +1825,9 @@ gb_new_arc(v,f>0? c[k-i+(f-2)*m_plus_n]:vv+k-i-1,DELAY);
 @ @<Compute the gate $c_k^{\,j}=c_k^{\,i}\lor b_k^{\,j}$@>=
 if (l) {
   spec_gate(v,'C',k,j,OR);
-} else v=new_vert(OR); /* if $l$ is zero, this gate is $c_k^k=w_k$ */
+}@+else v=new_vert(OR); /* if $l$ is zero, this gate is $c_k^k=w_k$ */
 gb_new_arc(v,cc,DELAY); /* first argument is $c_k^{\,i}$ */
-gb_new_arc(v,next_vert-2); /* second argument is $b_k^{\,j}$ */
+gb_new_arc(v,next_vert-2,DELAY); /* second argument is $b_k^{\,j}$ */
 
 @ Here we reuse the value $f=\flog(j-i)$ computed a minute ago.
 
@@ -1829,7 +1838,7 @@ gb_new_arc(v,f>0? c[k-i+(f-2)*m_plus_n]+1:uu+k-i-1,DELAY);
  /* $d_{k-i}^{\,j-i}$ */
 
 @ The output list will contain the gates in ``big-endian order''
-$z_{m+n-1}$ \dots, $z_1$, $z_0$, because we insert them into the
+$z_{m+n-1}$, \dots, $z_1$, $z_0$, because we insert them into the
 |outs| list in little-endian order.
 
 @<Compute the last gates $Z=U\oplus W$...@>=
@@ -1843,15 +1852,15 @@ for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
 @* Partial evaluation. The subroutine call |partial_gates(g,r,prob,seed,buf)|
 creates a new gate graph from a given gate graph~|g| by ``partial evaluation,''
 i.e., by setting some of the inputs to constant values and simplifying the
-result. The new graph is usually smaller than |g|; it may, in fact, be a great
-deal smaller. Graph~|g| is destroyed in the process.
+result. The new graph is usually smaller than |g|; it might, in fact, be
+a great deal smaller. Graph~|g| is destroyed in the process.
 
-The first |r| inputs of |g| are retained; each remaining input is
-retained with probability |prob/65536|, and if not retained it is assigned
-a random constant value. For example, about half of the inputs will become
-constant if |prob=32768|.
-The |seed| parameter defines a machine-independent source of random
-numbers, and it may be given any value between $0$ and $2^{31}-1$.
+The first |r| inputs of |g| are retained unconditionally. Each
+remaining input is retained with probability |prob/65536|, and if not
+retained it is assigned a random constant value. For example, about
+half of the inputs will become constant if |prob=32768|.  The |seed|
+parameter defines a machine-independent source of random numbers, and
+it may be given any value between $0$ and $2^{31}-1$.
 
 If the |buf| parameter is non-null, it should be the address of a string.
 In such a case, |partial_gates| will put a record of its partial evaluation
@@ -1860,7 +1869,7 @@ after the first |r|, namely |'*'| if the input was
 retained, |'0'| if it was set to~$0$, or |'1'| if it was set to~$1$.
 
 The new graph will contain only gates that contribute to the computation
-of at least one output value. Therefore some input gates may disappear
+of at least one output value. Therefore some input gates might disappear
 even though they were supposedly ``retained,'' i.e., even though their
 value has not been set constant. The |name| field of a vertex can be
 used to determine exactly which input gates have survived.
@@ -1874,10 +1883,10 @@ the function call |partial_gates(prod(m,n),m,0,seed,NULL)|, which
 creates a graph corresponding to a circuit that multiplies a given |m|-bit
 number by a fixed (but randomly selected) |n|-bit constant. If the constant
 is not zero, all |m| of the ``retained'' input gates necessarily survive.
-The demo program called |multiply| illustrates such circuits.
+The demo program called {\sc MULTIPLY} illustrates such circuits.
 
-The graph |g| might be a generalized network; i.e., it might
-have the |'C'| or |'='| gates described earlier. Notice that if |r| is
+The graph |g| might be a generalized network; that is, it might
+involve the |'C'| or |'='| gates described earlier. Notice that if |r| is
 sufficiently large, |partial_gates| becomes equivalent to the |reduce|
 routine. Therefore we need not make that private routine public.
 
@@ -1887,8 +1896,9 @@ if |partial_gates| is unable to complete its task.
 @<The |partial_gates| routine@>=
 Graph *partial_gates(g,r,prob,seed,buf)
   Graph *g; /* generalized gate graph */
-  unsigned r; /* the number of initial gates to leave untouched */
-  unsigned long prob; /* scaled probability of touching subsequent input gates */
+  unsigned long r; /* the number of initial gates to leave untouched */
+  unsigned long prob;
+   /* scaled probability of not touching subsequent input gates */
   long seed; /* seed value for random number generation */
   char *buf; /* optional parameter for information about partial assignment */
 {@+register Vertex *v; /* the current gate of interest */
@@ -1896,11 +1906,11 @@ Graph *partial_gates(g,r,prob,seed,buf)
   gb_init_rand(seed); /* get them random numbers rolling */
   for (v=g->vertices+r;v<g->vertices+g->n;v++)
     switch (v->typ) {
-    case 'C': case '=': continue; /* input gates may still follow */
+    case 'C': case '=': continue; /* input gates might still follow */
     case 'I': if ((gb_next_rand()>>15)>=prob) {
         v->typ='C';@+v->bit=gb_next_rand()>>30;
         if (buf) *buf++=v->bit+'0';
-      } else if (buf) *buf++='*';
+      }@+else if (buf) *buf++='*';
       break;
     default: goto done; /* no more input gates can follow */
     }
@@ -1917,7 +1927,7 @@ has no effect on the graph itself.
 if (g) {
   strcpy(name_buf,g->id);
   if (strlen(name_buf)>54) strcpy(name_buf+51,"...");
-  sprintf(g->id,"partial_gates(%s,%u,%lu,%ld)",name_buf,r,prob,seed);
+  sprintf(g->id,"partial_gates(%s,%lu,%lu,%ld)",name_buf,r,prob,seed);
 }
 
 @* Index. Here is a list that shows where the identifiers of this program are

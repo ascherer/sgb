@@ -1,7 +1,7 @@
-* File "econ.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* File "econ.dat" from the Stanford GraphBase (C) 1993 Stanford University
 * Input/Output structure of the US economy, 1985
 * This file may be freely copied but please do not change it in any way!
-* (Checksum parameters 886,303998716)
+* (Checksum parameters 886,114400212)
 Industry:
 Goods:
 Natural resources:
@@ -152,7 +152,7 @@ Business support services:73
 Agricultural support services:4
 Personal services:
 Health, education, and social services:77
-Non-institutional personal service:
+Non-institutional personal services:
 Personal support services:
 Hotels, beauty care, etc.:72
 Automobile repair and services:75

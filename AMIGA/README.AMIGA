@@ -1,0 +1,111 @@
+This file, ./AMIGA/README.AMIGA, is NOT part of the standard distribution
+of the Stanford GraphBase.
+
+
+COPYRIGHT NOTICE FOR ./AMIGA
+
+The following copyright notice extends to all files in the ./AMIGA
+subdirectory, but not to any part of the standard distribution of the
+Stanford GraphBase (which is copyright (c) 1993 by Stanford University).
+
+Copyright (c) 1994 Andreas Scherer
+
+Permission is granted to make and distribute verbatim copies of this
+document provided that the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+document under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+
+PURPOSE OF THIS FILE
+
+It describes the necessary steps to get the Stanford GraphBase (SGB) up and
+running on the Commodore AMIGA with the help of SAS/C++ 6.55.  Also it
+describes the contents of the subdirectory ./AMIGA, where `.' denotes the
+root directory of the standard installation of SGB.
+
+
+FILES ADDED FOR INSTALLING SGB ON THE AMIGA
+
+The standard distribution of SGB is assumed to be installed on your AMIGA.
+`Installed' means that all source files from the original archive are
+present in a root directory (denoted by `.' in what follows) and, if
+appropriate, one or more subdirectories, on your machine.  If you don't
+have SGB yet, go out and get it from labrea.stanford.edu, where it resides
+in the directory `/pub/sgb', or possibly from some other host location.
+
+The original source files are totally left untouched (as this is expressly
+prohibited by the copyright notice included in every single file of SGB).
+For installing SGB on the AMIGA, two additional files come with this patch.
+They should be added to the local SGB installation in a new subdirectory.
+
+./AMIGA/SMakefile	Makefile for SAS/C++ 6.55.
+./AMIGA/README.AMIGA	This file.
+
+
+HOW TO INSTALL SGB ON THE AMIGA
+
+First read the ./README file that comes with the standard distribution of
+the Stanford GraphBase, but don't follow the instructions for building the
+targets yet.  Some points are overwritten by what follows.  Details of the
+installation process are described in ./README, though.
+
+Then install CWEB (version 3.0 or greater), which can be found in various
+archives; the master files reside at labrea.stanford.edu; a complete AMIGA
+installation of CWEB (version 3.2 patch level 10) resides on the CTAN host
+ftp.dante.de:/pub/tex/web/c_cpp/AmigaCWEB/ and is ready to use.
+
+Copy ./AMIGA/SMakefile to the root directory of SGB and edit it as
+SMakefile instructs you; especially the entry for `MAKE' needs adjustment.
+If this is done, take a deep breath, and say "make tests".  After you get
+the message
+	Congratulations --- the tests have all been passed
+you can then say "make install".  If you do this for the first time, all
+necessary subdirectories will be created by the `make' process.
+
+If you want to install all the demonstration programs as well as the
+GraphBase library, say "make installdemos" after "make install".
+
+Finally, you should say "make clean" to remove all intermediate files from
+the root directory.
+
+
+TROUBLE SHOOTING
+
+I tested the AMIGA version of SGB with the following setup:
+
+	AMIGA 2000
+	GVP G-Force 030/50/50/8
+	SAS/C++ 6.56
+	CWEB 3.4 patch level 13
+
+For compilation the CFLAGS macro (see ./AMIGA/SMakefile) was set to
+
+	CFLAGS = DEBUG=full			# OPTIMIZE
+		INCLUDEDIR=$(SGBDIR)
+		INCLUDEDIR=$(INCLUDEDIR)
+		$(SYS)
+		CPU=any				# CPU=68030
+		MATH=standard			# MATH=68882
+		DEFINE=_STRICT_ANSI
+		IGNORE=85+93+100+132+154+161
+		NOICONS
+
+in combination with the appropriate setting of
+
+	MATHLIB = LIB:scm.lib			# LIB:scm881.lib
+
+Should you encounter problems with this AMIGA patch for SGB with these or
+different settings or should you have ideas for further improvements, like
+using GnuMake instead of SMake, or reducing the list of suppressed compiler
+warnings, contact the author of this contribution
+
+Andreas Scherer
+Rochusstraﬂe 22-24
+52062 Aachen
+Germany
+
+<scherer@physik.rwth-aachen.de> (Internet)
