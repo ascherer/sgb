@@ -1,0 +1,123 @@
+* File "huck.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* Huckleberry Finn, by Mark Twain
+* This file may be freely copied but please do not change it in any way!
+* (Checksum parameters 118,822615693)
+AB Abner Shackleford, friend of PW
+AP Aunt Polly, aunt who raises TS
+AS Aunt Sally Phelps, sister of AP
+AT Ab Turner, undertaker's assistant
+BD Bud Grangerford, cousin of BK
+BE Betsy, slave of RG
+BG Bob Grangerford, eldest son of CG and RG
+BH Buck Harkness, incites lynch mob
+BI Bill, thief wants to shoot TU
+BK Buck Grangerford, youngest son of CG and RG
+BM Brother Marples, friend of AS and SP
+BN Ben Rucker, friend of PW
+BO Boggs, town drunk
+BP Brer Penrod, friend of AS and SP
+BR Ben Rogers, member of TS's gang
+BS Baldy Shepherdson, kills BU in feud
+BT Bessie Thatcher, on boat with JT
+BU Burton, neighbor of SP
+CG Colonel Saul Grangerford, quality gentleman
+CS Colonel Sherburn, store owner who kills BO
+DH Deacon Lot Hovey, friend of PW
+DR Doctor Robinson, skeptical doctor
+DU The Duke, thespian swindler
+HF Huckleberry Finn, free spirit and narrator
+HI Hines, husky debunker
+HS Harney Shepherdson, young member of clan feuding with CG
+HT Brer Hightower, friend of AS and SP
+HW Harvey Wilks, English `dissentering minister'
+JG Joe Grangerford, cousin of BK
+JH Joe Harper, member of TS's gang
+JI Jimmy, young member of SP household
+JK Jack, slave of CG assigned to HF
+JL Judith Loftus, woman not fooled by HF
+JM Jim, runaway slave of MW
+JN John, on skiff with MP
+JO Joanna (the harelip), youngest niece of PW
+JP Jake Packard, thief wants to drown TU
+JT Judge Thatcher, prominent man in HF's village
+JY Johnny, JM's son
+KI The King, distinguished rapscallion
+LB Levi Bell, lawyer and friend of PW
+LI Lize, slave to AS
+LZ 'Lizabeth, JM's daughter
+MA Mathilda Angelina Araminta Phelps, daughter of AS and SP
+MC Miss Charlotte Grangerford, eldest daughter of CG and RG
+MH Mrs. Hotchkiss, friend of AS and SP
+MJ Mary Jane Wilks, redheaded and `full of sand'
+MP Mr. Parker, vigilante
+MR Mary, cousin of TS
+MS Miss Sophia Grangerford, second daughter of CG and RG
+MW Miss Watson, unmarried sister of WD
+NT Nat, slave of SP who feeds JM
+OD Old Doctor, doctor who treats TS
+PA Pap, ne'er-do-well father of HF
+PW Peter Wilks, recently dead man
+RG Rachel Grangerford, wife of CG
+RH Reverend Hobson, Baptist preacher
+SD Sister Damrell, friend of AS and SP
+SI Sister Dunlap, friend of AS and SP
+SP Silas Phelps, cotton farmer married to AS
+SR Sister Ridgeway, friend of AS and SP
+SS Sid Sawyer, quiet half-brother of TS
+SU Sister Utterback, friend of AS and SP
+SW Susan Wilks, sister of MJ and JO
+TB Tommy Barnes, little member of TS's gang
+TC Tim Collins, `young jake' en route to Ryo Janeero
+TF Townfolk, crowd of people
+TG Tom Grangerford, second son of CG and RG
+TP Thomas Franklin Benjamin Jefferson Elexander Phelps, son of AS and SP
+TS Tom Sawyer, adventurous friend of HF
+TU Jim Turner, tied-up thief
+WB Widow Bartley, friend of PW
+WD Widow Douglas, `allowed she would sivilize HF'
+WW William Wilks, deaf and dumb brother of HW and PW
+
+1:TS,HF;JT;WD,HF,MW
+2:JM,TS,HF;TS,HF,JH,BR,TB
+3:WD,MW,HF;TS,HF,JH,BR;PA
+4:WD,HF,MW;HF,JT;HF,JM;HF,PA
+5:PA,HF;PA,JT;JT,WD;JT,HF
+6:JT,PA;PA,HF;JT,HF;PA,WD
+7:PA,HF
+8:PA,JT,BT,JH,TS,AP,SS,MR;JM,HF;JM,MW;MW,WD
+9:JM,HF
+10:JM,HF
+11:HF,JL;PA,JT;JM,HF
+12:JM,HF;TU,JP,BI
+13:BI,JP;JM,HF
+14:JM,HF
+15:JM,HF
+16:JM,HF;HF,MP,JN
+17:HF,CG,BG,TG,RG,BK,MC,MS,BE
+18:HF,CG,BG,TG,RG,BK,MC,MS;BK,HF,HS;BS,BD;HF,JM,JK;MS,HS;BK,JG
+19:HF,JM,KI,DU
+20:HF,JM,KI,DU;KI,TF
+21:HF,JM,KI,DU;BO,CS,TF
+22:CS,BH,TF;HF,KI,DU
+23:KI,DU,TF;HF,KI,DU,JM;JM,JY;JM,LZ
+24:HF,KI,DU,JM;KI,DU,TF;KI,DU,HF,TC;PW,HW
+25:KI,DU,MJ,SW,JO,TF,PW;KI,DU,BN,AB,DH,WB;KI,DU,HF;TF,AB,DR,MJ,SW,JO
+26:KI,DU,MJ,HF,SW;HF,JO,MJ,SW
+27:HF,PW;PW,MJ;WB,KI,DU,TF,PW,HF,RH
+28:HF,MJ;HF,SW,JO;HW,WW,TF
+29:KI,DU,HW,WW,TF,DR,LB,HI,HF,AT;HI,TC;HF,JM
+30:HF,JM,KI,DU
+31:HF,JM;HF,DU,KI
+32:AS,LI,HF,SP
+33:HF,TS;HF,SP;AS,JI;JI,LI;AS,SP,TS;JM,SP,BU;BU,TF;TF,KI,DU
+34:TS,HF,JM,NT
+35:TS,HF
+36:TS,HF,JM,NT
+37:TS,HF,AS,SP,MA,LI;TS,HF,NT,JM
+38:TS,HF,JM
+39:TS,HF,AS;AS,TP;AS,SP;TS,HF,JM
+40:TS,HF;HF,AS,TF;TF,HF,JM,TS
+41:HF,OD;HF,SP,AS,MH,SD,SU,BP,SI,HT,BM,SR
+42:HF,AS,SP,TS,OD,JM,TF;AS,HF,TS,AP,SP;MW
+43:HF,TS,AP,AS,SP,JM;PA,JM
+* End of file "huck.dat"

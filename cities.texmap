@@ -1,0 +1,160 @@
+% Plain TeX code to generate a map of the 128 cities in miles.dat
+
+% Parameters to the \\ macro are:
+% #1: city name to be typeset
+% #2,#3: (x,y) coordinates for lower left corner of label box
+% #4,#5: (x,y) coordinates for the dot
+% (#4,#5)=(12318-lng,1.5(lat-2672)), where (lat,lng) are the coords in miles.dat
+
+% Parameters to \| are similar, but the state code is separated out
+% and put on a second line, #3 ems from the right edge of the main line
+% e.g. City Name, ST .5(cityx,cityy,dotx,doty)
+% puts "ST" on the second line, .5em from the right
+
+\newdimen\unit \unit=.0012in
+\setbox0=\hbox{\fivesy\char15}
+\newbox\dotbox \setbox\dotbox=\hbox{\kern-.5\wd0\fivesy\char15} \wd\dotbox=0pt
+\newdimen\fudge \setbox0=\hbox{\fiverm p} \fudge=-\dp0
+  \advance\fudge-.5\ht\dotbox \advance\fudge.5\dp\dotbox
+\newdimen\vertpos
+\def\\#1 (#2,#3,#4,#5){\vertpos=#5\unit \advance\vertpos\fudge
+  \setbox0=\hbox{\kern#4\unit \raise\vertpos\copy\dotbox}\wd0=0pt \box0
+  \setbox0=\hbox{\kern#2\unit \raise#3\unit\hbox{\fiverm#1}}\wd0=0pt \box0}
+\def\|#1, #2 #3(#4,#5,#6,#7){\vertpos=#7\unit \advance\vertpos\fudge
+  \setbox0=\hbox{\kern#6\unit \raise\vertpos\copy\dotbox}\wd0=0pt \box0
+  \setbox0=\hbox{\kern#4\unit \raise#5\unit
+   \hbox{\fiverm#1,\llap{\lower55\unit\hbox{#2\kern#3em}}}}\wd0=0pt \box0}
+
+\vglue 2in
+\noindent
+\\Ravenna, OH (3707,2103,4188,2166)
+\\Reading, PA (4735,2050,4719,2041)
+\\Red Bluff, CA (-415,2034,88,2019)
+\\Regina, SA (1535,3575,1847,3555)
+\\Reno, NV (306,1940,331,1920)
+\\Rhinelander, WI  (3222,2860,3370,2838)
+\\Richfield, UT  (877,1737,1103,1807)
+\|Richmond, IN .5(3620,1901,3823,1966)
+\\Richmond, VA (4585,1572,4567,1623)
+\\Roanoke, VA  (4136,1514,4318,1582)
+\\Rochester, MN  (2696,2613,3066,2595)
+\\Rochester, NY (4032,2445,4551,2466)
+\\Rockford, IL (2953,2277,3402,2332)
+\\Rock Springs, WY (1014,2161,1389,2230)
+\\Rocky Mount, NC  (4548,1323,4532,1383)
+\\Roswell, NM (1410,938,1859,1002)
+\\Rutland, VT  (5044,2504,5015,2533)
+\\Sacramento, CA (168,1796,163,1780)
+\\Saginaw, MI  (3533,2432,3918,2506)
+\\Saint Augustine, FL  (3996,402,4180,475)
+\\Saint Cloud, MN  (2349,2837,2895,2827)
+\\Saint Johnsbury, VT  (4991,2677,5110,2655)
+\\Saint Joseph, MI (3659,2319,3664,2307)
+\\Saint Joseph, MO (2203,1964,2828,1957)
+\|Saint Louis, MO .5(3105,1715,3293,1785)
+\\Saint Paul, MN  (2776,2750,3002,2734)
+\\Salem, OR (-362,2665,9,2733)
+\\Salida, CO (1404,1791,1712,1771)
+\\Salina, KS (2162,1793,2551,1818)
+\\Salinas, CA (-261,1426,147,1492)
+\\Salisbury, MD (4771,1690,4752,1747)
+\\Salt Lake City, UT (620,2036,1124,2106)
+\\San Angelo, TX (1699,683,2268,711)
+\\San Antonio, TX (1855,377,2462,405)
+\\San Bernardino, CA  (605,1090,581,1108)
+\\San Diego, CA  (340,827,597,898)
+\\Sandusky, OH (3537,2158,4041,2209)
+\\San Francisco, CA (-580,1605,70,1659)
+\\San Jos\'e, CA (147,1541,124,1593)
+\\Santa Ana, CA (-18,1004,525,1056)
+\\Santa Barbara, CA (-272,1175,342,1155)
+\\Santa Fe, NM (1224,1284,1717,1344)
+\\Santa Rosa, CA  (-531,1729,40,1758)
+\\Sarasota, FL (3604,29,4059,93)
+\\Sault Sainte Marie, MI (3894,2969,3877,2965)
+\\Savannah, GA (4223,804,4203,804)
+\\Schenectady, NY  (4942,2380,4917,2415)
+\\Scottsbluff, NB (1514,2292,1946,2272)
+\|Scranton, PA 1(4619,2245,4745,2203)
+\\Seattle, WA (-343,3143,79,3132)
+\\Sedalia, MO (2599,1720,2989,1798)
+\\Selma, AL (3630,786,3610,855)
+\\Seminole, OK (2416,1206,2644,1276)
+\\Sheridan, WY  (1204,2733,1616,2712)
+\\Sherman, TX  (2180,969,2651,1038)
+\\Shreveport, LA  (2845,887,2937,868)
+\\Sioux City, IA (2185,2296,2673,2365)
+\\Sioux Falls, SD (2102,2535,2639,2523)
+\\South Bend, IN (3118,2210,3687,2244)
+\\Spokane, WA (579,3153,571,3142)
+\\Springfield, IL (2896,1977,3347,1962)
+\\Springfield, MA (5070,2256,5053,2307)
+\\Springfield, MO (2986,1507,2983,1575)
+\\Springfield, OH (3430,1990,3931,1980)
+\\Staunton, VA (4151,1644,4405,1714)
+\\Sterling, CO (1767,2105,1990,2085)
+\\Steubenville, OH (3646,2045,4250,2046)
+\\Stevens Point, WI (3288,2600,3355,2670)
+\\Stockton, CA (204,1658,183,1686)
+\\Stroudsburg, PA  (4818,2111,4793,2140)
+\\Sumter, SC  (4292,1007,4277,1080)
+\\Swainsboro, GA (4087,894,4078,882)
+\\Syracuse, NY (4300,2374,4697,2449)
+\\Tacoma, WA (-380,3019,69,3078)
+\\Tallahassee, FL (3334,502,3884,559)
+\\Tampa, FL (4070,202,4067,184)
+\\Terre Haute, IN (3008,1855,3571,1912)
+\\Texarkana, TX  (2923,994,2907,1006)
+\\Toledo, OH (3743,2257,3958,2239)
+\\Topeka, KS (2380,1869,2745,1849)
+\\Toronto, ON  (4065,2561,4374,2539)
+\\Traverse City, MI  (3775,2682,3749,2706)
+\\Trenton, NJ (4859,1976,4835,2026)
+\\Trinidad, CO  (1740,1501,1861,1567)
+\\Tucson, AZ  (1018,755,1215,825)
+\\Tulsa, OK (2562,1436,2721,1416)
+\\Tupelo, MS (3037,1144,3441,1131)
+\\Tuscaloosa, AL  (3560,986,3555,973)
+\\Twin Falls, ID (361,2393,865,2376)
+\\Tyler, TX  (2417,816,2782,844)
+\|Uniontown, PA 1(4295,1986,4339,1977)
+\\Utica, NY  (4807,2438,4789,2458)
+\\Valdosta, GA (3995,555,3984,616)
+\\Valley City, ND (2037,3050,2511,3030)
+\\Vancouver, BC  (-257,3403,0,3382)
+\\Vicksburg, MS  (2963,771,3224,844)
+\\Victoria, TX  (2518,242,2611,313)
+\\Vincennes, IN (3575,1737,3559,1794)
+\\Waco, TX  (2494,652,2598,724)
+\\Walla Walla, WA  (370,2830,479,2902)
+\|Warren, PA .5(4285,2295,4398,2269)
+\\Washington, DC  (4633,1807,4609,1825)
+\\Waterbury, CT  (5027,2173,5007,2224)
+\\Waterloo, IA (2698,2383,3078,2367)
+\\Watertown, NY  (4731,2571,4720,2589)
+\\Watertown, SD  (2056,2701,2601,2727)
+\\Waukegan, IL (3180,2361,3529,2346)
+\\Wausau, WI  (3363,2741,3348,2736)
+\\Waycross, GA (4087,675,4077,675)
+\\Weed, CA (-252,2225,73,2205)
+\\Wenatchee, WA (291,3040,280,3105)
+\\West Palm Beach, FL (4190,-70,4307,0)
+\|Wheeling, WV 1(3975,1935,4240,2002)
+\\Wichita, KS  (2286,1575,2578,1645)
+\\Wichita Falls, TX  (1909,1098,2463,1077)
+\|Williamson, WV .5(3650,1616,4084,1644)
+\|Williamsport, PA .5(4168,2192,4612,2179)
+\\Williston, ND (1471,3232,1950,3214)
+\\Wilmington, DE (4776,1899,4757,1954)
+\\Wilmington, NC (4521,1143,4520,1128)
+\|Winchester, VA 0(4135,1805,4496,1870)
+\\Winnipeg, MB  (2347,3495,2597,3474)
+\\Winston-Salem, NC (3586,1354,4287,1407)
+\\Wisconsin Dells, WI  (2769,2469,3335,2536)
+\\Worcester, MA  (5140,2320,5132,2332)
+\\Yakima, WA (-11,2912,261,2982)
+\\Yankton, SD (2110,2410,2573,2424)
+\|Youngstown, OH 1(4262,2092,4247,2157)
+
+\nopagenumbers\bye
+

@@ -1,0 +1,90 @@
+The Stanford GraphBase is copyright 1992 by Stanford University
+
+These files may be freely copied and distributed, provided that
+no changes whatsoever are made. All users are asked to help keep
+the Stanford GraphBase sources consistent and ``uncorrupted,''
+identical everywhere in the world. Changes are permissible only
+if the changed file is given a new name, different from the names of
+existing files listed below, and only if the changed file is
+clearly identified as not being part of the Stanford GraphBase.
+The author has tried his best to produce correct and useful programs,
+in order to help promote computer science research, but no warranty
+of any kind should be assumed.
+
+FILES INCLUDED IN STANDARD GRAPHBASE DISTRIBUTION
+
+The standard Stanford GraphBase consists of the following files:
+
+1) Data files
+      anna.dat     Anna Karenina (used by gb_books)
+      david.dat    David Copperfield (used by gb_books)
+      econ.dat     US economic input and output (used by gb_econ)
+      games.dat    College football scores, 1990 (used by gb_games)
+      homer.dat    The Iliad (used by gb_books)
+      huck.dat     Huckleberry Finn (used by gb_books)
+      jean.dat     Les Miserables (used by gb_books)
+      miles.dat    Mileage between North American cities (used by gb_miles)
+      mona.dat     Mona Lisa pixels (used by gb_mona)
+      roget.dat    Cross references in Roget's Thesaurus (used by gb_roget)
+      words.dat    Five-letter words of English (used by (gb_words)
+2) CWEB program files
+  a) Kernel routines
+      gb_flip.w    System-independent random number generator
+      gb_graph.w   Data structures for graphs
+      gb_io.w      Input/output routines
+      gb_sort.w    Sorting routine for linked lists
+  b) Graph generating routines
+      gb_basic.w   Standard building blocks and graph operations
+      gb_books.w   Graphs based on world literature
+      gb_econ.w    Graphs based on US inter-industry flow
+      gb_games.w   Graphs based on college football games
+      gb_gates.w   Graphs based on combinational logic
+      gb_miles.w   Graphs based on highway distances
+      gb_mona.w    Graphs based on Leonardo's Mona Lisa
+      gb_plane.w   Planar graphs
+      gb_raman.w   Ramanujan graphs (expanders)
+      gb_rand.w    Random graphs
+      gb_roget.w   Graphs based on Roget's Thesaurus
+      gb_words.w   Graphs based on 5-letter words of English
+   c) Demonstration routines
+      assign_mona.w      The assignment problem, using Mona Lisa
+      book_components.w  Biconnected components, using the plots of books
+      econ_order.w       Heuristic solution to an optimum permutation problem
+      football.w         Heuristic solution to a longest-path problem
+      girth.w            Empirical study of Ramanujan graphs
+      ladders.w          Shortest paths in word graphs
+      miles_span.w       Comparison of algorithms for minimum spanning tree
+      multiply.w         Using a parallel multiplication circuit
+      queen.w            Graphs based on queen moves
+      roget_components.w Strong components of a directed graph
+      take_risc.w        Using a simple RISC computer circuit
+      word_components.w  Connected components of word graphs
+   d) Miscellaneous routines
+      boilerplate.w      Legalese incorporated into all GraphBase programs
+      gb_dijk.w          Variants of Dijkstra's algorithm for shortest paths
+      gb_save.w          Converting graphs to ASCII files and vice versa
+      test_sample.w      Test routine for GraphBase installation
+3) Miscellaneous files
+      Makefile           Instructions to build everything with UNIX
+      README             What you're now reading
+      abstract.plaintex  Short explanation of what it's all about
+      cities.texmap      TeXable map of the 128 cities in miles.dat
+      queen_wrap.ch      Demonstration changefile
+      sample.correct     Correct primary output of test_sample
+      test.correct       Correct secondary output of test_sample
+      test.dat           Weird data used to test gb_io
+
+TO INSTALL THESE PROGRAMS
+
+First install CWEB (version 2.4 or greater), which can be found in
+various archives; the master files reside at labrea.stanford.edu.
+Then, on a UNIX-like system, edit the Makefile as instructed there,
+and "make install".
+
+Complete instructions will appear in a book by D. E. Knuth entitled
+  The Stanford GraphBase: A Platform for Combinatorial Algorithms.
+
+Note: The system is presently in alpha-test state, meaning that everything
+appears to work on at least one system; but experience on a broad range
+of computers is lacking. Please communicate all suggested improvements to
+winkler@sunburn.stanford.edu, with subject line "GraphBase Alpha Test".

@@ -1,0 +1,675 @@
+* File "homer.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* $\rm I\Lambda IA\Delta O\Sigma$, by Homer
+* This file may be freely copied but please do not change it in any way!
+* (Checksum parameters 670,795252274)
+AA Aethra, Trojan lady in waiting
+AB Abarbarea, Trojan fountain nymph
+AC Achilles, angry warrior, swift-footed chief of Myrmidons from Phthia
+AD Automedon, charioteer of AC
+AE Aeneas, leader of Dardanians
+AF Aphrodite (Venus), daughter of ZE and DN, roots for Trojans
+AG Agamemnon, king of Argos and Mycenae, leader of Greek forces
+AH Andromache, wife of HT
+AI Anchises, father of AE
+AJ Great Ajax, king of Salamis
+AL Antilochus, son of NE
+AM Artemis (Cynthia/Diana), daughter of ZE and LE, roots for Trojans
+AN Antenor, aged councilor to PR
+AO Agenor, heir of AN, assists AE
+AP Apollo, son of ZE and LE, roots for Trojans
+AR Ares (Mars), son of ZE, roots for Trojans
+AS Atreus, high king, father of AG and ME
+AT Athene (Minerva), daughter of ZE, favors Greeks
+AU Augeias, king in Elis, stables cleaned by HR
+AX Little Ajax, king of Locris, handiest with a spear
+AZ Aegaeon, hundred-armed giant, brother of CR
+BL Bellerophon, king of Lycia after killing CM, 2F, 2G
+BO Boreas, the north wind
+BR Briseis, prize in AC harem
+CA Calchas, wise prophet
+CH Chryses, priest of AP
+CI Charis, wife of HP
+CL Clymene, Trojan lady in waiting, cow-eyed
+CM Chimera, monster with head of lioness and tail of snake
+CN Chiron, centaur, instructor of 97 and AC
+CR Cronus (Saturn), father of HD, PO, ZE
+CS Chryseis, daughter of CH
+CT Castor, brother of HL, tamer of horses
+DE Death, twin brother of SL
+DI Diomedes, king of middle Argos, Tiryns, and Aegina
+DM Demeter (Ceres), goddess with beautiful hair, mother of PP
+DN Dione, consort of ZE
+DP Deiphobus, son of PR and HC
+DT Dionysus (Bacchus), god of wine
+EA Euryalus, lieutenant of DI
+EB Eurybates, herald of AG
+EE Eeriboea, stepmother of EF and OT
+EF Ephialtes, giant, brother of OT
+EM Eurymedon, Greek charioteer
+EN Enyo (Bellona), goddess of war
+EO Eos (Aurora), rosy-fingered and saffron-robed goddess of dawn
+EP Eurypylus, leader of forty ships from Thessaly
+ER Erinnyes (Furies), goddesses of vengeance
+EU Eurus, the east wind
+FD False Dream, messenger of ZE
+FY Phylus, son of AU, horseman favored by ZE
+GL Glaucus, comrade and squire of SA, grandson of BL
+GR Graces, handmaidens of AF
+GS Greek soldiers, collectively
+HA Hours (Horae), goddesses of the seasons
+HB Hebe, daughter of ZE and HE, goddess of youth
+HC Hecuba, wife of PR, queen of Troy
+HD Hades (Pluto), king of the underworld
+HE Hera (Juno), wife of ZE, favors Greeks
+HL Helen, wife of ME, brought to Troy by PS
+HM Hermes (Mercury), son of ZE, slightly favors the Greeks
+HN Helenus, son of PR, soothsayer
+HO Homer, the poet
+HP Hephaestus (Vulcan), crippled son of ZE and HE, favors Greeks
+HR Heracles (Hercules), heroic strong man
+HT Hector, eldest son of PR and HC, brilliant commander of Trojan army
+IA Idaeus, Trojan herald
+ID Idomeneus, king of Crete
+IR Iris, golden-winged Olympian messenger
+LA Laodice, loveliest daughter of PR and HC
+LE Leto (Latona), mother of AM and AP
+LT Leitus, leader of Boeotians
+LY Lycaon, brother of PS
+MC Ate, goddess of mischief, eldest daughter of ZE
+ME Menelaus, brother of AG, king of Sparta
+MG Meges, son of FY, flotilla leader from western islands
+MO Moira, personification of Fate
+MR Meriones, comrade and squire of ID
+MT Menestheus, Athenian leader, renowned chariot-fighter
+MU Muses, nine sisters who like to sing
+NE Nestor, venerable king of Pylus and Dorium
+NI Night, goddess of nighttime
+NO Notus, the south wind
+NR Nereids, sisters of TH
+OC Oceanus, father of all streams
+OD Odysseus (Ulysses), crafty king of Ithaca
+OG Olympian gods, collectively
+OT Otus, giant, brother of EF
+PA Patroclus, righthand man of AC
+PB Peneleos, leader of Boeotians
+PC Pelops, charioteer god
+PD Polydamus, Trojan prince, son of 0N
+PE Peleus, father of AC
+PH Podarge, a harpy (snatcher)
+PL Polites, son of PR
+PN Pandarus, son of LY, archer who breaks truce
+PO Poseidon (Neptune), king of the sea, favors Greeks
+PP Persephone (Proserpina), wife of HD, queen of nether world
+PR Priam, king of Troy, son of 1K
+PS Paris (Alexander), son of PR and friend of AF
+PT Prothoenor, Boeotian chief
+PU Polydeuces (Pollux), twin brother of CT, boxer
+PX Phoenix, king of Dolopians, tutor and foster father of AC
+RA Axius, god of river in Macedonia
+RH Rhea, consort of CR, mother of ZE, HE, PO, HD
+RO Robots, golden handmaidens fabricated by HP
+RU Rumor, goddess and servant of ZE
+SA Sarpedon, son of ZE and 2E, leader of the Lycians
+SE Semele, mother of DT
+SF Strife, twin of AR
+SI Simoeis, river god, tributary of XA
+SL Sleep, twin brother of DE
+SP Spercheius, tireless river god
+ST Sthenelus, lieutenant of DI
+TA Talthybius, herald of AG
+TE Telamon, father of AJ and TU
+TH Thetis, sea nymph, mother of AC
+TI Themis, fair-cheeked goddess of law
+TL Tlepolemus, son of HR and 9J, king of Rhodes
+TM Thrasymedes, son of NE
+TR Thersites, ugliest man in Greek army
+TS Trojan soldiers, collectively
+TT Tethys, wife of OC
+TU Teucer, half brother of AJ
+TY Thyestes, sheep breeder, brother of AS
+WI Aeolus, lord of winds
+XA Xanthus, son of ZE, god of the river Scamander
+XB Xanthus and Balius, AC's divine horses, sired by ZF
+ZE Zeus (Jove/Jupiter), king of the gods
+ZF Zephyr, the west wind
+01 Archelochus, son of AN, lieutenant of AE
+02 Acamas, son of AN, lieutenant of AE
+03 Adrestus, son of 05, co-leader of Adresteians
+04 Amphius, son of 05, co-leader of Adresteians
+05 Merops, king of Percote, soothsayer
+06 Asius, leader of Hellespontian forces
+07 Hippothous, twin brother of 08, co-leader of Pelasgians
+08 Pylaeus, twin brother of 07, co-leader of Pelasgians
+09 Peirous, chief of Thracians, killed by 9K
+0A Euphemus, leader of Ciconian spearmen
+0B Pyraechmes, leader of Paeonian archers
+0C Pylaemenes, leader of Paphlagonian forces
+0D Odius, co-leader of Halizonian forces
+0E Epistrophus, co-leader of Halizonian forces
+0F Chromius, co-leader of Mysian forces
+0G Ennomus, augur and co-leader of Mysian forces
+0H Phorcys, co-leader of Phrygian forces
+0I Ascanius, godlike co-leader of Phrygian forces
+0J Mesthles, brother of 0K, co-leader of Maeonian forces
+0K Antiphus, brother of 0J, co-leader of Maeonian forces
+0L Nastes, brother of 0M, co-leader of Carian forces
+0M Amphimachus, vain brother of 0L, co-leader of Carians
+0N Panthous, Trojan elder, formerly priest at Delphi
+0O Thymoetes, Trojan elder
+0P Lampus, brother of PR
+0Q Clytius, brother of PR
+0R Hicetaon, brother of PR
+0S Ucalegon, Trojan elder
+0T Otreus, king of Phrygia
+0U Mygdon, king of Phrygia
+0V Echepolus, killed by AL
+0W Simoeisius, killed by AJ
+0X Democoon, bastard son of PR, killed by OD
+0Y Phegeus, son of 10, killed by DI
+0Z Idaeus, brother of 0Y, saved by HP
+10 Dares, noble priest of HP in Troy
+11 Phaestus, son of Maeonian nobleman, speared by ID
+12 Scamandrius, Trojan archer trained by AM, speared by ME
+13 Phereclus, Trojan shipbuilder, killed by MR
+14 Theano, wife of AN, priestess of AT
+15 Pedaeus, son of AN but not 14, killed by MG
+16 Hypsenor, son of Trojan priest, killed by EP
+17 Astynous, Trojan killed by DI
+18 Hypeiron, Trojan killed by DI
+19 Abas, brother of 1A, killed by DI
+1A Polyeidus, son of Trojan soothsayer, killed by DI
+1B Xanthus, brother of 1C, killed by DI
+1C Thoon, brother of 1B, killed by DI
+1D Echemmon, son of PR, killed by DI
+1E Chromius, son of PR, killed by DI
+1F Tros, ancient king of Troy
+1G Ganymede, son of 1F, made cupbearer to OG by ZE
+1H Deicoon, friend of AE, killed by AG
+1I Mydon, 0C's driver, killed by AL
+1J Amphius, fighter from Paesus, killed by AJ
+1K Laomedon, king of Troy, father of PR, killed by HR
+1L Hesione, daughter of 1K, rescued by HR
+1M Coeranus, Lycian speared by OD
+1N Alastor, Lycian speared by OD
+1O Chromius, Lycian speared by OD
+1P Alcandrus, Lycian speared by OD
+1Q Halius, Lycian speared by OD
+1R Noemon, Lycian speared by OD
+1S Prytanis, Lycian speared by OD
+1T Pelagon, attendant of SA
+1U Acamas, Thracian commander, killed by AJ
+1V Axylus, popular nobleman in suburban Troy, killed by DI
+1W Calysius, charioteer of 1V, killed by DI
+1X Dresus, Trojan killed by EA
+1Y Opheltius, Trojan killed by EA
+1Z Aesepus, son of 21 and AB, killed by EA
+20 Pedasus, twin brother of 1Z, killed by EA
+21 Bucolion, illegitimate eldest son of 1K
+22 Astyalus, Trojan killed by 94
+23 Pidytes, warrior from Percote, killed by OD
+24 Aretaon, Trojan soldier killed by TU
+25 Ablerus, Trojan soldier killed by AL
+26 Elatus, soldier from Pedasus, killed by AG
+27 Phylacus, Trojan soldier killed by LT
+28 Melanthius, Trojan soldier killed by EP
+29 Anteia, wife of 82
+2A Iobates, ancient king of Lycia, father of 29 and 2B
+2B Philonoe, wife of BL
+2C Isander, son of BL and 2B
+2D Hippolochus, son of BL and 2B, father of GL
+2E Laodameia, daughter of BL and 2B
+2F Solymi, Lycian tribe
+2G Amazons, warlike community of women
+2H Trojan noblewomen, assembled by HC
+2I Eetion, king of Cilicia, father of AH
+2J Scamandrius, infant son of HT and AH, nicknamed Astyanax
+2K Eniopeus, HT's charioteer, killed by DI
+2L Archeptolemus, 2K's replacement
+2M Agelaus, Trojan warrior killed by DI
+2N Orsilochus, Trojan warrior shot by TU
+2O Ormenus, Trojan warrior shot by TU
+2P Ophelestes, Trojan warrior shot by TU
+2Q Daetor, Trojan warrior shot by TU
+2R Chromius, Trojan warrior shot by TU
+2S Lycophontes, Trojan warrior shot by TU
+2T Amopaon, Trojan warrior shot by TU
+2U Melanippus, Trojan warrior shot by TU
+2V Gorgythion, son of PR, shot by TU
+2W Cebriones, half-brother of HT, 2L's replacement
+2X Dolon, rich, swift-footed, ugly Trojan
+2Y Rhesus, Thracian king, murdured in sleep by DI
+2Z Hippocoon, cousin of 2Y
+30 Mestor, deceased son of PR
+31 Polybus, son of AN
+32 Bienor, Trojan commander killed by AG
+33 Oileus, charioteer of 32, killed by AG
+34 Antiphus, son of PR, killed by AG
+35 Isus, illegitimate son of PR, killed by AG
+36 Antimachus, Trojan councillor
+37 Peisander, son of 36, killed by AG
+38 Hippolochus, son of 36, killed by AG
+39 Iphidamus, son of AN and 14, killed by AG
+3A Cisses, father of 14, guardian of 39
+3B Coon, eldest son of AN, killed by AG after wounding him
+3C Thymbraeus, Trojan warrior killed by DI
+3D Molion, charioteer of 3C, killed by OD
+3E Hippodamus, Trojan warrior killed by OD
+3F Hypeirochus, Trojan warrior killed by OD
+3G Agastrophus, Trojan warrior killed by DI
+3H Deiopites, Trojan warrior killed by OD
+3I Thoon, Trojan warrior killed by OD
+3J Ennomus, Trojan warrior killed by OD
+3K Chersidamas, Trojan warrior killed by OD
+3L Charops, Trojan warrior, brother of 3M, killed by OD
+3M Socus, wealthy Trojan warrior, killed by OD
+3N Doryclus, illegitmate son of PR, killed by AJ
+3O Pandocus, Trojan warrior killed by AJ
+3P Lysander, Trojan warrior killed by AJ
+3Q Pyrasus, Trojan warrior killed by AJ
+3R Pylartes, Trojan warrior killed by AJ
+3S Apisaon, Trojan warrior killed by EP
+3T Alcathous, brother-in-law of AE, killed by ID
+3U Troilus, deceased son of PR
+3V Asteropaeus, leader of the Paeonians
+3W Adamas, son of 06, killed by MR
+3X Iamenus, fighter with 06
+3Y Orestes, fighter with 06, killed by 93
+3Z Thoon, fighter with 06, killed by AL
+40 Oenomaus, fighter with 06
+41 Damasus, Trojan warrior killed by 94
+42 Pylon, Trojan warrior killed by 94
+43 Ormenus, Trojan warrior killed by 94
+44 Antiphates, Trojan warrior killed by 93
+45 Menon, Trojan warrior killed by 93
+46 Iamenus, Trojan warrior killed by 93
+47 Epicles, comrade of SA, killed by AJ
+48 Imbrius, husband of 49, killed by TU
+49 Medesicaste, illegitimate daughter of PR
+4A Cassandra, prophetess, daughter of PR
+4B Othryoneus, suitor of 4A, killed by ID
+4C Hippodameia, talented eldest daughter of AI
+4F Peisander, Trojan warrior killed by ME
+4G Harpalion, son of 0C, killed by MR
+4H Phalces, Trojan warrior, killed by AL
+4I Orthaeus, Trojan warrior
+4J Polyphetes, Trojan warrior
+4K Palmys, Trojan warrior
+4L Ascanius, Trojan warrior
+4M Morys, Trojan warrior killed by MR
+4N Satnius, Trojan warrior killed by AX
+4O Ilioneus, Trojan warrior killed by PB
+4P Hyrtius, Trojan warrior killed by AJ
+4Q Mermerus, Trojan warrior killed by AL
+4R Hippotion, Trojan warrior killed by MR
+4S Prothoon, Trojan warrior killed by TU
+4T Periphetes, Trojan warrior killed by TU
+4U Hyperenor, son of 0N, Trojan warrior killed by ME
+4V Caletor, son of 0Q, killed by AJ
+4W Cleitus, Trojan warrior killed by TU
+4X Astynous, charioteer for PD
+4Y Laodamas, Trojan warrior killed by AJ
+4Z Croesmus, Trojan warrior killed by MG
+A0 Dolops, son of 0P, killed by ME
+B0 Melanippus, neighber of PR, killed by AL
+C0 Areilycus, Trojan warrior killed by PA
+D0 Thoas, Trojan warrior killed by ME
+E0 Amphiclus, Trojan warrior killed by MG
+F0 Atymnius, friend of SA, Trojan warrior killed by AL
+G0 Maris, friend of SA, Trojan warrior killed by TM
+H0 Amisodarus, father of F0 and G0
+I0 Cleobolus, Trojan warrior killed by AX
+J0 Lycon, Trojan warrior killed by PB
+K0 Erymas, Trojan warrior killed by ID
+L0 Pronous, Trojan warrior killed by PA
+M0 Thestor, Trojan warrior killed by PA
+N0 Euryalus, Trojan warrior killed by PA
+O0 Erymas, Trojan warrior killed by PA
+P0 Amphoterus, Trojan warrior killed by PA
+Q0 Epaltes, Trojan warrior killed by PA
+R0 Tlepolemus, Trojan warrior killed by PA
+S0 Echius, Trojan warrior killed by PA
+T0 Pyris, Trojan warrior killed by PA
+U0 Ipheus, Trojan warrior killed by PA
+V0 Evippus, Trojan warrior killed by PA
+W0 Polymelus, Trojan warrior killed by PA
+X0 Thrasymelus, charioteer of SA, killed by PA
+Y0 Sthenelaus, Trojan warrior killed by PA
+Z0 Laogonus, Trojan warrior killed by MR
+A1 Adrestus, Trojan warrior killed by PA
+B1 Autonous, Trojan warrior killed by PA
+C1 Echeclus, Trojan warrior killed by PA
+D1 Perimus, Trojan warrior killed by PA
+E1 Epistor, Trojan warrior killed by PA
+F1 Melanippus, Trojan warrior killed by PA
+G1 Elasus, Trojan warrior killed by PA
+H1 Mulius, Trojan warrior killed by PA
+I1 Pylartes, Trojan warrior killed by PA
+J1 Euphorbus, son of 0N, killed by ME after wounding PA
+K1 Medon, Trojan leader
+L1 Thersilochus, Trojan leader
+M1 Deisenor, Trojan leader
+N1 Apisaon, Trojan warrior killed by 7R
+O1 Aretus, son of PR, killed by AD
+P1 Podes, son of 2I, killed by ME
+Q1 Ilus, son of 1F, ancient king of Troy
+R1 Assaracus, son of 1F, grandfather of AE
+S1 Erichtonius, richest man alive, father of 1F
+T1 Iphition, Trojan warrior killed by AC
+U1 Demoleon, son of AN, killed by AC
+V1 Hippodamus, driver of U1, killed by AC
+W1 Polydorus, youngest and favorite son of PR, killed by AC
+X1 Dryops, Trojan warrior killed by AC
+Y1 Demuchus, Trojan warrior killed by AC
+Z1 Loagonus, Trojan warrior killed by AC
+A2 Dardanus, brother of Z1, killed by AC
+B2 Tros, son of 1N, Trojan warrior killed by AC
+C2 Mulius, Trojan warrior killed by AC
+D2 Echeclus, son of AO, Trojan warrior killed by AC
+E2 Deucalion, Trojan warrior killed by AC
+F2 Rhigmus, Trojan warrior killed by AC
+G2 Areithous, driver of F2, killed by AC
+H2 Eetion, guest-friend of PR
+I2 Laothoe, concubine of PR
+J2 Pelegon, father of 3V, son of RA and K2
+K2 Periboea, mother of J2
+L2 Thersilochus, charioteer from Paeonia killed by AC
+M2 Mydon, charioteer from Paeonia killed by AC
+N2 Astypylus, charioteer from Paeonia killed by AC
+O2 Mnesus, charioteer from Paeonia killed by AC
+P2 Thrasius, charioteer from Paeonia killed by AC
+Q2 Aenius, charioteer from Paeonia killed by AC
+R2 Ophelestes, charioteer from Paeonia killed by AC
+S2 Altes, king of the Leleges, father of I2
+T2 Agathon, son of PR
+U2 Pammon, son of PR
+V2 Antiphonus, son of PR
+W2 Hippothous, son of PR
+X2 Dius, arrogant son of PR
+51 Melas, brother of 82
+52 Agrius, brother of 82
+53 Niobe, queen of Thebes
+54 Oedipus, king of Thebes
+55 Mecisteus, father of EA
+56 Epeius, huge Greek warrior, champion boxer
+57 Actor, brother of AU
+58 Laodocus, comrade of AL
+59 Coeranus, charioteer of MR, killed by HT
+5A Moliones, twin brothers, purported sons of 57
+5B Leiocritus, Greek warrior killed by AE
+5C Bathycles, wealthy Myrmidon, killed by GL
+5D Epeigeus, Myrmidon leader killed by HT
+5E Alcimedon, Myrmidon leader
+5F Peisander, Myrmidon leader
+5G Eileithyia, daughter of HE, goddess of childbirth
+5H Phylas, father of 5J
+5I Echecles, married 5J after 5K was born
+5J Polymele, singer and dancer
+5K Eudorus, Myrmidon leader, son of HM and 5J
+5L Borus, putative father of 5O
+5M Polydorus, javelin-thrower once beaten by NE
+5N Polydora, sister of AC
+5O Menestheus, Myrmidon leader, son of 5N and SP
+5P Periphetes, son of 5Q
+5Q Copreus, herald of 7U
+5R Otus, comrade of MG, killed by PD
+5S Schedius, Greek warrior killed by HT
+5T Lycophron, squire of AJ, killed by HT
+5U Deiochus, Greek warrior killed by PS
+5V Iasus, Athenian leader killed by AE
+5W Archesilaus, friend of MT, killed by HT
+5X Phyleus, javelin-thrower once beaten by NE
+5Y Iphiclus, runner once beaten by NE
+5Z Promachus, Greek warrior killed by 02
+60 Areilycus, Greek warrior killed by PD
+61 Ancaeus, wrestler once beaten by NE
+62 Alcmene, mother of HR
+63 Clytomedes, boxer once beaten by NE
+64 Europa, mother of 65 and 66
+65 Rhadamanthus, brother of 66
+66 Minos, ancient king of Crete
+67 Perseus, Greek hero
+68 Danae, mother of 67, had beautiful ankles
+69 Dia, mother of 6A
+6A Peirithous, son of ZE and 69, king of the Lapiths
+6B Noemon, comrade of AL
+6C Echepolus, subject of AG who avoids the war
+6D Hypsipyle, wife of Jason
+6E Janos, leader of the Argonauts
+6F Deipyle, mother of DI
+6G Dracius, lieutenant of MG
+6H Amphion, lieutenant of MG
+6I Bias, lieutenant of MT
+6J Pheidas, lieutenant of MT
+6K Polyidus, seer from Corinth
+6L Euchenor, son of 6K, killed by PS
+6M Mecisteus, companion of AL, killed by PD
+6N Hypsenor, Greek warrior slain by DP
+6O Stichius, lieutenant of MT, killed by HT
+6P Alcmaon, Greek warrior killed by SA
+6Q Pandion, bow-bearer of TU
+6R Thootes, Greek herald
+6S Menoetius, father of PA
+6T Moliones, twin sons of PO
+6U Mulius, husband of 6V, killed by NE
+6V Agamede, eldest daughter of AU
+6W Neleus, king of Pylos, father of NE
+6X Itymoneus, Elean cattleman killed by NE
+6Y Hecamede, female slave presented by AC to NE
+6Z Hipponous, Greek warrior killed by HT
+70 Orus, Greek warrior killed by HT
+71 Aesymnus, Greek warrior killed by HT
+72 Agelaus, Greek warrior killed by HT
+73 Opheltius, Greek warrior killed by HT
+74 Dolops, Greek warrior killed by HT
+75 Opites, Greek warrior killed by HT
+76 Autonous, Greek warrior killed by HT
+77 Asaeus, Greek warrior killed by HT
+78 Cinyras, king of Cyprus
+79 Tithonus, son of 1K, mortal consort of EO
+7A Molus, father of MR
+7B Amphidamas, Argonaut from Cythera
+7C Autolycus, sly grandfather of OD
+7D Iphis, slave girl captured by Achilles on Scyros
+7E Diomede, slave girl captured by Achilles on Lesbos
+7F Marpessa, had beautiful ankles
+7G Idas, strongest man of his day
+7H Cleopatra, wife of 7J, daughter of 7G and 7F
+7I Althea, wife of 82, curses 7J
+7J Meleager, son of 82 and 7I
+7K Clytia, beautiful slave girl of 7L
+7L Amyntor, father of PX
+7M Odius, Greek herald
+7N Iphianassa, daughter of AG
+7O Laodice, daughter of AG
+7P Chrysothemis, daughter of AG
+7Q Orestes, son of AG, student deferred from draft
+7R Lycomedes, Greek captain of 100 spearmen
+7S Deipyrus, Greek captain of 100 spearmen, killed by HN
+7T Aphareus, Greek captain of 100 spearmen, killed by AE
+7U Eurystheus, king of Mycenae, made HR labor
+7V Echius, father of 6M
+7W Ereuthalion, favorite squire of 7X
+7X Lycurgus, Arcadian warrior, killer of 7Y
+7Y Areithous, king of Arne in Thrace
+7Z Iphinous, Greek warrior slain by GL
+80 Eioneus, Greek from Magnesia, slain by HT
+81 Menesthius, son of 7Y, killed by PS
+82 Oeneus, king of Calydon
+83 Proetus, king of Tiryns, overlord of BL
+84 Glaucus, son of 85, father of BL
+85 Sisyphus, crafty son of WI
+86 Clysonomus, boy killed in quarrel by young PA
+87 Lycurgus, king of the Edonians
+88 Periphas, huge fighter, bravest of the Aetolians
+89 Oresbius, Boeotian landowner, slain by HT
+8A Helenus, Greek fighter, slain by HT
+8B Trechus, Aetolian fighter, slain by HT
+8C Orestes, Greek charioteer, slain by HT
+8D Teuthras, Greek from Magnesia, slain by HT
+8E Anchialus, veteran Greek fighter slain by HT
+8F Menesthes, veteran Greek fighter dispatched by HT
+8G Orsilochus, twin brother of 8H, lopped down by AE
+8H Crethon, twin brother of 8G, lopped down by AE
+8I Euneus, king of Lemnos, son of 6E and 6D
+8J Alcimus, friend of AC
+8K Melanippus, Greek leader
+8L Deipylus, companion of ST
+8M Leucus, companion of OD
+8N Popyphontes, Theban warrior, killed by 8R
+8O Maeon, Theban warrior, spared by 8R
+8P Eteocles, brother of 8Q
+8Q Polyneices, king of Thebes
+8R Tydeus, king of Calydon, son of 82, father of DI
+8T Bias, Pylian commander
+8U Haemon, Pylian commander
+8V Chromius, Pylian commander
+8W Alastor, Pylian commander
+8X Pelagon, Pylian commander
+8Y Daedalus, Athenian architect
+8Z Ariadne, daughter of 66
+90 Eurynome, daughter of OC
+91 Prothous, commander of Magnesian forces
+92 Guneus, king of Cyphus, leader of Thessailian contingent
+93 Leonteus, co-leader with 94 of Thessalian contingent
+94 Polypoetes, son of 6A, co-leader of Thessalian contingent
+95 Machaon, physician and co-leader of Thessalian contingent
+96 Podaleirius, physician and co-leader of Thessalian contingent
+97 Asclepius, famous physician, father of 95 and 96
+98 Medon, step-brother of AX, replaced 99 as leader of Thessalian contingent
+99 Philoctetes, famous archer bitten by a snake
+9A Eumelus, leader of Thessalian contingent
+9B Podarces, brother of 9C, leader of Thessalian contingent
+9C Protesilaus, the first Greek to land and the first casualty
+9D Epistrophus, brother of 9E, slain by AC
+9E Mynes, spearman slain by AC
+9F Antiphus, grandson of HR, leader of troops from Dodecanese islands
+9G Pheidippus, brother of 9F, leader of troops from Dodecanese islands
+9H Nireus, Symian leader, handsomest Greek excluding AC
+9I Licymnius, uncle of HR, murdered by TL
+9J Astyocheia, captured at Ephyra by HR
+9K Thoas, leader of Aetolians
+9L Polyxeinus, leader of an Epeian flotilla
+9M Diores, leader of an Epeian flotilla, killed by 09
+9N Thalpius, leader of an Epeian flotilla
+9O Amphimachus, son of Cteatus, leader of an Epeian flotilla
+9P Agapenor, king of Arcadians
+9Q Thamyris, Thracian bard
+9R Erechtheus, ancient ruler of Athens
+9S Elephenor, leader of the long-haired Abantes
+9T Epistrophus, son of Iphitus, Phocian leader
+9U Schedius, son of Iphitus, Phocian leader
+9V Astyoche, mother of 9X and 9W
+9W Ialmenus, son of AR and 9V, leader of Minyans
+9X Ascalaphus, twin brother of 9W
+9Y Clonius, Boeotian leader slain by AO
+9Z Arcesilaus, Boeotian leader
+
+1:CH,AG,ME,GS;AP,CH;HE,AC;AC,AG,CA;HE,AT;AT,AC;AT,OG;NE,AG,AC;CS,OD
+&:TA,EB,PA,AC,BR;TH,PO;AC,2I;AC,TH,PE;TH,AZ;AZ,ZE;CS,OD,CH;EO;ZE,OG
+&:TH,ZE;ZE,HE;HE,HP;HP,OG;HP,ZE
+2:ZE,FD;FD,AG;EO,OG;AG,NE;RU,GS;HP,ZE;ZE,HM;HM,PC;PC,AS;AS,TY;TY,AG
+&:AG,GS;NO;EU;ZF;HE,AT;AT,OD;OD,EB;OD,GS;TR,OD,AC;TR,GS;OD,TR;OD,AT,GS
+&:CA,GS;NE,GS,AG;PS,HL;AG,NE,ID,AJ,AX,DI,OD,ME;AT,GS;MU,HO;PB,LT,9Z,PT,9Y
+&:9W,9X,AR,9V;9U,9T;AX;9S;9R,AT;AJ;DI,ST,EA;AG;ME;NE;MU,9Q;9P;9O,9N,9M,9L
+&:9K;ID;MG,OD;FY,AU;AU,HR;HR,9J;TL,9I;9H;9G,9F;AC,BR;AC,9E,9D;9C,9B;99
+&:9B,9A,98,96,95,EP,94,93,92;97;91;IR,PR;IR,HT;AE,01,02;AI,AF;PN,AP;03,04,05
+&:06;07,08;02,09,0A;0B;RA;0C;0D,0E;0F,0G;0H,0I;0J,0K;0L,0M;0M,AC;SA,GL
+3:PS,ME;HT,PS;PS,HL;AG,GS;HT,GS,TS;ME,GS,TS;AG,TA;IR,HL
+&:HL,AA,CL,PR,0N,0O,0P,0Q,0R,0S,AN;PR,0T,0U;AG;AN,OD,ME;AJ;ID,ME,HL;CT,PU
+&:IA,PR;ZE;PR,AN,AG;HT,OD;PS,LY;PS,ME,AF;AF,HL,AA,CL;AF,HL,PS
+4:ZE,OG;OG,HB;ZE,HE,AT;AT,PN,ME;AG,ME;AG,TA;TA,95;97,CN;AG,EM;AG,GS;AG,ID,MR
+&:AG,AJ,AX;AG,NE,8X,8W,8V,8U,8T;AG,MT,OD;AG,DI,ST;8R,8Q;8R,8P,AT,8O,8N;AT,GS
+&:AR,TS;SF,GS,TS;AL,0V,9S;9S,AO;AJ,0W;34,AJ,8M;OD,0X;HT;AP,TS;AT,GS;09,9M;9K,09
+5:AT,DI;0Y,0Z,10;0Y,0Z,DI;0Z,HP;AT,AR;AG,0D;11,ID;ME,12;12,AM;AT,13;13,MR
+&:14,15,AN;15,MG;EP,16;DI,PN;DI,ST;DI,AT;DI,17;DI,18;DI,19,1A;DI,1B,1C
+&:DI,1D,1E;AE,PN;LY,PN;ST,DI;ZE,1F;ZE,1G;AI,AE;DI,PN,AE;AF,AI;AF,AE;ST,8L
+&:DI,AF;AP,AE;AF,GR;IR,AF;AF,AR;AF,DN;EF,OT,AR;EE,HM;HM,AR;HR,HE;HR,HD
+&:HD,AP;HR,OG;AT,HE,ZE;ZE,AF;DI,AP,AE;AM,LE,AE;AP,AR,SF;SA,HT;HT,TS;TS,GS
+&:TS,AE;DI,OD,AJ,AX;AG,1H;AE,8G,8H;ME,AR;ME,AL,AE;ME,AL,8G,8H;ME,AL,0C,1I
+&:HT,TS,AR,EN;HT,8E,8F;AJ,1J;AJ,TS;TL,SA;HR,1L;HR,1K;ZE,SA;OD,AT;OD,1M
+&:OD,1N;OD,1O;OD,1P;OD,1Q;OD,1R;OD,1S;HT,OD;SA,HT;SA,1T;HT,GS;HT,8D;HT,8C
+&:HT,8B;HT,8A;HT,89;HE,AT;HE,HB;HE,AT,HA;HE,ZE;AF,AP;HE,DI,GS;AT,DI,ST
+&:AT,8R;AT,DI,AR;AR,88;AR,ZE,AP;HB,AR
+6:GS,TS;AJ,1U;DI,1V,1W;EA,1X;EA,1Y;EA,1Z,20;1Z,20,AB,21;94,22;OD,23;TU,24
+&:AL,25;AG,26;LT,27;EP,28;ME,03,AG;NE,GS;HN,HT,AE;HT,TS;GL,DI;87,DT;DT,TH
+&:OG,87;85,WI;85,84;84,BL;ZE,83,BL;29,83,BL;2A,BL;EO,2A;BL,CM;BL,2F;BL,2G
+&:2A,BL,2B;2B,BL,2C,2D,2E;ZE,2E;2E,SA;AR,2C,2F;AM,2E;2D,GL;82,BL;ZE,GL
+&:HT,HC,LA;HC,2H,14,AT;HT,PS,HL;HT,AH,2I;HT,AH,2J;AC,2I;AJ,AX,ID,AG,ME,DI;PS,HT
+7:PS,81;HT,80;GL,7Z;AT,AP,HN;HT,TS;AG,GS;HT,TS,GS;ME,GS;AG,ME;NE,GS;NE,PE
+&:AR,7Y;7X,7Y;7X,7W;NE,7W;AG,DI,AJ,AX,ID,MR,EP,9K,OD;AJ,GS;AJ,HT;AP,HT
+&:AJ,HT,TA,IA;AG,AJ;AG,NE;AN,PS,PR;IA,AG,ME,DI;IA,PR;PO,ZE;EO;PO,AP,1K;6D,6E,8I
+8:EO;ZE,OG;AT,ZE;GS,TS;ID,AG,AJ,AX;NE,PS;NE,HT;DI,OD;DI,NE,EM,ST;DI,HT,2K
+&:HT,2L;HT,TS;HE,PO;HE,AG;AG,GS;DI,2M;AG,ME,AJ,AZ,ID,MR,EP,TU;TU,2N;TU,2O;TU,2P
+&:TU,2Q;TU,2R;TU,2S;TU,2T;TU,2U;AG,TU;TE,TU;TU,2V;HT,TU;HT,2W;AJ,TU,6M,8W
+&:HT,GS;HE,AT;7U,HR,HD;HA,AT,HE;ZE,IR;IR,HE,AT;ZE,PO;ZE,AT,HE;HT,TS;PO,AP,1K
+9:AG,DI,NE;TM,9X,9W,MR,7T,7S,7R;NE,AG;7Q;7P,7O,7N;HD;PX,AJ,OD,7M,EB,AC,PA
+&:AD,AD,PA;PE,AC;BR;TH;PX,7L,7K;7L,HD,PP;PX,PE;82,AM;7I,7J;7I,HD,PP,ER
+&:7J,7H;7G,AP,7F;82,7J;AC,7E;PA,7D;AG,OD,DI
+10:AG,ME;AG,NE;NE,OD,DI,ME,ID,AJ,MR,TM,AX,AG;7L,7C;7C,7B;7B,7A;AT,OD,DI
+&:HT,2X;2X,OD,DI;DI,2Y;AP,2Z
+11:EO,79;SF,GS;AG,78;AG,HE,AT;HT,PD,AE,31,AO,02;HT,TS;TS,GS;SF;OG;AF,AP
+&:AG,32;AG,33;AG,34,35;AC,34,35;AC,PR;36,PS;AG,37,38;ZE,HT,IR;MU;39,3A
+&:AG,39;AG,3B;3A,3B,HD;AG,GS;HT,TS;HT,77;HT,76;HT,75;HT,74;HT,73;HT,72
+&:HT,71;HT,70;HT,6Z;DI,OD,3C,3D;DI,03,04;OD,3E;OD,3F;DI,3G;DI,HT;AP,HT
+&:PS,DI;DI,ST;OD,TS;OD,3H;OD,3I;OD,3J;OD,3K;OD,3L;AT,OD;OD,3M;ME,AJ,OD
+&:AJ,3N;AJ,3O;AJ,3P;AJ,3Q;AJ,3R;PS,95;ID,NE;NE,95;HT,2W;EP,AJ;EP,3S;PS,EP
+&:AC,PA;EM,NE,95;6Y,NE,95;6Y,AC;NE,95,PA;NE,6X;NE,6W,HR;AT,NE;NE,6U
+&:6U,6V;NE,6T;PO,5A;5A,57;NE,OD,6S,AC,PA,PE;PA,EP;CN,PA;96
+12:PA,EP;PO,AP,ZE;HT,GS;PD,HT,2W;PS,3T,AO;HN,DP,06;AE,01,02;SA,GL,3V
+&:06,93,94,3W,3X,3Y,3Z,40;94,41;94,42;94,43;93,44;93,45;93,46;93,3Y;PD,HT
+&:HT,TS;GS,TS;GS,AJ,AX;ZE,SA;SA,GL;MT,6R;6R,AJ,AX;AJ,TU,6Q,MT;AJ,47;TU,GL
+&:SA,6P;AJ,TU,SA,ZE;SA,TS,MT,GS;ZE,HT,TS
+13:ZE;PO,AJ,AX;PO,TU,LT,PB,9K,7S,MR,AL;GS,HT;DP,MR;TU,48;48,49;48,PR;HT,TU,9O
+&:AJ,HT;6O,MT;PO,ID;ID,MR;4B,4A,PR;4B,ID;06,ID,AL;DP,ID,6N;AL,6M,8W,6N;ID,3T,PO
+&:AI,4C,3T;DP,AE,PS,AO,ID,9X,7T,7S,MR,AL;ID,40;DP,9X;OG;DP,MR;DP,PL;AE,7T
+&:AL,3Z;3W,AL;3W,MR;HN,7S;ME,HN;HN,AO;ME,4F;4G,ME;MR,4G;4G,PS;0C,4G;PS,6L
+&:6K,6L;HT,AX,9B,MT;MT,6O,6J,6I;MG,6G,6H;9B,98;AJ,AX,TS;PD,HT
+&:HT,PS,PD,2W,4H,4I,4J,4K,4L;AJ,HT,TS,GS
+14:NE,95;6Y;TM;NE,DI,OD,AG;51,52,82;82,8R;8R,6F;PO,AG;HP;AT;HE,AF;HE,RH,OC,TT
+&:HE,SL;HE,HR;ZE,OG;SL,NI;SL,GR;HE,ZE;ZE,69,6A;ZE,68,67;ZE,64,65;ZE,64,66
+&:ZE,SE,DT;ZE,62,HR;ZE,DM,PP;ZE,LE,AP,AM;ZE,SL;SL,PO;PO,GS;DI,OD;HT,AJ
+&:PD,AE,AO,SA,GL,HT;AX,4N;PD,60;AJ,PD,01;02,5Z;PB,02;PB,4O;MU;AJ,4P
+&:AL,4H;AL,4Q;MR,4M;MR,4R;TU,4S;TU,4T;ME,4U;AX,TS
+15:ZE,HE;PO,GS;TS,HT;HE,HR;ZE,HR;HE,OG;HE,TI;HE,AR,AT;HE,AP,IR;ZE,IR;IR,PO
+&:PO,ZE,HD,RH,CR;ER;ZE,AP;AP,HT;9K;AJ,ID,EU,MG,HT,AP,TS;HP,ZE;HT,6O;HT,5W
+&:AE,98;AE,5V;PD,6M;PL,7V;AO,9Y;5U,PS;NE;PA,EP;HT,AJ;AJ,4V;HT,5T;5T,AJ;TU,4W
+&:PD,4X;TU,HT;AJ,TU;HT,TS;AJ,GS;HT,5S;AJ,4Y;PD,5R;MG,PD,AP;MG,4Z;A0,MG;ME,A0
+&:HT,B0;ME,AL;AL,B0;HT,AL;5Q,HR;5Q,7U;HT,5P;NE,GS;AT;AJ;GS,TS
+16:PA,AC;ZE;MU;HT,AJ;CN,PE;PA,AD,XB;ZF,PH,XB;5L,PE,5N;SP,5N,5O;HM,5J,5K
+&:5K,5G;5I,5J,5H;5H,5K;5O,5K,5F,PX,5E,AC;TH;AC,ZE;PA,0B;PA,C0;ME,D0;MG,E0
+&:AL,F0;TM,G0;H0,CM;AX,I0;PB,J0;MR,02;ID,K0;AJ,HT;PA,HT;PA,L0;PA,M0;PA,N0
+&:PA,O0;PA,P0;PA,Q0;PA,R0;PA,S0;PA,T0;PA,U0;PA,V0;PA,W0;SA,PA;HE,ZE;PA,X0;AD
+&:SA,GL;GL,AP;GL,PD,AG,AE,HT;PA,AJ,AX;5D,PE,TH;5D,HT;PA,Y0;GL,5C;MR,Z0;AE,MR
+&:PA,MR;ZE,AP;AP,SA;SL,DE,SA;PA,XB;ZE,PA;PA,AD;PA,A1;PA,B1;PA,C1;PA,D1;PA,E1
+&:PA,F1;PA,G1;PA,H1;PA,I1;PA,AP;AP,HT;HT,2W,PA;EU,NO;AP,PA;J1,PA;HT,PA
+17:ME,4U;ME,J1;AP,HT;ME,AJ,PA;GL,HT;OG,PE,XB;PE,AC,XB
+&:HT,0J,GL,K1,L1,3V,M1,07,0H,0F,0G,AJ,ME;AX,ID,MR,AJ,TS;07,PA,AJ;HT,AJ,9U
+&:0H,07,AJ;AP,AE;AE,TS;AE,5B;7R,N1;3V,AJ;AL,TM;AC;GS,TS;AD,XB;ZE,XB;5E,AD
+&:HT,AE,0F,O1;AD,O1;HT,AD;AX,AD;ZE,AT;AT,ME;HT,P1;ME,P1;AP,HT;PD,PB;HT,LT
+&:ID,HT,59;MR,ID;AJ,MR,AX,ME;ME,AL;AL,58;ME,TM;ME,MR,AJ,AX;HT,AE,GS
+18:AC,AL;TH,NR;TH,AC;HE,HR;HT,AE,AJ,AX,PA;HE,IR;IR,AC;AT,AC;PD,HT;AC,PA
+&:TH,HP,CI;TH,90,HP;HP,RO,TH;AG,AC,BR;AC,PA;AP,PA,HT;8Y,8Z
+19:EO,OC;TH,AC,PA;AC,GS,DI,OD,AG;AG,3B;AM,BR;ZE,MO,ER;ZE,HE,MC;HE,7U,62
+&:OD,AC,AG;OD,AL,TM,MG,9K,MR,7R,8K,BR;TA,AG;AG,GS,AC;BR,PA;AG,ME,NE,ID,PX,AC,PA
+&:ZE,AT;AT,AC;CN,PE;AD,8J,XB;AD,AC,XB;HE,XB;XB,ER
+20:ZE,TI;TI,OG;HP,ZE;PO,ZE;HE,AT,PO,HM,HP;AR,AP,AM,LE,XA,AF;GS,TS,SF;AP,PO
+&:AT,AR;AM,HE;HM,LE;HP,XA;HD;AP,AE;AE,AC;ZE,AE;AT,AC;AE,AF;MO,AC;AT,TS
+&:HR,1L;AE,AC;AC,ZE,AT;OG,AE;S1,BO;1F,1G,Q1,R1;OG,1G;1K,79,0P,0Q,0R
+&:AE,AI;PO,HE;PO,AC;PO,AE;AC,GS;HT,TS;AP,HT;AC,T1;AC,U1,V1;AC,W1;AC,HT
+&:AP,HT;AT,AC;AC,X1;AC,Y1;AC,Z1,A2;AC,B2;AC,C2;AC,D2;AC,E2;AC,F2,G2
+21:AC,TS;AC,LY,8I;H2,8I;I2,PR,W1;I2,PR,LY;XA,AC;3V,J2;J2,RA,K2;XA,3V;AC,3V
+&:OC,ZE;AC,L2,M2,N2,O2,P2,Q2,R2;XA,AP;PO,AT,AC;XA,SI;HE,HP;XA,HP;NO,ZF;BO
+&:HP,XA,HE;ZE;AR,AT;DI,AR;HE,AR;AR,AF;HE,AT;AT,AF,AR;PO,AP,1K;ZE,1K;AP,AM
+&:HE,AM;HM,LE;AM,ZE;PR,TS;AP,TS;AP,AO;AO,AC
+22:TS;HT,CS;AP,AC;PR,HT;PR,I2,S2;HC,HT,PR;HT,AC;ZE,OG;AT,ZE;AP,HT;AT,AC
+&:AT,HT;HT,HD;GS,HT;AC,XB,HT;HC,PR;AH,HT,AF;2I,HT;2J,HT
+23:AC,GS,TH;AC,PA,HT;AC,AG;86,PA;6S,PA;PE,PA,AC;EO,GS;AG,MR;AP,AF,HT;AC,IR
+&:IR,ZF,BO,NO,EU;BO,ZF,AC,PA;AC,AG,GS;PO,PE,XB;9A,DI,ME,AL,MR;6C,AG;NE,AL
+&:AP,DI;AT,DI;AT,9A;ID,AX,AC;ST,DI;AC,9A;AC,AL;AC,3V;AM,9A;TA,ME;ME,AL;ME,6B
+&:MR;AC,NE;NE,63;NE,61;NE,5Y;NE,5X,5M;NE,5A;56,EA;DI,EA;55,54;AJ,OD;8I,LY,PA
+&:AJ,OD,AL;AT,OD;AT,AJ;AG,MR;AG,TA
+24:AC,HT;AP,HT;HE,AT,AF,PS;PS,HL;PO,HE,AT;AP,OG;MO;HE,AP;ZE,HE;AC,TH;ZE,IR
+&:AT,HE,TH,OG;ZE,TH;IR,PR;PR,HC;PR,HN,PS,T2,U2,V2,PL,DP,W2,X2;30,3U,HT;PR,IA
+&:PR,ZE;ZE,HM;HM,PR,IA;AC,AD,8J;PR,AC;AC,IA;AC,PA;53,AP,AM;AC,BR;HM,PR,IA,HT
+&:4A,TS,AH,HC,HT,PR,IA;AH,HT;HC,HT;HL,HT;EO
+* End of file "homer.dat"

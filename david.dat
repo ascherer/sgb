@@ -1,0 +1,157 @@
+* File "david.dat" from the Stanford GraphBase (C) 1992 Stanford University
+* David Copperfield, by Charles Dickens
+* This file may be freely copied but please do not change it in any way!
+* (Checksum parameters 152,151276216)
+AD Adams, head boy in DS's school
+AS Annie Strong, beautiful young wife of DS
+AW Agnes Wickfield, daughter of WW
+BA Mr. Barkis, willin' carrier
+BC Beauty Crewler, sister of ST
+BM Baby Murdstone, baby boy of CC and ED
+BT Betsey Trotwood, DC's paternal great-aunt
+CC Clara Copperfield, mother of DC
+CD Mr. Chillip, doctor at DC's birth
+CH Captain Hopkins, debtor with sonorous voice
+CK Mr. Creakle, proprietor of Salem House school
+CL Clicket (the Orfling), servant of WM
+CM Jack Maldon, ne'er-do-well cousin of AS
+CP Clara Peggotty, nurse to DC
+CR Mrs. Crupp, landlady to DC
+CS Miss Clarissa Spenlow, aunt of DO
+DB Richard Babley (Mr. Dick), weak-minded prot\'eg\'e of BT
+DC David Copperfield, our hero
+DL Mr. Dolloby, buyer of used clothing
+DM Miss Emma Micawber, daughter of WM and EM
+DO Dora Spenlow, daughter of FS
+DP Dan Peggotty, brother of CP
+DS Dr. Strong, schoolmaster at Dover
+DW Miss Mowcher, dwarf hairdresser
+ED Edward Murdstone, second husband of CC
+EM Mrs. Emma Micawber, sanguine wife of WM
+FG Mr. Grainger, friend of JS
+FM Mr. Markham, friend of JS
+FS Mr. Francis Spenlow, attorney
+GP Mr. Gulpidge, something to do with the law business
+GR Gregory, foreman of wine packers at Murdstone and Grinby
+GU Mrs. Gulpidge, dinner guest of FS
+HA Mrs. Henry Spiker, `Hamlet's Aunt'
+HC Rev. Horace Crewler, father of ST
+HP Ham Peggotty, nephew to CP and DP
+HS Mr. Henry Spiker, solicitor
+JK Mr. Jorkins, `hard-hearted' partner of FS
+JM Jane Murdstone, sister of ED
+JR Joram, partner of OM
+JS James Steerforth, schoolmate of DC
+JT Janet, maid to BT
+JU Julia Mills, bosom friend of DO
+KI Miss Kitt, creature in pink
+LA Miss Larkins, DC's older woman crush
+LC Mr. Chestle, `elderly' gentleman who marries LA
+LE Emily Peggotty (Little Em'ly), niece of DP
+LF Mr. Larkins, father of LA
+LM Littimer, valet to JS
+LS Miss Lavinia Spenlow, aunt of DO
+MC Mrs. Creakle, wife of CK
+ME Martha Endell, `fallen woman'
+MF Mrs. Fibbotson, old housemate of MM
+MG Mrs. Gummidge (Old Mawther), widow of DP's partner
+MH Mrs. Crewler, wife of HC
+MJ Master Wilkins Micawber Jr., son of WM and EM
+ML Charley Mell, teacher at Salem House
+MM Mrs. Mell, mother of ML
+MO Minnie Omer, daughter and seamstress to OM
+MP Mealy Potatoes, laborer at Murdstone and Grinby
+MS Mrs. Steerforth, mother of JS
+MW Mick Walker, laborer at Murdstone and Grinby
+OC Miss Creakle, daughter of CK
+OM Mr. Omer, haberdasher and funeral furnisher
+OS Mrs. Markleham (The Old Soldier), mother of AS
+PA Mary Anne Paragon, first servant of DC and DO
+PN Mr. Passnidge, friend of ED
+QU Mr. Quinion, manager of Murdstone and Grinby
+RD Rosa Dartle, companion to MS
+RW Red Whisker, rival for DO
+SA Miss Shepherd, adorable little girl
+SC Sarah Crewler, crippled sister of ST
+SH Mr. Sharp, headmaster at Salem House
+ST Sophy Crewler, fianc\'ee of TT
+TI Mr. Tiffey, clerk to FS
+TP Tipp, carman at Murdstone and Grinby
+TR Mr. Trotwood, husband left by BT
+TT Tommy Traddles, student at Salem House
+TU Mr. Tungay, one-legged guard at Salem House
+TW Micawber Twins, children of WM and EM
+UH Uriah Heep, articled to lawyer WW
+UM Mrs. Heep, 'umble mother of UH
+WA Mrs. Waterbrook, wife of WB
+WB Mr. Waterbrook, agent for WW
+WI William 1, friendly and hungry waiter
+WL William 2, coachman
+WM Wilkins Micawber, debtor who waits
+WW Mr. Wickfield, attorney at Dover
+
+1:CC,BT;BT,CP;HP,CP;BT,CD;HP,BT;CC,DC
+2:CC,DC,CP;DC,CP;DC,CP,ED;CP,CC;DC,ED;DC,ED,QU,PN;BA,DC,CP
+3:CP,DC;CP,HP,DC;CP,HP,DC,LE,MG,DP;LE,DC;MG,CP;DC,CC,ED;BA,DC,CP
+4:CC,CP,DC,ED;JM,DC,CC,ED;CC,ED,JM;DC,CC,JM,ED;DC,ED;CP,DC;JM,DC;BA,DC
+5:BA,DC,CP;BA,DC;DC,WI;DC,ML,MM,MF;TU,ML,DC
+6:DC,ML,TU;DC,TU,CK,MC,OC;TT,DC;JS,DC
+7:TU,CK;CK,DC;TT,JS,DC;DC,JS;MM,JS,TT,DC,CK,TU;TU,DC;DP,HP,DC,JS
+8:BA,DC;DC,CC,BM,CP;DC,CC,CP;DC,ED,JM;DC,JM,CC,BM;DC,ED,JM,CC;DC,CC,BM
+9:DC,SH;CK,MC,DC;OM,MO,DC,JR;DC,CP,CC,BM;ED,CD,DC,JM;MG,ED,CD,DC,JR,MO
+10:JM,CP,DC;DC,HP,DP,CP,BA;BA,CP,DP,MG,LE,DC,HP;DP,HP,LE,DC,MG;QU,DC,ED,JM
+11:DC,MW,MP;QU,DC,WM;DC,WM,TW,MJ,DM,EM,CL;GR,TP,DC;EM,DC;CH,DC;DC,CP,WM
+12:DC,EM,WM;WM,QU,TP,DC;DC,WM,EM,MJ,DM,CL;CP,DC;DC,MP
+13:DC,DL;DC,JT,BT,DB
+14:BT,JT,JM,ED,DC;BT,DC,JM,ED;BT,DC,JM,ED,DB;DB,DC,BT
+15:DC,DB,BT,JT;DC,BT,UH;DC,BT,WW;DC,BT,WW,AW
+16:WW,DC,DS,AS;AD,DC;CM,WW,DC,AW,UH;JM,DC,AS,DS,OS,WW,AW
+17:DC,CP;BT,DB,TR;DS,DC,DB;UH,DC,UM,WM;DC,WM,EM
+18:DC,SA;DC,AW;AD,DC;DC,LA;DC,LF;LC,DC
+19:DC,BT,DB;DC,AW;DC,AW,DS,AS,OS,WW;WL,DC;JS,DC
+20:DC,JS;MS,JS,DC,RD;MS,DC
+21:DC,MS,JS,RD,LM;DC,MO,OM;DC,CP,BA;DC,CP,JS;DC,JS,HP,LE,DP,MG
+22:DC,JS,MG;DC,JS,HP,LE;ME,LE,HP;DC,JS,LM;DC,JS,DW;DC,HP,LE,CP,ME
+23:DC,JS,LM;DC,BT,JT;BT,TR;DC,BT,FS;DC,FS;DC,BT,CR;DC,BT,TI
+24:DC,MS,RD;DC,JS;DC,CR;DC,JS,FG,FM;DC,AW
+25:DC,AW;DC,AW,WA;DC,WB,WA,HS,HA,UH,AW,TT,GP,GU;DC,UH
+26:DC,AW,UH;DC,FS;DC,DO,JM;DC,CR;DC,TI
+27:DC,TT;DC,TT,WM;DC,TT,WM,EM;DC,WM
+28:DC,CR;DC,TT,WM,EM;DC,TT,WM,EM,LM;DC,JS
+29:DC,FS;DC,RD,MS,JS;DC,RD;DC,RD,JS;DC,JS,MS;DC,JS
+30:DC,OM;DC,OM,MO,JR;DC,DP,CP,LE,HP;DC,CP,DP,BA
+31:DC,CP;DC,CP,MG,DP;DC,CP,MG,DP,HP;DC,HP;LE,LM,JS
+32:DC,HP,DP,MG;DC,MO;DC,DW;DC,HP,DP,MG,CP;DC,DP,RD,MS
+33:DC,CP,FS,ED;JM,ED;DC,DO,JU,FS,RW,KI;TI,DC,CP
+34:DC,AW;CR,DC;CP,TT;DC,TT;DC,CP,BT,DB,CR;DC,CP,BT,DB
+35:DC,DB,BT,CP;DC,FS;DC,JK;DC,TI;WW,UH,AW,UM;DC,AW,BT,WW,UH
+36:DC,DS;DC,DS,AS,CM;DC,DB,TT;DC,TT,DM,MJ,EM,WM
+37:BT,CR;BT,CP,DC;DC,DO;DC,DO,JU;DC,JU
+38:DC,TT,DB,BT;DC,FS,JM;DC,JU;DC,TI;DC,TI,JK;JU,DO;DO,LS,CS
+39:DC,BT;DC,JT;DC,WM;DC,AW,WW,UH,UM
+40:DC,BT,DB;DC,BT;DC,ME;DC,DP;DC,DP,ME;LE,MG
+41:DC,LS,CS;DC,BT,DB,TT;TT,HC,MH,BC,SC,ST;TT,DC,LS,CS;DC,DO;BT,LS,CS,DO
+42:DC,AW,LS,CS,DO;DC,WW,UH,DS;DC,DS,OS,AS;DB,DS;DB,AS;DC,BT;WM,EM
+43:DC,TT;DC,DO,BT,LS,CS;DC,AW,DO,BT,CP,LS,CS,TT,ST;DC,DO,LS;DC,DO
+44:DC,DO;DC,DO,PA;DC,BT;DC,DO,TT
+45:DC,DS,OS;DS,OS,AS;DC,BT,AS,OS;DC,BT,OS,DS,AS,DB;DC,BT,DB
+46:DC,RD;DC,RD,LM;LM,LE;DC,RD,MS;DC,DP;DC,DP,ME
+47:DC,DP,ME;BT,TR;DC,BT
+48:DC,DO;DC,DO,TT;DC,DO,BT
+49:DC,WM;DC,TT;TT,EM;DC,TT,WM;DC,TT,WM,BT,DB
+50:DC,DP;DP,ME;DC,ME;RD,LE,DC;DP,LE,DC
+51:DC,DP,BT;DC,DO;DC,OM;DC,DP,CP,MG;DC,HP;DC,DP,MG
+52:DC,BT,DO;DC,TT,BT,DB,WM,UH;DC,TT,BT,DB,WM,UH,AW,UM;DC,BT,WM,EM,DM,TW,MJ
+53:DC,DO,BT;DC,DO;DC,BT,DO,AW;DC,AW
+54:DC,AW,BT,WM,EM;DC,TT,BT,AW;DC,BT;DC,BT,TR;DC,BT,WM
+55:DC,CP,DP;DC,BT;DC,LE;DC,HP,JS
+56:DC,RD,MS
+57:DC,WM,EM,TW,MJ,DM,TT,AW,BT,CP,DP;DC,CP,DP;DP,ME,DC;DC,CP,MG;LE,AW;DC,LE
+58:DC,AW
+59:DC,TT,ST;DC,TT;DC,CD;DC,BT,CP,DB;ED,JM
+60:DC,BT;DC,AW;DC,AW,WW
+61:DC,TT,ST;DC,TT;DC,CK,TT;DC,CK,TT,UH,LM;LM,DW
+62:DC,BT;DC,AW;DC,BT,AW,DB,CP;DC,AW,TT,ST,DS,AS
+63:DC,AW,DP;DP,LE,ME,MG,WM,EM,MJ,DM,ML;DC,AW,DP,BT,CP
+64:DC,AW,BT,CP,DB;RD,MS;JU,CM;DS,AS,OS;DC,TT,ST;TT,HC,MC,BC;DC,AW
+* End of file "david.dat"

@@ -1,0 +1,260 @@
+% EXTENDED ABSTRACT DESCRIBING THE STANFORD GRAPHBASE --- PRELIMINARY DRAFT
+\magnification\magstep1
+\baselineskip12pt
+\parskip3pt
+\font\sc=cmcsc10 %use lower case as (Monthly)
+
+\def\happyface % new experimental version (DEK, November 88)
+{{\ooalign{\hfil\lower.06ex % a smiley face
+ \hbox{$\scriptscriptstyle\smile$}\hfil\crcr
+ \hfil\lower.7ex\hbox{\"{}}\hfil\crcr
+ \mathhexbox20D}}}
+\def\display#1:#2:#3\par{\par\hangindent #1 \noindent
+	\hbox to #1{\hfill #2 \hskip .1em}\ignorespaces#3\par}
+\def\disleft#1:#2:#3\par{\par\hangindent#1\noindent
+	 \hbox to #1{#2 \hfill \hskip .1em}\ignorespaces#3\par}
+\def\TeX{T\hbox{\hskip-.1667em\lower.424ex\hbox{E}\hskip-.125em X}}
+\def\biba{\par\parindent 40pt\hangindent 60pt}
+
+\centerline{\bf The Stanford GraphBase: A Platform for Combinatorial
+Algorithms}
+
+\bigskip
+A highly portable collection of programs and data will soon be
+available to researchers who study combinatorial algorithms and data
+structures. All files will be in the public domain, and usable with
+only one restriction: They must not be changed! A~``change file''
+mechanism will allow local customization while the master files stay
+intact.
+
+The programs are intended to be interesting in themselves as examples
+of ``literate programming.'' Thus, the Stanford GraphBase can also be
+regarded as a collection of approximately 30 essays for programmers to enjoy
+reading, whether or not they are doing algorithmic research. The
+programs are written in {\tt CWEB}, a~combination of \TeX\ and~C that
+is easy to use by anyone who knows those languages and easy to read by
+anyone familiar with the rudiments of~C. (The {\tt CWEB} system is
+itself portable and in the public domain.)
+
+Four program modules constitute the {\it kernel\/} of the GraphBase:
+
+{
+
+\biba
+{\sc gb\_$\,$flip} is a portable random number generator;
+
+\biba
+{\sc gb\_$\,$graph} defines standard data structures for graphs and
+includes routines for storage allocation;
+
+\biba
+{\sc gb\_$\,$io} reads data files and makes sure they are uncorrupted;
+
+\biba
+{\sc gb\_$\,$sort} is a portable sorting routine for 32-bit keys
+in linked lists of nodes.
+
+}
+
+\noindent
+All of the other programs rely on {\sc gb\_$\,$graph} and some subset
+of the other three parts of the kernel.
+
+A dozen or so {\it generator modules\/} construct graphs that are of
+special interest in algorithmic studies. For example {\tt
+gb\_$\,$basic} contains 12~subroutines to produce standard graphs,
+such as the graphs of queen moves on $d$-dimensional rectangular
+boards with ``wrap-around'' on selected coordinates. Another generator
+module, {\sc gb\_$\,$rand}, produces several varieties of
+random graphs.
+
+Each graph has a unique identifier that allows researchers all over
+the world to work with exactly the same graphs, even when those graphs
+are ``random.'' Repeatable experiments and standard benchmarks will
+therefore be possible and widely available.
+
+Most of the generator modules make use of {\it data sets}, which the
+author has been collecting for 20~years in an attempt to provide
+interesting and instructive examples for some forthcoming books on
+combinatorial algorithms ({\sl The Art of Computer Programming},
+Volumes 4A, 4B, and~4C). For example, one of the data sets is {\tt
+words.dat}, a~collection of 5-letter words of English that the author
+believes is ``complete'' from his own reading experience. Each word is
+accompanied by frequency counts in various standard corpuses of text,
+so that the most common terms can be singled out if desired. {\sc
+gb\_$\,$words} makes a subset of words into a graph by saying that two
+words are adjacent when they agree in~4 out of~5 positions. Thus, we
+can get from {\tt words} to {\tt graph} in seven steps:
+
+\disleft 30pt::
+{\tt words, wolds, golds, goads, grads, grade, grape,  graph.}
+
+\noindent
+This is in fact the shortest such chain obtainable from {\tt
+words.dat}.
+
+A dozen or so {\it demonstration modules\/} are also provided, as
+illustrations of how the generated graphs can be used. For example,
+the {\tt LADDERS} module is an interactive program to construct chains
+of 5-letter words like the one just exhibited, using arbitrary subsets
+of the data. If we insist on restricting our choices to the 2000 most
+common words, instead of using the entire collection of about 5700, the
+shortest path from {\tt words} to {\tt graph} turns out to have
+length~20:
+
+\disleft 30pt::
+{\tt words, lords, loads, leads, leaps, leapt, least,}
+\vskip-5pt
+\disleft 30pt::
+{\tt  lease, cease, chase, chose, chore, shore, shone,}
+\vskip-5pt
+\disleft 30pt::
+{\tt phone, prone, prove, grove, grave,
+grape, graph.}
+
+Several variations on this theme  have also been implemented: If we consider
+the distance between adjacent words to be alphabetic distance, for
+example, the shortest path from {\tt words} to {\tt graph} turns out
+to be
+ 
+\disleft 30pt::
+{\tt words} (3) {\tt woods} (16) {\tt goods} (14) {\tt goads} (3)
+{\tt grads} (14) {\tt grape} (3) {\tt graph},
+
+\noindent
+total length 65. 
+
+The {\tt LADDERS} module makes use of another GraphBase module called
+{\sc gb\_$\,$dijk}, which carries out Dijkstra's algorithm for
+shortest paths and allows the user to plug in arbitrary
+implementations of priority queues so that the performance of
+different queuing methods can be compared.
+
+The graphs produced by {\sc gb\_$\,$words} are undirected. Other
+generator modules, like {\sc gb\_$\,$roget}, produce directed graphs.
+Roget's {\sl Thesaurus\/} of 1882 classified all concepts into 1022
+categories, which we can call the vertices of a graph; an arc goes
+from~$u$ to~$v$ when category~$u$ contains a cross reference to
+category~$v$ in Roget's book. A~demonstration module called {\sc
+roget\_$\,$components} determines the strong components of graphs
+generated by {\sc gb\_$\,$roget}. This program is an exposition of
+Tarjan's algorithm for strong components and topological sorting of
+directed graphs.
+
+Similarly, 
+world literature leads to further interesting families of undirected
+graphs via
+the {\sc gb\_$\,$books} module. Five data sets {\tt anna.dat}, {\tt
+david.dat}, {\tt homer.dat}, {\tt huck.dat}, and {\tt jean.dat} give
+information about {\sl Anna Karenina}, {\sl David Copperfield}, {\sl
+The Iliad}, {\sl Huckleberry Finn}, and {\sl Les Mis\'erables\/}; as
+you might expect, the characters of each work become the vertices of a
+graph. Two vertices are adjacent if the corresponding characters
+encounter each other, in selected chapters of the book. 
+A~demonstration program called
+{\sc book\_$\,$components} finds the blocks (i.e., biconnected
+components) of these graphs using the elegant algorithm of Hopcroft
+and Tarjan.
+
+Another module, {\sc gb\_$\,$games}, generates graphs based on college
+football scores. All the games from the 1990 season
+ between America's leading 120
+teams are recorded in {\tt games.dat}; this data leads to ``cliquey''
+graphs, because most of the teams belong to leagues and they play
+every other team in their league. The overall graph is, however,
+connected. A~demonstration module called {\sc football} finds long
+chains of scores, to prove for instance that Stanford might have trounced
+Harvard by more than 2000 points if the two teams had met---because
+Stanford beat Notre Dame by~5, and Notre Dame beat Air Force by~30,
+and Air Force beat Hawaii by~24, and \dots~, and Yale beat Harvard
+by~15. (Conversely, a~similar ``proof'' also ranks Harvard over
+Stanford by more than 2000 points.) No good algorithm is known for
+finding the optimum solution to problems like this, so the data
+provides an opportunity for researchers to exhibit better and better
+solutions with better and better techniques as algorithmic
+progress is made.
+
+The {\sc gb\_$\,$econ} module generates directed graphs based on the
+flow of money between industries in the US economy. A~variety of
+graphs can be obtained, as the economy can be divided into any number of
+sectors from~2 to~80 in this model.
+ A~demonstration program {\sc econ\_$\,$order}
+attempts to rank the sectors in order from ``suppliers'' to
+``consumers,'' namely to permute rows and columns of a matrix so as to
+minimize the sum of entries above the diagonal. Again, no good
+algorithms for this problem are known; two heuristics are implemented
+for  comparison, one ``greedy'' and the other ``cautious.'' Greed
+appears to be victorious, at least in the economic sphere.
+
+The highway mileage between 128 North American cities appears in {\tt
+miles.dat}, and the {\sc gb\_$\,$miles} module generates a variety of
+graphs from~it. Of special interest is a demonstration module called
+{\sc miles\_$\,$span}, which computes the minimum spanning trees of
+graphs output by {\sc gb\_$\,$miles}. Four algorithms for minimum
+spanning trees are implemented and compared, including some that are
+theoretically appealing but do not seem to fare so well in practice.
+An approach to comparison of algorithms called ``mem counting'' is
+shown in this demonstration to be an easily implemented
+machine-independent measure of efficiency that gives a reasonably fair
+comparison between competing techniques.
+
+A generator module called {\sc gb\_$\,$raman} produces ``Ramanujan
+graphs,'' which are important because of their role as expander
+graphs, useful for communication. A~demonstration module called {\sc
+girth} computes the shortest circuit and the diameter of Ramanujan
+graphs. 
+Notice that some graphs, like those produced by {\sc gb\_$\,$basic} or
+{\sc gb\_$\,$raman}, have a rigid mathematical structure; others, like
+those produced by {\sc gb\_$\,$roget} or {\sc gb\_$\,$miles}, are more
+``organic'' in nature. It is interesting and important to test
+algorithms on both kinds of graphs, in order to see if there is any
+significant difference in performance.
+
+A generator module called {\sc gb\_$\,$gates} produces graphs of logic
+circuits. One family of graphs is equivalent to a simple {\sc risc}
+chip, a~programmable microcomputer with a variable number of registers
+and a variable number of bits per word. Using such a ``meta-network''
+of gates, algorithms for design automation can be tested for a range
+of varying parameters. A~demonstration module {\sc take\_$\,$risc}
+simulates the execution of the chip on a sample program. Another
+meta-network of gates will perform parallel multiplication of $m$-bit
+numbers by $n$-bit numbers or by an $n$-bit constant; the {\sc
+multiply} module demonstrates this network.
+
+Planar graphs are generated by {\sc gb\_$\,$plane}, which includes
+among other things an implementation of the best currently known
+algorithm for Delaunay triangulation.
+
+Pixel data can lead to interesting bipartite graphs. Leonardo's {\sl
+Giaconda\/} is represented by {\tt mona.dat}, an array of pixels that
+is converted into graphs of different kinds by {\sc gb\_$\,$mona}.
+A~demonstration routine {\sc assign\_$\,$mona} solves the assignment
+problem by choosing one pixel in each row and in each column so that
+the total brightness of selected pixels is maximized. Although the
+assignment problem being solved here has no relevance whatever to art
+criticism or art appreciation, it does have great pedagogical value,
+because there is probably no better way to understand the
+characteristics of a large array of numbers than to perceive the array
+as an image.
+
+This lecture might well have been called ``Fun and games with the
+Stanford GraphBase,'' because the demonstration programs are great
+toys to play with. Indeed, the author firmly believes that the best
+serious work is also good fun, and we shouldn't apologize if we enjoy
+doing research.
+
+The Stanford GraphBase is now being beta-tested, and it should be
+released in 1993. A~book about it, containing in particular all the
+programs together with indexes and typographic aids to the reader,
+will also be published in 1993. A~module called {\sc gb\_$\,$save}
+converts GraphBase graphs to and from an ASCII format that
+readily interfaces with other systems for graph manipulation.
+
+
+\bigskip
+\rightline{\sl ---\vtop{\hbox{Donald E. Knuth}
+\hbox{Stanford University}
+\hbox{March 31, 1992}}}
+
+\bye
+
