@@ -71,10 +71,6 @@ of all arcs having a common source and destination.
 
 The vertices are named simply |"0"|, |"1"|, |"2"|, and so on.
 
-Warning: Users need to initialize the random number generator before
-calling |random_graph|, or any other GraphBase procedure that
-consumes random numbers. (See {\sc GB\_\,FLIP}.)
-
 @ Examples: |random_graph(1000,5000,0,0,0,NULL,NULL,1,1,0)| creates a random
 undirected graph with 1000 vertices and 5000 edges (hence 10000 arcs) of
 length~1, having

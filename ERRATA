@@ -244,11 +244,6 @@ can be found in file gb_raman.w in the current sources
 
 Page 376, line 12: change "$p-a^2-2c^2$" to "$p-a^2-b^2-2c^2$"
 
-Page 385, new paragraph to follow line 4:
-    Warning: Users need to initialize the random number generator before
-  calling |random_graph|, or any other GraphBase procedure that
-  consumes random numbers. (See GB_FLIP.)
-
 Page 386, line 21: change (25,m,...) to (31,m,...)
 
 Page 387, line 14: change "of of" to "of"

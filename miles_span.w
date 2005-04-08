@@ -485,7 +485,7 @@ operations |init_queue(d)|, |enqueue(v,d)|, |requeue(v,d)|, and
 algorithm for shortest paths, described there, is remarkably similar
 to Jarn{\'\i}k and Prim's algorithm for minimum spanning trees; in
 fact, Dijkstra discovered the latter algorithm independently, at the
-@^Dijkstra, Edsger Wijbe@>
+@^Dijkstra, Edsger Wybe@>
 same time as he came up with his procedure for shortest paths.
 
 As in {\sc GB\_\,DIJK}, we define pointers to priority queue subroutines

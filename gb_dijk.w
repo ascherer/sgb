@@ -12,7 +12,7 @@ version of Dijkstra's algorithm, a general procedure for determining
 shortest paths in a directed graph that has nonnegative arc lengths
 [E.~W. Dijkstra, ``A note on two problems in connexion with graphs,''
 {\sl Numerische Mathematik\/ \bf1} (1959), 269--271].
-@^Dijkstra, Edsger Wijbe@>
+@^Dijkstra, Edsger Wybe@>
 
 If |hh| is null, the length of
 every arc in |gg| must be nonnegative. If |hh| is non-null, |hh| should be
