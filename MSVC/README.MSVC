@@ -29,8 +29,8 @@ compiler, which is the mandatory tool for using the files described here.
 `Installed' means that all source files from the original archive are present
 in a root directory (denoted by `.' in this file) and, if appropriate, one or
 more subdirectories, on your machine.  If you don't have SGB yet, go out and
-get it from labrea.stanford.edu, where it resides in the directory `/pub/sgb',
-or possibly from some other host location.
+get it from ftp.cs.stanford.edu, where it resides in the directory
+`~ftp/pub/sgb', or possibly from some other host location.
 
 The original source files are totally left untouched (as this is expressly
 prohibited by the copyright notice included in every single file of SGB).  For
@@ -77,7 +77,7 @@ yet.  Some points are overwritten by what follows.  Details of the
 installation process are described in ./README, though.
 
 Then install CWEB (version 3.0 or greater), which can be found in various
-archives; the master files reside at labrea.stanford.edu; a complete Win32
+archives; the master files reside at ftp.cs.stanford.edu; a complete Win32
 installation of CWEB can be found at http://www.literateprogramming.com.
 
 Now launch Microsoft Visual C++ 6.0 by double-clicking on the file "sgb.dsw".

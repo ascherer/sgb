@@ -405,7 +405,10 @@ for characters.
   for (k=1; !gb_eof(); k++) {
     gb_string(str_buf,':'); /* read the chapter number */
     if (str_buf[0]=='&') k--;
-    else chap_name[k]=gb_save_string(str_buf);
+    else {
+      if (str_buf[strlen(str_buf)-1]=='\n') str_buf[strlen(str_buf)-1]='\0';
+      chap_name[k]=gb_save_string(str_buf);
+    }
     if (k>=first_chapter && k<=last_chapter) {@+register Vertex *u=chap_base+k;
       if (str_buf[0]!='&') {
         u->name=chap_name[k];

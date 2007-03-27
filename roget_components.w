@@ -370,9 +370,9 @@ strength of the claimed component easily.
 @ After all the strong components have been found, we can also compute the
 relations between them, without mentioning any cross-connection more than
 once. In fact, we built the |settled_stack| precisely so that this task
-could be done easily without sorting or searching. If only the strong
-components themselves were of interest, this part of the algorithm wouldn't
-be necessary.
+could be done easily without sorting or searching. This part of the algorithm
+wouldn't be necessary if we were interested only in the strong
+components themselves.
 
 For this step we use the name |arc_from| for the field we previously
 called |untagged|. The trick here relies on the fact that all vertices of the

@@ -83,7 +83,7 @@ The standard Stanford GraphBase consists of the following files:
 TO INSTALL THESE PROGRAMS
 
 First install CWEB (version 3.0 or greater), which can be found in various
-archives; the master files reside at labrea.stanford.edu.  Then, on a
+archives; the master files reside at ftp.cs.stanford.edu.  Then, on a
 UNIX-like system, edit the Makefile as Makefile instructs you, take a deep
 breath, and "make tests". After you get the message
       Congratulations --- the tests have all been passed
@@ -215,7 +215,7 @@ IF YOU LIKE THE STANFORD GRAPHBASE send thanks to sgb@cs.stanford.edu.
 
 ******LATE-BREAKING NEWS:
 
-* The master sources at labrea.stanford.edu contain all the files listed above
+* The master sources at ftp.cs.stanford.edu contain all the files listed above
 (uncompressed), as well as a compressed file sgb.tar.gz that generates them on
 a UNIX system if you say "zcat sgb.tar.gz | tar xvpf -" using GNU's excellent
 new compression/decompression scheme.

@@ -5,6 +5,10 @@ I decided to change to the correct codes, since this won't affect any
 of the data that's critical for the graph structure. Please replace your
 copies of miles.dat (and cities.texmap) if they are dated earlier than 1995.
 
+Similarly, I found an embarrassing typo ("Monsiuer" for "Monsieur") in
+the file jean.dat; and there was a spurious white pixel at the very
+bottom right corner of lisa.dat; those glitches were corrected in March 2007.
+
 ----------------------------------------
 
 Here is a list of all significant changes that appeared in the third
