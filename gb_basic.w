@@ -693,10 +693,10 @@ their intersection has a cardinality that matches one of the bits in
 
 For example, suppose $n=3$ and |(n0,n1,n2,n3)=(2,2,2,0)|. Then the vertices
 are the 3-element submultisets of $\{0,0,1,1,2,2\}$, namely
-$$\{0,0,1\},\quad \{0,0,2\},\quad \{0,1,2\},\quad
+$$\{0,0,1\},\quad \{0,0,2\},\quad \{0,1,1\},\quad \{0,1,2\},\quad
 \{0,2,2\},\quad \{1,1,2\},\quad \{1,2,2\},$$
 which are represented by the respective vectors
-$$(2,1,0),\quad (2,0,1),\quad (1,1,1),\quad
+$$(2,1,0),\quad (2,0,1),\quad (1,2,0),\quad (1,1,1),\quad
 (1,0,2),\quad (0,2,1),\quad (0,1,2).$$
 The intersection of multisets represented by $(x_0,x_1,\ldots,x_d)$ and
 $(y_0,y_1,\ldots,y_d)$ is $$\bigl(\min(x_0,y_0),\min(x_1,y_1),\ldots,
@@ -705,7 +705,8 @@ in both multisets being intersected. If now |size_bits=3|, the
 multisets will be considered adjacent whenever their
 intersection contains exactly 0 or~1 elements, because $3=2^0+2^1$.
 The vertices adjacent to $\{0,0,1\}$, for example, will be
-$\{0,2,2\}$ and $\{1,2,2\}$. In this case, every pair of submultisets
+$\{0,2,2\}$, $\{1,1,2\}$,
+ and $\{1,2,2\}$. In this case, every pair of submultisets
 has a nonempty intersection, so the same graph would be obtained
 if |size_bits=2|.
 

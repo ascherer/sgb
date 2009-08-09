@@ -260,7 +260,7 @@ $$\vbox{\offinterlineskip
  \\15&\\14&\\13&\\12&\\11&\\10&\\9&\\8&\\7&\\6&\\5&\\4&\\3&\\2&\\1&%
   \\0&\omit\cr}}$$
 The \.{SRC} and \.A fields specify a ``source'' value.
-If $\.A=0$, the source is \.{SRC}, treated as a 16-bit signed
+If $\.A=0$, the source is \.{SRC}, treated as a 4-bit signed
 number between $-8$ and $+7$ inclusive.
 If $\.A=1$, the source is the contents of register \.{DST} plus the
 (signed) value of \.{SRC}. If $\.A=2$, the source is the contents of register
