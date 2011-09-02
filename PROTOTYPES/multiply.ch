@@ -8,6 +8,12 @@ int main(@t\1\1@>
   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
 @z
 
+@x l.183
+  printf("Please try another seed value; %d makes the answer zero!\n",seed);
+@y
+  printf("Please try another seed value; %ld makes the answer zero!\n",seed);
+@z
+
 @x l.200
 decimal_to_binary(x,s,n)
   char *x; /* decimal string */

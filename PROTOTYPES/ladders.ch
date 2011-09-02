@@ -15,6 +15,18 @@ long freq_cost(v)
 long freq_cost(Vertex *v)
 @z
 
+@x l.253
+quit_if(gg==NULL,no_room+5);  /* out of memory */
+@y
+quit_if(gg==NULL,no_room+5L);  /* out of memory */
+@z
+
+@x l.259
+quit_if(gb_trouble_code,no_room+6); /* out of memory */
+@y
+quit_if(gb_trouble_code,no_room+6L); /* out of memory */
+@z
+
 @x l.284
 long alph_dist(p,q)
   register char *p, *q;
