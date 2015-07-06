@@ -140,6 +140,12 @@ static void pr_gate(v)
 static void pr_gate(Vertex *v)
 @z
 
+@x l.1112
+    printf(a->tip->name);
+@y
+    fputs(a->tip->name,stdout);
+@z
+
 @x l.1117
 void print_gates(g)
   Graph *g;
