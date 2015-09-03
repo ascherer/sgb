@@ -4,6 +4,12 @@
 int main(void)
 @z
 
+@x
+if (i=random_lengths(g,0L,10L,12L,dst,2L))
+@y
+if ((i=random_lengths(g,0L,10L,12L,dst,2L)))
+@z
+
 @x l.165
 static void pr_vert();
    /* a subroutine for printing a vertex is declared below */

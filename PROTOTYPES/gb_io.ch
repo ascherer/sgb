@@ -38,7 +38,7 @@ char imap_chr(long d)
 long imap_ord(c)
   char c;
 @y
-long imap_ord(char c)
+long imap_ord(unsigned char c)
 @z
 
 @x l.206
@@ -46,13 +46,19 @@ extern char imap_chr(); /* the character that maps to a given character */
 extern long imap_ord(); /* the ordinal number of a given character */
 @y
 extern char imap_chr(long); /* the character that maps to a given character */
-extern long imap_ord(char); /* the ordinal number of a given character */
+extern long imap_ord(unsigned char); /* the ordinal number of a given character */
 @z
 
 @x l.213
 static void icode_setup()
 @y
 static void icode_setup(void)
+@z
+
+@x
+  for (p=imap,k=0; *p; p++,k++) icode[*p]=k;
+@y
+  for (p=imap,k=0; *p; p++,k++) icode[(unsigned char)*p]=k;
 @z
 
 @x l.225
@@ -126,11 +132,23 @@ long gb_digit(d)
 long gb_digit(char d)
 @z
 
+@x
+  if (imap_ord(*cur_pos)<d) return icode[*cur_pos++];
+@y
+  if (imap_ord(*cur_pos)<d) return icode[(unsigned char)*cur_pos++];
+@z
+
 @x l.322
 unsigned long gb_number(d)
     char d;
 @y
 unsigned long gb_number(char d)
+@z
+
+@x
+    a=a*d+icode[*cur_pos++];
+@y
+    a=a*d+icode[(unsigned char)*cur_pos++];
 @z
 
 @x l.353

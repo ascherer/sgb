@@ -25,3 +25,14 @@ node *new_node(@t\1\1@>
   node *x, /* an old node that the new node will call |prev| */
   long d@t\2\2@>) /* incremental change to |tot_len| */
 @z
+
+@x
+      if (a->del>d && a->tip->valid==v)
+        if (a->tip==goal) last_arc=a;
+        else best_arc=a,d=a->del;
+@y
+      if (a->del>d && a->tip->valid==v) {
+        if (a->tip==goal) last_arc=a;
+        else best_arc=a,d=a->del;
+      }
+@z

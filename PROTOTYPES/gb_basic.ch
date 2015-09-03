@@ -54,6 +54,13 @@ Graph *board(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+  @<Normalize the board-size parameters@>;
+@y
+  (void) s; (void) i;
+  @<Normalize the board-size parameters@>;
+@z
+
 @x l.493
 Graph *simplex(n,n0,n1,n2,n3,n4,directed)
   unsigned long n; /* the constant sum of all coordinates */
@@ -143,6 +150,13 @@ Graph *complement(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+  if (g==NULL) panic(missing_operand); /* where's |g|? */
+@y
+  (void) s; (void) d; (void) k; (void) j; (void) i;
+  if (g==NULL) panic(missing_operand); /* where's |g|? */
+@z
+
 @x l.1642
 Graph *gunion(g,gg,multi,directed)
   Graph *g,*gg; /* graphs to be united */
@@ -153,6 +167,15 @@ Graph *gunion(@t\1\1@>
   Graph *g,Graph *gg, /* graphs to be united */
   long multi, /* should we reproduce multiple arcs? */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+  if (g==NULL || gg==NULL) panic(missing_operand);
+    /* where are |g| and |gg|? */
+@y
+  (void) s; (void) d; (void) k; (void) j; (void) i;
+  if (g==NULL || gg==NULL) panic(missing_operand);
+    /* where are |g| and |gg|? */
 @z
 
 @x l.1723
@@ -167,6 +190,13 @@ Graph *intersection(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+@y
+  (void) s; (void) d; (void) k; (void) j; (void) i;
+  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+@z
+
 @x l.1836
 Graph *lines(g,directed)
   Graph *g; /* graph whose lines will become vertices */
@@ -175,6 +205,13 @@ Graph *lines(g,directed)
 Graph *lines(@t\1\1@>
   Graph *g, /* graph whose lines will become vertices */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+  if (g==NULL) panic(missing_operand); /* where is |g|? */
+@y
+  (void) s; (void) d; (void) k; (void) j; (void) i;
+  if (g==NULL) panic(missing_operand); /* where is |g|? */
 @z
 
 @x l.2010
@@ -187,6 +224,13 @@ Graph *product(@t\1\1@>
   Graph *g,Graph *gg, /* graphs to be multiplied */
   long type, /* |cartesian|, |direct|, or |strong| */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+@y
+  (void) s; (void) d; (void) k; (void) j; (void) i;
+  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
 @z
 
 @x l.2170
@@ -236,4 +280,11 @@ Graph *induced(@t\1\1@>
   long self, /* should self-loops be permitted? */
   long multi, /* should multiple arcs be permitted? */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+  if (g==NULL) panic(missing_operand); /* where is |g|? */
+@y
+  (void) s; (void) d; (void) i;
+  if (g==NULL) panic(missing_operand); /* where is |g|? */
 @z

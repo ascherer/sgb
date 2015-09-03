@@ -35,6 +35,30 @@ Graph *random_graph(@t\1\1@>
   long seed@t\2\2@>) /* random number seed */
 @z
 
+@x
+  if (multi<=0)
+    @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
+@y
+  if (multi<=0) {
+    @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
+  }
+@z
+
+@x
+    if (a->tip==v)
+@y
+    if (a->tip==v) {
+@z
+
+@x
+        goto done;
+      }
+@y
+        goto done;
+      }
+    }
+@z
+
 @x l.369
 static magic_entry *walker(n,nn,dist,g)
   long n; /* length of |dist| vector */
