@@ -30,8 +30,10 @@ extern Vertex *(*del_min)(void);
 @x l.162
 static long dummy(v)
   Vertex *v;
+{@+return 0;@+}
 @y
 static long dummy(Vertex *v)
+{@+(void)v;return 0;@+}
 @z
 
 @x l.169

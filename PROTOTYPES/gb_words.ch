@@ -34,6 +34,12 @@ static long iabs(x)
 static long iabs(long x)
 @z
 
+@x
+if (n==0 || nn<n)
+@y
+if (n==0 || nn<(long)n)
+@z
+
 @x l.508
 @p Vertex *find_word(q,f)
   char *q;

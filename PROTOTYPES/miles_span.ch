@@ -51,8 +51,11 @@ unsigned long jar_pr(Graph *g)
 @x l.610
 void init_heap(d) /* makes the heap empty */
   long d;
+{
 @y
 void init_heap(long d) /* makes the heap empty */
+{
+  (void) d;
 @z
 
 @x l.624
@@ -81,11 +84,19 @@ Vertex *del_heap()
 Vertex *del_heap(void)
 @z
 
+@x
+  register unsigned long j; /* child of that hole */
+@y
+  register long j; /* child of that hole */
+@z
+
 @x l.797
 void init_F_heap(d)
   long d;
+{@+F_heap=NULL;@+}
 @y
 void init_F_heap(long d)
+{@+(void)d;F_heap=NULL;@+}
 @z
 
 @x l.860

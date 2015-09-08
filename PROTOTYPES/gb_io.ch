@@ -30,7 +30,7 @@ char imap_chr(d)
 @y
 char imap_chr(long d)
 {
-  return((char)(d<0 || d>strlen(imap)? '\0': imap[d]));
+  return((char)(d<0 || d>(long)strlen(imap)? '\0': imap[d]));
 }
 @z
 
@@ -39,6 +39,12 @@ long imap_ord(c)
   char c;
 @y
 long imap_ord(unsigned char c)
+@z
+
+@x
+  return (c<0||c>255)? unexpected_char: icode[c];
+@y
+  return icode[c];
 @z
 
 @x l.206

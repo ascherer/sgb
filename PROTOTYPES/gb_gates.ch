@@ -40,6 +40,13 @@ Graph *risc(unsigned long regs)
   /* number of registers supported */
 @z
 
+@x
+register long k,r; /* all-purpose indices */
+@y
+register long k; /* all-purpose indices */
+register unsigned long r; /* all-purpose indices */
+@z
+
 @x l.412
 static Vertex* new_vert(t)
   char t; /* the type of the new gate */
@@ -102,6 +109,12 @@ static Vertex* make_xor(u,v)
 static Vertex* make_xor(Vertex *u,Vertex *v)
 @z
 
+@x
+@ @d first_of(n,t) new_vert(t);@+for (k=1;k<n;k++)@+new_vert(t);
+@y
+@ @d first_of(n,t) new_vert(t);@+for (k=1;k<(long)n;k++)@+new_vert(t);
+@z
+
 @x l.876
 static void make_adder(n,x,y,z,carry,add)
   unsigned long n; /* number of bits */
@@ -118,6 +131,12 @@ static void make_adder(@t\1\1@>
   char add@t\2\2@>) /* should we add or subtract? */
 @z
 
+@x
+  for (;k<n;k++) {
+@y
+  for (;k<(long)n;k++) {
+@z
+
 @x l.992
 long run_risc(g,rom,size,trace_regs)
   Graph *g; /* graph output by |risc| */
@@ -131,6 +150,27 @@ long run_risc(@t\1\1@>
   unsigned long size, /* length of |rom| vector */
   unsigned long trace_regs@t\2\2@>)
     /* if nonzero, this many registers will be traced */
+@z
+
+@x
+  register long k,r; /* general-purpose indices */
+@y
+  register long k; /* general-purpose indices */
+  register unsigned long r; /* general-purpose indices */
+@z
+
+@x
+  r=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
+  if (r<0) return r; /* not a valid gate graph! */
+@y
+  k=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
+  if (k<0) return k; /* not a valid gate graph! */
+@z
+
+@x
+  for (r=0;r<trace_regs;r++) printf(" r%-2ld ",r); /* register names */
+@y
+  for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
 @z
 
 @x l.1097
@@ -168,6 +208,102 @@ Graph* prod(unsigned long m,unsigned long n)
   /* lengths of the binary numbers to be multiplied */
 @z
 
+@x
+while (k<m_plus_n) {
+@y
+while (k<(long)m_plus_n) {
+@z
+
+@x
+for (j=0; j<m; j++) {
+@y
+for (j=0; j<(long)m; j++) {
+@z
+
+@x
+  for (k=0; k<n; k++)
+@y
+  for (k=0; k<(long)n; k++)
+@z
+
+@x
+  for (k=j+n; k<m_plus_n; k++) {
+@y
+  for (k=j+n; k<(long)m_plus_n; k++) {
+@z
+
+@x
+@d a_pos(j) (j<m? j+1: m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
+@y
+@d a_pos(j) ((unsigned long)(j)<m? (unsigned long)(j+1): m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
+@z
+
+@x
+for (j=0; j<m-2; j++) {
+@y
+for (j=0; j<(long)m-2; j++) {
+@z
+
+@x
+  for (k=0; k<m_plus_n; k++)
+@y
+  for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+  for (k=0; k<m_plus_n; k++)
+@y
+  for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+  for (k=0; k<m_plus_n; k++)
+@y
+  for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+  for (k=0; k<m_plus_n; k++)
+@y
+  for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+  for (k=0; k<m_plus_n-1; k++)
+@y
+  for (k=0; k<(long)m_plus_n-1; k++)
+@z
+
+@x
+for (k=0; k<m_plus_n; k++)
+@y
+for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+for (k=0; k<m_plus_n; k++)
+@y
+for (k=0; k<(long)m_plus_n; k++)
+@z
+
+@x
+for (i=3,j=2,k=3,l=3; l<=m_plus_n; l++) {
+@y
+for (i=3,j=2,k=3,l=3; l<=(long)m_plus_n; l++) {
+@z
+
+@x
+for (k=2;k<m_plus_n;k++) {
+@y
+for (k=2;k<(long)m_plus_n;k++) {
+@z
+
+@x
+for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
+@y
+for (k=0;k<(long)m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
+@z
+
 @x l.1897
 Graph *partial_gates(g,r,prob,seed,buf)
   Graph *g; /* generalized gate graph */
@@ -185,4 +321,10 @@ Graph *partial_gates(@t\1\1@>
   long seed, /* seed value for random number generation */
   char *buf@t\2\2@>)
     /* optional parameter for information about partial assignment */
+@z
+
+@x
+    case 'I': if ((gb_next_rand()>>15)>=prob) {
+@y
+    case 'I': if ((gb_next_rand()>>15)>=(long)prob) {
 @z

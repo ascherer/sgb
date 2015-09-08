@@ -38,11 +38,45 @@ long *lisa(@t\1\1@>
     /* where to allocate the matrix that will be output */
 @z
 
+@x
+for (l=lam=0; l<n; l++) {@+register long sum=0;
+@y
+for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
+@z
+
+@x
+for (k=kap=0; k<m;k++) {
+  for (l=0;l<n;l++) *(out_row+l)=0; /* clear the vector of sums */
+@y
+for (k=kap=0; k<(long)m;k++) {
+  for (l=0;l<(long)n;l++) *(out_row+l)=0; /* clear the vector of sums */
+@z
+
+@x
+  for (l=0; l<n; l++,out_row++) /* note that |out_row| will advance by~|n| */
+@y
+  for (l=0; l<(long)n; l++,out_row++) /* note that |out_row| will advance by~|n| */
+@z
+
 @x l.286
 static long na_over_b(n,a,b)
   long n,a,b;
 @y
 static long na_over_b(long n,long a,long b)
+@z
+
+@x
+if (*out_row<=d0) *out_row=0;
+else if (*out_row>=d1) *out_row=d;
+@y
+if (*out_row<=(long)d0) *out_row=0;
+else if (*out_row>=(long)d1) *out_row=d;
+@z
+
+@x
+for (i=0;i<m0;i++)
+@y
+for (i=0;i<(long)m0;i++)
 @z
 
 @x l.405
@@ -64,6 +98,40 @@ static long na_over_b(long n,long a,long b)
     /* and from columns $[|n0|\,.\,.\,|n1|)$ */
   unsigned long d0,unsigned long d1@t\2\2@>)
     /* lower and upper threshold of raw pixel scores */
+@z
+
+@x
+    if (k<m) {
+@y
+    if (k<(long)m) {
+@z
+
+@x
+        for (j=l; f[j]!=j; j=f[j]) ; /* find the first element */
+@y
+        for (j=l; f[j]!=(unsigned long)j; j=f[j]) ; /* find the first element */
+@z
+
+@x
+      }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
+@y
+      }@+else if (f[l]==(unsigned long)l) *apos=-1-*apos,regs++; /* new region found */
+@z
+
+@x
+    if (k>0&&l<n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+@y
+    if (k>0&&l<(long)n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+@z
+
+@x
+for (l=0;l<n;l++) u[l]=NULL;
+for (k=0,apos=a,aloc=0;k<m;k++)
+  for (l=0;l<n;l++,apos++,aloc++) {
+@y
+for (l=0;l<(long)n;l++) u[l]=NULL;
+for (k=0,apos=a,aloc=0;k<(long)m;k++)
+  for (l=0;l<(long)n;l++,apos++,aloc++) {
 @z
 
 @x l.562
@@ -92,4 +160,22 @@ static void adjac(Vertex *u,Vertex *v)
     /* threshold defining adjacency */
   long c@t\2\2@>)
     /* should we prefer dark pixels to light pixels? */
+@z
+
+@x
+for (k=0,v=new_graph->vertices;k<m;k++,v++) {
+@y
+for (k=0,v=new_graph->vertices;k<(long)m;k++,v++) {
+@z
+
+@x
+for (l=0;l<n;l++,v++) {
+@y
+for (l=0;l<(long)n;l++,v++) {
+@z
+
+@x
+    if (c?*apos<thresh:*apos>=thresh) {
+@y
+    if (c?*apos<(long)thresh:*apos>=(long)thresh) {
 @z

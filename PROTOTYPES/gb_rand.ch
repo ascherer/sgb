@@ -36,6 +36,12 @@ Graph *random_graph(@t\1\1@>
 @z
 
 @x
+for (k=0; k<n; k++) {
+@y
+for (k=0; k<(long)n; k++) {
+@z
+
+@x
   if (multi<=0)
     @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
 @y
@@ -57,6 +63,18 @@ Graph *random_graph(@t\1\1@>
         goto done;
       }
     }
+@z
+
+@x
+    while (nn<n) nn+=nn, kk--;
+@y
+    while (nn<(long)n) nn+=nn, kk--;
+@z
+
+@x
+    while (nn<n) nn+=nn, kk--;
+@y
+    while (nn<(long)n) nn+=nn, kk--;
 @z
 
 @x l.369
@@ -96,6 +114,18 @@ Graph *random_bigraph(@t\1\1@>
     /* bounds on random lengths */
   long seed@t\2\2@>)
     /* random number seed */
+@z
+
+@x
+  else for (k=0; k<n1; k++) *q++=(0x40000000+k)/n1;
+@y
+  else for (k=0; k<(long)n1; k++) *q++=(0x40000000+k)/n1;
+@z
+
+@x
+  else for (k=0; k<n2; k++) *q++=(0x40000000+k)/n2;
+@y
+  else for (k=0; k<(long)n2; k++) *q++=(0x40000000+k)/n2;
 @z
 
 @x l.523

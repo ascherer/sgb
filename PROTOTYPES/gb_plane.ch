@@ -31,6 +31,12 @@ Graph *plane(@t\1\1@>
     /* random number seed */
 @z
 
+@x
+for (k=0,v=new_graph->vertices; k<n; k++,v++) {
+@y
+for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
+@z
+
 @x l.226
 void delaunay(g,f)
   Graph *g; /* vertices in the plane */
@@ -47,6 +53,12 @@ static void new_euclid_edge(u,v)
   Vertex *u,*v;
 @y
 static void new_euclid_edge(Vertex *u,Vertex *v)
+@z
+
+@x
+  if ((gb_next_rand()>>15)>=gprob) {
+@y
+  if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
 @z
 
 @x l.283
@@ -116,6 +128,13 @@ static void flip(arc *c,arc *d,arc *e,@|
   node *xp,node *xpp)
 @z
 
+@x
+{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+@y
+{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+  (void) t; (void) tp;
+@z
+
 @x l.931
 Graph *plane_miles(n,north_weight,west_weight,pop_weight,extend,prob,seed)
   unsigned long n; /* number of vertices desired */
@@ -148,4 +167,10 @@ static void new_mile_edge(u,v)
   Vertex *u,*v;
 @y
 static void new_mile_edge(Vertex *u,Vertex *v)
+@z
+
+@x
+  if ((gb_next_rand()>>15)>=gprob) {
+@y
+  if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
 @z

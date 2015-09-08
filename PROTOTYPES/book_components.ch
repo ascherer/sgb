@@ -15,15 +15,5 @@ char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
 @y
 char *vertex_name(@t\1\1@> /* return (as a string) the name of vertex |v| */
   Vertex *v,
-  char i@t\2\2@>) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
-@z
-
-@x
-  code_name[i][0]=imap_chr(v->short_code/36);
-  code_name[i][1]=imap_chr(v->short_code%36);
-  return code_name[i];
-@y
-  code_name[(unsigned char)i][0]=imap_chr(v->short_code/36);
-  code_name[(unsigned char)i][1]=imap_chr(v->short_code%36);
-  return code_name[(unsigned char)i];
+  unsigned char i@t\2\2@>) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
 @z

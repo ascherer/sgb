@@ -73,6 +73,50 @@ Graph *simplex(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+  if (n0>n) n0=n;
+@y
+  if (n0>(long)n) n0=n;
+@z
+
+@x
+    if (n1>n) n1=n;
+@y
+    if (n1>(long)n) n1=n;
+@z
+
+@x
+      if (n2>n) n2=n;
+@y
+      if (n2>(long)n) n2=n;
+@z
+
+@x
+        if (n3>n) n3=n;
+@y
+        if (n3>(long)n) n3=n;
+@z
+
+@x
+        else {@+if (n4>n) n4=n;
+@y
+        else {@+if (n4>(long)n) n4=n;
+@z
+
+@x
+  for (k=1;k<=n;k++) {
+@y
+  for (k=1;k<=(long)n;k++) {
+@z
+
+@x
+if (yy[0]>=n) {
+  k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
+@y
+if (yy[0]>=(long)n) {
+  k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
+@z
+
 @x l.732
 Graph *subsets(n,n0,n1,n2,n3,n4,size_bits,directed)
   unsigned long n; /* the number of elements in the multiset */
@@ -87,6 +131,20 @@ Graph *subsets(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+if (yy[0]>=n) {
+  k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
+@y
+if (yy[0]>=(long)n) {
+  k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
+@z
+
+@x
+    long ss=0; /* the number of elements common to |u| and |v| */
+@y
+    unsigned long ss=0; /* the number of elements common to |u| and |v| */
+@z
+
 @x l.886
 Graph *perms(n0,n1,n2,n3,n4,max_inv,directed)
   long n0,n1,n2,n3,n4; /* composition of the multiset */
@@ -97,6 +155,30 @@ Graph *perms(@t\1\1@>
   long n0,long n1,long n2,long n3,long n4, /* composition of the multiset */
   unsigned long max_inv, /* maximum number of inversions */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+{@+register long ss; /* max inversions known to be possible */
+@y
+{@+register unsigned long ss; /* max inversions known to be possible */
+@z
+
+@x
+  for (k=1,nverts=1;k<=max_inv;k++) {
+@y
+  for (k=1,nverts=1;k<=(long)max_inv;k++) {
+@z
+
+@x
+  for (i=k,ii=0;i<=max_inv;i++,ii++) {
+@y
+  for (i=k,ii=0;i<=(long)max_inv;i++,ii++) {
+@z
+
+@x
+  if (m<max_inv && ytab[k]<k-1)
+@y
+  if (m<(long)max_inv && ytab[k]<k-1)
 @z
 
 @x l.1037
@@ -124,6 +206,24 @@ Graph *parts(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x
+  for (k=1;k<=max_parts;k++) {
+@y
+  for (k=1;k<=(long)max_parts;k++) {
+@z
+
+@x
+    for (j=k,i=0;j<=n;i++,j++) {
+@y
+    for (j=k,i=0;j<=(long)n;i++,j++) {
+@z
+
+@x
+if (d<max_parts) {
+@y
+if (d<(long)max_parts) {
+@z
+
 @x l.1290
 Graph *binary(n,max_height,directed)
   unsigned long n; /* the number of internal nodes */
@@ -134,6 +234,26 @@ Graph *binary(@t\1\1@>
   unsigned long n, /* the number of internal nodes */
   unsigned long max_height, /* maximum height of a leaf */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x
+    for (k=2;k<=n;k++) nn[k]=0;
+    for (j=2;j<=max_height;j++)
+@y
+    for (k=2;k<=(long)n;k++) nn[k]=0;
+    for (j=2;j<=(long)max_height;j++)
+@z
+
+@x
+    for (j=2;j<=max_height;j++) {
+@y
+    for (j=2;j<=(long)max_height;j++) {
+@z
+
+@x
+  if (ltab[0]>n) {
+@y
+  if (ltab[0]>(long)n) {
 @z
 
 @x l.1545
