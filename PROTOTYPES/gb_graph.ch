@@ -58,14 +58,18 @@ void make_compound_id(g,s1,gg,s2) /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
   char *s1; /* string for the beginning of the new |id| */
   Graph *gg; /* graph whose |id| is to be copied */
   char *s2; /* string for the end of the new |id| */
-{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
 @y
 void make_compound_id(@t\1\1@> /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
   Graph *g, /* graph whose |id| is to be set */
   char *s1, /* string for the beginning of the new |id| */
   Graph *gg, /* graph whose |id| is to be copied */
   char *s2@t\2\2@>) /* string for the end of the new |id| */
-{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
+@z
+
+@x l.495
+  if (strlen(tmp)<avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
+@y
+  if (strlen(tmp)<(siz_t)avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
 @z
 
 @x l.498
@@ -77,7 +81,6 @@ void make_double_compound_id(g,s1,gg,s2,ggg,s3)
   char *s2; /* string for the middle of the new |id| */
   Graph *ggg; /* second graph whose |id| is to be copied */
   char *s3; /* string for the end of the new |id| */
-{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
 @y
 void make_double_compound_id(@t\1\1@>
     /* |sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
@@ -87,7 +90,12 @@ void make_double_compound_id(@t\1\1@>
   char *s2, /* string for the middle of the new |id| */
   Graph *ggg, /* second graph whose |id| is to be copied */
   char *s3@t\2\2@>) /* string for the end of the new |id| */
-{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
+@z
+
+@x l.509
+  if (strlen(gg->id)+strlen(ggg->id)<avail)
+@y
+  if (strlen(gg->id)+strlen(ggg->id)<(siz_t)avail)
 @z
 
 @x l.549
