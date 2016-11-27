@@ -10,3 +10,9 @@ int main(@t\1\1@>
 {
   (void) argv;
 @z
+
+@x l.119
+unsigned long memry[memry_size]={
+@y
+unsigned long memry[memry_size]={@t\1\1@>
+@z
