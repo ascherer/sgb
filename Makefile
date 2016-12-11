@@ -7,23 +7,20 @@
 #   Skip down to "SHORTCUT" if you're going to work only from the
 #   current directory. (Not recommended for serious users.)
 
-#   Change SGBDIR to the directory where all GraphBase files will go:
-SGBDIR = /usr/local/sgb
-
 #   Change DATADIR to the directory where GraphBase data files will go:
-DATADIR = $(SGBDIR)/data
+DATADIR = /usr/share/sgb
 
 #   Change INCLUDEDIR to the directory where GraphBase header files will go:
-INCLUDEDIR = $(SGBDIR)/include
+INCLUDEDIR = /usr/include/sgb
 
 #   Change LIBDIR to the directory where GraphBase library routines will go:
-LIBDIR = /usr/local/lib
+LIBDIR = /usr/lib/sgb
 
 #   Change BINDIR to the directory where installdemos will put demo programs:
-BINDIR = /usr/local/bin
+BINDIR = /usr/bin
 
 #   Change CWEBINPUTS to the directory where CWEB include files will go:
-CWEBINPUTS = /usr/local/lib/cweb
+CWEBINPUTS = /usr/lib/cweb
 
 #   SHORTCUT: Uncomment these lines, for single-directory installation:
 #DATADIR = .
@@ -36,7 +33,7 @@ CWEBINPUTS = /usr/local/lib/cweb
 #SYS = -DSYSV
 
 #   If you prefer optimization to debugging, change -g to something like -O:
-CFLAGS = -g -I$(INCLUDEDIR) $(SYS)
+CFLAGS = -g -I$(INCLUDEDIR) $(SYS) -fpic
 
 ########## You shouldn't have to change anything after this point ##########
 
@@ -94,12 +91,11 @@ help:
 	@ echo "then (optionally) 'make installdemos';"
 	@ echo "then (optionally) 'make clean'."
 
-lib: libgb.a
+lib: libgb.so
 
-libgb.a: $(OBJS)
+libgb.so: $(OBJS)
 	rm -f certified
-	ar rcv libgb.a $(OBJS)
-	- ranlib libgb.a
+	$(CC) -shared -o libgb.so $(OBJS)
 
 gb_io.o: gb_io.c
 	$(CC) $(CFLAGS) -DDATA_DIRECTORY=\"$(DATADIR)/\" -c gb_io.c
@@ -113,33 +109,30 @@ test_graph: gb_graph.o
 test_flip: gb_flip.o
 	$(CC) $(CFLAGS) test_flip.c gb_flip.o -o test_flip
 
-tests: test_io test_graph test_flip
+tests: test_io test_graph test_flip lib test_sample
 	./test_io
 	./test_graph
 	./test_flip
-	make gb_sort.o
-	make lib
-	make test_sample
-	- ./test_sample > sample.out
+	LD_LIBRARY_PATH=. ./test_sample > sample.out
 	diff test.gb test.correct
 	diff sample.out sample.correct
 	rm test.gb sample.out test_io test_graph test_flip test_sample
 	echo "Congratulations --- the tests have all been passed."
 	touch certified
 
+demos: lib $(DEMOS)
+
 install: lib
-	if test ! -r certified; then echo "Please run 'make tests' first!"; fi
-	test -r certified
+	test -r certified || { echo "Please run 'make tests' first!"; exit 1; }
 	make installdata
 	- mkdir $(LIBDIR)
-	- cp libgb.a $(LIBDIR)
+	- cp libgb.so $(LIBDIR)
 	- mkdir $(CWEBINPUTS)
 	- cp -p boilerplate.w gb_types.w $(CWEBINPUTS)
 	- mkdir $(INCLUDEDIR)
 	- cp -p $(HEADERS) Makefile $(INCLUDEDIR)
 
 installdata: $(DATAFILES)
-	- mkdir $(SGBDIR)
 	- mkdir $(DATADIR)
 	- cp -p $(DATAFILES) $(DATADIR)
 
@@ -154,7 +147,7 @@ doc:
 	tex abstract.plaintex
 
 clean:
-	rm -f *~ *.o *.c *.h libgb.a certified \
+	rm -f *~ *.o *.c *.h libgb.so certified \
 	         *.tex *.log *.dvi *.toc *.idx *.scn core
 
 veryclean: clean
