@@ -25,6 +25,7 @@ Patch3: 0004-Nit-picked-in-2015.patch
 Patch4: 0005-GCC-Wall.patch
 Patch5: 0006-GCC-Wall-Wextra.patch
 Patch6: 0007-Alternative-fix-for-GCC-5.3.1.patch
+Patch7: 0008-Fix-typographic-glitch.patch
 
 %description
 The Stanford GraphBase: A Platform for Combinatorial Computing.
