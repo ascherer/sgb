@@ -1,6 +1,8 @@
+%bcond_without tex
+
 Name: sgb
 Version: 1:20090810
-Release: 16
+Release: 17
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
@@ -35,54 +37,62 @@ master files stay intact.
 %{__sed} -e "s/#SYS/SYS/" -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
 %{__make} tests assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components
+%if %{with tex}
 %{__pdftex} abstract.plaintex
+%endif
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/bin
+%{__mkdir_p} $RPM_BUILD_ROOT%{_bindir}
 %{__cp} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
-	$RPM_BUILD_ROOT/usr/bin
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/sgb
-%{__cp} *.dat $RPM_BUILD_ROOT/usr/share/sgb
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/include/sgb
-%{__cp} *.h $RPM_BUILD_ROOT/usr/include/sgb
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib
-%{__cp} libgb.a $RPM_BUILD_ROOT/usr/lib
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib/cweb
-%{__cp} boilerplate.w gb_types.w $RPM_BUILD_ROOT/usr/lib/cweb
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/doc/sgb
-%{__cp} abstract.pdf $RPM_BUILD_ROOT/usr/share/doc/sgb
+	$RPM_BUILD_ROOT%{_bindir}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/%{name}
+%{__cp} *.dat $RPM_BUILD_ROOT%{_datadir}/%{name}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_includedir}/%{name}
+%{__cp} *.h $RPM_BUILD_ROOT%{_includedir}/%{name}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}
+%{__cp} libgb.a $RPM_BUILD_ROOT%{_libdir}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/cweb
+%{__cp} boilerplate.w gb_types.w $RPM_BUILD_ROOT%{_libdir}/cweb
+%if %{with tex}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_docdir}/%{name}
+%{__cp} abstract.pdf $RPM_BUILD_ROOT%{_docdir}/%{name}
+%endif
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_usr}/bin/assign_lisa
-%{_usr}/bin/book_components
-%{_usr}/bin/econ_order
-%{_usr}/bin/football
-%{_usr}/bin/girth
-%{_usr}/bin/ladders
-%{_usr}/bin/miles_span
-%{_usr}/bin/multiply
-%{_usr}/bin/queen
-%{_usr}/bin/roget_components
-%{_usr}/bin/take_risc
-%{_usr}/bin/word_components
-%{_usr}/share/sgb
-%{_usr}/include/sgb
-%{_usr}/lib/libgb.a
-%{_usr}/lib/cweb/boilerplate.w
-%{_usr}/lib/cweb/gb_types.w
-%doc %{_usr}/share/doc/sgb
+%{_bindir}/assign_lisa
+%{_bindir}/book_components
+%{_bindir}/econ_order
+%{_bindir}/football
+%{_bindir}/girth
+%{_bindir}/ladders
+%{_bindir}/miles_span
+%{_bindir}/multiply
+%{_bindir}/queen
+%{_bindir}/roget_components
+%{_bindir}/take_risc
+%{_bindir}/word_components
+%{_datadir}/%{name}
+%{_includedir}/%{name}
+%{_libdir}/libgb.a
+%{_libdir}/cweb/boilerplate.w
+%{_libdir}/cweb/gb_types.w
+%if %{with tex}
+%doc %{_docdir}/%{name}
+%endif
 
 %post
 
 %postun
 
 %changelog
+* Thu Nov 26 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-17
+- Conditional Build Stuff.
 * Thu Oct 29 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-16
 - Fully parametrized specfile using tons of configuration macros.
 * Mon Sep 07 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-15
@@ -93,7 +103,7 @@ master files stay intact.
 - Provide consistent information in URL and Source.
 * Mon Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-13
 - Update sgb.spec by using %setup with suitable options.
-* Wed Jul 04 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-12
+* Sat Jul 04 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-12
 - GCC warns about uses of format functions that represent possible security
   problems.
 * Wed Jul 01 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-11
@@ -103,9 +113,9 @@ master files stay intact.
 - GCC complains about a few int/long conflicts; let's apply a patch
 * Mon Aug 01 2011 Andreas Scherer <andreas_tex@freenet.de> 20090810-9
 - dpkg complains about missing maintainer
-* Tue Nov 23 2009 Andreas Scherer <andreas_tex@freenet.de> 20090810-8
+* Mon Nov 23 2009 Andreas Scherer <andreas_tex@freenet.de> 20090810-8
 - CWEB utilities come from TeXLive 2009 installation
-* Tue Nov 09 2009 Andreas Scherer <andreas_tex@freenet.de> 20090810-7
+* Mon Nov 09 2009 Andreas Scherer <andreas_tex@freenet.de> 20090810-7
 - Update for 2009 sources
 * Tue Dec 18 2007 Andreas Scherer <andreas_tug@freenet.de> 20070421-6
 - Matching version number for Ubuntu/Debian
@@ -117,5 +127,5 @@ master files stay intact.
 - Update for 2005 sources and Debian version scheme
 * Wed Nov 02 2005 Andreas Scherer <andreas_tug@freenet.de> 20030623-2
 - Build from original source archive
-* Thu Oct 29 2005 Andreas Scherer <andreas_tug@freenet.de> 1.0-1
+* Sat Oct 29 2005 Andreas Scherer <andreas_tug@freenet.de> 1.0-1
 - Initial build
