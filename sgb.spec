@@ -2,7 +2,11 @@
 %bcond_without sysv
 
 Name: sgb
-Version: 1:20090810
+%if %{_vendor} == "debbuild"
+Version: 2:20090810
+%else
+Version: 20090810
+%endif
 Release: 19
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
