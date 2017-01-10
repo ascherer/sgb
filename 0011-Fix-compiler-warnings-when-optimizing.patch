@@ -1,0 +1,96 @@
+From 4a36cc2a8fad4fee9edbfe58ca00dc7027f249e0 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 10 Jan 2017 10:19:52 +0100
+Subject: [PATCH 11/11] Fix compiler warnings when optimizing.
+
+'gcc -O' issues a few extra warnings.
+---
+ PROTOTYPES/football.ch   | 14 ++++++++++++++
+ PROTOTYPES/gb_books.ch   |  6 ++++++
+ PROTOTYPES/gb_rand.ch    |  6 ++++++
+ PROTOTYPES/miles_span.ch |  6 ++++++
+ 4 files changed, 32 insertions(+)
+
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index 3be4af1..34df318 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -16,6 +16,12 @@ Vertex *prompt_for_team(char *s)
+   /* string used in prompt message */
+ @z
+ 
++@x
++    fgets(buffer,30,stdin);
++@y
++    if (fgets(buffer,30,stdin)) {}
++@z
++
+ @x l.207
+ node *new_node(x,d)
+   node *x; /* an old node that the new node will call |prev| */
+@@ -26,6 +32,14 @@ node *new_node(@t\1\1@>
+   long d@t\2\2@>) /* incremental change to |tot_len| */
+ @z
+ 
++@x
++    register Arc *best_arc; /* arc that achieves |del=d| */
++    register Arc *last_arc; /* arc that goes directly to |goal| */
++@y
++    register Arc *best_arc=0; /* arc that achieves |del=d| */
++    register Arc *last_arc=0; /* arc that goes directly to |goal| */
++@z
++
+ @x
+       if (a->del>d && a->tip->valid==v)
+         if (a->tip==goal) last_arc=a;
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 06edced..9bedd13 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -76,6 +76,12 @@ register unsigned long k; /* all-purpose indices */
+         if (p->chap!=(long)k) {@+register Vertex *v=p->vert;
+ @z
+ 
++@x
++Vertex *chap_base;
++@y
++Vertex *chap_base=0;
++@z
++
+ @x
+ if (n>characters) n=characters;
+ if (x>n) x=n;
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index bbfdbfc..c28fae6 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -143,3 +143,9 @@ long random_lengths(@t\1\1@>
+   long *dist, /* distribution of lengths */
+   long seed@t\2\2@>) /* random number seed */
+ @z
++
++@x
++  magic_entry *dist_table; /* alias table for nonuniform generation */
++@y
++  magic_entry *dist_table=0; /* alias table for nonuniform generation */
++@z
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 7cdc564..0d9e096 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -139,6 +139,12 @@ void qunite(@t\1\1@>
+   Arc *h@t\2\2@>) /* |h->qsib| will get the result */
+ @z
+ 
++@x
++  register Arc *r,*rr; /* remainders of the input lists */
++@y
++  register Arc *r=0,*rr=0; /* remainders of the input lists */
++@z
++
+ @x l.1257
+ qenque(h,a)
+   Arc *h; /* header of a binomial queue */
+-- 
+2.19.0
+
