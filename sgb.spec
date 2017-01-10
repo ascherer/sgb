@@ -57,8 +57,8 @@ master files stay intact.
 %{__cp} *.dat %{buildroot}%{_datadir}/%{name}
 %{__mkdir_p} %{buildroot}%{_includedir}/%{name}
 %{__cp} *.h %{buildroot}%{_includedir}/%{name}
-%{__mkdir_p} %{buildroot}%{_libdir}
-%{__cp} libgb.a %{buildroot}%{_libdir}
+%{__mkdir_p} %{buildroot}%{_libdir}/%{name}
+%{__cp} libgb.a %{buildroot}%{_libdir}/%{name}
 %{__mkdir_p} %{buildroot}%{_libdir}/cweb
 %{__cp} boilerplate.w gb_types.w %{buildroot}%{_libdir}/cweb
 %if %{with tex}
@@ -84,7 +84,7 @@ master files stay intact.
 %{_bindir}/word_components
 %{_datadir}/%{name}
 %{_includedir}/%{name}
-%{_libdir}/libgb.a
+%{_libdir}/%{name}/libgb.a
 %{_libdir}/cweb/boilerplate.w
 %{_libdir}/cweb/gb_types.w
 %{?with_tex:%doc %{_docdir}/%{name}}
