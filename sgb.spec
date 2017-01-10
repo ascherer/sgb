@@ -1,6 +1,7 @@
 %bcond_without tex
 %bcond_without sysv
 %bcond_without patches
+%bcond_with debuginfo
 
 Name: sgb
 %if %{_vendor} == "debbuild"
@@ -54,6 +55,10 @@ master files stay intact.
 %{__sed} -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
+%endif
+%if ! %{with debuginfo}
+%{__sed} -e "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
+%{__sed} -e "s/LDFLAGS =/LDFLAGS = -s/" -i Makefile
 %endif
 %{__make} tests demos
 %{?with_tex:%{__pdftex} abstract.plaintex}
