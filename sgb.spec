@@ -1,6 +1,6 @@
 Name: sgb
 Version: 1:20090810
-Release: 13
+Release: 14
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
@@ -14,6 +14,7 @@ Patch0: 0001-Nit-picked-in-2011.patch
 Patch1: 0002-GCC-complains-about-int-long-conflicts.patch
 Patch2: 0003-GCC-Wformat-security.patch
 Patch3: 0004-Nit-picked-in-2015.patch
+Patch4: 0005-GCC-Wall.patc
 
 %description
 The Stanford GraphBase: A Platform for Combinatorial Computing.
@@ -30,10 +31,11 @@ master files stay intact.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 ln -s PROTOTYPES/*.ch .
-sed "s/#SYS/SYS/" -i Makefile
+sed -e "s/#SYS/SYS/" -e "s/= -g/= -g -Wall/" -i Makefile
 make tests assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components
 pdftex abstract.plaintex
@@ -84,6 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Thu Sep 03 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-14
+- Compile with -Wall and fix the inflicted source modules.
 * Sat Aug 15 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-13
 - Provide consistent information in URL and Source.
 * Mon Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-13
