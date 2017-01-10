@@ -75,7 +75,7 @@ master files stay intact.
 %{__cp} libgb.a %{buildroot}%{_libdir}/%{name}
 %endif
 %{__mkdir_p} %{buildroot}%{_libdir}/cweb
-%{__cp} boilerplate.w gb_types.w %{buildroot}%{_libdir}/cweb
+%{__cp} gb_types.w %{buildroot}%{_libdir}/cweb
 %if %{with tex}
 %{__mkdir_p} %{buildroot}%{_docdir}/%{name}
 %{__cp} abstract.pdf %{buildroot}%{_docdir}/%{name}
@@ -104,7 +104,6 @@ master files stay intact.
 %else
 %{_libdir}/%{name}/libgb.a
 %endif
-%{_libdir}/cweb/boilerplate.w
 %{_libdir}/cweb/gb_types.w
 %{?with_tex:%doc %{_docdir}/%{name}}
 
