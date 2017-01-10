@@ -1,4 +1,5 @@
 %bcond_without tex
+%bcond_without sysv
 
 Name: sgb
 Version: 1:20090810
@@ -36,7 +37,10 @@ master files stay intact.
 
 %build
 %{__ln_s} PROTOTYPES/*.ch .
-%{__sed} -e "s/#SYS/SYS/" -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
+%if %{with sysv}
+%{__sed} -e "s/#SYS/SYS/" -i Makefile
+%endif
+%{__sed} -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
 %{__make} tests assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components
 %if %{with tex}
