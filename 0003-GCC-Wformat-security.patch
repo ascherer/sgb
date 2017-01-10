@@ -1,0 +1,31 @@
+From 9a9f4b3edbe2a5e8855e493454a3cd6ac60b10fa Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_scherer@alice.de>
+Date: Mon, 6 Jul 2015 12:24:55 +0200
+Subject: [PATCH 03/11] GCC -Wformat-security.
+
+GCC warns about uses of format functions that represent possible
+security problems.
+---
+ PROTOTYPES/gb_gates.ch | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index bf12c80..fdeccc8 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -140,6 +140,12 @@ static void pr_gate(v)
+ static void pr_gate(Vertex *v)
+ @z
+ 
++@x l.1112
++    printf(a->tip->name);
++@y
++    fputs(a->tip->name,stdout);
++@z
++
+ @x l.1117
+ void print_gates(g)
+   Graph *g;
+-- 
+2.19.0
+

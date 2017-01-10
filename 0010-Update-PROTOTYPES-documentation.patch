@@ -1,0 +1,47 @@
+From 4d19df2c7a31717f7a40699cb078c1985fda0862 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Mon, 12 Dec 2016 17:47:24 +0100
+Subject: [PATCH 10/11] Update PROTOTYPES documentation.
+
+---
+ PROTOTYPES/README.PROTOTYPES | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/PROTOTYPES/README.PROTOTYPES b/PROTOTYPES/README.PROTOTYPES
+index 3f871b4..bffeac8 100644
+--- a/PROTOTYPES/README.PROTOTYPES
++++ b/PROTOTYPES/README.PROTOTYPES
+@@ -8,7 +8,7 @@ The following copyright notice extends to all files in the ./PROTOTYPES
+ subdirectory, but not to any part of the standard distribution of the
+ Stanford GraphBase (which is copyright (c) 1993 by Stanford University).
+ 
+-Copyright (c) 1994, 1996 Andreas Scherer
++Copyright (c) 1994, 1996, 2016 Andreas Scherer
+ 
+ Permission is granted to make and distribute verbatim copies of this
+ document provided that the copyright notice and this permission notice are
+@@ -47,7 +47,8 @@ this effects the section @<Vanilla local variables@> in ./gb_basic.w only.
+ The patches in ./PROTOTYPES effect all of the kernel and library modules and
+ some demonstration programs.  To make use of these patches a special version
+ of ./AMIGA/SMakefile is provided (development and test of these patches were
+-done on a Commodore AMIGA with the help of SAS/C++ 6.56).
++done on a Commodore AMIGA with the help of SAS/C++ 6.56). Twenty years later
++this stuff stills works fine, but now with ever increasing versions of GCC.
+ 
+ ./PROTOTYPES/assign_lisa.ch
+ ./PROTOTYPES/book_components.ch
+@@ -99,9 +100,5 @@ acknowledge the files from ./PROTOTYPES automatically.
+ TROUBLE SHOOTING
+ 
+ Should you encounter problems with this patch for SGB or should you have
+-ideas for further improvements contact the author of this contribution
+-
+-Andreas Scherer
+-Rochusstraﬂe 22-24
+-52062 Aachen, Germany
+-<andreas.scherer@pobox.com>
++ideas for further improvements, contact the author of this contribution
++via the Github project (https://github.com/ascherer/sgb).
+-- 
+2.19.0
+
