@@ -143,3 +143,9 @@ long random_lengths(@t\1\1@>
   long *dist, /* distribution of lengths */
   long seed@t\2\2@>) /* random number seed */
 @z
+
+@x
+  magic_entry *dist_table; /* alias table for nonuniform generation */
+@y
+  magic_entry *dist_table=0; /* alias table for nonuniform generation */
+@z

@@ -139,6 +139,12 @@ void qunite(@t\1\1@>
   Arc *h@t\2\2@>) /* |h->qsib| will get the result */
 @z
 
+@x
+  register Arc *r,*rr; /* remainders of the input lists */
+@y
+  register Arc *r=0,*rr=0; /* remainders of the input lists */
+@z
+
 @x l.1257
 qenque(h,a)
   Arc *h; /* header of a binomial queue */

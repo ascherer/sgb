@@ -77,6 +77,12 @@ register unsigned long k; /* all-purpose indices */
 @z
 
 @x
+Vertex *chap_base;
+@y
+Vertex *chap_base=0;
+@z
+
+@x
 if (n>characters) n=characters;
 if (x>n) x=n;
 if (last_chapter>chapters) last_chapter=chapters;

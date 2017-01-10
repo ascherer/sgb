@@ -16,6 +16,12 @@ Vertex *prompt_for_team(char *s)
   /* string used in prompt message */
 @z
 
+@x
+    fgets(buffer,30,stdin);
+@y
+    if (!fgets(buffer,30,stdin)) return NULL; /* something's wrong */
+@z
+
 @x l.207
 node *new_node(x,d)
   node *x; /* an old node that the new node will call |prev| */
@@ -24,6 +30,14 @@ node *new_node(x,d)
 node *new_node(@t\1\1@>
   node *x, /* an old node that the new node will call |prev| */
   long d@t\2\2@>) /* incremental change to |tot_len| */
+@z
+
+@x
+    register Arc *best_arc; /* arc that achieves |del=d| */
+    register Arc *last_arc; /* arc that goes directly to |goal| */
+@y
+    register Arc *best_arc=0; /* arc that achieves |del=d| */
+    register Arc *last_arc=0; /* arc that goes directly to |goal| */
 @z
 
 @x
