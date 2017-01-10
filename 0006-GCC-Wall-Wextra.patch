@@ -1,0 +1,1020 @@
+From f17becef8ef9f58df1dbd7f4f23357d9afc076ae Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_scherer@alice.de>
+Date: Tue, 8 Sep 2015 13:39:18 +0200
+Subject: [PATCH 06/11] GCC -Wall -Wextra.
+
+Compile with '-Wall' and '-Wextra' and fix the inflicted source modules.
+---
+ PROTOTYPES/assign_lisa.ch     | 146 ++++++++++++++++++++++++++++++++++
+ PROTOTYPES/book_components.ch |  12 +--
+ PROTOTYPES/econ_order.ch      |   8 ++
+ PROTOTYPES/gb_basic.ch        | 120 ++++++++++++++++++++++++++++
+ PROTOTYPES/gb_books.ch        |  29 +++++++
+ PROTOTYPES/gb_dijk.ch         |   2 +
+ PROTOTYPES/gb_gates.ch        | 142 +++++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_graph.ch        |   4 +
+ PROTOTYPES/gb_io.ch           |   8 +-
+ PROTOTYPES/gb_lisa.ch         |  86 ++++++++++++++++++++
+ PROTOTYPES/gb_miles.ch        |  12 +++
+ PROTOTYPES/gb_plane.ch        |  25 ++++++
+ PROTOTYPES/gb_rand.ch         |  30 +++++++
+ PROTOTYPES/gb_roget.ch        |  14 ++++
+ PROTOTYPES/gb_words.ch        |   6 ++
+ PROTOTYPES/miles_span.ch      |  11 +++
+ PROTOTYPES/take_risc.ch       |   3 +
+ 17 files changed, 646 insertions(+), 12 deletions(-)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 73a80e6..5271604 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -7,3 +7,149 @@ int main(@t\1\1@>
+   int argc, /* the number of command-line arguments */
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
+ @z
++
++@x
++for (k=0;k<m;k++) {
++  for (l=0;l<n;l++) printf("% 4ld",compl?d-*(mtx+k*n+l):*(mtx+k*n+l));
++@y
++for (k=0;k<(long)m;k++) {
++  for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
++@z
++
++@x
++  for (l=0; l<n; l++) {
++@y
++  for (l=0; l<(long)n; l++) {
++@z
++
++@x
++    for (k=1;k<n;k++) 
++@y
++    for (k=1;k<(long)n;k++)
++@z
++
++@x
++      for (k=0;k<n;k++)
++@y
++      for (k=0;k<(long)n;k++)
++@z
++
++@x
++for (l=0; l<n; l++) {
++@y
++for (l=0; l<(long)n; l++) {
++@z
++
++@x
++for (k=0; k<m; k++) {
++@y
++for (k=0; k<(long)m; k++) {
++@z
++
++@x
++  for (l=1; l<n; l++) if (o,aa(k,l)<s) s=aa(k,l);
++@y
++  for (l=1; l<(long)n; l++) if (o,aa(k,l)<s) s=aa(k,l);
++@z
++
++@x
++  for (l=0; l<n; l++)
++@y
++  for (l=0; l<(long)n; l++)
++@z
++
++@x
++for (l=0; l<n; l++) {
++@y
++for (l=0; l<(long)n; l++) {
++@z
++
++@x
++for (k=0; k<m; k++)
++@y
++for (k=0; k<(long)m; k++)
++@z
++
++@x
++  for (l=0; l<n; l++)
++@y
++  for (l=0; l<(long)n; l++)
++@z
++
++@x
++for (l=0; l<n; l++)
++@y
++for (l=0; l<(long)n; l++)
++@z
++
++@x
++for (l=0; l<n; l++)
++@y
++for (l=0; l<(long)n; l++)
++@z
++
++@x
++    for (j=l+1; j<n; j++)
++@y
++    for (j=l+1; j<(long)n; j++)
++@z
++
++@x
++for (k=0;k<m;k++)
++  for (l=0;l<n;l++)
++@y
++for (k=0;k<(long)m;k++)
++  for (l=0;l<(long)n;l++)
++@z
++
++@x
++for (k=0;k<m;k++) {
++@y
++for (k=0;k<(long)m;k++) {
++@z
++
++@x
++for (l=0;l<n;l++) if (col_inc[l]) k++;
++if (k>m) {
++@y
++for (l=0;l<(long)n;l++) if (col_inc[l]) k++;
++if (k>(long)m) {
++@z
++
++@x
++  for (k=0; k<m; k++) for (l=0; l<n; l++)
++@y
++  for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
++@z
++
++@x
++  for (k=0; k<m; k++) for (l=0; l<n; l++)
++@y
++  for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
++@z
++
++@x
++  for (k=0; k<m; k++)
++@y
++  for (k=0; k<(long)m; k++)
++@z
++
++@x
++    for (k=0;k<m;k++) @<Output row |k| as a hexadecimal string@>;
++@y
++    for (k=0;k<(long)m;k++) @<Output row |k| as a hexadecimal string@>;
++@z
++
++@x
++  for (l=0; l<n; l++) {
++    x=(long)(conv*(float)(compl?d-aa(k,l):aa(k,l)));
++@y
++  for (l=0; l<(long)n; l++) {
++    x=(long)(conv*(float)(compl?(long)d-aa(k,l):aa(k,l)));
++@z
++
++@x
++  for (k=0; k<m; k++)
++@y
++  for (k=0; k<(long)m; k++)
++@z
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index 73220dd..00b12ff 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -15,15 +15,5 @@ char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
+ @y
+ char *vertex_name(@t\1\1@> /* return (as a string) the name of vertex |v| */
+   Vertex *v,
+-  char i@t\2\2@>) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
+-@z
+-
+-@x
+-  code_name[i][0]=imap_chr(v->short_code/36);
+-  code_name[i][1]=imap_chr(v->short_code%36);
+-  return code_name[i];
+-@y
+-  code_name[(unsigned char)i][0]=imap_chr(v->short_code/36);
+-  code_name[(unsigned char)i][1]=imap_chr(v->short_code%36);
+-  return code_name[(unsigned char)i];
++  unsigned char i@t\2\2@>) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
+ @z
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index 2a32e0d..2fbba49 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -2,8 +2,16 @@
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+   char *argv[]; /* an array of strings containing those arguments */
++{@+unsigned long n=79; /* the desired number of sectors */
+ @y
+ int main(@t\1\1@>
+   int argc, /* the number of command-line arguments */
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
++{@+long n=79; /* the desired number of sectors */
++@z
++
++@x
++  if (sscanf(argv[argc],"-n%lu",&n)==1) ;
++@y
++  if (sscanf(argv[argc],"-n%ld",&n)==1) ;
+ @z
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index e0ba838..01ed974 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -73,6 +73,50 @@ Graph *simplex(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (n0>n) n0=n;
++@y
++  if (n0>(long)n) n0=n;
++@z
++
++@x
++    if (n1>n) n1=n;
++@y
++    if (n1>(long)n) n1=n;
++@z
++
++@x
++      if (n2>n) n2=n;
++@y
++      if (n2>(long)n) n2=n;
++@z
++
++@x
++        if (n3>n) n3=n;
++@y
++        if (n3>(long)n) n3=n;
++@z
++
++@x
++        else {@+if (n4>n) n4=n;
++@y
++        else {@+if (n4>(long)n) n4=n;
++@z
++
++@x
++  for (k=1;k<=n;k++) {
++@y
++  for (k=1;k<=(long)n;k++) {
++@z
++
++@x
++if (yy[0]>=n) {
++  k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
++@y
++if (yy[0]>=(long)n) {
++  k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
++@z
++
+ @x l.732
+ Graph *subsets(n,n0,n1,n2,n3,n4,size_bits,directed)
+   unsigned long n; /* the number of elements in the multiset */
+@@ -87,6 +131,20 @@ Graph *subsets(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++if (yy[0]>=n) {
++  k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
++@y
++if (yy[0]>=(long)n) {
++  k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
++@z
++
++@x
++    long ss=0; /* the number of elements common to |u| and |v| */
++@y
++    unsigned long ss=0; /* the number of elements common to |u| and |v| */
++@z
++
+ @x l.886
+ Graph *perms(n0,n1,n2,n3,n4,max_inv,directed)
+   long n0,n1,n2,n3,n4; /* composition of the multiset */
+@@ -99,6 +157,30 @@ Graph *perms(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++{@+register long ss; /* max inversions known to be possible */
++@y
++{@+register unsigned long ss; /* max inversions known to be possible */
++@z
++
++@x
++  for (k=1,nverts=1;k<=max_inv;k++) {
++@y
++  for (k=1,nverts=1;k<=(long)max_inv;k++) {
++@z
++
++@x
++  for (i=k,ii=0;i<=max_inv;i++,ii++) {
++@y
++  for (i=k,ii=0;i<=(long)max_inv;i++,ii++) {
++@z
++
++@x
++  if (m<max_inv && ytab[k]<k-1)
++@y
++  if (m<(long)max_inv && ytab[k]<k-1)
++@z
++
+ @x l.1037
+ static char *short_imap="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+ abcdefghijklmnopqrstuvwxyz_^~&@@,;.:?!%#$+-*/|<=>()[]{}`'";
+@@ -124,6 +206,24 @@ Graph *parts(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  for (k=1;k<=max_parts;k++) {
++@y
++  for (k=1;k<=(long)max_parts;k++) {
++@z
++
++@x
++    for (j=k,i=0;j<=n;i++,j++) {
++@y
++    for (j=k,i=0;j<=(long)n;i++,j++) {
++@z
++
++@x
++if (d<max_parts) {
++@y
++if (d<(long)max_parts) {
++@z
++
+ @x l.1290
+ Graph *binary(n,max_height,directed)
+   unsigned long n; /* the number of internal nodes */
+@@ -136,6 +236,26 @@ Graph *binary(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++    for (k=2;k<=n;k++) nn[k]=0;
++    for (j=2;j<=max_height;j++)
++@y
++    for (k=2;k<=(long)n;k++) nn[k]=0;
++    for (j=2;j<=(long)max_height;j++)
++@z
++
++@x
++    for (j=2;j<=max_height;j++) {
++@y
++    for (j=2;j<=(long)max_height;j++) {
++@z
++
++@x
++  if (ltab[0]>n) {
++@y
++  if (ltab[0]>(long)n) {
++@z
++
+ @x l.1545
+ Graph *complement(g,copy,self,directed)
+   Graph *g; /* graph to be complemented */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index b705edb..06edced 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -56,3 +56,32 @@ Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
+   unsigned long first_chapter,unsigned long last_chapter,@|
+   long in_weight,long out_weight,long seed)
+ @z
++
++@x
++register long j,k; /* all-purpose indices */
++@y
++register long j; /* all-purpose indices */
++register unsigned long k; /* all-purpose indices */
++@z
++
++@x
++    if (p->chap!=k) {
++@y
++    if (p->chap!=(long)k) {
++@z
++
++@x
++        if (p->chap!=k) {@+register Vertex *v=p->vert;
++@y
++        if (p->chap!=(long)k) {@+register Vertex *v=p->vert;
++@z
++
++@x
++if (n>characters) n=characters;
++if (x>n) x=n;
++if (last_chapter>chapters) last_chapter=chapters;
++@y
++if ((long)n>characters) n=characters;
++if (x>n) x=n;
++if ((long)last_chapter>chapters) last_chapter=chapters;
++@z
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index 41007b7..7b178da 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -30,8 +30,10 @@ extern Vertex *(*del_min)(void);
+ @x l.162
+ static long dummy(v)
+   Vertex *v;
++{@+return 0;@+}
+ @y
+ static long dummy(Vertex *v)
++{@+(void)v;return 0;@+}
+ @z
+ 
+ @x l.169
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index fdeccc8..c1e782d 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -40,6 +40,13 @@ Graph *risc(unsigned long regs)
+   /* number of registers supported */
+ @z
+ 
++@x
++register long k,r; /* all-purpose indices */
++@y
++register long k; /* all-purpose indices */
++register unsigned long r; /* all-purpose indices */
++@z
++
+ @x l.412
+ static Vertex* new_vert(t)
+   char t; /* the type of the new gate */
+@@ -102,6 +109,12 @@ static Vertex* make_xor(u,v)
+ static Vertex* make_xor(Vertex *u,Vertex *v)
+ @z
+ 
++@x
++@ @d first_of(n,t) new_vert(t);@+for (k=1;k<n;k++)@+new_vert(t);
++@y
++@ @d first_of(n,t) new_vert(t);@+for (k=1;k<(long)n;k++)@+new_vert(t);
++@z
++
+ @x l.876
+ static void make_adder(n,x,y,z,carry,add)
+   unsigned long n; /* number of bits */
+@@ -118,6 +131,12 @@ static void make_adder(@t\1\1@>
+   char add@t\2\2@>) /* should we add or subtract? */
+ @z
+ 
++@x
++  for (;k<n;k++) {
++@y
++  for (;k<(long)n;k++) {
++@z
++
+ @x l.992
+ long run_risc(g,rom,size,trace_regs)
+   Graph *g; /* graph output by |risc| */
+@@ -133,6 +152,27 @@ long run_risc(@t\1\1@>
+     /* if nonzero, this many registers will be traced */
+ @z
+ 
++@x
++  register long k,r; /* general-purpose indices */
++@y
++  register long k; /* general-purpose indices */
++  register unsigned long r; /* general-purpose indices */
++@z
++
++@x
++  r=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
++  if (r<0) return r; /* not a valid gate graph! */
++@y
++  k=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
++  if (k<0) return k; /* not a valid gate graph! */
++@z
++
++@x
++  for (r=0;r<trace_regs;r++) printf(" r%-2ld ",r); /* register names */
++@y
++  for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
++@z
++
+ @x l.1097
+ static void pr_gate(v)
+   Vertex *v;
+@@ -168,6 +208,102 @@ Graph* prod(unsigned long m,unsigned long n)
+   /* lengths of the binary numbers to be multiplied */
+ @z
+ 
++@x
++while (k<m_plus_n) {
++@y
++while (k<(long)m_plus_n) {
++@z
++
++@x
++for (j=0; j<m; j++) {
++@y
++for (j=0; j<(long)m; j++) {
++@z
++
++@x
++  for (k=0; k<n; k++)
++@y
++  for (k=0; k<(long)n; k++)
++@z
++
++@x
++  for (k=j+n; k<m_plus_n; k++) {
++@y
++  for (k=j+n; k<(long)m_plus_n; k++) {
++@z
++
++@x
++@d a_pos(j) (j<m? j+1: m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
++@y
++@d a_pos(j) ((unsigned long)(j)<m? (unsigned long)(j+1): m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
++@z
++
++@x
++for (j=0; j<m-2; j++) {
++@y
++for (j=0; j<(long)m-2; j++) {
++@z
++
++@x
++  for (k=0; k<m_plus_n; k++)
++@y
++  for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++  for (k=0; k<m_plus_n; k++)
++@y
++  for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++  for (k=0; k<m_plus_n; k++)
++@y
++  for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++  for (k=0; k<m_plus_n; k++)
++@y
++  for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++  for (k=0; k<m_plus_n-1; k++)
++@y
++  for (k=0; k<(long)m_plus_n-1; k++)
++@z
++
++@x
++for (k=0; k<m_plus_n; k++)
++@y
++for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++for (k=0; k<m_plus_n; k++)
++@y
++for (k=0; k<(long)m_plus_n; k++)
++@z
++
++@x
++for (i=3,j=2,k=3,l=3; l<=m_plus_n; l++) {
++@y
++for (i=3,j=2,k=3,l=3; l<=(long)m_plus_n; l++) {
++@z
++
++@x
++for (k=2;k<m_plus_n;k++) {
++@y
++for (k=2;k<(long)m_plus_n;k++) {
++@z
++
++@x
++for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
++@y
++for (k=0;k<(long)m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
++@z
++
+ @x l.1897
+ Graph *partial_gates(g,r,prob,seed,buf)
+   Graph *g; /* generalized gate graph */
+@@ -186,3 +322,9 @@ Graph *partial_gates(@t\1\1@>
+   char *buf@t\2\2@>)
+     /* optional parameter for information about partial assignment */
+ @z
++
++@x
++    case 'I': if ((gb_next_rand()>>15)>=prob) {
++@y
++    case 'I': if ((gb_next_rand()>>15)>=(long)prob) {
++@z
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index de5bf95..9a32988 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -58,12 +58,14 @@ void make_compound_id(g,s1,gg,s2) /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+   char *s1; /* string for the beginning of the new |id| */
+   Graph *gg; /* graph whose |id| is to be copied */
+   char *s2; /* string for the end of the new |id| */
++{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
+ @y
+ void make_compound_id(@t\1\1@> /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+   Graph *g, /* graph whose |id| is to be set */
+   char *s1, /* string for the beginning of the new |id| */
+   Graph *gg, /* graph whose |id| is to be copied */
+   char *s2@t\2\2@>) /* string for the end of the new |id| */
++{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
+ @z
+ 
+ @x l.498
+@@ -75,6 +77,7 @@ void make_double_compound_id(g,s1,gg,s2,ggg,s3)
+   char *s2; /* string for the middle of the new |id| */
+   Graph *ggg; /* second graph whose |id| is to be copied */
+   char *s3; /* string for the end of the new |id| */
++{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
+ @y
+ void make_double_compound_id(@t\1\1@>
+     /* |sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
+@@ -84,6 +87,7 @@ void make_double_compound_id(@t\1\1@>
+   char *s2, /* string for the middle of the new |id| */
+   Graph *ggg, /* second graph whose |id| is to be copied */
+   char *s3@t\2\2@>) /* string for the end of the new |id| */
++{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
+ @z
+ 
+ @x l.549
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index cc7929b..d019fcd 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -30,7 +30,7 @@ char imap_chr(d)
+ @y
+ char imap_chr(long d)
+ {
+-  return((char)(d<0 || d>strlen(imap)? '\0': imap[d]));
++  return((char)(d<0 || d>(long)strlen(imap)? '\0': imap[d]));
+ }
+ @z
+ 
+@@ -41,6 +41,12 @@ long imap_ord(c)
+ long imap_ord(unsigned char c)
+ @z
+ 
++@x
++  return (c<0||c>255)? unexpected_char: icode[c];
++@y
++  return icode[c];
++@z
++
+ @x l.206
+ extern char imap_chr(); /* the character that maps to a given character */
+ extern long imap_ord(); /* the ordinal number of a given character */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index eda0b37..50e73d7 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -38,6 +38,26 @@ long *lisa(@t\1\1@>
+     /* where to allocate the matrix that will be output */
+ @z
+ 
++@x
++for (l=lam=0; l<n; l++) {@+register long sum=0;
++@y
++for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
++@z
++
++@x
++for (k=kap=0; k<m;k++) {
++  for (l=0;l<n;l++) *(out_row+l)=0; /* clear the vector of sums */
++@y
++for (k=kap=0; k<(long)m;k++) {
++  for (l=0;l<(long)n;l++) *(out_row+l)=0; /* clear the vector of sums */
++@z
++
++@x
++  for (l=0; l<n; l++,out_row++) /* note that |out_row| will advance by~|n| */
++@y
++  for (l=0; l<(long)n; l++,out_row++) /* note that |out_row| will advance by~|n| */
++@z
++
+ @x l.286
+ static long na_over_b(n,a,b)
+   long n,a,b;
+@@ -45,6 +65,20 @@ static long na_over_b(n,a,b)
+ static long na_over_b(long n,long a,long b)
+ @z
+ 
++@x
++if (*out_row<=d0) *out_row=0;
++else if (*out_row>=d1) *out_row=d;
++@y
++if (*out_row<=(long)d0) *out_row=0;
++else if (*out_row>=(long)d1) *out_row=d;
++@z
++
++@x
++for (i=0;i<m0;i++)
++@y
++for (i=0;i<(long)m0;i++)
++@z
++
+ @x l.405
+ @p Graph *plane_lisa(m,n,d,m0,m1,n0,n1,d0,d1)
+   unsigned long m,n; /* number of rows and columns desired */
+@@ -66,6 +100,40 @@ static long na_over_b(long n,long a,long b)
+     /* lower and upper threshold of raw pixel scores */
+ @z
+ 
++@x
++    if (k<m) {
++@y
++    if (k<(long)m) {
++@z
++
++@x
++        for (j=l; f[j]!=j; j=f[j]) ; /* find the first element */
++@y
++        for (j=l; f[j]!=(unsigned long)j; j=f[j]) ; /* find the first element */
++@z
++
++@x
++      }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
++@y
++      }@+else if (f[l]==(unsigned long)l) *apos=-1-*apos,regs++; /* new region found */
++@z
++
++@x
++    if (k>0&&l<n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
++@y
++    if (k>0&&l<(long)n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
++@z
++
++@x
++for (l=0;l<n;l++) u[l]=NULL;
++for (k=0,apos=a,aloc=0;k<m;k++)
++  for (l=0;l<n;l++,apos++,aloc++) {
++@y
++for (l=0;l<(long)n;l++) u[l]=NULL;
++for (k=0,apos=a,aloc=0;k<(long)m;k++)
++  for (l=0;l<(long)n;l++,apos++,aloc++) {
++@z
++
+ @x l.562
+ static void adjac(u,v)
+   Vertex *u,*v;
+@@ -93,3 +161,21 @@ static void adjac(Vertex *u,Vertex *v)
+   long c@t\2\2@>)
+     /* should we prefer dark pixels to light pixels? */
+ @z
++
++@x
++for (k=0,v=new_graph->vertices;k<m;k++,v++) {
++@y
++for (k=0,v=new_graph->vertices;k<(long)m;k++,v++) {
++@z
++
++@x
++for (l=0;l<n;l++,v++) {
++@y
++for (l=0;l<(long)n;l++,v++) {
++@z
++
++@x
++    if (c?*apos<thresh:*apos>=thresh) {
++@y
++    if (c?*apos<(long)thresh:*apos>=(long)thresh) {
++@z
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 9b9eb0b..c7d0c3f 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -27,6 +27,18 @@ Graph *miles(@t\1\1@>
+   long seed@t\2\2@>) /* random number seed */
+ @z
+ 
++@x
++      if (j>max_distance)
++@y
++      if (j>(long)max_distance)
++@z
++
++@x
++    if (++j>max_degree)
++@y
++    if (++j>(long)max_degree)
++@z
++
+ @x l.394
+ @p long miles_distance(u,v)
+   Vertex *u,*v;
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 9dde971..034f966 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -31,6 +31,12 @@ Graph *plane(@t\1\1@>
+     /* random number seed */
+ @z
+ 
++@x
++for (k=0,v=new_graph->vertices; k<n; k++,v++) {
++@y
++for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
++@z
++
+ @x l.226
+ void delaunay(g,f)
+   Graph *g; /* vertices in the plane */
+@@ -49,6 +55,12 @@ static void new_euclid_edge(u,v)
+ static void new_euclid_edge(Vertex *u,Vertex *v)
+ @z
+ 
++@x
++  if ((gb_next_rand()>>15)>=gprob) {
++@y
++  if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
++@z
++
+ @x l.283
+ static long int_sqrt(x)
+   long x;
+@@ -116,6 +128,13 @@ static void flip(arc *c,arc *d,arc *e,@|
+   node *xp,node *xpp)
+ @z
+ 
++@x
++{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
++@y
++{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
++  (void) t; (void) tp;
++@z
++
+ @x l.931
+ Graph *plane_miles(n,north_weight,west_weight,pop_weight,extend,prob,seed)
+   unsigned long n; /* number of vertices desired */
+@@ -149,3 +168,9 @@ static void new_mile_edge(u,v)
+ @y
+ static void new_mile_edge(Vertex *u,Vertex *v)
+ @z
++
++@x
++  if ((gb_next_rand()>>15)>=gprob) {
++@y
++  if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
++@z
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 2aebfcb..bbfdbfc 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -35,6 +35,12 @@ Graph *random_graph(@t\1\1@>
+   long seed@t\2\2@>) /* random number seed */
+ @z
+ 
++@x
++for (k=0; k<n; k++) {
++@y
++for (k=0; k<(long)n; k++) {
++@z
++
+ @x
+   if (multi<=0)
+     @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
+@@ -59,6 +65,18 @@ Graph *random_graph(@t\1\1@>
+     }
+ @z
+ 
++@x
++    while (nn<n) nn+=nn, kk--;
++@y
++    while (nn<(long)n) nn+=nn, kk--;
++@z
++
++@x
++    while (nn<n) nn+=nn, kk--;
++@y
++    while (nn<(long)n) nn+=nn, kk--;
++@z
++
+ @x l.369
+ static magic_entry *walker(n,nn,dist,g)
+   long n; /* length of |dist| vector */
+@@ -98,6 +116,18 @@ Graph *random_bigraph(@t\1\1@>
+     /* random number seed */
+ @z
+ 
++@x
++  else for (k=0; k<n1; k++) *q++=(0x40000000+k)/n1;
++@y
++  else for (k=0; k<(long)n1; k++) *q++=(0x40000000+k)/n1;
++@z
++
++@x
++  else for (k=0; k<n2; k++) *q++=(0x40000000+k)/n2;
++@y
++  else for (k=0; k<(long)n2; k++) *q++=(0x40000000+k)/n2;
++@z
++
+ @x l.523
+ long random_lengths(g,directed,min_len,max_len,dist,seed)
+   Graph *g; /* graph whose lengths will be randomized */
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 0342920..3222cfe 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -19,3 +19,17 @@ Graph *roget(@t\1\1@>
+   unsigned long prob, /* 65536 times the probability of rejecting an arc */
+   long seed@t\2\2@>) /* random number seed */
+ @z
++
++@x
++    if (gb_number(10)!=k) panic(syntax_error); /* out of synch */
++@y
++    if ((long)gb_number(10)!=k) panic(syntax_error); /* out of synch */
++@z
++
++@x
++  if (mapping[j] && iabs(j-k)>=min_distance &&
++       (prob==0 || ((gb_next_rand()>>15)>=prob)))
++@y
++  if (mapping[j] && (unsigned long)iabs(j-k)>=min_distance &&
++       (prob==0 || ((unsigned long)(gb_next_rand()>>15)>=prob)))
++@z
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index bcb4b10..5a9f9ff 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -34,6 +34,12 @@ static long iabs(x)
+ static long iabs(long x)
+ @z
+ 
++@x
++if (n==0 || nn<n)
++@y
++if (n==0 || nn<(long)n)
++@z
++
+ @x l.508
+ @p Vertex *find_word(q,f)
+   char *q;
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 68edf24..7cdc564 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -51,8 +51,11 @@ unsigned long jar_pr(Graph *g)
+ @x l.610
+ void init_heap(d) /* makes the heap empty */
+   long d;
++{
+ @y
+ void init_heap(long d) /* makes the heap empty */
++{
++  (void) d;
+ @z
+ 
+ @x l.624
+@@ -81,11 +84,19 @@ Vertex *del_heap()
+ Vertex *del_heap(void)
+ @z
+ 
++@x
++  register unsigned long j; /* child of that hole */
++@y
++  register long j; /* child of that hole */
++@z
++
+ @x l.797
+ void init_F_heap(d)
+   long d;
++{@+F_heap=NULL;@+}
+ @y
+ void init_F_heap(long d)
++{@+(void)d;F_heap=NULL;@+}
+ @z
+ 
+ @x l.860
+diff --git a/PROTOTYPES/take_risc.ch b/PROTOTYPES/take_risc.ch
+index eebfdcd..660f56e 100644
+--- a/PROTOTYPES/take_risc.ch
++++ b/PROTOTYPES/take_risc.ch
+@@ -2,8 +2,11 @@
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+   char *argv[]; /* an array of strings containing those arguments */
++{
+ @y
+ int main(@t\1\1@>
+   int argc, /* the number of command-line arguments */
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
++{
++  (void) argv;
+ @z
+-- 
+2.19.0
+

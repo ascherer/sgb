@@ -1,0 +1,55 @@
+From 5a8ba7577e64017061a562022a6504a151743888 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_coder@freenet.de>
+Date: Fri, 2 Sep 2011 09:39:05 +0200
+Subject: [PATCH 02/11] GCC complains about int/long conflicts.
+
+In very rare situations in the original SGB code, int/long conflicts occur.
+It's elementary how to fix these nits.
+---
+ PROTOTYPES/ladders.ch  | 12 ++++++++++++
+ PROTOTYPES/multiply.ch |  6 ++++++
+ 2 files changed, 18 insertions(+)
+
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index e493a44..6d4324b 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -15,6 +15,18 @@ long freq_cost(v)
+ long freq_cost(Vertex *v)
+ @z
+ 
++@x l.253
++quit_if(gg==NULL,no_room+5);  /* out of memory */
++@y
++quit_if(gg==NULL,no_room+5L);  /* out of memory */
++@z
++
++@x l.259
++quit_if(gb_trouble_code,no_room+6); /* out of memory */
++@y
++quit_if(gb_trouble_code,no_room+6L); /* out of memory */
++@z
++
+ @x l.284
+ long alph_dist(p,q)
+   register char *p, *q;
+diff --git a/PROTOTYPES/multiply.ch b/PROTOTYPES/multiply.ch
+index 488a739..d4995bb 100644
+--- a/PROTOTYPES/multiply.ch
++++ b/PROTOTYPES/multiply.ch
+@@ -8,6 +8,12 @@ int main(@t\1\1@>
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
+ @z
+ 
++@x l.183
++  printf("Please try another seed value; %d makes the answer zero!\n",seed);
++@y
++  printf("Please try another seed value; %ld makes the answer zero!\n",seed);
++@z
++
+ @x l.200
+ decimal_to_binary(x,s,n)
+   char *x; /* decimal string */
+-- 
+2.19.0
+

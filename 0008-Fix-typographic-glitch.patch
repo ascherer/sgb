@@ -1,0 +1,27 @@
+From d97c363be2db48514026a49b11cf5d8231061538 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Sun, 27 Nov 2016 16:17:57 +0100
+Subject: [PATCH 08/11] Fix typographic glitch.
+
+The initialization material should be properly indented.
+---
+ PROTOTYPES/take_risc.ch | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/PROTOTYPES/take_risc.ch b/PROTOTYPES/take_risc.ch
+index 660f56e..f570585 100644
+--- a/PROTOTYPES/take_risc.ch
++++ b/PROTOTYPES/take_risc.ch
+@@ -10,3 +10,9 @@ int main(@t\1\1@>
+ {
+   (void) argv;
+ @z
++
++@x l.119
++unsigned long memry[memry_size]={
++@y
++unsigned long memry[memry_size]={@t\1\1@>
++@z
+-- 
+2.19.0
+

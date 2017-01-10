@@ -1,0 +1,269 @@
+From 7762ebd1b9ee6f370f38c66858b45030211057c3 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_scherer@alice.de>
+Date: Thu, 3 Sep 2015 11:19:38 +0200
+Subject: [PATCH 05/11] GCC -Wall.
+
+Compile with '-Wall' and fix the inflicted source modules.
+---
+ PROTOTYPES/book_components.ch | 10 +++++++
+ PROTOTYPES/football.ch        | 11 ++++++++
+ PROTOTYPES/gb_basic.ch        | 51 +++++++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_io.ch           | 22 +++++++++++++--
+ PROTOTYPES/gb_rand.ch         | 24 +++++++++++++++++
+ PROTOTYPES/test_sample.ch     |  6 +++++
+ 6 files changed, 122 insertions(+), 2 deletions(-)
+
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index 6c845fc..73220dd 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -17,3 +17,13 @@ char *vertex_name(@t\1\1@> /* return (as a string) the name of vertex |v| */
+   Vertex *v,
+   char i@t\2\2@>) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
+ @z
++
++@x
++  code_name[i][0]=imap_chr(v->short_code/36);
++  code_name[i][1]=imap_chr(v->short_code%36);
++  return code_name[i];
++@y
++  code_name[(unsigned char)i][0]=imap_chr(v->short_code/36);
++  code_name[(unsigned char)i][1]=imap_chr(v->short_code%36);
++  return code_name[(unsigned char)i];
++@z
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index e7a6de6..3be4af1 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -25,3 +25,14 @@ node *new_node(@t\1\1@>
+   node *x, /* an old node that the new node will call |prev| */
+   long d@t\2\2@>) /* incremental change to |tot_len| */
+ @z
++
++@x
++      if (a->del>d && a->tip->valid==v)
++        if (a->tip==goal) last_arc=a;
++        else best_arc=a,d=a->del;
++@y
++      if (a->del>d && a->tip->valid==v) {
++        if (a->tip==goal) last_arc=a;
++        else best_arc=a,d=a->del;
++      }
++@z
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index dfa4474..e0ba838 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -54,6 +54,13 @@ Graph *board(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  @<Normalize the board-size parameters@>;
++@y
++  (void) s; (void) i;
++  @<Normalize the board-size parameters@>;
++@z
++
+ @x l.493
+ Graph *simplex(n,n0,n1,n2,n3,n4,directed)
+   unsigned long n; /* the constant sum of all coordinates */
+@@ -143,6 +150,13 @@ Graph *complement(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (g==NULL) panic(missing_operand); /* where's |g|? */
++@y
++  (void) s; (void) d; (void) k; (void) j; (void) i;
++  if (g==NULL) panic(missing_operand); /* where's |g|? */
++@z
++
+ @x l.1642
+ Graph *gunion(g,gg,multi,directed)
+   Graph *g,*gg; /* graphs to be united */
+@@ -155,6 +169,15 @@ Graph *gunion(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (g==NULL || gg==NULL) panic(missing_operand);
++    /* where are |g| and |gg|? */
++@y
++  (void) s; (void) d; (void) k; (void) j; (void) i;
++  if (g==NULL || gg==NULL) panic(missing_operand);
++    /* where are |g| and |gg|? */
++@z
++
+ @x l.1723
+ Graph *intersection(g,gg,multi,directed)
+   Graph *g,*gg; /* graphs to be intersected */
+@@ -167,6 +190,13 @@ Graph *intersection(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
++@y
++  (void) s; (void) d; (void) k; (void) j; (void) i;
++  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
++@z
++
+ @x l.1836
+ Graph *lines(g,directed)
+   Graph *g; /* graph whose lines will become vertices */
+@@ -177,6 +207,13 @@ Graph *lines(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (g==NULL) panic(missing_operand); /* where is |g|? */
++@y
++  (void) s; (void) d; (void) k; (void) j; (void) i;
++  if (g==NULL) panic(missing_operand); /* where is |g|? */
++@z
++
+ @x l.2010
+ Graph *product(g,gg,type,directed)
+   Graph *g,*gg; /* graphs to be multiplied */
+@@ -189,6 +226,13 @@ Graph *product(@t\1\1@>
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
+ 
++@x
++  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
++@y
++  (void) s; (void) d; (void) k; (void) j; (void) i;
++  if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
++@z
++
+ @x l.2170
+ Graph *bi_complete(n1,n2,directed)
+   unsigned long n1; /* size of first part */
+@@ -237,3 +281,10 @@ Graph *induced(@t\1\1@>
+   long multi, /* should multiple arcs be permitted? */
+   long directed@t\2\2@>) /* should the graph be directed? */
+ @z
++
++@x
++  if (g==NULL) panic(missing_operand); /* where is |g|? */
++@y
++  (void) s; (void) d; (void) i;
++  if (g==NULL) panic(missing_operand); /* where is |g|? */
++@z
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 02b5d53..cc7929b 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -38,7 +38,7 @@ char imap_chr(long d)
+ long imap_ord(c)
+   char c;
+ @y
+-long imap_ord(char c)
++long imap_ord(unsigned char c)
+ @z
+ 
+ @x l.206
+@@ -46,7 +46,7 @@ extern char imap_chr(); /* the character that maps to a given character */
+ extern long imap_ord(); /* the ordinal number of a given character */
+ @y
+ extern char imap_chr(long); /* the character that maps to a given character */
+-extern long imap_ord(char); /* the ordinal number of a given character */
++extern long imap_ord(unsigned char); /* the ordinal number of a given character */
+ @z
+ 
+ @x l.213
+@@ -55,6 +55,12 @@ static void icode_setup()
+ static void icode_setup(void)
+ @z
+ 
++@x
++  for (p=imap,k=0; *p; p++,k++) icode[*p]=k;
++@y
++  for (p=imap,k=0; *p; p++,k++) icode[(unsigned char)*p]=k;
++@z
++
+ @x l.225
+ extern void gb_newline(); /* advance to next line of the data file */
+ extern long new_checksum(); /* compute change in magic number */
+@@ -126,6 +132,12 @@ long gb_digit(d)
+ long gb_digit(char d)
+ @z
+ 
++@x
++  if (imap_ord(*cur_pos)<d) return icode[*cur_pos++];
++@y
++  if (imap_ord(*cur_pos)<d) return icode[(unsigned char)*cur_pos++];
++@z
++
+ @x l.322
+ unsigned long gb_number(d)
+     char d;
+@@ -133,6 +145,12 @@ unsigned long gb_number(d)
+ unsigned long gb_number(char d)
+ @z
+ 
++@x
++    a=a*d+icode[*cur_pos++];
++@y
++    a=a*d+icode[(unsigned char)*cur_pos++];
++@z
++
+ @x l.353
+ extern char *gb_string(); /* |gb_string(p,c)| reads a string delimited by |c|
+ @y
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index ba6e8f6..2aebfcb 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -35,6 +35,30 @@ Graph *random_graph(@t\1\1@>
+   long seed@t\2\2@>) /* random number seed */
+ @z
+ 
++@x
++  if (multi<=0)
++    @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
++@y
++  if (multi<=0) {
++    @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
++  }
++@z
++
++@x
++    if (a->tip==v)
++@y
++    if (a->tip==v) {
++@z
++
++@x
++        goto done;
++      }
++@y
++        goto done;
++      }
++    }
++@z
++
+ @x l.369
+ static magic_entry *walker(n,nn,dist,g)
+   long n; /* length of |dist| vector */
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index becb6ad..62cbb7a 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -4,6 +4,12 @@
+ int main(void)
+ @z
+ 
++@x
++if (i=random_lengths(g,0L,10L,12L,dst,2L))
++@y
++if ((i=random_lengths(g,0L,10L,12L,dst,2L)))
++@z
++
+ @x l.165
+ static void pr_vert();
+    /* a subroutine for printing a vertex is declared below */
+-- 
+2.19.0
+
