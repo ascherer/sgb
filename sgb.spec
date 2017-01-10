@@ -3,7 +3,7 @@
 
 Name: sgb
 Version: 1:20090810
-Release: 18
+Release: 19
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
@@ -26,6 +26,7 @@ Patch4: 0005-GCC-Wall.patch
 Patch5: 0006-GCC-Wall-Wextra.patch
 Patch6: 0007-Alternative-fix-for-GCC-5.3.1.patch
 Patch7: 0008-Fix-typographic-glitch.patch
+Patch8: 0009-Build-SGB-library-as-shared-object.patch
 
 %description
 The Stanford GraphBase: A Platform for Combinatorial Computing.
@@ -43,8 +44,7 @@ master files stay intact.
 %{__ln_s} PROTOTYPES/*.ch .
 %{?with_sysv:%{__sed} -e "s/#SYS/SYS/" -i Makefile}
 %{__sed} -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
-%{__make} tests assign_lisa book_components econ_order football girth ladders \
-	miles_span multiply queen roget_components take_risc word_components
+%{__make} tests demos
 %{?with_tex:%{__pdftex} abstract.plaintex}
 
 %install
@@ -58,7 +58,7 @@ master files stay intact.
 %{__mkdir_p} %{buildroot}%{_includedir}/%{name}
 %{__cp} *.h %{buildroot}%{_includedir}/%{name}
 %{__mkdir_p} %{buildroot}%{_libdir}/%{name}
-%{__cp} libgb.a %{buildroot}%{_libdir}/%{name}
+%{__cp} libgb.so %{buildroot}%{_libdir}/%{name}
 %{__mkdir_p} %{buildroot}%{_libdir}/cweb
 %{__cp} boilerplate.w gb_types.w %{buildroot}%{_libdir}/cweb
 %if %{with tex}
@@ -84,16 +84,21 @@ master files stay intact.
 %{_bindir}/word_components
 %{_datadir}/%{name}
 %{_includedir}/%{name}
-%{_libdir}/%{name}/libgb.a
+%{_libdir}/%{name}/libgb.so
 %{_libdir}/cweb/boilerplate.w
 %{_libdir}/cweb/gb_types.w
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %post
+%{__ldconfig} %{_libdir}/%{name}
 
 %postun
+%{__ldconfig} %{_libdir}/%{name}
 
 %changelog
+* Sun Dec 11 2016 Andreas Scherer <andreas_tex@freenet.de> 20090810-19
+- Build SGB library as shared object
+
 * Tue May 24 2016 Andreas Scherer <andreas_tex@freenet.de> 20090810-18
 - Fix compiler warning and build on new architecture.
 
