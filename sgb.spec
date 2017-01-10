@@ -1,6 +1,6 @@
 Name: sgb
 Version: 1:20090810
-Release: 15
+Release: 16
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
@@ -31,58 +31,60 @@ master files stay intact.
 %patch -P 0 1 2 3 4 5 -p1
 
 %build
-ln -s PROTOTYPES/*.ch .
-sed -e "s/#SYS/SYS/" -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
-make tests assign_lisa book_components econ_order football girth ladders \
+%{__ln_s} PROTOTYPES/*.ch .
+%{__sed} -e "s/#SYS/SYS/" -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
+%{__make} tests assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components
-pdftex abstract.plaintex
+%{__pdftex} abstract.plaintex
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-cp assign_lisa book_components econ_order football girth ladders \
+%{__rm} -rf $RPM_BUILD_ROOT
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/bin
+%{__cp} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
 	$RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/share/sgb
-cp *.dat $RPM_BUILD_ROOT/usr/share/sgb
-mkdir -p $RPM_BUILD_ROOT/usr/include/sgb
-cp *.h $RPM_BUILD_ROOT/usr/include/sgb
-mkdir -p $RPM_BUILD_ROOT/usr/lib
-cp libgb.a $RPM_BUILD_ROOT/usr/lib
-mkdir -p $RPM_BUILD_ROOT/usr/lib/cweb
-cp boilerplate.w gb_types.w $RPM_BUILD_ROOT/usr/lib/cweb
-mkdir -p $RPM_BUILD_ROOT/usr/share/doc/sgb
-cp abstract.pdf $RPM_BUILD_ROOT/usr/share/doc/sgb
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/sgb
+%{__cp} *.dat $RPM_BUILD_ROOT/usr/share/sgb
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/include/sgb
+%{__cp} *.h $RPM_BUILD_ROOT/usr/include/sgb
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib
+%{__cp} libgb.a $RPM_BUILD_ROOT/usr/lib
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib/cweb
+%{__cp} boilerplate.w gb_types.w $RPM_BUILD_ROOT/usr/lib/cweb
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/doc/sgb
+%{__cp} abstract.pdf $RPM_BUILD_ROOT/usr/share/doc/sgb
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/bin/assign_lisa
-/usr/bin/book_components
-/usr/bin/econ_order
-/usr/bin/football
-/usr/bin/girth
-/usr/bin/ladders
-/usr/bin/miles_span
-/usr/bin/multiply
-/usr/bin/queen
-/usr/bin/roget_components
-/usr/bin/take_risc
-/usr/bin/word_components
-/usr/share/sgb
-/usr/include/sgb
-/usr/lib/libgb.a
-/usr/lib/cweb/boilerplate.w
-/usr/lib/cweb/gb_types.w
-%doc /usr/share/doc/sgb
+%{_usr}/bin/assign_lisa
+%{_usr}/bin/book_components
+%{_usr}/bin/econ_order
+%{_usr}/bin/football
+%{_usr}/bin/girth
+%{_usr}/bin/ladders
+%{_usr}/bin/miles_span
+%{_usr}/bin/multiply
+%{_usr}/bin/queen
+%{_usr}/bin/roget_components
+%{_usr}/bin/take_risc
+%{_usr}/bin/word_components
+%{_usr}/share/sgb
+%{_usr}/include/sgb
+%{_usr}/lib/libgb.a
+%{_usr}/lib/cweb/boilerplate.w
+%{_usr}/lib/cweb/gb_types.w
+%doc %{_usr}/share/doc/sgb
 
 %post
 
 %postun
 
 %changelog
+* Thu Oct 29 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-16
+- Fully parametrized specfile using tons of configuration macros.
 * Mon Sep 07 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-15
 - Compile with -Wall and -Wextra and fix the inflicted source modules.
 * Thu Sep 03 2015 Andreas Scherer <andreas_tex@freenet.de> 20090810-14
