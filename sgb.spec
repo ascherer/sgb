@@ -37,15 +37,11 @@ master files stay intact.
 
 %build
 %{__ln_s} PROTOTYPES/*.ch .
-%if %{with sysv}
-%{__sed} -e "s/#SYS/SYS/" -i Makefile
-%endif
+%{?with_sysv:%{__sed} -e "s/#SYS/SYS/" -i Makefile}
 %{__sed} -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
 %{__make} tests assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components
-%if %{with tex}
-%{__pdftex} abstract.plaintex
-%endif
+%{?with_tex:%{__pdftex} abstract.plaintex}
 
 %install
 %{__rm} -rf %{buildroot}
@@ -87,9 +83,7 @@ master files stay intact.
 %{_libdir}/libgb.a
 %{_libdir}/cweb/boilerplate.w
 %{_libdir}/cweb/gb_types.w
-%if %{with tex}
-%doc %{_docdir}/%{name}
-%endif
+%{?with_tex:%doc %{_docdir}/%{name}}
 
 %post
 
