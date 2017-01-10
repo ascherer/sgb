@@ -1,0 +1,62 @@
+From 3fe7df9fc6c08c6b14d416b80dc4db23b527221f Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 24 May 2016 17:07:54 +0200
+Subject: [PATCH 07/11] Alternative fix for GCC 5.3.1.
+
+The original type 'int' of variable(s) 'avail' was in fact correct all
+along. GCC 5.3.1 complains about the type for the '.*' string formatter.
+In the end, only the 'unsigned' comparison has to be type-casted.
+---
+ PROTOTYPES/gb_graph.ch | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 9a32988..79b2929 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -58,14 +58,18 @@ void make_compound_id(g,s1,gg,s2) /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+   char *s1; /* string for the beginning of the new |id| */
+   Graph *gg; /* graph whose |id| is to be copied */
+   char *s2; /* string for the end of the new |id| */
+-{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
+ @y
+ void make_compound_id(@t\1\1@> /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+   Graph *g, /* graph whose |id| is to be set */
+   char *s1, /* string for the beginning of the new |id| */
+   Graph *gg, /* graph whose |id| is to be copied */
+   char *s2@t\2\2@>) /* string for the end of the new |id| */
+-{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2);
++@z
++
++@x l.495
++  if (strlen(tmp)<avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
++@y
++  if (strlen(tmp)<(siz_t)avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
+ @z
+ 
+ @x l.498
+@@ -77,7 +81,6 @@ void make_double_compound_id(g,s1,gg,s2,ggg,s3)
+   char *s2; /* string for the middle of the new |id| */
+   Graph *ggg; /* second graph whose |id| is to be copied */
+   char *s3; /* string for the end of the new |id| */
+-{@+int avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
+ @y
+ void make_double_compound_id(@t\1\1@>
+     /* |sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
+@@ -87,7 +90,12 @@ void make_double_compound_id(@t\1\1@>
+   char *s2, /* string for the middle of the new |id| */
+   Graph *ggg, /* second graph whose |id| is to be copied */
+   char *s3@t\2\2@>) /* string for the end of the new |id| */
+-{@+siz_t avail=ID_FIELD_SIZE-strlen(s1)-strlen(s2)-strlen(s3);
++@z
++
++@x l.509
++  if (strlen(gg->id)+strlen(ggg->id)<avail)
++@y
++  if (strlen(gg->id)+strlen(ggg->id)<(siz_t)avail)
+ @z
+ 
+ @x l.549
+-- 
+2.19.0
+
