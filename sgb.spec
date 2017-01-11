@@ -52,13 +52,13 @@ master files stay intact.
 %{__ln_s} PROTOTYPES/*.ch .
 %{?with_sysv:%{__sed} -e "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
-%{__sed} -e "s/= -g/= -g -Wall -Wextra/" -i Makefile
+%{__sed} -e "s/CFLAGS = -g/& -Wall -Wextra/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif
 %if ! %{with debuginfo}
 %{__sed} -e "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
-%{__sed} -e "s/LDFLAGS =/LDFLAGS = -s/" -i Makefile
+%{__sed} -e "s/LDFLAGS =/& -s/" -i Makefile
 %endif
 
 %build
