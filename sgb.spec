@@ -4,19 +4,22 @@
 %bcond_with debuginfo
 
 Name: sgb
-%if %{_vendor} == "debbuild"
-Version: 2:20090810
-%else
-Version: 20090810
-%endif
-Release: 19
-Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
+Packager: Andreas Scherer <andreas@komputer.de>
+Release: 19
 
-Group: Productivity/Development
+%if %{_vendor} == "debbuild"
+Version: 2:20090810
+Group: math
 Distribution: Kubuntu 16.04 (x86_64)
+%else
+Version: 20090810
+Group: Productivity/Scientific/Math
+Distribution: openSUSE 42 (x86_64)
+%endif
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: amd64
 %if %{with tex}
