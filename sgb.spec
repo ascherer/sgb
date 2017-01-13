@@ -7,24 +7,25 @@ Name: sgb
 Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
-Packager: Andreas Scherer <andreas@komputer.de>
+Packager: Andreas Scherer <https://ascherer.github.io>
 Release: 19
 
 %if %{_vendor} == "debbuild"
 Version: 2:20090810
 Group: math
 Distribution: Kubuntu 16.04 (x86_64)
-%else
-Version: 20090810
-Group: Productivity/Scientific/Math
-Distribution: openSUSE 42 (x86_64)
-%endif
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: amd64
 %if %{with tex}
 BuildRequires: texlive
 %endif
+%else
+Version: 20090810
+Group: Productivity/Scientific/Math
+Distribution: openSUSE 42 (x86_64)
+%global __echo /bin/echo
+%global __pdftex `which pdftex`
+%endif
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
 %if %{with patches}
