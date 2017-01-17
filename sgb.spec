@@ -14,7 +14,6 @@ Release: 19
 Version: 2:20090810
 Group: math
 Distribution: Kubuntu 16.04 (x86_64)
-BuildArch: amd64
 %if %{with tex}
 BuildRequires: texlive
 %endif
