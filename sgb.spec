@@ -81,6 +81,9 @@ master files stay intact.
 %{__mkdir_p} %{buildroot}%{_libdir}/%{name}
 %if %{with patches}
 %{__cp} libgb.so %{buildroot}%{_libdir}/%{name}
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
+%{__echo} "%{_libdir}/%{name}" > \
+	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %else
 %{__cp} libgb.a %{buildroot}%{_libdir}/%{name}
 %endif
@@ -111,6 +114,7 @@ master files stay intact.
 %{_includedir}/%{name}
 %if %{with patches}
 %{_libdir}/%{name}/libgb.so
+%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %else
 %{_libdir}/%{name}/libgb.a
 %endif
