@@ -94,8 +94,6 @@ master files stay intact.
 %{__cp} abstract.pdf %{buildroot}%{_docdir}/%{name}
 %endif
 
-%clean
-
 %files
 %defattr(-,root,root,-)
 %{_bindir}/assign_lisa
