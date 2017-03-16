@@ -69,30 +69,21 @@ master files stay intact.
 %{?with_tex:%{__pdftex} abstract.plaintex}
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir_p} %{buildroot}%{_bindir}
-%{__cp} assign_lisa book_components econ_order football girth ladders \
+%{__install} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
-	%{buildroot}%{_bindir}
-%{__mkdir_p} %{buildroot}%{_datadir}/%{name}
-%{__cp} *.dat %{buildroot}%{_datadir}/%{name}
-%{__mkdir_p} %{buildroot}%{_includedir}/%{name}
-%{__cp} *.h %{buildroot}%{_includedir}/%{name}
-%{__mkdir_p} %{buildroot}%{_libdir}/%{name}
+	-D -t %{buildroot}%{_bindir}
+%{__install} *.dat -D -t %{buildroot}%{_datadir}/%{name}
+%{__install} *.h -D -t %{buildroot}%{_includedir}/%{name}
 %if %{with patches}
-%{__cp} libgb.so %{buildroot}%{_libdir}/%{name}
+%{__install} libgb.so -D -t %{buildroot}%{_libdir}/%{name}
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
 %{__echo} "%{_libdir}/%{name}" > \
 	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %else
-%{__cp} libgb.a %{buildroot}%{_libdir}/%{name}
+%{__install} libgb.a -D -t %{buildroot}%{_libdir}/%{name}
 %endif
-%{__mkdir_p} %{buildroot}%{_libdir}/cweb
-%{__cp} gb_types.w %{buildroot}%{_libdir}/cweb
-%if %{with tex}
-%{__mkdir_p} %{buildroot}%{_docdir}/%{name}
-%{__cp} abstract.pdf %{buildroot}%{_docdir}/%{name}
-%endif
+%{__install} gb_types.w -D -t %{buildroot}%{_libdir}/cweb
+%{?with_tex:%{__install} abstract.pdf -D -t %{buildroot}%{_docdir}/%{name}}
 
 %files
 %defattr(-,root,root,-)
