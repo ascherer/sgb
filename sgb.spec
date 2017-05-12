@@ -69,6 +69,7 @@ master files stay intact.
 %{?with_tex:%{__pdftex} abstract.plaintex}
 
 %install
+%{__rm} -rf %{buildroot}
 %{__install} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
 	-D -t %{buildroot}%{_bindir}
