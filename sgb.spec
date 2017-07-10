@@ -87,21 +87,10 @@ master files stay intact.
 %{?with_tex:%{__install} abstract.pdf -D -t %{buildroot}%{_docdir}/%{name}}
 
 %files
-%defattr(-,root,root,-)
-%{_bindir}/assign_lisa
-%{_bindir}/book_components
-%{_bindir}/econ_order
-%{_bindir}/football
-%{_bindir}/girth
-%{_bindir}/ladders
-%{_bindir}/miles_span
-%{_bindir}/multiply
-%{_bindir}/queen
-%{_bindir}/roget_components
-%{_bindir}/take_risc
-%{_bindir}/word_components
-%{_datadir}/%{name}
-%{_includedir}/%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/*
+%{_datadir}/%{name}/*
+%{_includedir}/%{name}/*
 %if %{with patches}
 %{_libdir}/%{name}/libgb.so
 %{_sysconfdir}/ld.so.conf.d/%{name}.conf
@@ -109,7 +98,7 @@ master files stay intact.
 %{_libdir}/%{name}/libgb.a
 %endif
 %{_libdir}/cweb/gb_types.w
-%{?with_tex:%doc %{_docdir}/%{name}}
+%{?with_tex:%doc %{_docdir}/%{name}/*}
 
 %post
 %{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
