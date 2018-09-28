@@ -73,22 +73,22 @@ master files stay intact.
 %{__install} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
 	-D -t %{buildroot}%{_bindir}
-%{__install} *.dat -D -t %{buildroot}%{_datadir}/%{name}
-%{__install} *.h -D -t %{buildroot}%{_includedir}/%{name}
+%{__install} *.dat -m 644 -D -t %{buildroot}%{_datadir}/%{name}
+%{__install} *.h -m 644 -D -t %{buildroot}%{_includedir}/%{name}
 %if %{with patches}
 %{__install} libgb.so -D -t %{buildroot}%{_libdir}/%{name}
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
 %{__echo} "%{_libdir}/%{name}" > \
 	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %else
-%{__install} libgb.a -D -t %{buildroot}%{_libdir}/%{name}
+%{__install} libgb.a -m 644 -D -t %{buildroot}%{_libdir}/%{name}
 %endif
-%{__install} gb_types.w -D -t %{buildroot}%{_libdir}/cweb
-%{?with_tex:%{__install} abstract.pdf -D -t %{buildroot}%{_docdir}/%{name}}
+%{__install} gb_types.w -m 644 -D -t %{buildroot}%{_libdir}/cweb
+%{?with_tex:%{__install} abstract.pdf -m 644 -D -t %{buildroot}%{_docdir}/%{name}}
 
 %files
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+%defattr(-,root,root,-)
+%{_bindir}/*
 %{_datadir}/%{name}/*
 %{_includedir}/%{name}/*
 %if %{with patches}
