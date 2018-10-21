@@ -21,8 +21,8 @@ BuildRequires: texlive
 Version: 20090810
 Group: Productivity/Scientific/Math
 Distribution: openSUSE 42 (x86_64)
-%global __echo /bin/echo
-%global __pdftex `which pdftex`
+%global __echo %(which echo)
+%global __pdftex %(which pdftex)
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
