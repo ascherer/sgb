@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 19
+Release: 21
 
 %if %{_vendor} == "debbuild"
 Version: 2:20090810
@@ -27,18 +27,21 @@ Distribution: openSUSE 42 (x86_64)
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
+
+# Nits picked on https://www-cs-staff.stanford.edu/~knuth/sgb.html
+Patch1: 0001-Nit-picked-in-2011.patch
+Patch2: 0004-Nit-picked-in-2015.patch
+
 %if %{with patches}
-Patch0: 0001-Nit-picked-in-2011.patch
-Patch1: 0002-GCC-complains-about-int-long-conflicts.patch
-Patch2: 0003-GCC-Wformat-security.patch
-Patch3: 0004-Nit-picked-in-2015.patch
-Patch4: 0005-GCC-Wall.patch
-Patch5: 0006-GCC-Wall-Wextra.patch
-Patch6: 0007-Alternative-fix-for-GCC-5.3.1.patch
-Patch7: 0008-Fix-typographic-glitch.patch
-Patch8: 0009-Build-SGB-library-as-shared-object.patch
-Patch9: 0010-Update-PROTOTYPES-documentation.patch
-Patch10: 0011-Fix-compiler-warnings-when-optimizing.patch
+Patch3: 0002-GCC-complains-about-int-long-conflicts.patch
+Patch4: 0003-GCC-Wformat-security.patch
+Patch5: 0005-GCC-Wall.patch
+Patch6: 0006-GCC-Wall-Wextra.patch
+Patch7: 0007-Alternative-fix-for-GCC-5.3.1.patch
+Patch8: 0008-Fix-typographic-glitch.patch
+Patch9: 0009-Build-SGB-library-as-shared-object.patch
+Patch10: 0010-Update-PROTOTYPES-documentation.patch
+Patch11: 0011-Fix-compiler-warnings-when-optimizing.patch
 %endif
 
 %description
