@@ -73,21 +73,33 @@ master files stay intact.
 
 %install
 %{__rm} -rf %{buildroot}
+
+%{__install} -d %{buildroot}%{_bindir} \
+	%{buildroot}%{_datadir}/%{name} \
+	%{buildroot}%{_includedir}/%{name} \
+	%{buildroot}%{_libdir}/%{name} \
+	%{buildroot}%{_libdir}/cweb
+
+%{?with_tex:%{__install} -d %{buildroot}%{_docdir}/%{name}}
+
 %{__install} assign_lisa book_components econ_order football girth ladders \
 	miles_span multiply queen roget_components take_risc word_components \
-	-D -t %{buildroot}%{_bindir}
-%{__install} *.dat -m 644 -D -t %{buildroot}%{_datadir}/%{name}
-%{__install} *.h -m 644 -D -t %{buildroot}%{_includedir}/%{name}
+	%{buildroot}%{_bindir}
+%{__install} -m 644 *.dat %{buildroot}%{_datadir}/%{name}
+%{__install} -m 644 *.h %{buildroot}%{_includedir}/%{name}
+
 %if %{with patches}
-%{__install} libgb.so -D -t %{buildroot}%{_libdir}/%{name}
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
+%{__install} libgb.so %{buildroot}%{_libdir}/%{name}
+%{__install} -d %{buildroot}%{_sysconfdir}/ld.so.conf.d
 %{__echo} "%{_libdir}/%{name}" > \
 	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %else
-%{__install} libgb.a -m 644 -D -t %{buildroot}%{_libdir}/%{name}
+%{__install} -m 644 libgb.a %{buildroot}%{_libdir}/%{name}
 %endif
-%{__install} gb_types.w -m 644 -D -t %{buildroot}%{_libdir}/cweb
-%{?with_tex:%{__install} abstract.pdf -m 644 -D -t %{buildroot}%{_docdir}/%{name}}
+
+%{__install} -m 644 gb_types.w %{buildroot}%{_libdir}/cweb
+
+%{?with_tex:%{__install} -m 644 abstract.pdf %{buildroot}%{_docdir}/%{name}}
 
 %files
 %defattr(-,root,root,-)
