@@ -56,15 +56,15 @@ master files stay intact.
 %prep
 %autosetup -c -p1
 %{__ln_s} PROTOTYPES/*.ch .
-%{?with_sysv:%{__sed} -e "s/#SYS/SYS/" -i Makefile}
+%{?with_sysv:%{__perl} -pe "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
-%{__sed} -e "s/CFLAGS = -g/& -Wall -Wextra/" -i Makefile
+%{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif
 %if ! %{with debuginfo}
-%{__sed} -e "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
-%{__sed} -e "s/LDFLAGS =/& -s/" -i Makefile
+%{__perl} -pe "s/(CFLAGS =) -g/\1 -O/" -i Makefile
+%{__perl} -pe "s/(LDFLAGS =)/\1 -s/" -i Makefile
 %endif
 
 %build
