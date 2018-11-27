@@ -1,7 +1,7 @@
-From d97c363be2db48514026a49b11cf5d8231061538 Mon Sep 17 00:00:00 2001
+From 1346df4d76eb7838cd60013f2854c0d99a7a3ea5 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 27 Nov 2016 16:17:57 +0100
-Subject: [PATCH 08/11] Fix typographic glitch.
+Subject: [PATCH 08/12] Fix typographic glitch.
 
 The initialization material should be properly indented.
 ---
@@ -23,5 +23,5 @@ index 660f56e..f570585 100644
 +unsigned long memry[memry_size]={@t\1\1@>
 +@z
 -- 
-2.19.0
+2.19.2
 
