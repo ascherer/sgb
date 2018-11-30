@@ -1,7 +1,7 @@
-From 102aff1aec42519a1bead170de1a76d04d4a10df Mon Sep 17 00:00:00 2001
+From 5b352a0fa06e2b497ca1d507fa84f70eb2bbcbce Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 9 Mar 2011 00:00:00 +0100
-Subject: [PATCH 01/13] Nit picked in 2011.
+Subject: [PATCH 01/14] Nit picked in 2011.
 
 ---
  miles_span.w | 2 +-
@@ -21,5 +21,5 @@ index d576770..6a5f9b7 100644
    o,v=heap_elt(1);
    o,u=heap_elt(hsize--);
 -- 
-2.19.2
+2.20.1
 
