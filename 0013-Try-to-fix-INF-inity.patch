@@ -1,0 +1,333 @@
+From 117b7ee431e6a0fb59b81e8d5e08ded10f59d7a2 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Fri, 30 Nov 2018 11:06:08 +0100
+Subject: [PATCH 13/13] Try to fix 'INF'inity.
+
+See https://www-cs-staff.stanford.edu/~knuth/sgb.html for details.
+---
+ PROTOTYPES/assign_lisa.ch | 52 ++++++++++++++++++++++-----------------
+ PROTOTYPES/econ_order.ch  |  8 +++++-
+ PROTOTYPES/gb_lisa.ch     | 32 ++++++++++++++----------
+ 3 files changed, 55 insertions(+), 37 deletions(-)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 5271604..fdcc58d 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -8,7 +8,7 @@ int main(@t\1\1@>
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
+ @z
+ 
+-@x
++@x l.149
+ for (k=0;k<m;k++) {
+   for (l=0;l<n;l++) printf("% 4ld",compl?d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @y
+@@ -16,85 +16,91 @@ for (k=0;k<(long)m;k++) {
+   for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @z
+ 
+-@x
++@x l.309
+   for (l=0; l<n; l++) {
+ @y
+   for (l=0; l<(long)n; l++) {
+ @z
+ 
+-@x
++@x l.311
+     for (k=1;k<n;k++) 
+ @y
+     for (k=1;k<(long)n;k++)
+ @z
+ 
+-@x
++@x l.314
+       for (k=0;k<n;k++)
+ @y
+       for (k=0;k<(long)n;k++)
+ @z
+ 
+-@x
++@x l.396
++@d INF 0x7fffffff /* infinity (or darn near) */
++@y
++@d INF (long)(((unsigned long)-1)>>1) /* infinity (or darn near) */
++@z
++
++@x l.400
+ for (l=0; l<n; l++) {
+ @y
+ for (l=0; l<(long)n; l++) {
+ @z
+ 
+-@x
++@x l.406
+ for (k=0; k<m; k++) {
+ @y
+ for (k=0; k<(long)m; k++) {
+ @z
+ 
+-@x
++@x l.408
+   for (l=1; l<n; l++) if (o,aa(k,l)<s) s=aa(k,l);
+ @y
+   for (l=1; l<(long)n; l++) if (o,aa(k,l)<s) s=aa(k,l);
+ @z
+ 
+-@x
++@x l.410
+   for (l=0; l<n; l++)
+ @y
+   for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.428
+ for (l=0; l<n; l++) {
+ @y
+ for (l=0; l<(long)n; l++) {
+ @z
+ 
+-@x
++@x l.432
+ for (k=0; k<m; k++)
+ @y
+ for (k=0; k<(long)m; k++)
+ @z
+ 
+-@x
++@x l.469
+   for (l=0; l<n; l++)
+ @y
+   for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.512
+ for (l=0; l<n; l++)
+ @y
+ for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.517
+ for (l=0; l<n; l++)
+ @y
+ for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.542
+     for (j=l+1; j<n; j++)
+ @y
+     for (j=l+1; j<(long)n; j++)
+ @z
+ 
+-@x
++@x l.562
+ for (k=0;k<m;k++)
+   for (l=0;l<n;l++)
+ @y
+@@ -102,13 +108,13 @@ for (k=0;k<(long)m;k++)
+   for (l=0;l<(long)n;l++)
+ @z
+ 
+-@x
++@x l.568
+ for (k=0;k<m;k++) {
+ @y
+ for (k=0;k<(long)m;k++) {
+ @z
+ 
+-@x
++@x l.575
+ for (l=0;l<n;l++) if (col_inc[l]) k++;
+ if (k>m) {
+ @y
+@@ -116,31 +122,31 @@ for (l=0;l<(long)n;l++) if (col_inc[l]) k++;
+ if (k>(long)m) {
+ @z
+ 
+-@x
++@x l.596
+   for (k=0; k<m; k++) for (l=0; l<n; l++)
+ @y
+   for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.608
+   for (k=0; k<m; k++) for (l=0; l<n; l++)
+ @y
+   for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
+ @z
+ 
+-@x
++@x l.622
+   for (k=0; k<m; k++)
+ @y
+   for (k=0; k<(long)m; k++)
+ @z
+ 
+-@x
++@x l.670
+     for (k=0;k<m;k++) @<Output row |k| as a hexadecimal string@>;
+ @y
+     for (k=0;k<(long)m;k++) @<Output row |k| as a hexadecimal string@>;
+ @z
+ 
+-@x
++@x l.684
+   for (l=0; l<n; l++) {
+     x=(long)(conv*(float)(compl?d-aa(k,l):aa(k,l)));
+ @y
+@@ -148,7 +154,7 @@ if (k>(long)m) {
+     x=(long)(conv*(float)(compl?(long)d-aa(k,l):aa(k,l)));
+ @z
+ 
+-@x
++@x l.699
+   for (k=0; k<m; k++)
+ @y
+   for (k=0; k<(long)m; k++)
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index 2fbba49..ea9d3d2 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -10,7 +10,13 @@ int main(@t\1\1@>
+ {@+long n=79; /* the desired number of sectors */
+ @z
+ 
+-@x
++@x l.109
++@d INF 0x7fffffff /* infinity (or darn near) */
++@y
++@d INF (long)(((unsigned long)-1)>>1) /* infinity (or darn near) */
++@z
++
++@x l.120
+   if (sscanf(argv[argc],"-n%lu",&n)==1) ;
+ @y
+   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 50e73d7..3d3ac21 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -38,13 +38,13 @@ long *lisa(@t\1\1@>
+     /* where to allocate the matrix that will be output */
+ @z
+ 
+-@x
++@x l.229
+ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ @y
+ for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
+ @z
+ 
+-@x
++@x l.250
+ for (k=kap=0; k<m;k++) {
+   for (l=0;l<n;l++) *(out_row+l)=0; /* clear the vector of sums */
+ @y
+@@ -52,12 +52,18 @@ for (k=kap=0; k<(long)m;k++) {
+   for (l=0;l<(long)n;l++) *(out_row+l)=0; /* clear the vector of sums */
+ @z
+ 
+-@x
++@x l.264
+   for (l=0; l<n; l++,out_row++) /* note that |out_row| will advance by~|n| */
+ @y
+   for (l=0; l<(long)n; l++,out_row++) /* note that |out_row| will advance by~|n| */
+ @z
+ 
++@x l.283
++@d el_gordo 0x7fffffff /* $2^{31}-1$, the largest single-precision |long| */
++@y
++@d el_gordo (long)(((unsigned long)-1)>>1) /* the largest single-precision |long| */
++@z
++
+ @x l.286
+ static long na_over_b(n,a,b)
+   long n,a,b;
+@@ -65,7 +71,7 @@ static long na_over_b(n,a,b)
+ static long na_over_b(long n,long a,long b)
+ @z
+ 
+-@x
++@x l.319
+ if (*out_row<=d0) *out_row=0;
+ else if (*out_row>=d1) *out_row=d;
+ @y
+@@ -73,7 +79,7 @@ if (*out_row<=(long)d0) *out_row=0;
+ else if (*out_row>=(long)d1) *out_row=d;
+ @z
+ 
+-@x
++@x l.334
+ for (i=0;i<m0;i++)
+ @y
+ for (i=0;i<(long)m0;i++)
+@@ -100,31 +106,31 @@ for (i=0;i<(long)m0;i++)
+     /* lower and upper threshold of raw pixel scores */
+ @z
+ 
+-@x
++@x l.496
+     if (k<m) {
+ @y
+     if (k<(long)m) {
+ @z
+ 
+-@x
++@x l.498
+         for (j=l; f[j]!=j; j=f[j]) ; /* find the first element */
+ @y
+         for (j=l; f[j]!=(unsigned long)j; j=f[j]) ; /* find the first element */
+ @z
+ 
+-@x
++@x l.501
+       }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
+ @y
+       }@+else if (f[l]==(unsigned long)l) *apos=-1-*apos,regs++; /* new region found */
+ @z
+ 
+-@x
++@x l.504
+     if (k>0&&l<n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+ @y
+     if (k>0&&l<(long)n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+ @z
+ 
+-@x
++@x l.533
+ for (l=0;l<n;l++) u[l]=NULL;
+ for (k=0,apos=a,aloc=0;k<m;k++)
+   for (l=0;l<n;l++,apos++,aloc++) {
+@@ -162,19 +168,19 @@ static void adjac(Vertex *u,Vertex *v)
+     /* should we prefer dark pixels to light pixels? */
+ @z
+ 
+-@x
++@x l.628
+ for (k=0,v=new_graph->vertices;k<m;k++,v++) {
+ @y
+ for (k=0,v=new_graph->vertices;k<(long)m;k++,v++) {
+ @z
+ 
+-@x
++@x l.632
+ for (l=0;l<n;l++,v++) {
+ @y
+ for (l=0;l<(long)n;l++,v++) {
+ @z
+ 
+-@x
++@x l.644
+     if (c?*apos<thresh:*apos>=thresh) {
+ @y
+     if (c?*apos<(long)thresh:*apos>=(long)thresh) {
+-- 
+2.19.2
+
