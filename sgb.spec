@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 22
+Release: 23
 
 %if %{_vendor} == "debbuild"
 Version: 2:20090810
@@ -47,6 +47,7 @@ Patch9: 0009-Build-SGB-library-as-shared-object.patch
 Patch10: 0010-Update-PROTOTYPES-documentation.patch
 Patch11: 0011-Fix-compiler-warnings-when-optimizing.patch
 Patch12: 0012-Fix-issue-4-prefix-is-too-short.patch
+Patch13: 0013-Try-to-fix-INF-inity.patch
 %endif
 
 %description

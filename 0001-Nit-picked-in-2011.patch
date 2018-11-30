@@ -1,7 +1,7 @@
-From 07177630e0320b41454fc830d0c2259b87ae6362 Mon Sep 17 00:00:00 2001
+From 102aff1aec42519a1bead170de1a76d04d4a10df Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 9 Mar 2011 00:00:00 +0100
-Subject: [PATCH 01/12] Nit picked in 2011.
+Subject: [PATCH 01/13] Nit picked in 2011.
 
 ---
  miles_span.w | 2 +-
