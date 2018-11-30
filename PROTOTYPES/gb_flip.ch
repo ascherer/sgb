@@ -20,7 +20,8 @@ long gb_flip_cycle(void)
 void gb_init_rand(seed)
     long seed;
 @y
-void gb_init_rand(long seed)
+void gb_init_rand(
+    long seed)
 @z
 
 @x l.223
@@ -33,7 +34,8 @@ extern void gb_init_rand(long);
 long gb_unif_rand(m)
     long m;
 @y
-long gb_unif_rand(long m)
+long gb_unif_rand(
+    long m)
 @z
 
 @x l.255

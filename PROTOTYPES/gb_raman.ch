@@ -23,8 +23,8 @@ Graph *raman(@t\1\1@>
 static void deposit(a,b,c,d)
   long a,b,c,d; /* a solution to $a^2+b^2+c^2+d^2=p$ */
 @y
-static void deposit(long a,long b,long c,long d)
-  /* a solution to $a^2+b^2+c^2+d^2=p$ */
+static void deposit(
+  long a,long b,long c,long d) /* a solution to $a^2+b^2+c^2+d^2=p$ */
 @z
 
 @x l.697

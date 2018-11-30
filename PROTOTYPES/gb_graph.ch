@@ -18,7 +18,8 @@ char *gb_alloc(@t\1\1@>
 void gb_free(s)
   Area s;
 @y
-void gb_free(Area s)
+void gb_free(
+  Area s)
 @z
 
 @x l.311
@@ -37,8 +38,8 @@ extern void gb_free(Area); /* deallocate all blocks for an area */
 Graph *gb_new_graph(n)
   long n; /* desired number of vertices */
 @y
-Graph *gb_new_graph(long n)
-  /* desired number of vertices */
+Graph *gb_new_graph(
+  long n) /* desired number of vertices */
 @z
 
 @x l.476
@@ -128,22 +129,24 @@ void gb_new_edge(@t\1\1@>
 char *gb_save_string(s)
   register char *s; /* the string to be copied */
 @y
-char *gb_save_string(register char *s)
-  /* the string to be copied */
+char *gb_save_string(
+  register char *s) /* the string to be copied */
 @z
 
 @x l.772
 void switch_to_graph(g)
   Graph *g;
 @y
-void switch_to_graph(Graph *g)
+void switch_to_graph(
+  Graph *g)
 @z
 
 @x l.790
 void gb_recycle(g)
   Graph *g;
 @y
-void gb_recycle(Graph *g)
+void gb_recycle(
+  Graph *g)
 @z
 
 @x l.804
@@ -177,31 +180,38 @@ extern Vertex* hash_out(); /* find a name in hash table of current graph */
 extern void hash_setup(); /* create a hash table for a given graph */
 extern Vertex* hash_lookup(); /* find a name in a given graph */
 @y
-extern void hash_in(Vertex *); /* input a name to the hash table of current graph */
-extern Vertex* hash_out(char *); /* find a name in hash table of current graph */
-extern void hash_setup(Graph *); /* create a hash table for a given graph */
-extern Vertex* hash_lookup(char *,Graph *); /* find a name in a given graph */
+extern void hash_in(Vertex *);
+   /* input a name to the hash table of current graph */
+extern Vertex* hash_out(char *);
+   /* find a name in hash table of current graph */
+extern void hash_setup(Graph *);
+   /* create a hash table for a given graph */
+extern Vertex* hash_lookup(char *,Graph *);
+   /* find a name in a given graph */
 @z
 
 @x l.855
 void hash_in(v)
   Vertex *v;
 @y
-void hash_in(Vertex *v)
+void hash_in(
+  Vertex *v)
 @z
 
 @x l.898
 Vertex* hash_out(s)
   char* s;
 @y
-Vertex* hash_out(char *s)
+Vertex* hash_out(
+  char *s)
 @z
 
 @x l.909
 void hash_setup(g)
   Graph *g;
 @y
-void hash_setup(Graph *g)
+void hash_setup(
+  Graph *g)
 @z
 
 @x l.924
@@ -209,5 +219,7 @@ Vertex* hash_lookup(s,g)
   char *s;
   Graph *g;
 @y
-Vertex* hash_lookup(char *s,Graph *g)
+Vertex* hash_lookup(
+  char *s,
+  Graph *g)
 @z

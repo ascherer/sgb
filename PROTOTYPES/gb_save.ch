@@ -10,8 +10,8 @@ extern Graph *restore_graph(char *);
 Graph *restore_graph(f)
   char *f; /* the file name */
 @y
-Graph *restore_graph(char *f)
-  /* the file name */
+Graph *restore_graph(
+  char *f) /* the file name */
 @z
 
 @x l.225
@@ -60,8 +60,8 @@ static void flushout(void) /* output the buffer to |save_file| */
 static void prepare_string(s)
   char *s; /* string that is moved to |item_buf| */
 @y
-static void prepare_string(char *s)
-  /* string that is moved to |item_buf| */
+static void prepare_string(
+  char *s) /* string that is moved to |item_buf| */
 @z
 
 @x l.709

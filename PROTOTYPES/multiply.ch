@@ -30,6 +30,6 @@ void decimal_to_binary(@t\1\1@>
 long depth(g)
   Graph *g; /* graph with gates as vertices */
 @y
-long depth(Graph *g)
-  /* graph with gates as vertices */
+long depth(
+  Graph *g) /* graph with gates as vertices */
 @z

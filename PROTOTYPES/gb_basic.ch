@@ -54,11 +54,15 @@ Graph *board(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.185
   @<Normalize the board-size parameters@>;
+  @<Set up a graph with |n| vertices@>;
+  @<Insert arcs or edges for all legal moves@>;
 @y
   (void) s; (void) i;
-  @<Normalize the board-size parameters@>;
+  @<Normalize the board-size parameters@>@;
+  @<Set up a graph with |n| vertices@>@;
+  @<Insert arcs or edges for all legal moves@>@;
 @z
 
 @x l.493
@@ -73,43 +77,43 @@ Graph *simplex(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.512
   if (n0>n) n0=n;
 @y
   if (n0>(long)n) n0=n;
 @z
 
-@x
+@x l.516
     if (n1>n) n1=n;
 @y
     if (n1>(long)n) n1=n;
 @z
 
-@x
+@x l.520
       if (n2>n) n2=n;
 @y
       if (n2>(long)n) n2=n;
 @z
 
-@x
+@x l.524
         if (n3>n) n3=n;
 @y
         if (n3>(long)n) n3=n;
 @z
 
-@x
+@x l.527
         else {@+if (n4>n) n4=n;
 @y
         else {@+if (n4>(long)n) n4=n;
 @z
 
-@x
+@x l.575
   for (k=1;k<=n;k++) {
 @y
   for (k=1;k<=(long)n;k++) {
 @z
 
-@x
+@x l.603
 if (yy[0]>=n) {
   k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
 @y
@@ -131,7 +135,7 @@ Graph *subsets(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.763
 if (yy[0]>=n) {
   k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
 @y
@@ -139,7 +143,7 @@ if (yy[0]>=(long)n) {
   k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
 @z
 
-@x
+@x l.790
     long ss=0; /* the number of elements common to |u| and |v| */
 @y
     unsigned long ss=0; /* the number of elements common to |u| and |v| */
@@ -157,25 +161,25 @@ Graph *perms(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.915
 {@+register long ss; /* max inversions known to be possible */
 @y
 {@+register unsigned long ss; /* max inversions known to be possible */
 @z
 
-@x
+@x l.940
   for (k=1,nverts=1;k<=max_inv;k++) {
 @y
   for (k=1,nverts=1;k<=(long)max_inv;k++) {
 @z
 
-@x
+@x l.961
   for (i=k,ii=0;i<=max_inv;i++,ii++) {
 @y
   for (i=k,ii=0;i<=(long)max_inv;i++,ii++) {
 @z
 
-@x
+@x l.1017
   if (m<max_inv && ytab[k]<k-1)
 @y
   if (m<(long)max_inv && ytab[k]<k-1)
@@ -206,19 +210,19 @@ Graph *parts(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1127
   for (k=1;k<=max_parts;k++) {
 @y
   for (k=1;k<=(long)max_parts;k++) {
 @z
 
-@x
+@x l.1129
     for (j=k,i=0;j<=n;i++,j++) {
 @y
     for (j=k,i=0;j<=(long)n;i++,j++) {
 @z
 
-@x
+@x l.1207
 if (d<max_parts) {
 @y
 if (d<(long)max_parts) {
@@ -236,7 +240,7 @@ Graph *binary(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1328
     for (k=2;k<=n;k++) nn[k]=0;
     for (j=2;j<=max_height;j++)
 @y
@@ -244,13 +248,13 @@ Graph *binary(@t\1\1@>
     for (j=2;j<=(long)max_height;j++)
 @z
 
-@x
+@x l.1356
     for (j=2;j<=max_height;j++) {
 @y
     for (j=2;j<=(long)max_height;j++) {
 @z
 
-@x
+@x l.1413
   if (ltab[0]>n) {
 @y
   if (ltab[0]>(long)n) {
@@ -270,7 +274,7 @@ Graph *complement(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1555
   if (g==NULL) panic(missing_operand); /* where's |g|? */
 @y
   (void) s; (void) d; (void) k; (void) j; (void) i;
@@ -289,7 +293,7 @@ Graph *gunion(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1651
   if (g==NULL || gg==NULL) panic(missing_operand);
     /* where are |g| and |gg|? */
 @y
@@ -310,7 +314,7 @@ Graph *intersection(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1732
   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
 @y
   (void) s; (void) d; (void) k; (void) j; (void) i;
@@ -327,7 +331,7 @@ Graph *lines(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.1843
   if (g==NULL) panic(missing_operand); /* where is |g|? */
 @y
   (void) s; (void) d; (void) k; (void) j; (void) i;
@@ -346,7 +350,7 @@ Graph *product(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.2018
   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
 @y
   (void) s; (void) d; (void) k; (void) j; (void) i;
@@ -402,7 +406,7 @@ Graph *induced(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
-@x
+@x l.2259
   if (g==NULL) panic(missing_operand); /* where is |g|? */
 @y
   (void) s; (void) d; (void) i;

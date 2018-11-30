@@ -4,7 +4,7 @@
 int main(void)
 @z
 
-@x
+@x l.113
 if (i=random_lengths(g,0L,10L,12L,dst,2L))
 @y
 if ((i=random_lengths(g,0L,10L,12L,dst,2L)))

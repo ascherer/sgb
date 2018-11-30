@@ -16,7 +16,7 @@ Vertex *prompt_for_team(char *s)
   /* string used in prompt message */
 @z
 
-@x
+@x l.148
     fgets(buffer,30,stdin);
 @y
     if (!fgets(buffer,30,stdin)) return NULL; /* something's wrong */
@@ -32,7 +32,7 @@ node *new_node(@t\1\1@>
   long d@t\2\2@>) /* incremental change to |tot_len| */
 @z
 
-@x
+@x l.285
     register Arc *best_arc; /* arc that achieves |del=d| */
     register Arc *last_arc; /* arc that goes directly to |goal| */
 @y
@@ -40,7 +40,7 @@ node *new_node(@t\1\1@>
     register Arc *last_arc=0; /* arc that goes directly to |goal| */
 @z
 
-@x
+@x l.294
       if (a->del>d && a->tip->valid==v)
         if (a->tip==goal) last_arc=a;
         else best_arc=a,d=a->del;

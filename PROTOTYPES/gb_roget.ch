@@ -20,13 +20,13 @@ Graph *roget(@t\1\1@>
   long seed@t\2\2@>) /* random number seed */
 @z
 
-@x
+@x l.176
     if (gb_number(10)!=k) panic(syntax_error); /* out of synch */
 @y
     if ((long)gb_number(10)!=k) panic(syntax_error); /* out of synch */
 @z
 
-@x
+@x l.198
   if (mapping[j] && iabs(j-k)>=min_distance &&
        (prob==0 || ((gb_next_rand()>>15)>=prob)))
 @y

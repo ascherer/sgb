@@ -28,7 +28,8 @@ char imap_chr(d)
   return d<0 || d>strlen(imap)? '\0': imap[d];
 }
 @y
-char imap_chr(long d)
+char imap_chr(
+  long d)
 {
   return((char)(d<0 || d>(long)strlen(imap)? '\0': imap[d]));
 }
@@ -38,10 +39,11 @@ char imap_chr(long d)
 long imap_ord(c)
   char c;
 @y
-long imap_ord(unsigned char c)
+long imap_ord(
+  unsigned char c)
 @z
 
-@x
+@x l.201
   return (c<0||c>255)? unexpected_char: icode[c];
 @y
   return icode[c];
@@ -61,7 +63,7 @@ static void icode_setup()
 static void icode_setup(void)
 @z
 
-@x
+@x l.217
   for (p=imap,k=0; *p; p++,k++) icode[*p]=k;
 @y
   for (p=imap,k=0; *p; p++,k++) icode[(unsigned char)*p]=k;
@@ -135,10 +137,11 @@ extern unsigned long gb_number(char); /* |gb_number(d)| reads a radix-|d| number
 long gb_digit(d)
     char d;
 @y
-long gb_digit(char d)
+long gb_digit(
+    char d)
 @z
 
-@x
+@x l.319
   if (imap_ord(*cur_pos)<d) return icode[*cur_pos++];
 @y
   if (imap_ord(*cur_pos)<d) return icode[(unsigned char)*cur_pos++];
@@ -148,10 +151,11 @@ long gb_digit(char d)
 unsigned long gb_number(d)
     char d;
 @y
-unsigned long gb_number(char d)
+unsigned long gb_number(
+    char d)
 @z
 
-@x
+@x l.328
     a=a*d+icode[*cur_pos++];
 @y
     a=a*d+icode[(unsigned char)*cur_pos++];
@@ -186,14 +190,16 @@ extern long gb_open(char *); /* open a GraphBase data file; return 0 if OK */
 void gb_raw_open(f)
     char *f;
 @y
-void gb_raw_open(char *f)
+void gb_raw_open(
+    char *f)
 @z
 
 @x l.463
 long gb_open(f)
     char *f;
 @y
-long gb_open(char *f)
+long gb_open(
+    char *f)
 @z
 
 @x l.534

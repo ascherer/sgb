@@ -32,7 +32,8 @@ static long dummy(v)
   Vertex *v;
 {@+return 0;@+}
 @y
-static long dummy(Vertex *v)
+static long dummy(
+  Vertex *v)
 {@+(void)v;return 0;@+}
 @z
 
@@ -47,14 +48,15 @@ long dijkstra(@t\1\1@>
   Vertex *uu, /* the starting point */
   Vertex *vv, /* the ending point */
   Graph *gg, /* the graph they belong to */
-  long (*hh)(Vertex *)@t\2\2@>) /* heuristic function */
+  long @[@] (*hh)(Vertex *)@t\2\2@>) /* heuristic function */
 @z
 
 @x l.257
 void print_dijkstra_result(vv)
   Vertex *vv; /* ending vertex */
 @y
-void print_dijkstra_result(Vertex *vv) /* ending vertex */
+void print_dijkstra_result(
+  Vertex *vv) /* ending vertex */
 @z
 
 @x l.295
@@ -75,7 +77,8 @@ Vertex *(*del_min)(void) = del_first; /* remove element with smallest key */
 void init_dlist(d)
   long d;
 @y
-void init_dlist(long d)
+void init_dlist(
+  long d)
 @z
 
 @x l.328
@@ -83,7 +86,9 @@ void enlist(v,d)
   Vertex *v;
   long d;
 @y
-void enlist(Vertex *v,long d)
+void enlist(
+  Vertex *v,
+  long d)
 @z
 
 @x l.340
@@ -91,7 +96,9 @@ void reenlist(v,d)
   Vertex *v;
   long d;
 @y
-void reenlist(Vertex *v,long d)
+void reenlist(
+  Vertex *v,
+  long d)
 @z
 
 @x l.353
@@ -104,7 +111,8 @@ Vertex *del_first(void)
 void init_128(d)
   long d;
 @y
-void init_128(long d)
+void init_128(
+  long d)
 @z
 
 @x l.386

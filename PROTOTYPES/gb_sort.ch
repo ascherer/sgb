@@ -8,5 +8,6 @@ extern void gb_linksort(void *); /* procedure to sort a linked list */
 void gb_linksort(l)
   node *l;
 @y
-void gb_linksort(node *l)
+void gb_linksort(
+  node *l)
 @z

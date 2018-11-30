@@ -27,13 +27,13 @@ Graph *miles(@t\1\1@>
   long seed@t\2\2@>) /* random number seed */
 @z
 
-@x
+@x l.366
       if (j>max_distance)
 @y
       if (j>(long)max_distance)
 @z
 
-@x
+@x l.378
     if (++j>max_degree)
 @y
     if (++j>(long)max_degree)
@@ -43,7 +43,8 @@ Graph *miles(@t\1\1@>
 @p long miles_distance(u,v)
   Vertex *u,*v;
 @y
-@p long miles_distance(Vertex *u,Vertex *v)
+@p long miles_distance(
+  Vertex *u,Vertex *v)
 @z
 
 @x l.401

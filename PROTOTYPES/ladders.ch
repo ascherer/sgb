@@ -12,7 +12,8 @@ int main(@t\1\1@>
 long freq_cost(v)
   Vertex *v;
 @y
-long freq_cost(Vertex *v)
+long freq_cost(
+  Vertex *v)
 @z
 
 @x l.253
@@ -31,35 +32,40 @@ quit_if(gb_trouble_code,no_room+6L); /* out of memory */
 long alph_dist(p,q)
   register char *p, *q;
 @y
-long alph_dist(register char *p,register char *q)
+long alph_dist(
+  register char *p,register char *q)
 @z
 
 @x l.291
 void plant_new_edge(v)
   Vertex *v;
 @y
-void plant_new_edge(Vertex *v)
+void plant_new_edge(
+  Vertex *v)
 @z
 
 @x l.324
 long hamm_dist(p,q)
   register char *p, *q;
 @y
-long hamm_dist(register char *p,register char *q)
+long hamm_dist(
+  register char *p,register char *q)
 @z
 
 @x l.338
 long alph_heur(v)
   Vertex *v;
 @y
-long alph_heur(Vertex *v)
+long alph_heur(
+  Vertex *v)
 @z
 
 @x l.342
 long hamm_heur(v)
   Vertex *v;
 @y
-long hamm_heur(Vertex *v)
+long hamm_heur(
+  Vertex *v)
 @z
 
 @x l.380

@@ -35,13 +35,13 @@ Graph *random_graph(@t\1\1@>
   long seed@t\2\2@>) /* random number seed */
 @z
 
-@x
+@x l.181
 for (k=0; k<n; k++) {
 @y
 for (k=0; k<(long)n; k++) {
 @z
 
-@x
+@x l.204
   if (multi<=0)
     @<Search for duplicate arcs or edges; |goto repeat| or |done| if found@>;
 @y
@@ -50,13 +50,13 @@ for (k=0; k<(long)n; k++) {
   }
 @z
 
-@x
+@x l.226
     if (a->tip==v)
 @y
     if (a->tip==v) {
 @z
 
-@x
+@x l.237
         goto done;
       }
 @y
@@ -65,13 +65,13 @@ for (k=0; k<(long)n; k++) {
     }
 @z
 
-@x
+@x l.290
     while (nn<n) nn+=nn, kk--;
 @y
     while (nn<(long)n) nn+=nn, kk--;
 @z
 
-@x
+@x l.294
     while (nn<n) nn+=nn, kk--;
 @y
     while (nn<(long)n) nn+=nn, kk--;
@@ -116,13 +116,13 @@ Graph *random_bigraph(@t\1\1@>
     /* random number seed */
 @z
 
-@x
+@x l.498
   else for (k=0; k<n1; k++) *q++=(0x40000000+k)/n1;
 @y
   else for (k=0; k<(long)n1; k++) *q++=(0x40000000+k)/n1;
 @z
 
-@x
+@x l.502
   else for (k=0; k<n2; k++) *q++=(0x40000000+k)/n2;
 @y
   else for (k=0; k<(long)n2; k++) *q++=(0x40000000+k)/n2;
@@ -144,7 +144,7 @@ long random_lengths(@t\1\1@>
   long seed@t\2\2@>) /* random number seed */
 @z
 
-@x
+@x l.532
   magic_entry *dist_table; /* alias table for nonuniform generation */
 @y
   magic_entry *dist_table=0; /* alias table for nonuniform generation */

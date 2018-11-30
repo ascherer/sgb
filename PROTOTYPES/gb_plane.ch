@@ -31,7 +31,7 @@ Graph *plane(@t\1\1@>
     /* random number seed */
 @z
 
-@x
+@x l.135
 for (k=0,v=new_graph->vertices; k<n; k++,v++) {
 @y
 for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
@@ -44,7 +44,7 @@ void delaunay(g,f)
 @y
 void delaunay(@t\1\1@>
   Graph *g, /* vertices in the plane */
-  void (*f)(Vertex *,Vertex *)@t\2\2@>)
+  void @[@] (*f)(Vertex *,Vertex *)@t\2\2@>)
     /* procedure that absorbs the triangulated edges */
 @z
 
@@ -55,7 +55,7 @@ static void new_euclid_edge(u,v)
 static void new_euclid_edge(Vertex *u,Vertex *v)
 @z
 
-@x
+@x l.255
   if ((gb_next_rand()>>15)>=gprob) {
 @y
   if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
@@ -65,56 +65,64 @@ static void new_euclid_edge(Vertex *u,Vertex *v)
 static long int_sqrt(x)
   long x;
 @y
-static long int_sqrt(long x)
+static long int_sqrt(
+  long x)
 @z
 
 @x l.322
 static long sign_test(x1,x2,x3,y1,y2,y3)
   long x1,x2,x3,y1,y2,y3;
 @y
-static long sign_test(long x1,long x2,long x3,long y1,long y2,long y3)
+static long sign_test(
+  long x1,long x2,long x3,long y1,long y2,long y3)
 @z
 
 @x l.431
 static long ccw(u,v,w)
   Vertex *u,*v,*w;
 @y
-static long ccw(Vertex *u,Vertex *v,Vertex *w)
+static long ccw(
+  Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.474
 static long incircle(t,u,v,w)
   Vertex *t,*u,*v,*w;
 @y
-static long incircle(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+static long incircle(
+  Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.542
 static long ff(t,u,v,w)
   Vertex *t,*u,*v,*w;
 @y
-static long ff(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+static long ff(
+  Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.550
 static long gg(t,u,v,w)
   Vertex *t,*u,*v,*w;
 @y
-static long gg(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+static long gg(
+  Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.558
 static long hh(t,u,v,w)
   Vertex *t,*u,*v,*w;
 @y
-static long hh(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+static long hh(
+  Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.563
 static long jj(t,u,v,w)
   Vertex *t,*u,*v,*w;
 @y
-static long jj(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+static long jj(
+  Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
 @x l.882
@@ -123,12 +131,13 @@ static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
   Vertex *t,*tp,*tpp,*p;
   node *xp,*xpp;
 @y
-static void flip(arc *c,arc *d,arc *e,@|
+static void flip(
+  arc *c,arc *d,arc *e,@|
   Vertex *t,Vertex *tp,Vertex *tpp,Vertex *p,@|
   node *xp,node *xpp)
 @z
 
-@x
+@x l.886
 {@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
 @y
 {@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
@@ -166,10 +175,11 @@ Graph *plane_miles(@t\1\1@>
 static void new_mile_edge(u,v)
   Vertex *u,*v;
 @y
-static void new_mile_edge(Vertex *u,Vertex *v)
+static void new_mile_edge(
+  Vertex *u,Vertex *v)
 @z
 
-@x
+@x l.985
   if ((gb_next_rand()>>15)>=gprob) {
 @y
   if ((unsigned long)(gb_next_rand()>>15)>=gprob) {

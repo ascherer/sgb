@@ -22,7 +22,8 @@ void report(@t\1\1@>
 unsigned long krusk(g)
   Graph *g;
 @y
-unsigned long krusk(Graph *g)
+unsigned long krusk(
+  Graph *g)
 @z
 
 @x l.498
@@ -45,7 +46,8 @@ Vertex *(*del_min)(void);
 unsigned long jar_pr(g)
   Graph *g;
 @y
-unsigned long jar_pr(Graph *g)
+unsigned long jar_pr(
+  Graph *g)
 @z
 
 @x l.610
@@ -53,7 +55,8 @@ void init_heap(d) /* makes the heap empty */
   long d;
 {
 @y
-void init_heap(long d) /* makes the heap empty */
+void init_heap(
+  long d) /* makes the heap empty */
 {
   (void) d;
 @z
@@ -84,7 +87,7 @@ Vertex *del_heap()
 Vertex *del_heap(void)
 @z
 
-@x
+@x l.628
   register unsigned long j; /* child of that hole */
 @y
   register long j; /* child of that hole */
@@ -95,7 +98,8 @@ void init_F_heap(d)
   long d;
 {@+F_heap=NULL;@+}
 @y
-void init_F_heap(long d)
+void init_F_heap(
+  long d)
 {@+(void)d;F_heap=NULL;@+}
 @z
 
@@ -139,7 +143,7 @@ void qunite(@t\1\1@>
   Arc *h@t\2\2@>) /* |h->qsib| will get the result */
 @z
 
-@x
+@x l.1187
   register Arc *r,*rr; /* remainders of the input lists */
 @y
   register Arc *r=0,*rr=0; /* remainders of the input lists */
@@ -169,8 +173,8 @@ void qmerge(@t\1\1@>
 Arc *qdel_min(h)
   Arc *h; /* header of binomial queue */
 @y
-Arc *qdel_min(Arc *h)
-  /* header of binomial queue */
+Arc *qdel_min(
+  Arc *h) /* header of binomial queue */
 @z
 
 @x l.1339
@@ -180,7 +184,7 @@ qtraverse(h,visit)
 @y
 void qtraverse(@t\1\1@>
   Arc *h, /* head of binomial queue to be unraveled */
-  void (*visit)(register Arc *)@t\2\2@>)
+  void @[@] (*visit)(register Arc *)@t\2\2@>)
     /* procedure to be invoked on each node */
 @z
 
@@ -188,12 +192,14 @@ void qtraverse(@t\1\1@>
 unsigned long cher_tar_kar(g)
   Graph *g;
 @y
-unsigned long cher_tar_kar(Graph *g)
+unsigned long cher_tar_kar(
+  Graph *g)
 @z
 
 @x l.1614
 void note_edge(a)
   Arc *a;
 @y
-void note_edge(Arc *a)
+void note_edge(
+  Arc *a)
 @z

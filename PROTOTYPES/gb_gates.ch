@@ -36,11 +36,11 @@ long gate_eval(@t\1\1@>
 Graph *risc(regs)
   unsigned long regs; /* number of registers supported */
 @y
-Graph *risc(unsigned long regs)
-  /* number of registers supported */
+Graph *risc(
+  unsigned long regs) /* number of registers supported */
 @z
 
-@x
+@x l.230
 register long k,r; /* all-purpose indices */
 @y
 register long k; /* all-purpose indices */
@@ -51,8 +51,8 @@ register unsigned long r; /* all-purpose indices */
 static Vertex* new_vert(t)
   char t; /* the type of the new gate */
 @y
-static Vertex* new_vert(char t)
-  /* the type of the new gate */
+static Vertex* new_vert(
+  char t) /* the type of the new gate */
 @z
 
 @x l.445
@@ -99,17 +99,19 @@ static Vertex* make5(@t\1\1@>
 static Vertex* comp(v)
   Vertex *v;
 @y
-static Vertex* comp(Vertex *v)
+static Vertex* comp(
+  Vertex *v)
 @z
 
 @x l.514
 static Vertex* make_xor(u,v)
   Vertex *u,*v;
 @y
-static Vertex* make_xor(Vertex *u,Vertex *v)
+static Vertex* make_xor(
+  Vertex *u,Vertex *v)
 @z
 
-@x
+@x l.558
 @ @d first_of(n,t) new_vert(t);@+for (k=1;k<n;k++)@+new_vert(t);
 @y
 @ @d first_of(n,t) new_vert(t);@+for (k=1;k<(long)n;k++)@+new_vert(t);
@@ -131,7 +133,7 @@ static void make_adder(@t\1\1@>
   char add@t\2\2@>) /* should we add or subtract? */
 @z
 
-@x
+@x l.889
   for (;k<n;k++) {
 @y
   for (;k<(long)n;k++) {
@@ -152,14 +154,14 @@ long run_risc(@t\1\1@>
     /* if nonzero, this many registers will be traced */
 @z
 
-@x
+@x l.1001
   register long k,r; /* general-purpose indices */
 @y
   register long k; /* general-purpose indices */
   register unsigned long r; /* general-purpose indices */
 @z
 
-@x
+@x l.1004
   r=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
   if (r<0) return r; /* not a valid gate graph! */
 @y
@@ -167,7 +169,7 @@ long run_risc(@t\1\1@>
   if (k<0) return k; /* not a valid gate graph! */
 @z
 
-@x
+@x l.1025
   for (r=0;r<trace_regs;r++) printf(" r%-2ld ",r); /* register names */
 @y
   for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
@@ -177,7 +179,8 @@ long run_risc(@t\1\1@>
 static void pr_gate(v)
   Vertex *v;
 @y
-static void pr_gate(Vertex *v)
+static void pr_gate(
+  Vertex *v)
 @z
 
 @x l.1112
@@ -190,14 +193,16 @@ static void pr_gate(Vertex *v)
 void print_gates(g)
   Graph *g;
 @y
-void print_gates(Graph *g)
+void print_gates(
+  Graph *g)
 @z
 
 @x l.1146
 static Graph* reduce(g)
   Graph *g;
 @y
-static Graph* reduce(Graph *g)
+static Graph* reduce(
+  Graph *g)
 @z
 
 @x l.1487
@@ -208,97 +213,97 @@ Graph* prod(unsigned long m,unsigned long n)
   /* lengths of the binary numbers to be multiplied */
 @z
 
-@x
+@x l.1545
 while (k<m_plus_n) {
 @y
 while (k<(long)m_plus_n) {
 @z
 
-@x
+@x l.1614
 for (j=0; j<m; j++) {
 @y
 for (j=0; j<(long)m; j++) {
 @z
 
-@x
+@x l.1619
   for (k=0; k<n; k++)
 @y
   for (k=0; k<(long)n; k++)
 @z
 
-@x
+@x l.1621
   for (k=j+n; k<m_plus_n; k++) {
 @y
   for (k=j+n; k<(long)m_plus_n; k++) {
 @z
 
-@x
+@x l.1629
 @d a_pos(j) (j<m? j+1: m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
 @y
 @d a_pos(j) ((unsigned long)(j)<m? (unsigned long)(j+1): m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
 @z
 
-@x
+@x l.1632
 for (j=0; j<m-2; j++) {
 @y
 for (j=0; j<(long)m-2; j++) {
 @z
 
-@x
+@x l.1636
   for (k=0; k<m_plus_n; k++)
 @y
   for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1639
   for (k=0; k<m_plus_n; k++)
 @y
   for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1644
   for (k=0; k<m_plus_n; k++)
 @y
   for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1647
   for (k=0; k<m_plus_n; k++)
 @y
   for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1653
   for (k=0; k<m_plus_n-1; k++)
 @y
   for (k=0; k<(long)m_plus_n-1; k++)
 @z
 
-@x
+@x l.1665
 for (k=0; k<m_plus_n; k++)
 @y
 for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1668
 for (k=0; k<m_plus_n; k++)
 @y
 for (k=0; k<(long)m_plus_n; k++)
 @z
 
-@x
+@x l.1756
 for (i=3,j=2,k=3,l=3; l<=m_plus_n; l++) {
 @y
 for (i=3,j=2,k=3,l=3; l<=(long)m_plus_n; l++) {
 @z
 
-@x
+@x l.1782
 for (k=2;k<m_plus_n;k++) {
 @y
 for (k=2;k<(long)m_plus_n;k++) {
 @z
 
-@x
+@x l.1846
 for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
 @y
 for (k=0;k<(long)m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
@@ -323,7 +328,7 @@ Graph *partial_gates(@t\1\1@>
     /* optional parameter for information about partial assignment */
 @z
 
-@x
+@x l.1910
     case 'I': if ((gb_next_rand()>>15)>=prob) {
 @y
     case 'I': if ((gb_next_rand()>>15)>=(long)prob) {

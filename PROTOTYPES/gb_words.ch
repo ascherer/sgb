@@ -24,17 +24,19 @@ Graph *words(@t\1\1@>
 static double flabs(x)
   long x;
 @y
-static double flabs(long x)
+static double flabs(
+  long x)
 @z
 
 @x l.256
 static long iabs(x)
   long x;
 @y
-static long iabs(long x)
+static long iabs(
+  long x)
 @z
 
-@x
+@x l.426
 if (n==0 || nn<n)
 @y
 if (n==0 || nn<(long)n)
@@ -47,7 +49,8 @@ if (n==0 || nn<(long)n)
                         or |f| should be |NULL| */
 @y
 @p Vertex *find_word(@t\1\1@>
-  char *q,void (*f)(Vertex *)@t\2\2@>)
+  char *q,
+  void @[@] (*f)(Vertex *)@t\2\2@>)
     /* |*f| should take one argument, of type |Vertex *|,
        or |f| should be |NULL| */
 @z
