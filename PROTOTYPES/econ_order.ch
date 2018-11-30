@@ -10,7 +10,13 @@ int main(@t\1\1@>
 {@+long n=79; /* the desired number of sectors */
 @z
 
-@x
+@x l.109
+@d INF 0x7fffffff /* infinity (or darn near) */
+@y
+@d INF (long)(((unsigned long)-1)>>1) /* infinity (or darn near) */
+@z
+
+@x l.120
   if (sscanf(argv[argc],"-n%lu",&n)==1) ;
 @y
   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
