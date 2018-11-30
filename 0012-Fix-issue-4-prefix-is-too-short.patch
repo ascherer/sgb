@@ -1,7 +1,7 @@
-From 9e2c28d5b9c5695c53ad8c2c6f2b2c9bca421b2e Mon Sep 17 00:00:00 2001
+From f90e143883b3e4c2b27731bc7039cf28c87734a8 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Tue, 27 Nov 2018 08:53:10 +0100
-Subject: [PATCH 12/13] Fix issue #4: 'prefix' is too short.
+Subject: [PATCH 12/14] Fix issue #4: 'prefix' is too short.
 
 Contents like "A100:" is too long to be NULL-terminated, so accessing
 the 'prefix' buffer bombs. Add a sixth byte for the NULL terminator.
@@ -27,5 +27,5 @@ index c1e782d..a6c93ec 100644
  static Vertex* make2(t,v1,v2)
    char t; /* the type of the new gate */
 -- 
-2.19.2
+2.20.1
 

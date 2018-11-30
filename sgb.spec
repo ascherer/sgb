@@ -48,6 +48,7 @@ Patch10: 0010-Update-PROTOTYPES-documentation.patch
 Patch11: 0011-Fix-compiler-warnings-when-optimizing.patch
 Patch12: 0012-Fix-issue-4-prefix-is-too-short.patch
 Patch13: 0013-Try-to-fix-INF-inity.patch
+Patch14: 0014-Retain-code-layout.patch
 %endif
 
 %description
