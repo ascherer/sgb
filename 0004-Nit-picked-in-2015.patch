@@ -1,7 +1,7 @@
-From 0b6fe81a7108b25fdf17fa5fa20aec360855c7ef Mon Sep 17 00:00:00 2001
+From e2dd3866443bdb06af7e8d966058598b3f4fd186 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Thu, 6 Aug 2015 00:00:00 +0200
-Subject: [PATCH 04/14] Nit picked in 2015.
+Subject: [PATCH 04/15] Nit picked in 2015.
 
 ---
  gb_words.w | 2 +-

@@ -1,0 +1,76 @@
+From 04113f59c212b3ef15cf828c7de29acd4a1deeab Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sat, 1 Dec 2018 12:28:19 +0100
+Subject: [PATCH 15/15] Check bit-length of operands earlier.
+
+---
+ PROTOTYPES/multiply.ch | 46 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+diff --git a/PROTOTYPES/multiply.ch b/PROTOTYPES/multiply.ch
+index c919adc..3e8e5d7 100644
+--- a/PROTOTYPES/multiply.ch
++++ b/PROTOTYPES/multiply.ch
+@@ -8,6 +8,36 @@ int main(@t\1\1@>
+   char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
+ @z
+ 
++@x l.117
++@d retry(s,t)
++    {@+printf(s);@+goto t;@+}
++@y
++@d retry(s,t)
++    {@+fputs(s,stdout);@+goto t;@+}
++@z
++
++@x l.134
++strcpy(x,p);
++@y
++strcpy(x,p);@+strcpy(z,x);
++decimal_to_binary(z,buffer,m);
++if (*z) {
++  sprintf(buffer,"(Sorry, %s has more than %ld bits.)\n",x,m);
++  retry(buffer,step1);
++}
++@z
++
++@x l.153
++strcpy(y,p);
++@y
++strcpy(y,p);@+strcpy(z,y);
++decimal_to_binary(z,buffer+m,n);
++if (*z) {
++  sprintf(buffer+m,"(Sorry, %s has more than %ld bits.)\n\n",y,n);
++  retry(buffer+m,step2);
++}
++@z
++
+ @x l.183
+   printf("Please try another seed value; %d makes the answer zero!\n",seed);
+ @y
+@@ -26,6 +56,22 @@ void decimal_to_binary(@t\1\1@>
+   long n@t\2\2@>) /* length of |s| */
+ @z
+ 
++@x l.227
++if (*z) {
++  printf("(Sorry, %s has more than %ld bits.)\n",x,m);
++  continue;
++}
++@y
++@z
++
++@x l.234
++  if (*z) {
++    printf("(Sorry, %s has more than %ld bits.)\n",y,n);
++    continue;
++  }
++@y
++@z
++
+ @x l.282
+ long depth(g)
+   Graph *g; /* graph with gates as vertices */
+-- 
+2.19.2
+
