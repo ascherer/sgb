@@ -1,7 +1,7 @@
-From f90e143883b3e4c2b27731bc7039cf28c87734a8 Mon Sep 17 00:00:00 2001
+From 0b35dcfabdd2eefbf1c40ce25fd071a26409c53e Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Tue, 27 Nov 2018 08:53:10 +0100
-Subject: [PATCH 12/14] Fix issue #4: 'prefix' is too short.
+Subject: [PATCH 12/15] Fix issue #4: 'prefix' is too short.
 
 Contents like "A100:" is too long to be NULL-terminated, so accessing
 the 'prefix' buffer bombs. Add a sixth byte for the NULL terminator.
