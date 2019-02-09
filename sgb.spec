@@ -13,7 +13,7 @@ Release: 24
 %if %{_vendor} == "debbuild"
 Version: 2:20090810
 Group: math
-Distribution: Kubuntu 16.04 (x86_64)
+Distribution: Kubuntu 18.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
