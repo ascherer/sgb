@@ -66,8 +66,8 @@ master files stay intact.
 %{__ln_s} PROTOTYPES/*.ch .
 %{?with_sysv:%{__perl} -pe "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
-%{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra -Wno-format-overflow/" \
-	-i Makefile
+%{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra -Wno-format-overflow \
+	-Wno-implicit-fallthrough/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif
