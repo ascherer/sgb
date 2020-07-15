@@ -72,7 +72,7 @@ master files stay intact.
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif
 %if ! %{with debuginfo}
-%{__perl} -pe "s/(CFLAGS =) -g/\1 -O/" -i Makefile
+%{__perl} -pe "s/(CFLAGS =) -g/\1 -O3/" -i Makefile
 %{__perl} -pe "s/(LDFLAGS =)/\1 -s/" -i Makefile
 %endif
 
