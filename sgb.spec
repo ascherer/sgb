@@ -8,17 +8,17 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 24
+Release: 25
 
 %if %{_vendor} == "debbuild"
-Version: 2:20090810
+Version: 2:20210130
 Group: math
 Distribution: Kubuntu 18.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
 %else
-Version: 20090810
+Version: 20210130
 Group: Productivity/Scientific/Math
 Distribution: openSUSE 42 (x86_64)
 %global __echo %(which echo)
@@ -28,17 +28,10 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
 
-# Nits picked on https://www-cs-staff.stanford.edu/~knuth/sgb.html
-Patch1: 0001-Nit-picked-in-2011.patch
-
 %if %{with patches}
 Patch2: 0002-GCC-complains-about-int-long-conflicts.patch
 Patch3: 0003-GCC-Wformat-security.patch
-%endif
 
-Patch4: 0004-Nit-picked-in-2015.patch
-
-%if %{with patches}
 Patch5: 0005-GCC-Wall.patch
 Patch6: 0006-GCC-Wall-Wextra.patch
 Patch7: 0007-Alternative-fix-for-GCC-5.3.1.patch
@@ -46,7 +39,7 @@ Patch8: 0008-Fix-typographic-glitch.patch
 Patch9: 0009-Build-SGB-library-as-shared-object.patch
 Patch10: 0010-Update-PROTOTYPES-documentation.patch
 Patch11: 0011-Fix-compiler-warnings-when-optimizing.patch
-Patch12: 0012-Fix-issue-4-prefix-is-too-short.patch
+
 Patch13: 0013-Try-to-fix-INF-inity.patch
 Patch14: 0014-Retain-code-layout.patch
 Patch15: 0015-Check-bit-length-of-operands-earlier.patch
