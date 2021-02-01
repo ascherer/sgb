@@ -684,7 +684,7 @@ Vertex *del_heap()
   register Vertex *u; /* vertex being sifted down */
   register unsigned long k; /* hole in the heap */
   register unsigned long j; /* child of that hole */
-  register long d; /* |u->dist|, the vertex of the vertex being sifted */
+  register long d; /* |u->dist|, the key of the vertex being sifted */
   if (hsize==0) return NULL;
   o,v=heap_elt(1);
   o,u=heap_elt(hsize--);

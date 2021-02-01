@@ -396,7 +396,7 @@ done:gb_free(node_blocks);
 @ The only slightly unusual data structure needed is a set of five hash tables,
 one for each of the strings of four letters obtained by suppressing
 a single letter of a five-letter word. For example, a word like `\.{words}'
-will lead to entries for `\.{\ ords}', `\.{w\ rds}, `\.{wo\ ds}', `\.{wor\ s}',
+will lead to entries for `\.{\ ords}', `\.{w\ rds}', `\.{wo\ ds}', `\.{wor\ s}',
 and `\.{word\ }', one in each of the hash tables.
 
 @d hash_prime 6997 /* a prime number larger than the total number of words */

@@ -428,7 +428,7 @@ static Vertex* new_vert(t)
 
 @<Private...@>=
 static Vertex* next_vert; /* the first vertex not yet assigned a name */
-static char prefix[5]; /* prefix string for vertex names */
+static char prefix[8]; /* prefix string for vertex names */
 static long count; /* serial number for vertex names */
 static char name_buf[100]; /* place to form vertex names */
 

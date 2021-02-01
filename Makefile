@@ -77,7 +77,7 @@ DEMOFILES = assign_lisa.w book_components.w econ_order.w football.w \
         girth.w ladders.w miles_span.w multiply.w queen.w roget_components.w \
         take_risc.w word_components.w
 MISCWEBS = boilerplate.w gb_dijk.w gb_save.w gb_types.w test_sample.w
-CHANGEFILES = queen_wrap.ch word_giant.ch
+CHANGEFILES = queen_wrap.ch word_giant.ch gb_graph-bigalloc.ch
 MISCFILES = Makefile README abstract.plaintex cities.texmap blank.w \
         sample.correct test.correct test.dat +The+Stanford+GraphBase+
 ALL = $(DATAFILES) $(KERNELFILES) $(GENERATORFILES) $(DEMOFILES) \
