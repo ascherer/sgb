@@ -449,7 +449,7 @@ index a6c93ec..1dd0051 100644
 +  char t) /* the type of the new gate */
  @z
  
- @x l.431
+ @x l.445
 @@ -105,17 +105,19 @@ static Vertex* make5(@t\1\1@>
  static Vertex* comp(v)
    Vertex *v;
