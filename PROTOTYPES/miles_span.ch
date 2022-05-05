@@ -75,6 +75,18 @@ void req_heap(@t\1\1@>
   long d@t\2\2@>) /* its new |dist| */
 @z
 
+@x l.661
+    do@+{
+@y
+    do {
+@z
+
+@x l.666
+    }@+while (j>0 && (oo,(u=heap_elt(j))->dist>d));
+@y
+    } while (j>0 && (oo,(u=heap_elt(j))->dist>d));
+@z
+
 @x l.682
 Vertex *del_heap()
 @y
@@ -112,6 +124,18 @@ void req_F_heap(@t\1\1@>
 Vertex *del_F_heap()
 @y
 Vertex *del_F_heap(void)
+@z
+
+@x l.1004
+    do@+{
+@y
+    do {
+@z
+
+@x l.1007
+    }@+while (h<r);
+@y
+    } while (h<r);
 @z
 
 @x l.1155
@@ -156,6 +180,18 @@ Arc *qdel_min(Arc *h)
   /* header of binomial queue */
 @z
 
+@x l.1324
+  do@+{@+long t=mm&(mm-1);
+@y
+  do {@+long t=mm&(mm-1);
+@z
+
+@x l.1330
+  }@+while (mm);
+@y
+  } while (mm);
+@z
+
 @x l.1339
 qtraverse(h,visit)
   Arc *h; /* head of binomial queue to be unraveled */
@@ -172,6 +208,18 @@ unsigned long cher_tar_kar(g)
   Graph *g;
 @y
 unsigned long cher_tar_kar(Graph *g)
+@z
+
+@x l.1492
+do@+{a=qdel_min(v->pq);
+@y
+do {a=qdel_min(v->pq);
+@z
+
+@x l.1496
+}@+while (u==v); /* repeat until a new fragment is found */
+@y
+} while (u==v); /* repeat until a new fragment is found */
 @z
 
 @x l.1614

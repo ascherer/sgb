@@ -56,3 +56,15 @@ Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
   unsigned long first_chapter,unsigned long last_chapter,@|
   long in_weight,long out_weight,long seed)
 @z
+
+@x l.455
+      do@+{@+
+@y
+      do {@+
+@z
+
+@x l.461
+      }@+while (c==','); /* repeat until end of the clique */
+@y
+      } while (c==','); /* repeat until end of the clique */
+@z
