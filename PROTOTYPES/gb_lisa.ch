@@ -23,7 +23,7 @@ long *lisa(m,n,d,m0,m1,n0,n1,d0,d1,area)
   unsigned long d0,d1; /* lower and upper threshold of raw pixel scores */
   Area area; /* where to allocate the matrix that will be output */
 @y
-long *lisa(@t\1\1@>
+long *lisa(
   unsigned long m,unsigned long n,
     /* number of rows and columns desired */
   unsigned long d,
@@ -34,7 +34,7 @@ long *lisa(@t\1\1@>
     /* and from columns $[|n0|\,.\,.\,|n1|)$ */
   unsigned long d0,unsigned long d1,
     /* lower and upper threshold of raw pixel scores */
-  Area area@t\2\2@>)
+  Area area)
     /* where to allocate the matrix that will be output */
 @z
 
@@ -101,7 +101,7 @@ do {@+k--;@+ q<<=1;
   unsigned long n0,n1; /* and from columns $[|n0|\,.\,.\,|n1|)$ */
   unsigned long d0,d1; /* lower and upper threshold of raw pixel scores */
 @y
-@p Graph *plane_lisa(@t\1\1@>
+@p Graph *plane_lisa(
   unsigned long m,unsigned long n,
     /* number of rows and columns desired */
   unsigned long d,
@@ -110,7 +110,7 @@ do {@+k--;@+ q<<=1;
     /* input will be from rows $[|m0|\,.\,.\,|m1|)$ */
   unsigned long n0,unsigned long n1,
     /* and from columns $[|n0|\,.\,.\,|n1|)$ */
-  unsigned long d0,unsigned long d1@t\2\2@>)
+  unsigned long d0,unsigned long d1)
     /* lower and upper threshold of raw pixel scores */
 @z
 
@@ -129,7 +129,7 @@ static void adjac(Vertex *u,Vertex *v)
   unsigned long thresh; /* threshold defining adjacency */
   long c; /* should we prefer dark pixels to light pixels? */
 @y
-@p Graph *bi_lisa(@t\1\1@>
+@p Graph *bi_lisa(
   unsigned long m,unsigned long n,
     /* number of rows and columns desired */
   unsigned long m0,unsigned long m1,
@@ -138,6 +138,6 @@ static void adjac(Vertex *u,Vertex *v)
     /* and from columns $[|n0|\,.\,.\,|n1|)$ */
   unsigned long thresh,
     /* threshold defining adjacency */
-  long c@t\2\2@>)
+  long c)
     /* should we prefer dark pixels to light pixels? */
 @z

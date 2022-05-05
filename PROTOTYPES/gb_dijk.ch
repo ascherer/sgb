@@ -41,11 +41,11 @@ long dijkstra(uu,vv,gg,hh)
   Graph *gg; /* the graph they belong to */
   long @[@] (*hh)(); /* heuristic function */
 @y
-long dijkstra(@t\1\1@>
+long dijkstra(
   Vertex *uu, /* the starting point */
   Vertex *vv, /* the ending point */
   Graph *gg, /* the graph they belong to */
-  long (*hh)(Vertex *)@t\2\2@>) /* heuristic function */
+  long (*hh)(Vertex *)) /* heuristic function */
 @z
 
 @x l.257
@@ -148,9 +148,9 @@ void enq_128(v,d)
   Vertex *v; /* new vertex for the queue */
   long d; /* its |dist| */
 @y
-void enq_128(@t\1\1@>
+void enq_128(
   Vertex *v, /* new vertex for the queue */
-  long d@t\2\2@>) /* its |dist| */
+  long d) /* its |dist| */
 @z
 
 @x l.425
@@ -158,9 +158,9 @@ void req_128(v,d)
   Vertex *v; /* vertex to be moved to another list */
   long d; /* its new |dist| */
 @y
-void req_128(@t\1\1@>
+void req_128(
   Vertex *v, /* vertex to be moved to another list */
-  long d@t\2\2@>) /* its new |dist| */
+  long d) /* its new |dist| */
 @z
 
 @x l.442

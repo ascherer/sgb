@@ -68,9 +68,9 @@ long new_checksum(s,old_checksum)
   char *s; /* a string */
   long old_checksum;
 @y
-long new_checksum(@t\1\1@>
+long new_checksum(
   char *s, /* a string */
-  long old_checksum@t\2\2@>)
+  long old_checksum)
 @z
 
 @x l.245
@@ -145,9 +145,9 @@ char *gb_string(p,c)
     char *p; /* where to put the result */
     char c; /* character following the string */
 @y
-char *gb_string(@t\1\1@>
+char *gb_string(
   char *p, /*  where to put the result */
-  char c@t\2\2@>) /* character following the string */
+  char c) /* character following the string */
 @z
 
 @x l.427
