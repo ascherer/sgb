@@ -54,6 +54,18 @@ Graph *board(@t\1\1@>
   long directed@t\2\2@>) /* should the graph be directed? */
 @z
 
+@x l.410
+    do yy[k]+=nn[k];@+ while (yy[k]<0);
+@y
+    do yy[k]+=nn[k]; while (yy[k]<0);
+@z
+
+@x l.413
+    do yy[k]-=nn[k];@+ while (yy[k]>=nn[k]);
+@y
+    do yy[k]-=nn[k]; while (yy[k]>=nn[k]);
+@z
+
 @x l.493
 Graph *simplex(n,n0,n1,n2,n3,n4,directed)
   unsigned long n; /* the constant sum of all coordinates */
@@ -175,6 +187,18 @@ Graph *lines(g,directed)
 Graph *lines(@t\1\1@>
   Graph *g, /* graph whose lines will become vertices */
   long directed@t\2\2@>) /* should the graph be directed? */
+@z
+
+@x l.1948
+    do@+{gb_new_arc(u,v,1L);
+@y
+    do {gb_new_arc(u,v,1L);
+@z
+
+@x l.1950
+    }@+while (v->u.V==u->v.V);
+@y
+    } while (v->u.V==u->v.V);
 @z
 
 @x l.2010
