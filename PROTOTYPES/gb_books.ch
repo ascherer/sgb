@@ -23,7 +23,7 @@ static Graph *bgraph(bipartite,
                           not in that interval */
   long seed; /* random number seed */
 @y
-static Graph *bgraph(@t\1\1@>
+static Graph *bgraph(
   long bipartite, /* should we make the graph bipartite? */
   char *title, /* identification of the selected book */
   unsigned long n, /* number of vertices desired before exclusion */
@@ -32,7 +32,7 @@ static Graph *bgraph(@t\1\1@>
     /* interval of chapters leading to edges */
   long in_weight, /* weight coefficient pertaining to chapters in that interval */
   long out_weight, /* weight coefficient pertaining to chapters not in that interval */
-  long seed@t\2\2@>) /* random number seed */
+  long seed) /* random number seed */
 @z
 
 @x l.185

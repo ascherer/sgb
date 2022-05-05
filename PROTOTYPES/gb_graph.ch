@@ -9,9 +9,9 @@ char *gb_alloc(n,s)
   long n; /* number of consecutive bytes desired */
   Area s; /* storage area that will contain the new block */
 @y
-char *gb_alloc(@t\1\1@>
+char *gb_alloc(
   long n, /* number of consecutive bytes desired */
-  Area s@t\2\2@>) /* storage area that will contain the new block */
+  Area s) /* storage area that will contain the new block */
 @z
 
 @x l.297
@@ -59,11 +59,11 @@ void make_compound_id(g,s1,gg,s2) /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
   Graph *gg; /* graph whose |id| is to be copied */
   char *s2; /* string for the end of the new |id| */
 @y
-void make_compound_id(@t\1\1@> /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+void make_compound_id( /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
   Graph *g, /* graph whose |id| is to be set */
   char *s1, /* string for the beginning of the new |id| */
   Graph *gg, /* graph whose |id| is to be copied */
-  char *s2@t\2\2@>) /* string for the end of the new |id| */
+  char *s2) /* string for the end of the new |id| */
 @z
 
 @x l.498
@@ -76,14 +76,14 @@ void make_double_compound_id(g,s1,gg,s2,ggg,s3)
   Graph *ggg; /* second graph whose |id| is to be copied */
   char *s3; /* string for the end of the new |id| */
 @y
-void make_double_compound_id(@t\1\1@>
+void make_double_compound_id(
     /* |sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
   Graph *g, /* graph whose |id| is to be set */
   char *s1, /* string for the beginning of the new |id| */
   Graph *gg, /* first graph whose |id| is to be copied */
   char *s2, /* string for the middle of the new |id| */
   Graph *ggg, /* second graph whose |id| is to be copied */
-  char *s3@t\2\2@>) /* string for the end of the new |id| */
+  char *s3) /* string for the end of the new |id| */
 @z
 
 @x l.549
@@ -97,9 +97,9 @@ void gb_new_arc(u,v,len)
   Vertex *u, *v; /* a newly created arc will go from |u| to |v| */
   long len; /* its length */
 @y
-void gb_new_arc(@t\1\1@>
+void gb_new_arc(
   Vertex *u,Vertex *v, /* a newly created arc will go from |u| to |v| */
-  long len@t\2\2@>) /* its length */
+  long len) /* its length */
 @z
 
 @x l.626
@@ -107,9 +107,9 @@ void gb_new_edge(u,v,len)
   Vertex *u, *v; /* new arcs will go from |u| to |v| and from |v| to |u| */
   long len; /* their length */
 @y
-void gb_new_edge(@t\1\1@>
+void gb_new_edge(
   Vertex *u,Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
-  long len@t\2\2@>) /* their length */
+  long len) /* their length */
 @z
 
 @x l.689
