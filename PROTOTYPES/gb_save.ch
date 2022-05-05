@@ -50,6 +50,18 @@ static void classify(@t\1\1@>
   char t@t\2\2@>) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
 @z
 
+@x l.569
+  do@+{@+activity=0;
+@y
+  do {@+activity=0;
+@z
+
+@x l.578
+  }@+while (activity);
+@y
+  } while (activity);
+@z
+
 @x l.672
 static void flushout() /* output the buffer to |save_file| */
 @y
@@ -68,6 +80,18 @@ static void prepare_string(char *s)
 static void move_item()
 @y
 static void move_item(void)
+@z
+
+@x l.718
+      do@+{
+@y
+      do {
+@z
+
+@x l.722
+      }@+while(l>78);
+@y
+      } while(l>78);
 @z
 
 @x l.747

@@ -55,6 +55,38 @@ void print_dijkstra_result(vv)
 void print_dijkstra_result(Vertex *vv) /* ending vertex */
 @z
 
+@x l.265
+  do@+{ /* pop an item from |p| to |t| */
+@y
+  do { /* pop an item from |p| to |t| */
+@z
+
+@x l.270
+  }@+while (t!=p); /* the loop stops with |t==p==uu| */
+  do@+{
+@y
+  } while (t!=p); /* the loop stops with |t==p==uu| */
+  do {
+@z
+
+@x l.274
+  }@+while (t);
+@y
+  } while (t);
+@z
+
+@x l.276
+  do@+{ /* pop an item from |t| to |p| */
+@y
+  do { /* pop an item from |t| to |p| */
+@z
+
+@x l.281
+  }@+while (p!=vv);
+@y
+  } while (p!=vv);
+@z
+
 @x l.295
 void @[@] (*init_queue)() = init_dlist; /* create an empty dlist */
 void @[@] (*enqueue)() = enlist; /* insert a new element in dlist */

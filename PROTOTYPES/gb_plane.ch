@@ -105,6 +105,18 @@ static long jj(t,u,v,w)
 static long jj(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
+@x l.751
+do@+{
+@y
+do {
+@z
+
+@x l.755
+}@+while (x->u);
+@y
+} while (x->u);
+@z
+
 @x l.882
 static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
   arc *c,*d,*e;

@@ -154,6 +154,18 @@ static Graph* reduce(g)
 static Graph* reduce(Graph *g)
 @z
 
+@x l.1365
+  do@+{
+@y
+  do {
+@z
+
+@x l.1383
+  }@+while (v!=sentinel);
+@y
+  } while (v!=sentinel);
+@z
+
 @x l.1487
 Graph* prod(m,n)
   unsigned long m,n; /* lengths of the binary numbers to be multiplied */
