@@ -8,12 +8,12 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 25
+Release: 26
 
 %if %{_vendor} == "debbuild"
 Version: 2:20210130
 Group: math
-Distribution: Kubuntu 18.04 (x86_64)
+Distribution: Kubuntu 20.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
@@ -29,20 +29,22 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
 
 %if %{with patches}
+#Patch1: 0001-sgb-2-20210130-base.patch
 Patch2: 0002-GCC-complains-about-int-long-conflicts.patch
 Patch3: 0003-GCC-Wformat-security.patch
-
-Patch5: 0005-GCC-Wall.patch
-Patch6: 0006-GCC-Wall-Wextra.patch
-Patch7: 0007-Alternative-fix-for-GCC-5.3.1.patch
-Patch8: 0008-Fix-typographic-glitch.patch
-Patch9: 0009-Build-SGB-library-as-shared-object.patch
-Patch10: 0010-Update-PROTOTYPES-documentation.patch
-Patch11: 0011-Fix-compiler-warnings-when-optimizing.patch
-
-Patch13: 0013-Try-to-fix-INF-inity.patch
-Patch14: 0014-Retain-code-layout.patch
-Patch15: 0015-Check-bit-length-of-operands-earlier.patch
+Patch4: 0004-GCC-Wall.patch
+Patch5: 0005-GCC-Wall-Wextra.patch
+Patch6: 0006-Alternative-fix-for-GCC-5.3.1.patch
+Patch7: 0007-Fix-typographic-glitch.patch
+Patch8: 0008-Build-SGB-library-as-shared-object.patch
+Patch9: 0009-Update-PROTOTYPES-documentation.patch
+Patch10: 0010-Fix-compiler-warnings-when-optimizing.patch
+Patch11: 0011-Try-to-fix-INF-inity.patch
+Patch12: 0012-Retain-code-layout.patch
+Patch13: 0013-Check-bit-length-of-operands-earlier.patch
+Patch14: 0014-Purge-control-codes.patch
+Patch15: 0015-Purge-t-control-codes.patch
+Patch16: 0016-Use-implicit-fall-through-comments.patch
 %endif
 
 %description

@@ -1,7 +1,7 @@
-From 715dad06e7d17a05da676cf54f3d4a7d605a2cff Mon Sep 17 00:00:00 2001
+From 5696096eda2449115a0f040ed88493f0d8e87e0c Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 17:17:35 +0100
-Subject: [PATCH 14/15] Retain code layout.
+Subject: [PATCH 12/16] Retain code layout.
 
 ---
  PROTOTYPES/football.ch    |  6 ++--
@@ -421,7 +421,7 @@ index d19c33b..5241d25 100644
  
  @x l.255
 diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
-index a6c93ec..1dd0051 100644
+index c1e782d..13f275f 100644
 --- a/PROTOTYPES/gb_gates.ch
 +++ b/PROTOTYPES/gb_gates.ch
 @@ -36,11 +36,11 @@ long gate_eval(@t\1\1@>
@@ -450,7 +450,7 @@ index a6c93ec..1dd0051 100644
  @z
  
  @x l.445
-@@ -105,17 +105,19 @@ static Vertex* make5(@t\1\1@>
+@@ -99,17 +99,19 @@ static Vertex* make5(@t\1\1@>
  static Vertex* comp(v)
    Vertex *v;
  @y
@@ -473,7 +473,7 @@ index a6c93ec..1dd0051 100644
  @ @d first_of(n,t) new_vert(t);@+for (k=1;k<n;k++)@+new_vert(t);
  @y
  @ @d first_of(n,t) new_vert(t);@+for (k=1;k<(long)n;k++)@+new_vert(t);
-@@ -137,7 +139,7 @@ static void make_adder(@t\1\1@>
+@@ -131,7 +133,7 @@ static void make_adder(@t\1\1@>
    char add@t\2\2@>) /* should we add or subtract? */
  @z
  
@@ -482,7 +482,7 @@ index a6c93ec..1dd0051 100644
    for (;k<n;k++) {
  @y
    for (;k<(long)n;k++) {
-@@ -158,14 +160,14 @@ long run_risc(@t\1\1@>
+@@ -152,14 +154,14 @@ long run_risc(@t\1\1@>
      /* if nonzero, this many registers will be traced */
  @z
  
@@ -499,7 +499,7 @@ index a6c93ec..1dd0051 100644
    r=gate_eval(g,"0",NULL); /* reset the RISC by turning off the \.{RUN} bit */
    if (r<0) return r; /* not a valid gate graph! */
  @y
-@@ -173,7 +175,7 @@ long run_risc(@t\1\1@>
+@@ -167,7 +169,7 @@ long run_risc(@t\1\1@>
    if (k<0) return k; /* not a valid gate graph! */
  @z
  
@@ -508,7 +508,7 @@ index a6c93ec..1dd0051 100644
    for (r=0;r<trace_regs;r++) printf(" r%-2ld ",r); /* register names */
  @y
    for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
-@@ -183,7 +185,8 @@ long run_risc(@t\1\1@>
+@@ -177,7 +179,8 @@ long run_risc(@t\1\1@>
  static void pr_gate(v)
    Vertex *v;
  @y
@@ -518,7 +518,7 @@ index a6c93ec..1dd0051 100644
  @z
  
  @x l.1112
-@@ -196,14 +199,16 @@ static void pr_gate(Vertex *v)
+@@ -190,14 +193,16 @@ static void pr_gate(Vertex *v)
  void print_gates(g)
    Graph *g;
  @y
@@ -537,7 +537,7 @@ index a6c93ec..1dd0051 100644
  @z
  
  @x l.1487
-@@ -214,97 +219,97 @@ Graph* prod(unsigned long m,unsigned long n)
+@@ -208,97 +213,97 @@ Graph* prod(unsigned long m,unsigned long n)
    /* lengths of the binary numbers to be multiplied */
  @z
  
@@ -651,7 +651,7 @@ index a6c93ec..1dd0051 100644
  for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
  @y
  for (k=0;k<(long)m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
-@@ -329,7 +334,7 @@ Graph *partial_gates(@t\1\1@>
+@@ -323,7 +328,7 @@ Graph *partial_gates(@t\1\1@>
      /* optional parameter for information about partial assignment */
  @z
  
@@ -1390,5 +1390,5 @@ index 62cbb7a..3adc970 100644
  @y
  if ((i=random_lengths(g,0L,10L,12L,dst,2L)))
 -- 
-2.20.1
+2.36.1
 
