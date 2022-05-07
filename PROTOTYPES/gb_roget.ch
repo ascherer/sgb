@@ -19,3 +19,9 @@ Graph *roget(
   unsigned long prob, /* 65536 times the probability of rejecting an arc */
   long seed) /* random number seed */
 @z
+
+@x l.205
+    /* fall through to the space case */
+@y
+    @=/* fall through to the space case */@>
+@z

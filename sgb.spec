@@ -60,7 +60,7 @@ master files stay intact.
 %{?with_sysv:%{__perl} -pe "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
 %{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra -Wno-format-overflow \
-	-Wno-implicit-fallthrough/" -i Makefile
+	-Wimplicit-fallthrough=2/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif

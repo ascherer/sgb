@@ -103,3 +103,9 @@ static void translate_field(
   util *l, /* address of field to be output in symbolic form */
   char t) /* type of formatting desired */
 @z
+
+@x l.760
+    /* fall through to case \.Z */
+@y
+    @=/* fall through to case \.Z */@>
+@z
