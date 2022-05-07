@@ -33,3 +33,11 @@ Graph *roget(
   if (mapping[j] && (unsigned long)iabs(j-k)>=min_distance &&
        (prob==0 || ((unsigned long)(gb_next_rand()>>15)>=prob)))
 @z
+
+@x l.205
+    /* fall through to the space case */
+  case ' ': j=gb_number(10);@+break;
+@y
+    @=/* fall through */@>
+  case ' ': j=gb_number(10);@+break;
+@z
