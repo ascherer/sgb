@@ -82,6 +82,18 @@ Vertex *chap_base;
 Vertex *chap_base=0;
 @z
 
+@x l.455
+      do@+{@+
+@y
+      do {@+
+@z
+
+@x l.461
+      }@+while (c==','); /* repeat until end of the clique */
+@y
+      } while (c==','); /* repeat until end of the clique */
+@z
+
 @x l.499
 if (n>characters) n=characters;
 if (x>n) x=n;

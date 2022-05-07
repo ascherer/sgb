@@ -21,3 +21,15 @@ int main(@t\1\1@>
 @y
   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
 @z
+
+@x l.274
+do@+{
+@y
+do {
+@z
+
+@x l.280
+}@+while(j!=best_j);
+@y
+} while(j!=best_j);
+@z

@@ -44,12 +44,36 @@ for (l=lam=0; l<n; l++) {@+register long sum=0;
 for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
 @z
 
+@x l.231
+  do@+{@+register long nl; /* giant column where something new might happen */
+@y
+  do {@+register long nl; /* giant column where something new might happen */
+@z
+
+@x l.237
+  }@+while (lam<next_lam);
+@y
+  } while (lam<next_lam);
+@z
+
 @x l.250
 for (k=kap=0; k<m;k++) {
   for (l=0;l<n;l++) *(out_row+l)=0; /* clear the vector of sums */
 @y
 for (k=kap=0; k<(long)m;k++) {
   for (l=0;l<(long)n;l++) *(out_row+l)=0; /* clear the vector of sums */
+@z
+
+@x l.253
+  do@+{@+register long nk; /* giant row where something new might happen */
+@y
+  do {@+register long nk; /* giant row where something new might happen */
+@z
+
+@x l.263
+  }@+while (kap<next_kap);
+@y
+  } while (kap<next_kap);
 @z
 
 @x l.264
@@ -69,6 +93,30 @@ static long na_over_b(n,a,b)
   long n,a,b;
 @y
 static long na_over_b(long n,long a,long b)
+@z
+
+@x l.295
+  do@+{@+bit[k]=n&1; /* save the least significant bit of $n$ */
+@y
+  do {@+bit[k]=n&1; /* save the least significant bit of $n$ */
+@z
+
+@x l.298
+  }@+while (n>nmax);
+@y
+  } while (n>nmax);
+@z
+
+@x l.309
+do@+{@+k--;@+ q<<=1;
+@y
+do {@+k--;@+ q<<=1;
+@z
+
+@x l.316
+}@+while (k);
+@y
+} while (k);
 @z
 
 @x l.319

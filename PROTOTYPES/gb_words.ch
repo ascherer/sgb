@@ -36,6 +36,18 @@ static long iabs(
   long x)
 @z
 
+@x l.359
+  do@+{
+@y
+  do {
+@z
+
+@x l.366
+  }@+while (gb_char()==',');
+@y
+  } while (gb_char()==',');
+@z
+
 @x l.426
 if (n==0 || nn<n)
 @y
