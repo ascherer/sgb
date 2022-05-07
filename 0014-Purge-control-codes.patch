@@ -1,0 +1,495 @@
+From fd4c49a1fd4121b10e13f4b103782eb119b23efd Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sat, 7 May 2022 22:02:40 +0200
+Subject: [PATCH 14/16] Purge '@+' control codes.
+
+Starting with CWEB 3.0, 'do ... while' loops are formatted in the
+desired compact form by default.
+
+Plus, the '@+' before the 'while' added a second space.
+---
+ PROTOTYPES/econ_order.ch | 12 ++++++++++
+ PROTOTYPES/football.ch   | 36 ++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_basic.ch   | 24 ++++++++++++++++++++
+ PROTOTYPES/gb_books.ch   | 12 ++++++++++
+ PROTOTYPES/gb_dijk.ch    | 32 +++++++++++++++++++++++++++
+ PROTOTYPES/gb_flip.ch    | 14 +++++++++++-
+ PROTOTYPES/gb_gates.ch   | 12 ++++++++++
+ PROTOTYPES/gb_lisa.ch    | 48 ++++++++++++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_plane.ch   | 12 ++++++++++
+ PROTOTYPES/gb_save.ch    | 24 ++++++++++++++++++++
+ PROTOTYPES/gb_words.ch   | 12 ++++++++++
+ PROTOTYPES/miles_span.ch | 48 ++++++++++++++++++++++++++++++++++++++++
+ 12 files changed, 285 insertions(+), 1 deletion(-)
+
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index ea9d3d2..4e9afec 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -21,3 +21,15 @@ int main(@t\1\1@>
+ @y
+   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
+ @z
++
++@x l.274
++do@+{
++@y
++do {
++@z
++
++@x l.280
++}@+while(j!=best_j);
++@y
++} while(j!=best_j);
++@z
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index df2e3f3..3853ee4 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -32,6 +32,18 @@ node *new_node(@t\1\1@>
+   long d@t\2\2@>) /* incremental change to |tot_len| */
+ @z
+ 
++@x l.237
++do@+{@+register node*t;
++@y
++do {@+register node*t;
++@z
++
++@x l.242
++}@+while (cur_node);
++@y
++} while (cur_node);
++@z
++
+ @x l.285
+     register Arc *best_arc; /* arc that achieves |del=d| */
+     register Arc *last_arc; /* arc that goes directly to |goal| */
+@@ -50,3 +62,27 @@ node *new_node(@t\1\1@>
+         else best_arc=a,d=a->del;
+       }
+ @z
++
++@x l.312
++do@+{
++@y
++do {
++@z
++
++@x l.320
++}@+while (u);
++@y
++} while (u);
++@z
++
++@x l.355
++  do@+{
++@y
++  do {
++@z
++
++@x l.363
++  }@+while (m>0); /* exactly one node should be in |list[0]| (see below) */
++@y
++  } while (m>0); /* exactly one node should be in |list[0]| (see below) */
++@z
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index b8e5d47..d996c10 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -65,6 +65,18 @@ Graph *board(@t\1\1@>
+   @<Insert arcs or edges for all legal moves@>@;
+ @z
+ 
++@x l.410
++    do yy[k]+=nn[k];@+ while (yy[k]<0);
++@y
++    do yy[k]+=nn[k]; while (yy[k]<0);
++@z
++
++@x l.413
++    do yy[k]-=nn[k];@+ while (yy[k]>=nn[k]);
++@y
++    do yy[k]-=nn[k]; while (yy[k]>=nn[k]);
++@z
++
+ @x l.493
+ Graph *simplex(n,n0,n1,n2,n3,n4,directed)
+   unsigned long n; /* the constant sum of all coordinates */
+@@ -338,6 +350,18 @@ Graph *lines(@t\1\1@>
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @z
+ 
++@x l.1948
++    do@+{gb_new_arc(u,v,1L);
++@y
++    do {gb_new_arc(u,v,1L);
++@z
++
++@x l.1950
++    }@+while (v->u.V==u->v.V);
++@y
++    } while (v->u.V==u->v.V);
++@z
++
+ @x l.2010
+ Graph *product(g,gg,type,directed)
+   Graph *g,*gg; /* graphs to be multiplied */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 5cda86d..5b770f0 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -82,6 +82,18 @@ Vertex *chap_base;
+ Vertex *chap_base=0;
+ @z
+ 
++@x l.455
++      do@+{@+
++@y
++      do {@+
++@z
++
++@x l.461
++      }@+while (c==','); /* repeat until end of the clique */
++@y
++      } while (c==','); /* repeat until end of the clique */
++@z
++
+ @x l.499
+ if (n>characters) n=characters;
+ if (x>n) x=n;
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index 9a1894a..bffb923 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -59,6 +59,38 @@ void print_dijkstra_result(
+   Vertex *vv) /* ending vertex */
+ @z
+ 
++@x l.265
++  do@+{ /* pop an item from |p| to |t| */
++@y
++  do { /* pop an item from |p| to |t| */
++@z
++
++@x l.270
++  }@+while (t!=p); /* the loop stops with |t==p==uu| */
++  do@+{
++@y
++  } while (t!=p); /* the loop stops with |t==p==uu| */
++  do {
++@z
++
++@x l.274
++  }@+while (t);
++@y
++  } while (t);
++@z
++
++@x l.276
++  do@+{ /* pop an item from |t| to |p| */
++@y
++  do { /* pop an item from |t| to |p| */
++@z
++
++@x l.281
++  }@+while (p!=vv);
++@y
++  } while (p!=vv);
++@z
++
+ @x l.295
+ void @[@] (*init_queue)() = init_dlist; /* create an empty dlist */
+ void @[@] (*enqueue)() = enlist; /* insert a new element in dlist */
+diff --git a/PROTOTYPES/gb_flip.ch b/PROTOTYPES/gb_flip.ch
+index 5241d25..1a84435 100644
+--- a/PROTOTYPES/gb_flip.ch
++++ b/PROTOTYPES/gb_flip.ch
+@@ -38,7 +38,19 @@ long gb_unif_rand(
+     long m)
+ @z
+ 
+-@x l.255
++@x l.256
++  do@+{
++@y
++  do {
++@z
++
++@x l.258
++  }@+while (t<=(unsigned long)r);
++@y
++  } while (t<=(unsigned long)r);
++@z
++
++@x l.263
+ extern long gb_unif_rand();
+ @y
+ extern long gb_unif_rand(long);
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 13f275f..575979b 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -205,6 +205,18 @@ static Graph* reduce(
+   Graph *g)
+ @z
+ 
++@x l.1365
++  do@+{
++@y
++  do {
++@z
++
++@x l.1383
++  }@+while (v!=sentinel);
++@y
++  } while (v!=sentinel);
++@z
++
+ @x l.1487
+ Graph* prod(m,n)
+   unsigned long m,n; /* lengths of the binary numbers to be multiplied */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 3d3ac21..c59f53d 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -44,6 +44,18 @@ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
+ @z
+ 
++@x l.231
++  do@+{@+register long nl; /* giant column where something new might happen */
++@y
++  do {@+register long nl; /* giant column where something new might happen */
++@z
++
++@x l.237
++  }@+while (lam<next_lam);
++@y
++  } while (lam<next_lam);
++@z
++
+ @x l.250
+ for (k=kap=0; k<m;k++) {
+   for (l=0;l<n;l++) *(out_row+l)=0; /* clear the vector of sums */
+@@ -52,6 +64,18 @@ for (k=kap=0; k<(long)m;k++) {
+   for (l=0;l<(long)n;l++) *(out_row+l)=0; /* clear the vector of sums */
+ @z
+ 
++@x l.253
++  do@+{@+register long nk; /* giant row where something new might happen */
++@y
++  do {@+register long nk; /* giant row where something new might happen */
++@z
++
++@x l.263
++  }@+while (kap<next_kap);
++@y
++  } while (kap<next_kap);
++@z
++
+ @x l.264
+   for (l=0; l<n; l++,out_row++) /* note that |out_row| will advance by~|n| */
+ @y
+@@ -71,6 +95,30 @@ static long na_over_b(n,a,b)
+ static long na_over_b(long n,long a,long b)
+ @z
+ 
++@x l.295
++  do@+{@+bit[k]=n&1; /* save the least significant bit of $n$ */
++@y
++  do {@+bit[k]=n&1; /* save the least significant bit of $n$ */
++@z
++
++@x l.298
++  }@+while (n>nmax);
++@y
++  } while (n>nmax);
++@z
++
++@x l.309
++do@+{@+k--;@+ q<<=1;
++@y
++do {@+k--;@+ q<<=1;
++@z
++
++@x l.316
++}@+while (k);
++@y
++} while (k);
++@z
++
+ @x l.319
+ if (*out_row<=d0) *out_row=0;
+ else if (*out_row>=d1) *out_row=d;
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 67e36a2..438ccd2 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -125,6 +125,18 @@ static long jj(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
+ @z
+ 
++@x l.751
++do@+{
++@y
++do {
++@z
++
++@x l.755
++}@+while (x->u);
++@y
++} while (x->u);
++@z
++
+ @x l.882
+ static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
+   arc *c,*d,*e;
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 6af51f6..3b19119 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -50,6 +50,18 @@ static void classify(@t\1\1@>
+   char t@t\2\2@>) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
+ @z
+ 
++@x l.569
++  do@+{@+activity=0;
++@y
++  do {@+activity=0;
++@z
++
++@x l.578
++  }@+while (activity);
++@y
++  } while (activity);
++@z
++
+ @x l.672
+ static void flushout() /* output the buffer to |save_file| */
+ @y
+@@ -70,6 +82,18 @@ static void move_item()
+ static void move_item(void)
+ @z
+ 
++@x l.718
++      do@+{
++@y
++      do {
++@z
++
++@x l.722
++      }@+while(l>78);
++@y
++      } while(l>78);
++@z
++
+ @x l.747
+ static void translate_field(l,t)
+   util *l; /* address of field to be output in symbolic form */
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index 45c2b3f..d5105fb 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -36,6 +36,18 @@ static long iabs(
+   long x)
+ @z
+ 
++@x l.359
++  do@+{
++@y
++  do {
++@z
++
++@x l.366
++  }@+while (gb_char()==',');
++@y
++  } while (gb_char()==',');
++@z
++
+ @x l.426
+ if (n==0 || nn<n)
+ @y
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 49fcf70..33d1b88 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -81,6 +81,18 @@ void req_heap(@t\1\1@>
+   long d@t\2\2@>) /* its new |dist| */
+ @z
+ 
++@x l.661
++    do@+{
++@y
++    do {
++@z
++
++@x l.666
++    }@+while (j>0 && (oo,(u=heap_elt(j))->dist>d));
++@y
++    } while (j>0 && (oo,(u=heap_elt(j))->dist>d));
++@z
++
+ @x l.682
+ Vertex *del_heap()
+ @y
+@@ -129,6 +141,18 @@ Vertex *del_F_heap()
+ Vertex *del_F_heap(void)
+ @z
+ 
++@x l.1004
++    do@+{
++@y
++    do {
++@z
++
++@x l.1007
++    }@+while (h<r);
++@y
++    } while (h<r);
++@z
++
+ @x l.1155
+ qunite(m,q,mm,qq,h)
+   register long m,mm; /* number of nodes in the forests */
+@@ -177,6 +201,18 @@ Arc *qdel_min(
+   Arc *h) /* header of binomial queue */
+ @z
+ 
++@x l.1324
++  do@+{@+long t=mm&(mm-1);
++@y
++  do {@+long t=mm&(mm-1);
++@z
++
++@x l.1330
++  }@+while (mm);
++@y
++  } while (mm);
++@z
++
+ @x l.1339
+ qtraverse(h,visit)
+   Arc *h; /* head of binomial queue to be unraveled */
+@@ -196,6 +232,18 @@ unsigned long cher_tar_kar(
+   Graph *g)
+ @z
+ 
++@x l.1492
++do@+{a=qdel_min(v->pq);
++@y
++do {a=qdel_min(v->pq);
++@z
++
++@x l.1496
++}@+while (u==v); /* repeat until a new fragment is found */
++@y
++} while (u==v); /* repeat until a new fragment is found */
++@z
++
+ @x l.1614
+ void note_edge(a)
+   Arc *a;
+-- 
+2.36.1
+
