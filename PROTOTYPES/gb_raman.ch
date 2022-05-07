@@ -11,11 +11,11 @@ Graph *raman(p,q,type,reduce)
   unsigned long type; /* selector between different possible constructions */
   unsigned long reduce; /* if nonzero, multiple edges and self-loops won't occur */
 @y
-Graph *raman(@t\1\1@>
+Graph *raman(
   long p, /* one less than the desired degree; must be prime */
   long q, /* size parameter; must be prime and properly related to |type| */
   unsigned long type, /* selector between different possible constructions */
-  unsigned long reduce@t\2\2@>)
+  unsigned long reduce)
     /* if nonzero, multiple edges and self-loops won't occur */
 @z
 
@@ -32,7 +32,7 @@ static long lin_frac(a,k)
   long a; /* the number being transformed; $q$ represents $\infty$ */
   long k; /* index into |gen| table */
 @y
-static long lin_frac(@t\1\1@>
+static long lin_frac(
   long a, /* the number being transformed; $q$ represents $\infty$ */
-  long k@t\2\2@>) /* index into |gen| table */
+  long k) /* index into |gen| table */
 @z

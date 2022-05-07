@@ -11,9 +11,9 @@ Graph *econ(n,omit,threshold,seed)
   unsigned long threshold; /* minimum per-64K-age in arcs leading in */
   long seed; /* random number seed */
 @y
-Graph *econ(@t\1\1@>
+Graph *econ(
   unsigned long n, /* number of vertices desired */
   unsigned long omit, /* number of special vertices to omit */
   unsigned long threshold, /* minimum per-64K-age in arcs leading in */
-  long seed@t\2\2@>) /* random number seed */
+  long seed) /* random number seed */
 @z
