@@ -23,6 +23,7 @@ Group: Productivity/Scientific/Math
 Distribution: openSUSE 42 (x86_64)
 %global __echo %(which echo)
 %global __pdftex %(which pdftex)
+%global __perl %(which perl)
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
