@@ -10,10 +10,10 @@ URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
 Release: 26
 
-%if %{_vendor} == "debbuild"
+%if "%{_vendor}" == "debbuild"
 Version: 2:20210130
 Group: math
-Distribution: Kubuntu 20.04 (x86_64)
+Distribution: Kubuntu 22.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
