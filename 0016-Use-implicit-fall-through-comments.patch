@@ -1,7 +1,7 @@
-From b436ab483994c12c8290e9d195f46fbc3b207cdb Mon Sep 17 00:00:00 2001
+From 5eb0fa0fd482cd1069b2bc31d90aa375133d4796 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:19:24 +0200
-Subject: [PATCH 16/16] Use implicit fall through comments.
+Subject: [PATCH 16/17] Use implicit fall through comments.
 
 ---
  PROTOTYPES/gb_roget.ch | 8 ++++++++
@@ -9,7 +9,7 @@ Subject: [PATCH 16/16] Use implicit fall through comments.
  2 files changed, 16 insertions(+)
 
 diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
-index 58a5ae0..01fdf17 100644
+index 58a5ae0..4bcd4cb 100644
 --- a/PROTOTYPES/gb_roget.ch
 +++ b/PROTOTYPES/gb_roget.ch
 @@ -33,3 +33,11 @@ Graph *roget(
@@ -21,11 +21,11 @@ index 58a5ae0..01fdf17 100644
 +    /* fall through to the space case */
 +  case ' ': j=gb_number(10);@+break;
 +@y
-+    @=/* fall through to the space case */@>
++    @=/* fall through */@>
 +  case ' ': j=gb_number(10);@+break;
 +@z
 diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
-index 11bae64..62c0eba 100644
+index 11bae64..7ee88b3 100644
 --- a/PROTOTYPES/gb_save.ch
 +++ b/PROTOTYPES/gb_save.ch
 @@ -103,3 +103,11 @@ static void translate_field(
@@ -37,9 +37,9 @@ index 11bae64..62c0eba 100644
 +    /* fall through to case \.Z */
 + case 'Z': buf_ptr--; /* forget spurious comma */
 +@y
-+    @=/* fall through to case \.Z */@>
++    @=/* fall through */@>
 + case 'Z': buf_ptr--; /* forget spurious comma */
 +@z
 -- 
-2.36.1
+2.39.2
 
