@@ -36,19 +36,7 @@ long gb_unif_rand(m)
 long gb_unif_rand(long m)
 @z
 
-@x l.256
-  do@+{
-@y
-  do {
-@z
-
-@x l.258
-  }@+while (t<=(unsigned long)r);
-@y
-  } while (t<=(unsigned long)r);
-@z
-
-@x l.263
+@x l.255
 extern long gb_unif_rand();
 @y
 extern long gb_unif_rand(long);

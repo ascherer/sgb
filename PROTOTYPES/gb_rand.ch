@@ -23,7 +23,7 @@ Graph *random_graph(n,m,multi,self,directed,dist_from,dist_to,min_len,max_len,
   long min_len,max_len; /* bounds on random lengths */
   long seed; /* random number seed */
 @y
-Graph *random_graph(
+Graph *random_graph(@t\1\1@>
   unsigned long n, /* number of vertices desired */
   unsigned long m, /* number of arcs or edges desired */
   long multi, /* allow duplicate arcs? */
@@ -32,7 +32,7 @@ Graph *random_graph(
   long *dist_from, /* distribution of arc sources */
   long *dist_to, /* distribution of arc destinations */
   long min_len,long max_len, /* bounds on random lengths */
-  long seed) /* random number seed */
+  long seed@t\2\2@>) /* random number seed */
 @z
 
 @x l.369
@@ -43,11 +43,11 @@ static magic_entry *walker(n,nn,dist,g)
     /* start of distribution table, which sums to $2^{30}$ */
   Graph *g; /* tables will be allocated for this graph's vertices */
 @y
-static magic_entry *walker(
+static magic_entry *walker(@t\1\1@>
   long n, /* length of |dist| vector */
   long nn, /* $2^{\lceil\mskip1mu\lg n\rceil}$ */
   register long *dist, /* start of distribution table, which sums to $2^{30}$ */
-  Graph *g) /* tables will be allocated for this graph's vertices */
+  Graph *g@t\2\2@>) /* tables will be allocated for this graph's vertices */
 @z
 
 @x l.454
@@ -59,7 +59,7 @@ Graph *random_bigraph(n1,n2,m,multi,dist1,dist2,min_len,max_len,seed)
   long min_len,max_len; /* bounds on random lengths */
   long seed; /* random number seed */
 @y
-Graph *random_bigraph(
+Graph *random_bigraph(@t\1\1@>
   unsigned long n1,unsigned long n2,
     /* number of vertices desired in each part */
   unsigned long m,
@@ -70,7 +70,7 @@ Graph *random_bigraph(
     /* distribution of edge endpoints */
   long min_len,long max_len,
     /* bounds on random lengths */
-  long seed)
+  long seed@t\2\2@>)
     /* random number seed */
 @z
 
@@ -82,10 +82,10 @@ long random_lengths(g,directed,min_len,max_len,dist,seed)
   long *dist; /* distribution of lengths */
   long seed; /* random number seed */
 @y
-long random_lengths(
+long random_lengths(@t\1\1@>
   Graph *g, /* graph whose lengths will be randomized */
   long directed, /* is it directed? */
   long min_len,long max_len, /* bounds on random lengths */
   long *dist, /* distribution of lengths */
-  long seed) /* random number seed */
+  long seed@t\2\2@>) /* random number seed */
 @z

@@ -23,7 +23,7 @@ static Graph *bgraph(bipartite,
                           not in that interval */
   long seed; /* random number seed */
 @y
-static Graph *bgraph(
+static Graph *bgraph(@t\1\1@>
   long bipartite, /* should we make the graph bipartite? */
   char *title, /* identification of the selected book */
   unsigned long n, /* number of vertices desired before exclusion */
@@ -32,7 +32,7 @@ static Graph *bgraph(
     /* interval of chapters leading to edges */
   long in_weight, /* weight coefficient pertaining to chapters in that interval */
   long out_weight, /* weight coefficient pertaining to chapters not in that interval */
-  long seed) /* random number seed */
+  long seed@t\2\2@>) /* random number seed */
 @z
 
 @x l.185
@@ -55,16 +55,4 @@ Graph *bi_book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
 Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
   unsigned long first_chapter,unsigned long last_chapter,@|
   long in_weight,long out_weight,long seed)
-@z
-
-@x l.455
-      do@+{@+
-@y
-      do {@+
-@z
-
-@x l.461
-      }@+while (c==','); /* repeat until end of the clique */
-@y
-      } while (c==','); /* repeat until end of the clique */
 @z

@@ -13,11 +13,11 @@ Graph *words(n,wt_vector,wt_threshold,seed)
   long wt_threshold; /* minimum qualifying weight */
   long seed; /* random number seed */
 @y
-Graph *words(
+Graph *words(@t\1\1@>
   unsigned long n, /* maximum number of vertices desired */
   long wt_vector[], /* pointer to array of weights */
   long wt_threshold, /* minimum qualifying weight */
-  long seed) /* random number seed */
+  long seed@t\2\2@>) /* random number seed */
 @z
 
 @x l.210
@@ -34,26 +34,14 @@ static long iabs(x)
 static long iabs(long x)
 @z
 
-@x l.359
-  do@+{
-@y
-  do {
-@z
-
-@x l.366
-  }@+while (gb_char()==',');
-@y
-  } while (gb_char()==',');
-@z
-
 @x l.508
 @p Vertex *find_word(q,f)
   char *q;
   void @[@] (*f)(); /* |*f| should take one argument, of type |Vertex *|,
                         or |f| should be |NULL| */
 @y
-@p Vertex *find_word(
-  char *q,void (*f)(Vertex *))
+@p Vertex *find_word(@t\1\1@>
+  char *q,void (*f)(Vertex *)@t\2\2@>)
     /* |*f| should take one argument, of type |Vertex *|,
        or |f| should be |NULL| */
 @z
