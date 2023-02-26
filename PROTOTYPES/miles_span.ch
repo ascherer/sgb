@@ -3,9 +3,9 @@ main(argc,argv)
   int argc; /* the number of command-line arguments */
   char *argv[]; /* an array of strings containing those arguments */
 @y
-int main(
+int main(@t\1\1@>
   int argc, /* the number of command-line arguments */
-  char *argv[]) /* an array of strings containing those arguments */
+  char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
 @z
 
 @x l.197
@@ -13,9 +13,9 @@ report(u,v,l)
   Vertex *u,*v; /* adjacent vertices in the minimum spanning tree */
   long l; /* the length of the edge between them */
 @y
-void report(
+void report(@t\1\1@>
   Vertex *u,Vertex *v, /* adjacent vertices in the minimum spanning tree */
-  long l) /* the length of the edge between them */
+  long l@t\2\2@>) /* the length of the edge between them */
 @z
 
 @x l.378
@@ -60,9 +60,9 @@ void enq_heap(v,d)
   Vertex *v; /* vertex that is entering the queue */
   long d; /* its key (aka |dist|) */
 @y
-void enq_heap(
+void enq_heap(@t\1\1@>
   Vertex *v, /* vertex that is entering the queue */
-  long d) /* its key (aka |dist|) */
+  long d@t\2\2@>) /* its key (aka |dist|) */
 @z
 
 @x l.651
@@ -70,21 +70,9 @@ void req_heap(v,d)
   Vertex *v; /* vertex whose key is being reduced */
   long d; /* its new |dist| */
 @y
-void req_heap(
+void req_heap(@t\1\1@>
   Vertex *v, /* vertex whose key is being reduced */
-  long d) /* its new |dist| */
-@z
-
-@x l.661
-    do@+{
-@y
-    do {
-@z
-
-@x l.666
-    }@+while (j>0 && (oo,(u=heap_elt(j))->dist>d));
-@y
-    } while (j>0 && (oo,(u=heap_elt(j))->dist>d));
+  long d@t\2\2@>) /* its new |dist| */
 @z
 
 @x l.682
@@ -105,9 +93,9 @@ void enq_F_heap(v,d)
   Vertex *v; /* vertex that is entering the queue */
   long d; /* its key (aka |dist|) */
 @y
-void enq_F_heap(
+void enq_F_heap(@t\1\1@>
   Vertex *v, /* vertex that is entering the queue */
-  long d) /* its key (aka |dist|) */
+  long d@t\2\2@>) /* its key (aka |dist|) */
 @z
 
 @x l.901
@@ -115,9 +103,9 @@ void req_F_heap(v,d)
   Vertex *v; /* vertex whose key is being reduced */
   long d; /* its new |dist| */
 @y
-void req_F_heap(
+void req_F_heap(@t\1\1@>
   Vertex *v, /* vertex whose key is being reduced */
-  long d) /* its new |dist| */
+  long d@t\2\2@>) /* its new |dist| */
 @z
 
 @x l.970
@@ -126,30 +114,18 @@ Vertex *del_F_heap()
 Vertex *del_F_heap(void)
 @z
 
-@x l.1004
-    do@+{
-@y
-    do {
-@z
-
-@x l.1007
-    }@+while (h<r);
-@y
-    } while (h<r);
-@z
-
 @x l.1155
 qunite(m,q,mm,qq,h)
   register long m,mm; /* number of nodes in the forests */
   register Arc *q,*qq; /* binomial trees in the forests, linked by |qsib| */
   Arc *h; /* |h->qsib| will get the result */
 @y
-void qunite(
+void qunite(@t\1\1@>
   register long m, /* number of nodes in the forests */
   register Arc *q, /* binomial trees in the forests, linked by |qsib| */
   register long mm, /* number of nodes in the forests */
   register Arc *qq, /* binomial trees in the forests, linked by |qsib| */
-  Arc *h) /* |h->qsib| will get the result */
+  Arc *h@t\2\2@>) /* |h->qsib| will get the result */
 @z
 
 @x l.1257
@@ -157,9 +133,9 @@ qenque(h,a)
   Arc *h; /* header of a binomial queue */
   Arc *a; /* new element for that queue */
 @y
-void qenque(
+void qenque(@t\1\1@>
   Arc *h, /* header of a binomial queue */
-  Arc *a) /* new element for that queue */
+  Arc *a@t\2\2@>) /* new element for that queue */
 @z
 
 @x l.1272
@@ -167,9 +143,9 @@ qmerge(h,hh)
   Arc *h; /* header of binomial queue that will receive the result */
   Arc *hh; /* header of binomial queue that will be absorbed */
 @y
-void qmerge(
+void qmerge(@t\1\1@>
   Arc *h, /* header of binomial queue that will receive the result */
-  Arc *hh) /* header of binomial queue that will be absorbed */
+  Arc *hh@t\2\2@>) /* header of binomial queue that will be absorbed */
 @z
 
 @x l.1291
@@ -180,26 +156,14 @@ Arc *qdel_min(Arc *h)
   /* header of binomial queue */
 @z
 
-@x l.1324
-  do@+{@+long t=mm&(mm-1);
-@y
-  do {@+long t=mm&(mm-1);
-@z
-
-@x l.1330
-  }@+while (mm);
-@y
-  } while (mm);
-@z
-
 @x l.1339
 qtraverse(h,visit)
   Arc *h; /* head of binomial queue to be unraveled */
   void @[@] (*visit)(); /* procedure to be invoked on each node */
 @y
-void qtraverse(
+void qtraverse(@t\1\1@>
   Arc *h, /* head of binomial queue to be unraveled */
-  void (*visit)(register Arc *))
+  void (*visit)(register Arc *)@t\2\2@>)
     /* procedure to be invoked on each node */
 @z
 
@@ -208,18 +172,6 @@ unsigned long cher_tar_kar(g)
   Graph *g;
 @y
 unsigned long cher_tar_kar(Graph *g)
-@z
-
-@x l.1492
-do@+{a=qdel_min(v->pq);
-@y
-do {a=qdel_min(v->pq);
-@z
-
-@x l.1496
-}@+while (u==v); /* repeat until a new fragment is found */
-@y
-} while (u==v); /* repeat until a new fragment is found */
 @z
 
 @x l.1614

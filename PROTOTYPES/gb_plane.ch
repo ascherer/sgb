@@ -18,7 +18,7 @@ Graph *plane(n,x_range,y_range,extend,prob,seed)
   unsigned long prob; /* probability of rejecting a Delaunay edge */
   long seed; /* random number seed */
 @y
-Graph *plane(
+Graph *plane(@t\1\1@>
   unsigned long n,
     /* number of vertices desired */
   unsigned long x_range,unsigned long y_range,
@@ -27,7 +27,7 @@ Graph *plane(
     /* should a point at infinity be included? */
   unsigned long prob,
     /* probability of rejecting a Delaunay edge */
-  long seed)
+  long seed@t\2\2@>)
     /* random number seed */
 @z
 
@@ -36,9 +36,9 @@ void delaunay(g,f)
   Graph *g; /* vertices in the plane */
   void @[@] (*f)(); /* procedure that absorbs the triangulated edges */
 @y
-void delaunay(
+void delaunay(@t\1\1@>
   Graph *g, /* vertices in the plane */
-  void (*f)(Vertex *,Vertex *))
+  void (*f)(Vertex *,Vertex *)@t\2\2@>)
     /* procedure that absorbs the triangulated edges */
 @z
 
@@ -105,18 +105,6 @@ static long jj(t,u,v,w)
 static long jj(Vertex *t,Vertex *u,Vertex *v,Vertex *w)
 @z
 
-@x l.751
-do@+{
-@y
-do {
-@z
-
-@x l.755
-}@+while (x->u);
-@y
-} while (x->u);
-@z
-
 @x l.882
 static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
   arc *c,*d,*e;
@@ -138,7 +126,7 @@ Graph *plane_miles(n,north_weight,west_weight,pop_weight,extend,prob,seed)
   unsigned long prob; /* probability of rejecting a Delaunay edge */
   long seed; /* random number seed */
 @y
-Graph *plane_miles(
+Graph *plane_miles(@t\1\1@>
   unsigned long n,
     /* number of vertices desired */
   long north_weight,
@@ -151,7 +139,7 @@ Graph *plane_miles(
     /* should a point at infinity be included? */
   unsigned long prob,
     /* probability of rejecting a Delaunay edge */
-  long seed)
+  long seed@t\2\2@>)
     /* random number seed */
 @z
 
