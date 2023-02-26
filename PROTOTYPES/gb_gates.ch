@@ -26,10 +26,10 @@ long gate_eval(g,in_vec,out_vec)
   char *in_vec; /* string for input values, or |NULL| */
   char *out_vec; /* string for output values, or |NULL| */
 @y
-long gate_eval(
+long gate_eval(@t\1\1@>
   Graph *g, /* graph with gates as vertices */
   char *in_vec, /* string for input values, or |NULL| */
-  char *out_vec) /* string for output values, or |NULL| */
+  char *out_vec@t\2\2@>) /* string for output values, or |NULL| */
 @z
 
 @x l.215
@@ -53,9 +53,9 @@ static Vertex* make2(t,v1,v2)
   char t; /* the type of the new gate */
   Vertex *v1,*v2;
 @y
-static Vertex* make2(
+static Vertex* make2(@t\1\1@>
   char t, /* the type of the new gate */
-  Vertex *v1,Vertex *v2)
+  Vertex *v1,Vertex *v2@t\2\2@>)
 @z
 
 @x l.454
@@ -63,9 +63,9 @@ static Vertex* make3(t,v1,v2,v3)
   char t; /* the type of the new gate */
   Vertex *v1,*v2,*v3;
 @y
-static Vertex* make3(
+static Vertex* make3(@t\1\1@>
   char t, /* the type of the new gate */
-  Vertex *v1,Vertex *v2,Vertex *v3)
+  Vertex *v1,Vertex *v2,Vertex *v3@t\2\2@>)
 @z
 
 @x l.464
@@ -73,9 +73,9 @@ static Vertex* make4(t,v1,v2,v3,v4)
   char t; /* the type of the new gate */
   Vertex *v1,*v2,*v3,*v4;
 @y
-static Vertex* make4(
+static Vertex* make4(@t\1\1@>
   char t, /* the type of the new gate */
-  Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4)
+  Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4@t\2\2@>)
 @z
 
 @x l.475
@@ -83,9 +83,9 @@ static Vertex* make5(t,v1,v2,v3,v4,v5)
   char t; /* the type of the new gate */
   Vertex *v1,*v2,*v3,*v4,*v5;
 @y
-static Vertex* make5(
+static Vertex* make5(@t\1\1@>
   char t, /* the type of the new gate */
-  Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4,Vertex *v5)
+  Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4,Vertex *v5@t\2\2@>)
 @z
 
 @x l.496
@@ -110,12 +110,12 @@ static void make_adder(n,x,y,z,carry,add)
   Vertex *carry; /* add this to |y|, unless it's null */
   char add; /* should we add or subtract? */
 @y
-static void make_adder(
+static void make_adder(@t\1\1@>
   unsigned long n, /* number of bits */
   Vertex *x[],Vertex *y[], /* input gates */
   Vertex *z[], /* output gates */
   Vertex *carry, /* add this to |y|, unless it's null */
-  char add) /* should we add or subtract? */
+  char add@t\2\2@>) /* should we add or subtract? */
 @z
 
 @x l.992
@@ -125,11 +125,11 @@ long run_risc(g,rom,size,trace_regs)
   unsigned long size; /* length of |rom| vector */
   unsigned long trace_regs; /* if nonzero, this many registers will be traced */
 @y
-long run_risc(
+long run_risc(@t\1\1@>
   Graph *g, /* graph output by |risc| */
   unsigned long rom[], /* contents of read-only memory */
   unsigned long size, /* length of |rom| vector */
-  unsigned long trace_regs)
+  unsigned long trace_regs@t\2\2@>)
     /* if nonzero, this many registers will be traced */
 @z
 
@@ -154,18 +154,6 @@ static Graph* reduce(g)
 static Graph* reduce(Graph *g)
 @z
 
-@x l.1365
-  do@+{
-@y
-  do {
-@z
-
-@x l.1383
-  }@+while (v!=sentinel);
-@y
-  } while (v!=sentinel);
-@z
-
 @x l.1487
 Graph* prod(m,n)
   unsigned long m,n; /* lengths of the binary numbers to be multiplied */
@@ -183,12 +171,12 @@ Graph *partial_gates(g,r,prob,seed,buf)
   long seed; /* seed value for random number generation */
   char *buf; /* optional parameter for information about partial assignment */
 @y
-Graph *partial_gates(
+Graph *partial_gates(@t\1\1@>
   Graph *g, /* generalized gate graph */
   unsigned long r, /* the number of initial gates to leave untouched */
   unsigned long prob,
     /* scaled probability of not touching subsequent input gates */
   long seed, /* seed value for random number generation */
-  char *buf)
+  char *buf@t\2\2@>)
     /* optional parameter for information about partial assignment */
 @z

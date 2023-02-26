@@ -3,9 +3,9 @@ main(argc,argv)
   int argc; /* the number of command-line arguments */
   char *argv[]; /* an array of strings containing those arguments */
 @y
-int main(
+int main(@t\1\1@>
   int argc, /* the number of command-line arguments */
-  char *argv[]) /* an array of strings containing those arguments */
+  char *argv[]@t\2\2@>) /* an array of strings containing those arguments */
 @z
 
 @x l.216
@@ -55,7 +55,7 @@ long prompt_for_five(s,p)
   char *s; /* string used in prompt message */
   register char *p; /* where to put a string typed by the user */
 @y
-long prompt_for_five(
+long prompt_for_five(@t\1\1@>
   char *s, /* string used in prompt message */
-  register char *p) /* where to put a string typed by the user */
+  register char *p@t\2\2@>) /* where to put a string typed by the user */
 @z

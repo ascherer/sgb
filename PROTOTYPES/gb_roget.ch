@@ -12,16 +12,10 @@ Graph *roget(n,min_distance,prob,seed)
   unsigned long prob; /* 65536 times the probability of rejecting an arc */
   long seed; /* random number seed */
 @y
-Graph *roget(
+Graph *roget(@t\1\1@>
   unsigned long n, /* number of vertices desired */
   unsigned long min_distance,
     /* smallest inter-category distance allowed in an arc */
   unsigned long prob, /* 65536 times the probability of rejecting an arc */
-  long seed) /* random number seed */
-@z
-
-@x l.205
-    /* fall through to the space case */
-@y
-    @=/* fall through to the space case */@>
+  long seed@t\2\2@>) /* random number seed */
 @z
