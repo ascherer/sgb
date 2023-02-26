@@ -55,6 +55,12 @@ static Vertex* new_vert(
   char t) /* the type of the new gate */
 @z
 
+@x l.427
+@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,b);@+count=0;
+@y
+@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,(b)&0xffff);@+count=0;
+@z
+
 @x l.445
 static Vertex* make2(t,v1,v2)
   char t; /* the type of the new gate */

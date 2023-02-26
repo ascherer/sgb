@@ -38,6 +38,15 @@ long *lisa(
     /* where to allocate the matrix that will be output */
 @z
 
+@x l.183
+sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+   m,n,d,m0,m1,n0,n1,d0,d1);
+@y
+sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+   m&0x1ff,n&0x1ff,d&0xffffffff,m0&0x1ff,m1&0x1ff,n0&0x1ff,n1&0x1ff,
+   d0&0xffffffff,d1&0xffffffff);
+@z
+
 @x l.229
 for (l=lam=0; l<n; l++) {@+register long sum=0;
 @y

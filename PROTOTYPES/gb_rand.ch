@@ -37,8 +37,10 @@ Graph *random_graph(
 
 @x l.181
 for (k=0; k<n; k++) {
+  sprintf(name_buffer,"%ld",k);
 @y
 for (k=0; k<(long)n; k++) {
+  sprintf(name_buffer,"%ld",k&0xffffffff);
 @z
 
 @x l.204

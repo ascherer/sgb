@@ -19,6 +19,22 @@ Graph *raman(
     /* if nonzero, multiple edges and self-loops won't occur */
 @z
 
+@x l.283
+    else sprintf(name_buf,"{%ld,%ld}",a,aa);
+@y
+    else sprintf(name_buf,"{%ld,%ld}",
+      (unsigned long)a&0xffff,(unsigned long)aa&0xffff);
+@z
+
+@x l.314
+        sprintf(name_buf,"(%ld,%ld;1,%ld)",b,v->y.I,c);
+@y
+        sprintf(name_buf,"(%ld,%ld;1,%ld)",
+          (unsigned long)b&0x1fff,
+          (unsigned long)(v->y.I)&0x1fff,
+          (unsigned long)c&0x1fff);
+@z
+
 @x l.481
 static void deposit(a,b,c,d)
   long a,b,c,d; /* a solution to $a^2+b^2+c^2+d^2=p$ */
