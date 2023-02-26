@@ -19,9 +19,9 @@ static long fill_field(l,t)
   util *l; /* location of field to be filled in */
   char t; /* its type code */
 @y
-static long fill_field(
+static long fill_field(@t\1\1@>
   util *l, /* location of field to be filled in */
-  char t) /* its type code */
+  char t@t\2\2@>) /* its type code */
 @z
 
 @x l.308
@@ -35,9 +35,9 @@ long save_graph(g,f)
   Graph *g; /* graph to be saved */
   char *f; /* name of the file to be created */
 @y
-long save_graph(
+long save_graph(@t\1\1@>
   Graph *g, /* graph to be saved */
-  char *f) /* name of the file to be created */
+  char *f@t\2\2@>) /* name of the file to be created */
 @z
 
 @x l.518
@@ -45,21 +45,9 @@ static void classify(l,t)
   util *l; /* location of field to be classified */
   char t; /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
 @y
-static void classify(
+static void classify(@t\1\1@>
   util *l, /* location of field to be classified */
-  char t) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
-@z
-
-@x l.569
-  do@+{@+activity=0;
-@y
-  do {@+activity=0;
-@z
-
-@x l.578
-  }@+while (activity);
-@y
-  } while (activity);
+  char t@t\2\2@>) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
 @z
 
 @x l.672
@@ -82,30 +70,12 @@ static void move_item()
 static void move_item(void)
 @z
 
-@x l.718
-      do@+{
-@y
-      do {
-@z
-
-@x l.722
-      }@+while(l>78);
-@y
-      } while(l>78);
-@z
-
 @x l.747
 static void translate_field(l,t)
   util *l; /* address of field to be output in symbolic form */
   char t; /* type of formatting desired */
 @y
-static void translate_field(
+static void translate_field(@t\1\1@>
   util *l, /* address of field to be output in symbolic form */
-  char t) /* type of formatting desired */
-@z
-
-@x l.760
-    /* fall through to case \.Z */
-@y
-    @=/* fall through to case \.Z */@>
+  char t@t\2\2@>) /* type of formatting desired */
 @z
