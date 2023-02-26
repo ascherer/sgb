@@ -1,7 +1,7 @@
-From e85c37e603821ad7dc1d9f5e9439e9a7f3880111 Mon Sep 17 00:00:00 2001
+From 25f027b5e774b981f8f04fd25c0e129b110b5b19 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Thu, 3 Sep 2015 11:19:38 +0200
-Subject: [PATCH 04/16] GCC -Wall.
+Subject: [PATCH 04/17] GCC -Wall.
 
 Compile with '-Wall' and fix the inflicted source modules.
 ---
@@ -265,5 +265,5 @@ index becb6ad..62cbb7a 100644
  static void pr_vert();
     /* a subroutine for printing a vertex is declared below */
 -- 
-2.36.1
+2.39.2
 

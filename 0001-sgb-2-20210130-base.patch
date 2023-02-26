@@ -1,7 +1,7 @@
-From 094765fccbe2395b8821749f81766c1c4147444b Mon Sep 17 00:00:00 2001
+From 11bb45c7a555a836f044180e0344aa6fa045eb96 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Sat, 7 May 2022 22:39:31 +0200
-Subject: [PATCH 01/16] sgb-2:20210130 base
+Date: Sun, 26 Feb 2023 18:57:18 +0100
+Subject: [PATCH 01/17] sgb-2:20210130 base
 
 ---
  +The+Stanford+GraphBase+       |    0
@@ -41586,5 +41586,5 @@ index 0000000..8bd70a6
 +zowie 4
 +* End of file "words.dat"
 -- 
-2.36.1
+2.39.2
 

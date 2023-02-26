@@ -1,0 +1,94 @@
+From d4552f9d73b890dfbc596cf23853df4fc3269877 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sun, 26 Feb 2023 18:04:55 +0100
+Subject: [PATCH 17/17] Limit lengths of numeric values in strings.
+
+---
+ PROTOTYPES/gb_gates.ch |  6 ++++++
+ PROTOTYPES/gb_lisa.ch  |  9 +++++++++
+ PROTOTYPES/gb_raman.ch | 16 ++++++++++++++++
+ PROTOTYPES/gb_rand.ch  |  2 ++
+ 4 files changed, 33 insertions(+)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index f8a3699..10c5329 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -55,6 +55,12 @@ static Vertex* new_vert(
+   char t) /* the type of the new gate */
+ @z
+ 
++@x l.427
++@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,b);@+count=0;
++@y
++@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,(b)&0xffff);@+count=0;
++@z
++
+ @x l.445
+ static Vertex* make2(t,v1,v2)
+   char t; /* the type of the new gate */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index cf4583a..68b4630 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -38,6 +38,15 @@ long *lisa(
+     /* where to allocate the matrix that will be output */
+ @z
+ 
++@x l.183
++sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
++   m,n,d,m0,m1,n0,n1,d0,d1);
++@y
++sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
++   m&0x1ff,n&0x1ff,d&0xffffffff,m0&0x1ff,m1&0x1ff,n0&0x1ff,n1&0x1ff,
++   d0&0xffffffff,d1&0xffffffff);
++@z
++
+ @x l.229
+ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ @y
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index f12895b..50ed123 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -19,6 +19,22 @@ Graph *raman(
+     /* if nonzero, multiple edges and self-loops won't occur */
+ @z
+ 
++@x l.283
++    else sprintf(name_buf,"{%ld,%ld}",a,aa);
++@y
++    else sprintf(name_buf,"{%ld,%ld}",
++      (unsigned long)a&0xffff,(unsigned long)aa&0xffff);
++@z
++
++@x l.314
++        sprintf(name_buf,"(%ld,%ld;1,%ld)",b,v->y.I,c);
++@y
++        sprintf(name_buf,"(%ld,%ld;1,%ld)",
++          (unsigned long)b&0xffff,
++          (unsigned long)(v->y.I)&0xf,
++          (unsigned long)c&0xffff);
++@z
++
+ @x l.481
+ static void deposit(a,b,c,d)
+   long a,b,c,d; /* a solution to $a^2+b^2+c^2+d^2=p$ */
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 9f677d1..543779d 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -37,8 +37,10 @@ Graph *random_graph(
+ 
+ @x l.181
+ for (k=0; k<n; k++) {
++  sprintf(name_buffer,"%ld",k);
+ @y
+ for (k=0; k<(long)n; k++) {
++  sprintf(name_buffer,"%ld",k&0xffffffff);
+ @z
+ 
+ @x l.204
+-- 
+2.39.2
+
