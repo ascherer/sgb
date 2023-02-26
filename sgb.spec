@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 26
+Release: 27
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -46,6 +46,7 @@ Patch13: 0013-Check-bit-length-of-operands-earlier.patch
 Patch14: 0014-Purge-control-codes.patch
 Patch15: 0015-Purge-t-control-codes.patch
 Patch16: 0016-Use-implicit-fall-through-comments.patch
+Patch17: 0017-Limit-lengths-of-numeric-values-in-strings.patch
 %endif
 
 %description
@@ -62,8 +63,7 @@ master files stay intact.
 %{__ln_s} PROTOTYPES/*.ch .
 %{?with_sysv:%{__perl} -pe "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
-%{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra -Wno-format-overflow \
-	-Wimplicit-fallthrough=2/" -i Makefile
+%{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra/" -i Makefile
 %else
 %{__echo} 'demos: lib $(DEMOS)' >> Makefile
 %endif
