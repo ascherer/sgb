@@ -1,4 +1,4 @@
-From d4552f9d73b890dfbc596cf23853df4fc3269877 Mon Sep 17 00:00:00 2001
+From 77848aaa10e07c04851b219f2ddb455da10bb241 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 26 Feb 2023 18:04:55 +0100
 Subject: [PATCH 17/17] Limit lengths of numeric values in strings.
@@ -48,7 +48,7 @@ index cf4583a..68b4630 100644
  for (l=lam=0; l<n; l++) {@+register long sum=0;
  @y
 diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
-index f12895b..50ed123 100644
+index f12895b..8b06e79 100644
 --- a/PROTOTYPES/gb_raman.ch
 +++ b/PROTOTYPES/gb_raman.ch
 @@ -19,6 +19,22 @@ Graph *raman(
@@ -66,9 +66,9 @@ index f12895b..50ed123 100644
 +        sprintf(name_buf,"(%ld,%ld;1,%ld)",b,v->y.I,c);
 +@y
 +        sprintf(name_buf,"(%ld,%ld;1,%ld)",
-+          (unsigned long)b&0xffff,
-+          (unsigned long)(v->y.I)&0xf,
-+          (unsigned long)c&0xffff);
++          (unsigned long)b&0x1fff,
++          (unsigned long)(v->y.I)&0x1fff,
++          (unsigned long)c&0x1fff);
 +@z
 +
  @x l.481
