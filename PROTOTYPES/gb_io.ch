@@ -1,13 +1,39 @@
-@x l.35
+@x l.34
+@t\2@>@/
 int main()
 @y
+@#
+@t\2\4@>
 int main(void)
+@z
+
+@x l.70
+@<Header files to include@>@;
+@y
+#include "gb_io.h" /* we include our own interface first */
+@z
+
+@x l.85
+@ @(gb_io.h@>=
+@<Header...@>@;
+@y
+@ @(gb_io.h@>=
+#ifndef GB_IO_H
+#define GB_IO_H
+@#
+@<Header files to include@>@;
 @z
 
 @x l.123
 static void fill_buf()
 @y
 static void fill_buf(void)
+@z
+
+@x l.182
+@d unexpected_char 127 /* default |icode| value */
+
+@y
 @z
 
 @x l.185
@@ -49,10 +75,12 @@ long imap_ord(
   return icode[c];
 @z
 
-@x l.206
+@x l.205
+#define unexpected_char @t\quad@> 127
 extern char imap_chr(); /* the character that maps to a given character */
 extern long imap_ord(); /* the ordinal number of a given character */
 @y
+#define unexpected_char @t\quad@> 127 /* default |icode| value */
 extern char imap_chr(long); /* the character that maps to a given character */
 extern long imap_ord(unsigned char); /* the ordinal number of a given character */
 @z
@@ -161,9 +189,12 @@ unsigned long gb_number(
     a=a*d+icode[(unsigned char)*cur_pos++];
 @z
 
-@x l.353
+@x l.352
+#define STR_BUF_LENGTH 160
+extern char str_buf[]; /* safe place to receive output of |gb_string| */
 extern char *gb_string(); /* |gb_string(p,c)| reads a string delimited by |c|
 @y
+extern char str_buf[]; /* safe place to receive output of |gb_string| */
 extern char *gb_string(char *,char);
   /* |gb_string(p,c)| reads a string delimited by |c|
 @z
@@ -176,6 +207,14 @@ char *gb_string(p,c)
 char *gb_string(
   char *p, /*  where to put the result */
   char c) /* character following the string */
+@z
+
+@x l.424
+@ @d gb_raw_open gb_r_open /* abbreviation for Procrustean external linkage */
+
+@(gb_io.h@>=
+@y
+@ @(gb_io.h@>=
 @z
 
 @x l.427
@@ -208,12 +247,22 @@ long gb_close()
 long gb_close(void)
 @z
 
+@x l.565
+@ @d gb_raw_close gb_r_close /* for Procrustean external linkage */
+
+@(gb_io.h@>=
+@y
+@ @(gb_io.h@>=
+@z
+
 @x l.567
 extern long gb_close(); /* close a GraphBase data file; return 0 if OK */
 extern long gb_raw_close(); /* close file and return the checksum */
 @y
 extern long gb_close(void); /* close a GraphBase data file; return 0 if OK */
 extern long gb_raw_close(void); /* close file and return the checksum */
+@#
+#endif /* |GB_IO_H| */
 @z
 
 @x l.571

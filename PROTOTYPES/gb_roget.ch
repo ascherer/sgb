@@ -1,7 +1,23 @@
 @x l.14
 extern Graph *roget();
 @y
+#ifndef GB_ROGET_H
+#define GB_ROGET_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
+@z
+
+@x l.70
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h"
+ /* and we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_roget.h" /* we use our own interface first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.78
@@ -20,10 +36,26 @@ Graph *roget(
   long seed) /* random number seed */
 @z
 
+@x l.170
+@d cat_no u.I /* utility field |u| of each vertex holds the category number */
+
+@y
+@z
+
 @x l.176
     if (gb_number(10)!=k) panic(syntax_error); /* out of synch */
 @y
     if ((long)gb_number(10)!=k) panic(syntax_error); /* out of synch */
+@z
+
+@x l.188
+#define cat_no @t\quad@> u.I
+ /* definition of |cat_no| is repeated in the header file */
+@y
+#define cat_no @t\quad@> u.I
+  /* utility field |u| of each vertex holds the category number */
+@#
+#endif /* |GB_ROGET_H| */
 @z
 
 @x l.198
@@ -38,6 +70,6 @@ Graph *roget(
     /* fall through to the space case */
   case ' ': j=gb_number(10);@+break;
 @y
-    @=/* fall through */@>
+    @=/* fall through */@>@;
   case ' ': j=gb_number(10);@+break;
 @z

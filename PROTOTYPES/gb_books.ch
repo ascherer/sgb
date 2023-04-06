@@ -2,10 +2,25 @@
 extern Graph *book();
 extern Graph *bi_book();
 @y
+#ifndef GB_BOOKS_H
+#define GB_BOOKS_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 extern Graph *book(char *,unsigned long,unsigned long,@|
    unsigned long,unsigned long,long,long,long);
 extern Graph *bi_book(char *,unsigned long,unsigned long,@|
   unsigned long,unsigned long,long,long,long);
+@z
+
+@x l.148
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
+                        for random numbers */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_books.h" /* we use our own interface first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
+                        for random numbers */
 @z
 
 @x l.158
@@ -64,6 +79,29 @@ register long j; /* all-purpose indices */
 register unsigned long k; /* all-purpose indices */
 @z
 
+@x l.306
+@d desc z.S /* utility field |z| points to the \<description> string */
+@d in_count y.I /* utility field |y| counts appearances in selected chapters */
+@d out_count x.I /* utility field |x| counts appearances in other chapters */
+@d short_code u.I /* utility field |u| contains a radix-36 number */
+
+@y
+@z
+
+@x l.335
+#define desc @t\quad@> z.S /* utility field definitions for the header file */
+#define in_count @t\quad@> y.I
+#define out_count @t\quad@> x.I
+#define short_code @t\quad@> u.I
+@y
+#define desc @t\quad@> z.S /* utility field |z| points to the \<description> string */
+#define in_count @t\quad@> y.I /* utility field |y| counts appearances in selected chapters */
+#define out_count @t\quad@> x.I /* utility field |x| counts appearances in other chapters */
+#define short_code @t\quad@> u.I /* utility field |u| contains a radix-36 number */
+@#
+#endif /* |GB_BOOKS_H| */
+@z
+
 @x l.377
     if (p->chap!=k) {
 @y
@@ -92,6 +130,13 @@ Vertex *chap_base=0;
       }@+while (c==','); /* repeat until end of the clique */
 @y
       } while (c==','); /* repeat until end of the clique */
+@z
+
+@x l.471
+@ @(gb_books.h@>=
+#define chap_no @[a.I@] /* utility field definition in the header file */
+@y
+@ (This section remains empty for historic reasons.)
 @z
 
 @x l.499

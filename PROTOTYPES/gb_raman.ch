@@ -1,7 +1,17 @@
 @x l.32
 extern Graph *raman();
 @y
+#ifndef GB_RAMAN_H
+#define GB_RAMAN_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 extern Graph *raman(long,long,unsigned long,unsigned long);
+#endif /* | GB_RAMAN_H| */
+@z
+
+@x l.87
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_raman.h" /* we use our own interface first */
 @z
 
 @x l.92

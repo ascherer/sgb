@@ -4,6 +4,52 @@ int main()
 int main(void)
 @z
 
+@x l.43
+#ifdef SYSV
+#include <string.h>
+#else
+#include <strings.h>
+#endif
+#include <stdio.h>
+#include <stdlib.h>
+@h@#
+@<Type declarations@>@;
+@y
+#include "gb_graph.h" /* we include our own interface first */
+@h@#
+@z
+
+@x l.64
+#include <stdio.h>
+#include <stdlib.h>
+#ifdef SYSV
+#include <string.h>
+#else
+#include <strings.h>
+#endif
+#undef min
+@y
+#ifndef GB_GRAPH_H
+#define GB_GRAPH_H
+@#
+#include <stdio.h>
+#include <stdlib.h>
+#ifdef SYSV
+#include <string.h>
+#else
+#include <strings.h>
+#endif
+#undef min
+@z
+
+@x l.221
+@d gb_typed_alloc(n,t,s) @[(t*)@]gb_alloc((long)((n)*@[sizeof@](t)),s)
+@y
+@(gb_graph.h@>=
+#define gb_typed_alloc(n,t,s) @[@t\quad@>\
+               @[(t*)@]gb_alloc((long)((n)*@[sizeof@](t)),s)@]
+@z
+
 @x l.266
 char *gb_alloc(n,s)
   long n; /* number of consecutive bytes desired */
@@ -29,9 +75,17 @@ extern char *gb_alloc(); /* allocate another block for an area */
 extern void gb_free(); /* deallocate all blocks for an area */
 @y
 extern char *gb_alloc(long,Area); /* allocate another block for an area */
-#define gb_typed_alloc(n,t,s) @[@t\quad@>\
-               @[(t*)@]gb_alloc((long)((n)*@[sizeof@](t)),s)@]
 extern void gb_free(Area); /* deallocate all blocks for an area */
+@z
+
+@x l.427
+@d n_1 uu.I /* utility field |uu| may denote size of bipartite first part */
+
+@(gb_graph.h@>=
+#define n_1 @t\quad@> uu.I
+@y
+@(gb_graph.h@>=
+#define n_1 @t\quad@> uu.I /* utility field |uu| may denote size of bipartite first part */
 @z
 
 @x l.442
@@ -115,6 +169,14 @@ void gb_new_arc(
   long len) /* its length */
 @z
 
+@x l.623
+@d gb_new_graph gb_nugraph /* abbreviations for Procrustean linkers */
+@d gb_new_arc gb_nuarc
+@d gb_new_edge gb_nuedge
+
+@y
+@z
+
 @x l.626
 void gb_new_edge(u,v,len)
   Vertex *u, *v; /* new arcs will go from |u| to |v| and from |v| to |u| */
@@ -188,6 +250,8 @@ extern void hash_setup(Graph *);
    /* create a hash table for a given graph */
 extern Vertex* hash_lookup(char *,Graph *);
    /* find a name in a given graph */
+@#
+#endif /* |GB_GRAPH_H| */
 @z
 
 @x l.855

@@ -1,8 +1,17 @@
-@x l.21
+@x l.17
+@d plane_lisa p_lisa /* abbreviation for Procrustean external linkage */
+
+@(gb_lisa.h@>=
+#define plane_lisa p_lisa
 extern long* lisa();
 extern Graph *plane_lisa();
 extern Graph *bi_lisa();
 @y
+@(gb_lisa.h@>=
+#ifndef GB_LISA_H
+#define GB_LISA_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+#define plane_lisa p_lisa
 extern long* lisa(unsigned long,unsigned long,unsigned long,@|
    unsigned long,unsigned long,unsigned long,unsigned long,@|
    unsigned long,unsigned long,Area);@/
@@ -12,6 +21,22 @@ extern Graph *plane_lisa(unsigned long,unsigned long,unsigned long,@|
 extern Graph *bi_lisa(unsigned long,unsigned long,@|
    unsigned long,unsigned long,unsigned long,unsigned long,@|
    unsigned long,long);
+@z
+
+@x l.124
+extern char lisa_id[];
+@y
+extern char lisa_id[];
+@#
+#endif /* |GB_LISA_H| */
+@z
+
+@x l.142
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_lisa.h" /* we use our own interface first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @z
 
 @x l.149
@@ -161,6 +186,17 @@ for (i=0;i<(long)m0;i++)
     /* and from columns $[|n0|\,.\,.\,|n1|)$ */
   unsigned long d0,unsigned long d1)
     /* lower and upper threshold of raw pixel scores */
+@z
+
+@x l.431
+@ @<gb_lisa.h@>=
+#define pixel_value @t\quad@> x.I /* definitions for the header file */
+#define first_pixel @t\quad@> y.I
+#define last_pixel @t\quad@> z.I
+#define matrix_rows @t\quad@> uu.I
+#define matrix_cols @t\quad@> vv.I
+@y
+@ (This section remains empty for historic reasons.)
 @z
 
 @x l.496

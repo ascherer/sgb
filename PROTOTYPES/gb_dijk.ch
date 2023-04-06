@@ -1,13 +1,32 @@
+@x l.58
+#include "gb_graph.h" /* define the standard GraphBase data structures */
+@y
+#include "gb_dijk.h" /* we use our own interface first */
+@z
+
 @x l.68
+@(gb_dijk.h@>=
 extern long dijkstra(); /* procedure to calculate shortest paths */
 #define print_dijkstra_result p_dijkstra_result /* shorthand for linker */
 extern void print_dijkstra_result(); /* procedure to display the answer */
 @y
+@(gb_dijk.h@>=
+#ifndef GB_DIJK_H
+#define GB_DIJK_H
+#include "gb_graph.h" /* define the standard GraphBase data structures */
 extern long dijkstra(Vertex *,Vertex *,Graph *,long (*)(Vertex *));
    /* procedure to calculate shortest paths */
 #define print_dijkstra_result p_dijkstra_result /* shorthand for linker */
 extern void print_dijkstra_result(Vertex *);
    /* procedure to display the answer */
+@z
+
+@x l.118
+@(gb_dijk.h@>=
+#define dist @[z.I@]
+#define backlink @[y.V@]
+
+@y
 @z
 
 @x l.143
@@ -25,6 +44,13 @@ extern void @[@] (*requeue)(Vertex *,long);
    /* decrease the key of an element in the queue */
 extern Vertex *(*del_min)(void);
    /* remove an element with smallest key */
+@z
+
+@x l.155
+@(gb_dijk.h@>=
+#define hh_val @[x.I@]
+
+@y
 @z
 
 @x l.162
@@ -49,6 +75,12 @@ long dijkstra(
   Vertex *vv, /* the ending point */
   Graph *gg, /* the graph they belong to */
   long @[@] (*hh)(Vertex *)) /* heuristic function */
+@z
+
+@x l.254
+@d print_dijkstra_result p_dijkstra_result /* shorthand for linker */
+
+@y
 @z
 
 @x l.257
@@ -191,4 +223,6 @@ extern void init_128(long);
 extern Vertex *del_128(void);
 extern void enq_128(Vertex *,long);
 extern void req_128(Vertex *,long);
+@#
+#endif /* |GB_DIJK_H| */
 @z

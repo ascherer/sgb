@@ -2,8 +2,23 @@
 extern Graph *words();
 extern Vertex *find_word();
 @y
+#ifndef GB_WORDS_H
+#define GB_WORDS_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 extern Graph *words(unsigned long,long [],long,long);
 extern Vertex *find_word(char *,void (*)(Vertex *));
+@z
+
+@x l.152
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_words.h" /* we use our own interface first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.162
@@ -46,6 +61,21 @@ static long iabs(
   }@+while (gb_char()==',');
 @y
   } while (gb_char()==',');
+@z
+
+@x l.418
+@d weight u.I /* weighted frequencies */
+@d loc a.I /* index of difference (0, 1, 2, 3, or 4) */
+
+@(gb_words.h@>=
+#define weight @[u.I@] /* repeat the definitions in the header file */
+#define loc @[a.I@]
+@y
+@(gb_words.h@>=
+#define weight @[u.I@] /* weighted frequencies */
+#define loc @[a.I@] /* index of difference (0, 1, 2, 3, or 4) */
+@#
+#endif /* |GB_WORDS_H| */
 @z
 
 @x l.426

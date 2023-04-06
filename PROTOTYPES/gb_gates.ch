@@ -1,4 +1,5 @@
-@x l.27
+@x l.26
+#define print_gates p_gates /* abbreviation for Procrustean linkers */
 extern Graph *risc(); /* make a network for a microprocessor */
 extern Graph *prod(); /* make a network for high-speed multiplication */
 extern void print_gates(); /* write a network to standard output file */
@@ -6,6 +7,10 @@ extern long gate_eval(); /* evaluate a network */
 extern Graph *partial_gates(); /* reduce network size */
 extern long run_risc(); /* simulate the microprocessor */
 @y
+#ifndef GB_GATES_H
+#define GB_GATES_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+#define print_gates p_gates /* abbreviation for Procrustean linkers */
 extern Graph *risc(unsigned long);
    /* make a network for a microprocessor */
 extern Graph *prod(unsigned long,unsigned long);
@@ -20,6 +25,50 @@ extern long run_risc(Graph *,unsigned long [],unsigned long,unsigned long);
    /* simulate the microprocessor */
 @z
 
+@x l.87
+@d val x.I /* the field containing a boolean value */
+@d typ y.I /* the field containing the gate type */
+@d alt z.V /* the field pointing to another related gate */
+@d outs zz.A /* the field pointing to the list of output gates */
+@d is_boolean(v) ((unsigned long)(v)<=1) /* is a |tip| field constant? */
+@d the_boolean(v) ((long)(v)) /* if so, this is its value */
+@d tip_value(v) (is_boolean(v)? the_boolean(v): (v)->val)
+@d AND '&'
+@d OR '|'
+@d NOT '~'
+@d XOR '^'
+
+@y
+@z
+
+@x l.100
+#define val @t\quad@> x.I /* the definitions are repeated in the header file */
+#define typ @t\quad@> y.I
+#define alt @t\quad@> z.V
+#define outs @t\quad@> zz.A
+#define is_boolean(v) @t\quad@> ((unsigned long)(v)<=1)
+#define the_boolean(v) @t\quad@> ((long)(v))
+#define tip_value(v) @t\quad@> (is_boolean(v)? the_boolean(v): (v)->val)
+#define AND @t\quad@> '&'
+#define OR @t\quad@> '|'
+#define NOT @t\quad@> '~'
+#define XOR @t\quad@> '^'
+@y
+#define val @t\quad@> x.I /* the field containing a boolean value */
+#define typ @t\quad@> y.I /* the field containing the gate type */
+#define alt @t\quad@> z.V /* the field pointing to another related gate */
+#define outs @t\quad@> zz.A /* the field pointing to the list of output gates */
+#define is_boolean(v) @t\quad@> ((unsigned long)(v)<=1) /* is a |tip| field constant? */
+#define the_boolean(v) @t\quad@> ((long)(v)) /* if so, this is its value */
+#define tip_value(v) @t\quad@> (is_boolean(v)? the_boolean(v): (v)->val)
+#define AND @t\quad@> '&'
+#define OR @t\quad@> '|'
+#define NOT @t\quad@> '~'
+#define XOR @t\quad@> '^'
+@#
+#endif /* |GB_GATES_H| */
+@z
+
 @x l.130
 long gate_eval(g,in_vec,out_vec)
   Graph *g; /* graph with gates as vertices */
@@ -30,6 +79,17 @@ long gate_eval(
   Graph *g, /* graph with gates as vertices */
   char *in_vec, /* string for input values, or |NULL| */
   char *out_vec) /* string for output values, or |NULL| */
+@z
+
+@x l.184
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h"
+ /* and we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_gates.h" /* we use our own interface first */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.215
@@ -181,6 +241,11 @@ long run_risc(
   for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
 @z
 
+@x l.1094
+@d print_gates p_gates /* abbreviation makes chopped-off name unique */
+@y
+@z
+
 @x l.1097
 static void pr_gate(v)
   Vertex *v;
@@ -201,6 +266,13 @@ void print_gates(g)
 @y
 void print_gates(
   Graph *g)
+@z
+
+@x l.1127
+@ @(gb_gates.h@>=
+#define bit @t\quad@> z.I
+@y
+@ (This section remains empty for historic reasons.)
 @z
 
 @x l.1146

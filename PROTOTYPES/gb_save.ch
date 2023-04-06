@@ -1,9 +1,24 @@
-@x l.47
+@x l.46
+@(gb_save.h@>=
 extern long save_graph();
 extern Graph *restore_graph();
 @y
+@(gb_save.h@>=
+#ifndef GB_SAVE_H
+#define GB_SAVE_H
+#include "gb_graph.h" /* we use the data structures of {\sc GB\_\,GRAPH} */
 extern long save_graph(Graph *,char *);
 extern Graph *restore_graph(char *);
+#endif /* |GB_SAVE_H| */
+@z
+
+@x l.54
+#include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
+#include "gb_graph.h"
+ /* and, of course, the data structures of {\sc GB\_\,GRAPH} */
+@y
+#include "gb_save.h" /* we use our own interface first */
+#include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
 @z
 
 @x l.149
@@ -108,6 +123,6 @@ static void translate_field(
     /* fall through to case \.Z */
  case 'Z': buf_ptr--; /* forget spurious comma */
 @y
-    @=/* fall through */@>
+    @=/* fall through */@>@;
  case 'Z': buf_ptr--; /* forget spurious comma */
 @z

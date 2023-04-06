@@ -13,6 +13,11 @@ extern Graph *lines(); /* the line graph of a graph */
 extern Graph *product(); /* the product of two graphs */
 extern Graph *induced(); /* a graph induced from another */
 @y
+#ifndef GB_BASIC_H
+#define GB_BASIC_H
+@#
+#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
+@#
 extern Graph *board(long,long,long,long,long,long,long);
    /* moves on generalized chessboards */
 extern Graph *simplex(unsigned long,long,long,long,long,long,long);
@@ -38,6 +43,12 @@ extern Graph *product(Graph *,Graph *,long,long);
    /* the product of two graphs */
 extern Graph *induced(Graph *,char *,long,long,long);
    /* a graph induced from another */
+@z
+
+@x l.33
+#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_basic.h" /* we use our own interface first */
 @z
 
 @x l.176
@@ -362,6 +373,17 @@ Graph *lines(
     } while (v->u.V==u->v.V);
 @z
 
+@x l.2005
+@(gb_basic.h@>=
+#define cartesian 0
+#define direct 1
+#define strong 2
+@y
+@d cartesian 0
+@d direct 1
+@d strong 2
+@z
+
 @x l.2010
 Graph *product(g,gg,type,directed)
   Graph *g,*gg; /* graphs to be multiplied */
@@ -381,6 +403,15 @@ Graph *product(
   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
 @z
 
+@x l.2161
+@d ind z.I
+
+@(gb_basic.h@>=
+#define ind @[z.I /* utility field |z| when used to induce a graph */@]
+@y
+@d ind z.I /* utility field |z| when used to induce a graph */@]
+@z
+
 @x l.2170
 Graph *bi_complete(n1,n2,directed)
   unsigned long n1; /* size of first part */
@@ -391,6 +422,14 @@ Graph *bi_complete(
   unsigned long n1, /* size of first part */
   unsigned long n2, /* size of second part */
   long directed) /* should all arcs go from first part to second? */
+@z
+
+@x l.2213
+@(gb_basic.h@>=
+#define IND_GRAPH 1000000000
+#define subst @[y.G@]
+
+@y
 @z
 
 @x l.2223
@@ -412,6 +451,8 @@ extern Graph *wheel(); /* standard applications of |induced| */
 extern Graph *bi_complete(unsigned long,unsigned long,long);
 extern Graph *wheel(unsigned long,unsigned long,long);
    /* standard applications of |induced| */
+@#
+#endif /* |GB_BASIC_H| */
 @z
 
 @x l.2248

@@ -1,3 +1,16 @@
+@x l.22
+@d random_graph r_graph /* abbreviations for Procrustean external linkage */
+@d random_bigraph r_bigraph
+@d random_lengths r_lengths
+
+@(gb_rand.h@>=
+@y
+@(gb_rand.h@>=
+#ifndef GB_RAND_H
+#define GB_RAND_H
+#include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
+@z
+
 @x l.31
 extern Graph *random_graph();
 extern Graph *random_bigraph();
@@ -8,6 +21,13 @@ extern Graph *random_graph(unsigned long,unsigned long,long,long,long,@|
 extern Graph *random_bigraph(unsigned long,unsigned long,unsigned long,@|
   long,long *,long *,long,long,long);
 extern long random_lengths(Graph *,long,long,long,long *,long);
+#endif /* |GB_RAND_H| */
+@z
+
+@x l.39
+#include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
+@y
+#include "gb_rand.h" /* we include our own interface first */
 @z
 
 @x l.139

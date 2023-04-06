@@ -1,13 +1,40 @@
-@x l.20
+@x l.16
+@d plane_miles p_miles /* abbreviation for Procrustean external linkage */
+
+@(gb_plane.h@>=
+#define plane_miles p_miles
 extern Graph *plane();
 extern Graph *plane_miles();
 extern void delaunay();
 @y
+@(gb_plane.h@>=
+#ifndef GB_PLANE_H
+#define GB_PLANE_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+#define plane_miles p_miles /* abbreviation for Procrustean external linkage */
 extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
   unsigned long,unsigned long,long);
 extern Graph *plane_miles(unsigned long,long,long,long,@|
   unsigned long,unsigned long,long);
 extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
+#endif /* |GB_PLANE_H| */
+@z
+
+@x l.61
+@(gb_plane.h@>=
+#define INFTY @t\quad@> 0x10000000L
+
+@y
+@z
+
+@x l.76
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_plane.h" /* we use our own interface first */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.92
@@ -35,6 +62,15 @@ Graph *plane(
 for (k=0,v=new_graph->vertices; k<n; k++,v++) {
 @y
 for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
+@z
+
+@x l.149
+@ @(gb_plane.h@>=
+#define x_coord @t\quad@> x.I
+#define y_coord @t\quad@> y.I
+#define z_coord @t\quad@> z.I
+@y
+@ (This section remains empty for historic reasons.)
 @z
 
 @x l.226

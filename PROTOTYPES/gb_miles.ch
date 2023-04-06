@@ -1,8 +1,29 @@
 @x l.14
 extern Graph *miles();
 @y
+#ifndef GB_MILES_H
+#define GB_MILES_H
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 extern Graph *miles(unsigned long,long,long,long,@|
   unsigned long,unsigned long,long);
+@z
+
+@x l.63
+@d MAX_N 128
+
+@y
+@z
+
+@x l.107
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+@y
+#include "gb_miles.h" /* we use our own interface first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+#include "gb_flip.h"
+ /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.116
@@ -25,6 +46,18 @@ Graph *miles(
   unsigned long max_distance, /* maximum distance in an edge, if nonzero */
   unsigned long max_degree, /* maximum number of edges per vertex, if nonzero */
   long seed) /* random number seed */
+@z
+
+@x l.303
+@d x_coord x.I
+@d y_coord y.I
+@d index_no z.I
+@y
+@z
+
+@x l.324
+#define people @t\quad@> w.I
+@y
 @z
 
 @x l.366
@@ -51,4 +84,6 @@ Graph *miles(
 extern long miles_distance();
 @y
 extern long miles_distance(Vertex *,Vertex *);
+@#
+#endif /* |GB_MILES_H| */
 @z
