@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 28
+Release: 29
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -48,6 +48,7 @@ Patch15: 0015-Purge-t-control-codes.patch
 Patch16: 0016-Use-implicit-fall-through-comments.patch
 Patch17: 0017-Limit-lengths-of-numeric-values-in-strings.patch
 Patch18: 0018-Issue-7-Move-more-stuff-to-header-files.patch
+Patch19: 0019-Single-point-for-C-standard-headers.patch
 %endif
 
 %description

@@ -1,0 +1,445 @@
+From ed0a0747d0d6530d4500ad7cdb2c68923d81ae5d Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sun, 9 Apr 2023 12:47:47 +0200
+Subject: [PATCH 19/19] Single point for C standard headers.
+
+Don't repeat yourself (incompletely). Both GB_GRAPH and GB_IO had a
+small group of standard C header files and the peculiar SYSV switch.
+
+Since almost all library modules and driver programs include gb_graph.h
+anyway, we incorporate gb_io.h as the single point of entry for standard
+C headers (apart of two separate modules). This cleans up the #include
+list in several modules.
+
+Note that the #include hierarchy would have to change massively, if
+gb_graph.h would be replaced by forward type definitions in header
+files. For convenience, we stick with the classic scheme (minus the
+duplication).
+---
+ PROTOTYPES/assign_lisa.ch      |  5 +++++
+ PROTOTYPES/book_components.ch  |  8 ++++++++
+ PROTOTYPES/econ_order.ch       |  9 +++++++++
+ PROTOTYPES/football.ch         |  5 +++++
+ PROTOTYPES/gb_books.ch         |  1 -
+ PROTOTYPES/gb_econ.ch          |  1 -
+ PROTOTYPES/gb_games.ch         |  1 -
+ PROTOTYPES/gb_graph.ch         | 23 +++++++++++++++--------
+ PROTOTYPES/gb_io.ch            | 29 +++++++++++++++++++++++++++++
+ PROTOTYPES/gb_lisa.ch          |  1 -
+ PROTOTYPES/gb_miles.ch         |  1 -
+ PROTOTYPES/gb_plane.ch         |  4 ++++
+ PROTOTYPES/gb_roget.ch         |  1 -
+ PROTOTYPES/gb_save.ch          |  1 -
+ PROTOTYPES/gb_sort.ch          |  2 ++
+ PROTOTYPES/gb_words.ch         |  1 -
+ PROTOTYPES/girth.ch            |  5 +++++
+ PROTOTYPES/ladders.ch          |  5 +++++
+ PROTOTYPES/miles_span.ch       |  9 +++++++++
+ PROTOTYPES/multiply.ch         |  5 +++++
+ PROTOTYPES/queen.ch            |  5 +++++
+ PROTOTYPES/roget_components.ch |  5 +++++
+ PROTOTYPES/take_risc.ch        |  5 +++++
+ PROTOTYPES/test_sample.ch      |  8 --------
+ PROTOTYPES/word_components.ch  |  5 +++++
+ 25 files changed, 121 insertions(+), 24 deletions(-)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 086c6f9..70ddc49 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -1,3 +1,8 @@
++@x l.69
++#include "gb_graph.h" /* the GraphBase data structures */
++@y
++@z
++
+ @x l.72
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index 895f884..6342433 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -1,3 +1,11 @@
++@x l.51
++#include "gb_graph.h" /* the GraphBase data structures */
++#include "gb_books.h" /* the |book| routine */
++#include "gb_io.h" /* the |imap_chr| routine */
++@y
++#include "gb_books.h" /* the |book| routine */
++@z
++
+ @x l.58
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index 81686c0..af6db08 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -1,3 +1,12 @@
++@x l.75
++#include "gb_graph.h" /* the GraphBase data structures */
++#include "gb_flip.h" /* the random number generator */
++#include "gb_econ.h" /* the |econ| routine */
++@y
++#include "gb_econ.h" /* the |econ| routine */
++#include "gb_flip.h" /* the random number generator */
++@z
++
+ @x l.80
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index ab0ba6d..d0bade0 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -1,3 +1,8 @@
++@x l.54
++#include "gb_graph.h" /* the standard GraphBase data structures */
++@y
++@z
++
+ @x l.61
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 3fa9302..462f0a0 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -18,7 +18,6 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_books.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
+                         for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index 55cc5d5..a38b1c7 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -34,7 +34,6 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
+  /* and of course we'll use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_econ.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 20905c7..2b597f3 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -76,7 +76,6 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_games.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 1cd7d0a..78b9610 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -19,6 +19,20 @@ int main(void)
+ @h@#
+ @z
+ 
++@x l.56
++@ The type declarations of {\sc GB\_\,GRAPH} appear also in the header file
++\.{gb\_graph.h}. For convenience, that header file also incorporates the
++standard system headers for input/output and string manipulation.
++
++Some system header files define an unsafe macro called |min|, which will
++interfere with GraphBase use of a useful identifier. We scotch that.
++@y
++@ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
++\.{gb\_graph.h}. For convenience, that header file also incorporates the
++standard system headers for input/output and string manipulation via
++\.{gb\_io.h}.
++@z
++
+ @x l.64
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -31,15 +45,8 @@ int main(void)
+ @y
+ #ifndef GB_GRAPH_H
+ #define GB_GRAPH_H
++#include "gb_io.h" /* central point with standard C interfaces */
+ @#
+-#include <stdio.h>
+-#include <stdlib.h>
+-#ifdef SYSV
+-#include <string.h>
+-#else
+-#include <strings.h>
+-#endif
+-#undef min
+ @z
+ 
+ @x l.221
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 8ba0e7d..c4641ad 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -24,6 +24,35 @@ int main(void)
+ @<Header files to include@>@;
+ @z
+ 
++@x l.90
++@ We will stick to standard \CEE/-type input conventions. We'll also have
++occasion to use some of the standard string operations.
++@y
++@ We will stick to standard \CEE/-type input conventions. We'll also have
++occasion to use some of the standard string operations.
++
++Some system header files define an unsafe macro called |min|, which will
++interfere with GraphBase use of a useful identifier. We scotch that.
++@z
++
++@x l.94
++#include <stdio.h>
++#ifdef SYSV
++#include <string.h>
++#else
++#include <strings.h>
++#endif
++@y
++#include <stdio.h> /* |@!FILE| et al.*/
++#include <stdlib.h> /* |@!calloc| et al.*/
++#ifdef SYSV
++#include <string.h> /* |@!strcpy| et al.*/
++#else
++#include <strings.h>
++#endif
++#undef min
++@z
++
+ @x l.123
+ static void fill_buf()
+ @y
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 161cf77..9722e4c 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -36,7 +36,6 @@ extern char lisa_id[];
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_lisa.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 6031e01..8c1a9e7 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -21,7 +21,6 @@ extern Graph *miles(unsigned long,long,long,long,@|
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_miles.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 06fea42..053e2b6 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -31,10 +31,14 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
++#include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */
++#include "gb_io.h"
++ /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
+ @y
+ #include "gb_plane.h" /* we use our own interface first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
++#include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */
+ @z
+ 
+ @x l.92
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 5822402..a5b4e6c 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -15,7 +15,6 @@ extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
+  /* and we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_roget.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 62f3d83..6489448 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -18,7 +18,6 @@ extern Graph *restore_graph(char *);
+  /* and, of course, the data structures of {\sc GB\_\,GRAPH} */
+ @y
+ #include "gb_save.h" /* we use our own interface first */
+-#include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index 05873d4..b0b4b0d 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -1,7 +1,9 @@
+ @x l.10
+ #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
++#include "gb_flip.h" /* we need to use the random number generator */
+ @y
+ #include "gb_sort.h" /* we use our own interface first */
++#include "gb_flip.h" /* we need to use the random number generator */
+ #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+ @z
+ 
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index 73355ff..48e6f71 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -16,7 +16,6 @@ extern Vertex *find_word(char *,void (*)(Vertex *));
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+ #include "gb_words.h" /* we use our own interface first */
+-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/girth.ch b/PROTOTYPES/girth.ch
+index 94038d4..5ba67b3 100644
+--- a/PROTOTYPES/girth.ch
++++ b/PROTOTYPES/girth.ch
+@@ -1,3 +1,8 @@
++@x l.61
++#include "gb_graph.h" /* the standard GraphBase data structures */
++@y
++@z
++
+ @x l.65
+ main()
+ @y
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index e968b8a..65acb88 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -1,3 +1,8 @@
++@x l.85
++#include "gb_graph.h" /* the standard GraphBase data structures */
++@y
++@z
++
+ @x l.90
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 4de0843..e886279 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -1,3 +1,12 @@
++@x l.91
++#include "gb_graph.h" /* the GraphBase data structures */
++#include "gb_save.h" /* |restore_graph| */
++#include "gb_miles.h" /* the |miles| routine */
++@y
++#include "gb_miles.h" /* the |miles| routine */
++#include "gb_save.h" /* |restore_graph| */
++@z
++
+ @x l.99
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/multiply.ch b/PROTOTYPES/multiply.ch
+index bc19782..17affec 100644
+--- a/PROTOTYPES/multiply.ch
++++ b/PROTOTYPES/multiply.ch
+@@ -1,3 +1,8 @@
++@x l.33
++#include "gb_graph.h" /* the standard GraphBase data structures */
++@y
++@z
++
+ @x l.38
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/queen.ch b/PROTOTYPES/queen.ch
+index 1c3ea52..d9c4fbc 100644
+--- a/PROTOTYPES/queen.ch
++++ b/PROTOTYPES/queen.ch
+@@ -1,3 +1,8 @@
++@x l.22
++#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
++@y
++@z
++
+ @x l.26
+ main()
+ @y
+diff --git a/PROTOTYPES/roget_components.ch b/PROTOTYPES/roget_components.ch
+index 72b5633..83fba2f 100644
+--- a/PROTOTYPES/roget_components.ch
++++ b/PROTOTYPES/roget_components.ch
+@@ -1,3 +1,8 @@
++@x l.40
++#include "gb_graph.h" /* the GraphBase data structures */
++@y
++@z
++
+ @x l.45
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/take_risc.ch b/PROTOTYPES/take_risc.ch
+index d007478..c471a73 100644
+--- a/PROTOTYPES/take_risc.ch
++++ b/PROTOTYPES/take_risc.ch
+@@ -1,3 +1,8 @@
++@x l.31
++#include "gb_graph.h" /* the standard GraphBase data structures */
++@y
++@z
++
+ @x l.35
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index 634dd62..ebcdfb0 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -10,14 +10,6 @@
+ int main(void)
+ @z
+ 
+-@x l.45
+-#include "gb_gates.h" /* and the graphs based on logic circuits */
+-@y
+-#include "gb_gates.h" /* and the graphs based on logic circuits */
+-#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
+-#include "gb_io.h" /* and the GraphBase input/output routines */
+-@z
+-
+ @x l.113
+ if (i=random_lengths(g,0L,10L,12L,dst,2L))
+ @y
+diff --git a/PROTOTYPES/word_components.ch b/PROTOTYPES/word_components.ch
+index fa625d5..c604fd0 100644
+--- a/PROTOTYPES/word_components.ch
++++ b/PROTOTYPES/word_components.ch
+@@ -1,3 +1,8 @@
++@x l.16
++#include "gb_graph.h" /* the GraphBase data structures */
++@y
++@z
++
+ @x l.19
+ main()
+ @y
+-- 
+2.40.0
+
