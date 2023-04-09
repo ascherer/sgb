@@ -10,14 +10,6 @@
 int main(void)
 @z
 
-@x l.45
-#include "gb_gates.h" /* and the graphs based on logic circuits */
-@y
-#include "gb_gates.h" /* and the graphs based on logic circuits */
-#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
-#include "gb_io.h" /* and the GraphBase input/output routines */
-@z
-
 @x l.113
 if (i=random_lengths(g,0L,10L,12L,dst,2L))
 @y

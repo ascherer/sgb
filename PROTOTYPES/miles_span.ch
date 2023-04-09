@@ -1,3 +1,12 @@
+@x l.91
+#include "gb_graph.h" /* the GraphBase data structures */
+#include "gb_save.h" /* |restore_graph| */
+#include "gb_miles.h" /* the |miles| routine */
+@y
+#include "gb_miles.h" /* the |miles| routine */
+#include "gb_save.h" /* |restore_graph| */
+@z
+
 @x l.99
 main(argc,argv)
   int argc; /* the number of command-line arguments */

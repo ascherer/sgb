@@ -24,6 +24,35 @@ int main(void)
 @<Header files to include@>@;
 @z
 
+@x l.90
+@ We will stick to standard \CEE/-type input conventions. We'll also have
+occasion to use some of the standard string operations.
+@y
+@ We will stick to standard \CEE/-type input conventions. We'll also have
+occasion to use some of the standard string operations.
+
+Some system header files define an unsafe macro called |min|, which will
+interfere with GraphBase use of a useful identifier. We scotch that.
+@z
+
+@x l.94
+#include <stdio.h>
+#ifdef SYSV
+#include <string.h>
+#else
+#include <strings.h>
+#endif
+@y
+#include <stdio.h> /* |@!FILE| et al.*/
+#include <stdlib.h> /* |@!calloc| et al.*/
+#ifdef SYSV
+#include <string.h> /* |@!strcpy| et al.*/
+#else
+#include <strings.h>
+#endif
+#undef min
+@z
+
 @x l.123
 static void fill_buf()
 @y

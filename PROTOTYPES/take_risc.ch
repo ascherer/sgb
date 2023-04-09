@@ -1,3 +1,8 @@
+@x l.31
+#include "gb_graph.h" /* the standard GraphBase data structures */
+@y
+@z
+
 @x l.35
 main(argc,argv)
   int argc; /* the number of command-line arguments */

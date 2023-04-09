@@ -19,6 +19,20 @@ int main(void)
 @h@#
 @z
 
+@x l.56
+@ The type declarations of {\sc GB\_\,GRAPH} appear also in the header file
+\.{gb\_graph.h}. For convenience, that header file also incorporates the
+standard system headers for input/output and string manipulation.
+
+Some system header files define an unsafe macro called |min|, which will
+interfere with GraphBase use of a useful identifier. We scotch that.
+@y
+@ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
+\.{gb\_graph.h}. For convenience, that header file also incorporates the
+standard system headers for input/output and string manipulation via
+\.{gb\_io.h}.
+@z
+
 @x l.64
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,15 +45,8 @@ int main(void)
 @y
 #ifndef GB_GRAPH_H
 #define GB_GRAPH_H
+#include "gb_io.h" /* central point with standard C interfaces */
 @#
-#include <stdio.h>
-#include <stdlib.h>
-#ifdef SYSV
-#include <string.h>
-#else
-#include <strings.h>
-#endif
-#undef min
 @z
 
 @x l.221

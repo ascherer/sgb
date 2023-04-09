@@ -1,3 +1,11 @@
+@x l.51
+#include "gb_graph.h" /* the GraphBase data structures */
+#include "gb_books.h" /* the |book| routine */
+#include "gb_io.h" /* the |imap_chr| routine */
+@y
+#include "gb_books.h" /* the |book| routine */
+@z
+
 @x l.58
 main(argc,argv)
   int argc; /* the number of command-line arguments */

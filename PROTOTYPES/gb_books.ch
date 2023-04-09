@@ -18,7 +18,6 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
 #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_books.h" /* we use our own interface first */
-#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 #include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
                         for random numbers */
 @z

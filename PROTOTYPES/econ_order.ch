@@ -1,3 +1,12 @@
+@x l.75
+#include "gb_graph.h" /* the GraphBase data structures */
+#include "gb_flip.h" /* the random number generator */
+#include "gb_econ.h" /* the |econ| routine */
+@y
+#include "gb_econ.h" /* the |econ| routine */
+#include "gb_flip.h" /* the random number generator */
+@z
+
 @x l.80
 main(argc,argv)
   int argc; /* the number of command-line arguments */
