@@ -1,0 +1,309 @@
+From f2d942c693af877d551a0871ee6220cc38721bb6 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 20 Apr 2023 19:58:38 +0200
+Subject: [PATCH 20/20] Reference the interfaces of the modules.
+
+---
+ PROTOTYPES/gb_basic.ch |  2 +-
+ PROTOTYPES/gb_books.ch |  2 +-
+ PROTOTYPES/gb_dijk.ch  |  2 +-
+ PROTOTYPES/gb_econ.ch  |  2 +-
+ PROTOTYPES/gb_flip.ch  |  9 ++++++++-
+ PROTOTYPES/gb_games.ch |  2 +-
+ PROTOTYPES/gb_gates.ch |  2 +-
+ PROTOTYPES/gb_graph.ch |  9 ++++++++-
+ PROTOTYPES/gb_io.ch    | 10 +++++++++-
+ PROTOTYPES/gb_lisa.ch  |  2 +-
+ PROTOTYPES/gb_miles.ch |  2 +-
+ PROTOTYPES/gb_plane.ch |  2 +-
+ PROTOTYPES/gb_raman.ch |  2 +-
+ PROTOTYPES/gb_rand.ch  |  7 ++++++-
+ PROTOTYPES/gb_roget.ch |  2 +-
+ PROTOTYPES/gb_save.ch  |  2 +-
+ PROTOTYPES/gb_sort.ch  |  2 +-
+ PROTOTYPES/gb_words.ch |  2 +-
+ 18 files changed, 45 insertions(+), 18 deletions(-)
+
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index f6cfe26..331d768 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -48,7 +48,7 @@ extern Graph *induced(Graph *,char *,long,long,long);
+ @x l.33
+ #include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_basic.h" /* we use our own interface first */
++#include "gb_basic.h" /* we use our own interface |@(gb_basic.h@>| first */
+ @z
+ 
+ @x l.176
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 462f0a0..a3c085d 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -17,7 +17,7 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
+                         for random numbers */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_books.h" /* we use our own interface first */
++#include "gb_books.h" /* we use our own interface |@(gb_books.h@>| first */
+ #include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
+                         for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index bf8b289..7474402 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -1,7 +1,7 @@
+ @x l.58
+ #include "gb_graph.h" /* define the standard GraphBase data structures */
+ @y
+-#include "gb_dijk.h" /* we use our own interface first */
++#include "gb_dijk.h" /* we use our own interface |@(gb_dijk.h@>| first */
+ @z
+ 
+ @x l.68
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index a38b1c7..a5082c9 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -33,7 +33,7 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
+ #include "gb_graph.h"
+  /* and of course we'll use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_econ.h" /* we use our own interface first */
++#include "gb_econ.h" /* we use our own interface |@(gb_econ.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_flip.ch b/PROTOTYPES/gb_flip.ch
+index 83038dd..1ea6716 100644
+--- a/PROTOTYPES/gb_flip.ch
++++ b/PROTOTYPES/gb_flip.ch
+@@ -1,3 +1,10 @@
++@x l.35
++#include "gb_flip.h"   /* all users of {\sc GB\_\,FLIP} should do this */
++@y
++#include "gb_flip.h"   /* all users of {\sc GB\_\,FLIP} should include the
++  header file |@(gb_flip.h@>| */
++@z
++
+ @x l.38
+ int main()
+ @y
+@@ -7,7 +14,7 @@ int main(void)
+ @x l.57
+ @<Private declarations@>@;
+ @y
+-#include "gb_flip.h" /* we use our own interface first */
++#include "gb_flip.h" /* we use our own interface |@(gb_flip.h@>| first */
+ @<Private declarations@>@;
+ @z
+ 
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 2b597f3..df1e3fb 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -75,7 +75,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_games.h" /* we use our own interface first */
++#include "gb_games.h" /* we use our own interface |@(gb_games.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index db9a0fa..425554b 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -87,7 +87,7 @@ long gate_eval(
+ #include "gb_graph.h"
+  /* and we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_gates.h" /* we use our own interface first */
++#include "gb_gates.h" /* we use our own interface |@(gb_gates.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 78b9610..7f648d4 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -1,3 +1,10 @@
++@x l.25
++#include "gb_graph.h"  /* all users of {\sc GB\_\,GRAPH} should do this */
++@y
++#include "gb_graph.h"  /* all users of {\sc GB\_\,GRAPH} should include
++  the header file |@(gb_graph.h@>| */
++@z
++
+ @x l.28
+ int main()
+ @y
+@@ -15,7 +22,7 @@ int main(void)
+ @h@#
+ @<Type declarations@>@;
+ @y
+-#include "gb_graph.h" /* we include our own interface first */
++#include "gb_graph.h" /* we use our own interface |@(gb_graph.h@>| first */
+ @h@#
+ @z
+ 
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index c4641ad..d681eb5 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -1,3 +1,11 @@
++@x l.30
++#include "gb_io.h"
++  /* all users of {\sc GB\_\,IO} should include this header file */
++@y
++#include "gb_io.h"
++  /* all users of {\sc GB\_\,IO} should include the header file |@(gb_io.h@>| */
++@z
++
+ @x l.34
+ @t\2@>@/
+ int main()
+@@ -10,7 +18,7 @@ int main(void)
+ @x l.70
+ @<Header files to include@>@;
+ @y
+-#include "gb_io.h" /* we include our own interface first */
++#include "gb_io.h" /* we use our own interface |@(gb_io.h@>| first */
+ @z
+ 
+ @x l.85
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 9722e4c..566c8b9 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -35,7 +35,7 @@ extern char lisa_id[];
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_lisa.h" /* we use our own interface first */
++#include "gb_lisa.h" /* we use our own interface |@(gb_lisa.h@>| first */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 8c1a9e7..1d89b8d 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -20,7 +20,7 @@ extern Graph *miles(unsigned long,long,long,long,@|
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_miles.h" /* we use our own interface first */
++#include "gb_miles.h" /* we use our own interface |@(gb_miles.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 053e2b6..a5ba68c 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -35,7 +35,7 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
+ #include "gb_io.h"
+  /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
+ @y
+-#include "gb_plane.h" /* we use our own interface first */
++#include "gb_plane.h" /* we use our own interface |@(gb_plane.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ #include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index 4bbb542..8b9f92a 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -11,7 +11,7 @@ extern Graph *raman(long,long,unsigned long,unsigned long);
+ @x l.87
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_raman.h" /* we use our own interface first */
++#include "gb_raman.h" /* we use our own interface |@(gb_raman.h@>| first */
+ @z
+ 
+ @x l.92
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index c06d4bf..7fbde5a 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -11,6 +11,11 @@
+ #include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
+ @z
+ 
++@x l.28
++ /* users of {\sc GB\_\,RAND} should include this header info */
++@y
++@z
++
+ @x l.31
+ extern Graph *random_graph();
+ extern Graph *random_bigraph();
+@@ -27,7 +32,7 @@ extern long random_lengths(Graph *,long,long,long,long *,long);
+ @x l.39
+ #include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
+ @y
+-#include "gb_rand.h" /* we include our own interface first */
++#include "gb_rand.h" /* we use our own interface |@(gb_rand.h@>| first */
+ @z
+ 
+ @x l.139
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index a5b4e6c..503f61d 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -14,7 +14,7 @@ extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
+ #include "gb_graph.h"
+  /* and we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_roget.h" /* we use our own interface first */
++#include "gb_roget.h" /* we use our own interface |@(gb_roget.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 6489448..e5695c5 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -17,7 +17,7 @@ extern Graph *restore_graph(char *);
+ #include "gb_graph.h"
+  /* and, of course, the data structures of {\sc GB\_\,GRAPH} */
+ @y
+-#include "gb_save.h" /* we use our own interface first */
++#include "gb_save.h" /* we use our own interface |@(gb_save.h@>| first */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index b0b4b0d..284489c 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -2,7 +2,7 @@
+ #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+ #include "gb_flip.h" /* we need to use the random number generator */
+ @y
+-#include "gb_sort.h" /* we use our own interface first */
++#include "gb_sort.h" /* we use our own interface |@(gb_sort.h@>| first */
+ #include "gb_flip.h" /* we need to use the random number generator */
+ #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+ @z
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index 48e6f71..0a70ab3 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -15,7 +15,7 @@ extern Vertex *find_word(char *,void (*)(Vertex *));
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+ @y
+-#include "gb_words.h" /* we use our own interface first */
++#include "gb_words.h" /* we use our own interface |@(gb_words.h@>| first */
+ #include "gb_flip.h"
+  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
+ @z
+-- 
+2.40.0
+
