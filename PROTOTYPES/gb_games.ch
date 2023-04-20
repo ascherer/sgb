@@ -75,7 +75,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_games.h" /* we use our own interface first */
+#include "gb_games.h" /* we use our own interface |@(gb_games.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z

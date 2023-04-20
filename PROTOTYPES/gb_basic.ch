@@ -48,7 +48,7 @@ extern Graph *induced(Graph *,char *,long,long,long);
 @x l.33
 #include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_basic.h" /* we use our own interface first */
+#include "gb_basic.h" /* we use our own interface |@(gb_basic.h@>| first */
 @z
 
 @x l.176

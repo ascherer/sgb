@@ -11,6 +11,11 @@
 #include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
 @z
 
+@x l.28
+ /* users of {\sc GB\_\,RAND} should include this header info */
+@y
+@z
+
 @x l.31
 extern Graph *random_graph();
 extern Graph *random_bigraph();
@@ -27,7 +32,7 @@ extern long random_lengths(Graph *,long,long,long,long *,long);
 @x l.39
 #include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
 @y
-#include "gb_rand.h" /* we include our own interface first */
+#include "gb_rand.h" /* we use our own interface |@(gb_rand.h@>| first */
 @z
 
 @x l.139

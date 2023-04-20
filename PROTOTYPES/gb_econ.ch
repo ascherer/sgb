@@ -33,7 +33,7 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
 #include "gb_graph.h"
  /* and of course we'll use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_econ.h" /* we use our own interface first */
+#include "gb_econ.h" /* we use our own interface |@(gb_econ.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z

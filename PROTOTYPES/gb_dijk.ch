@@ -1,7 +1,7 @@
 @x l.58
 #include "gb_graph.h" /* define the standard GraphBase data structures */
 @y
-#include "gb_dijk.h" /* we use our own interface first */
+#include "gb_dijk.h" /* we use our own interface |@(gb_dijk.h@>| first */
 @z
 
 @x l.68

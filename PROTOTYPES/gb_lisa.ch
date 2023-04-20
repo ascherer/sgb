@@ -35,7 +35,7 @@ extern char lisa_id[];
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_lisa.h" /* we use our own interface first */
+#include "gb_lisa.h" /* we use our own interface |@(gb_lisa.h@>| first */
 @z
 
 @x l.149

@@ -17,7 +17,7 @@ extern Graph *restore_graph(char *);
 #include "gb_graph.h"
  /* and, of course, the data structures of {\sc GB\_\,GRAPH} */
 @y
-#include "gb_save.h" /* we use our own interface first */
+#include "gb_save.h" /* we use our own interface |@(gb_save.h@>| first */
 @z
 
 @x l.149

@@ -14,7 +14,7 @@ extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
 #include "gb_graph.h"
  /* and we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_roget.h" /* we use our own interface first */
+#include "gb_roget.h" /* we use our own interface |@(gb_roget.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z

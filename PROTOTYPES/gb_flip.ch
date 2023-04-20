@@ -1,3 +1,10 @@
+@x l.35
+#include "gb_flip.h"   /* all users of {\sc GB\_\,FLIP} should do this */
+@y
+#include "gb_flip.h"   /* all users of {\sc GB\_\,FLIP} should include the
+  header file |@(gb_flip.h@>| */
+@z
+
 @x l.38
 int main()
 @y
@@ -7,7 +14,7 @@ int main(void)
 @x l.57
 @<Private declarations@>@;
 @y
-#include "gb_flip.h" /* we use our own interface first */
+#include "gb_flip.h" /* we use our own interface |@(gb_flip.h@>| first */
 @<Private declarations@>@;
 @z
 

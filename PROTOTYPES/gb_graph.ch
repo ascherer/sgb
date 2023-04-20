@@ -1,3 +1,10 @@
+@x l.25
+#include "gb_graph.h"  /* all users of {\sc GB\_\,GRAPH} should do this */
+@y
+#include "gb_graph.h"  /* all users of {\sc GB\_\,GRAPH} should include
+  the header file |@(gb_graph.h@>| */
+@z
+
 @x l.28
 int main()
 @y
@@ -15,7 +22,7 @@ int main(void)
 @h@#
 @<Type declarations@>@;
 @y
-#include "gb_graph.h" /* we include our own interface first */
+#include "gb_graph.h" /* we use our own interface |@(gb_graph.h@>| first */
 @h@#
 @z
 

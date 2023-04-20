@@ -87,7 +87,7 @@ long gate_eval(
 #include "gb_graph.h"
  /* and we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_gates.h" /* we use our own interface first */
+#include "gb_gates.h" /* we use our own interface |@(gb_gates.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z

@@ -1,3 +1,11 @@
+@x l.30
+#include "gb_io.h"
+  /* all users of {\sc GB\_\,IO} should include this header file */
+@y
+#include "gb_io.h"
+  /* all users of {\sc GB\_\,IO} should include the header file |@(gb_io.h@>| */
+@z
+
 @x l.34
 @t\2@>@/
 int main()
@@ -10,7 +18,7 @@ int main(void)
 @x l.70
 @<Header files to include@>@;
 @y
-#include "gb_io.h" /* we include our own interface first */
+#include "gb_io.h" /* we use our own interface |@(gb_io.h@>| first */
 @z
 
 @x l.85

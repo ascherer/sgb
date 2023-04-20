@@ -35,7 +35,7 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
 #include "gb_io.h"
  /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
 @y
-#include "gb_plane.h" /* we use our own interface first */
+#include "gb_plane.h" /* we use our own interface |@(gb_plane.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 #include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */

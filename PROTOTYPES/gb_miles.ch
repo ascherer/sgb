@@ -20,7 +20,7 @@ extern Graph *miles(unsigned long,long,long,long,@|
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_miles.h" /* we use our own interface first */
+#include "gb_miles.h" /* we use our own interface |@(gb_miles.h@>| first */
 #include "gb_flip.h"
  /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z

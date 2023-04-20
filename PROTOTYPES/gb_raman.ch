@@ -11,7 +11,7 @@ extern Graph *raman(long,long,unsigned long,unsigned long);
 @x l.87
 #include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
-#include "gb_raman.h" /* we use our own interface first */
+#include "gb_raman.h" /* we use our own interface |@(gb_raman.h@>| first */
 @z
 
 @x l.92

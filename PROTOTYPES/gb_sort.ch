@@ -2,7 +2,7 @@
 #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
 #include "gb_flip.h" /* we need to use the random number generator */
 @y
-#include "gb_sort.h" /* we use our own interface first */
+#include "gb_sort.h" /* we use our own interface |@(gb_sort.h@>| first */
 #include "gb_flip.h" /* we need to use the random number generator */
 #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
 @z
