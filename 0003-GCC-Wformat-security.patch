@@ -1,7 +1,7 @@
-From 63287bff32526b980c79a3e1598664a0b287a3cc Mon Sep 17 00:00:00 2001
+From 986784677dc8b7a600062b26ade666ebf323f910 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Mon, 6 Jul 2015 12:24:55 +0200
-Subject: [PATCH 03/20] GCC -Wformat-security.
+Subject: [PATCH 03/21] GCC -Wformat-security.
 
 GCC warns about uses of format functions that represent possible
 security problems.
@@ -27,5 +27,5 @@ index bf12c80..fdeccc8 100644
  void print_gates(g)
    Graph *g;
 -- 
-2.40.0
+2.40.1
 
