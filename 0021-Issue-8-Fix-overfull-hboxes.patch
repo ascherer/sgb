@@ -1,0 +1,71 @@
+From 2bb777d28c1935a586c070ec909888de16483ce8 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 27 Apr 2023 17:04:22 +0200
+Subject: [PATCH 21/21] Issue #8: Fix overfull \hboxes.
+
+---
+ PROTOTYPES/gb_basic.ch | 10 ++++++++++
+ PROTOTYPES/gb_lisa.ch  |  6 ++++++
+ PROTOTYPES/gb_miles.ch |  8 ++++++++
+ 3 files changed, 24 insertions(+)
+
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index 331d768..ec004c1 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -251,6 +251,16 @@ if (d<max_parts) {
+ if (d<(long)max_parts) {
+ @z
+ 
++@x l.1277
++The partial ordering corresponding to the directed graph on
++${2n+1\choose n}/(2n+1)$ vertices created by |all_trees(n,1)|
++is a lattice with interesting properties. See Huang and Tamari,
++@y
++The partial ordering that corresponds to the directed graph on
++${2n+1\choose n}/(2n+1)$ vertices created by |all_trees(n,1)|
++is a lattice with some interesting properties. See Huang and Tamari,
++@z
++
+ @x l.1290
+ Graph *binary(n,max_height,directed)
+   unsigned long n; /* the number of internal nodes */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 566c8b9..d5c6f69 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -23,6 +23,12 @@ extern Graph *bi_lisa(unsigned long,unsigned long,@|
+    unsigned long,long);
+ @z
+ 
++@x l.76
++|@t\\{lisa\_pix}@>=lisa(360,250,255,0,360,0,250,0,255*360*250,area)|;
++@y
++|@t\\{lisa\_pix}@>=lisa(360,@/250,255,0,360,0,250,0,255*360*250,area)|;
++@z
++
+ @x l.124
+ extern char lisa_id[];
+ @y
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 1d89b8d..71f4b77 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -71,6 +71,14 @@ Graph *miles(
+     if (++j>(long)max_degree)
+ @z
+ 
++@x l.389
++The result might be negative when an edge has been suppressed. Moreover,
++we can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
++@y
++The result might be negative when an edge has been suppressed.
++We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
++@z
++
+ @x l.394
+ @p long miles_distance(u,v)
+   Vertex *u,*v;
+-- 
+2.40.1
+
