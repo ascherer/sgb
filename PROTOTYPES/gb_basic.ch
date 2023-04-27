@@ -251,6 +251,16 @@ if (d<max_parts) {
 if (d<(long)max_parts) {
 @z
 
+@x l.1277
+The partial ordering corresponding to the directed graph on
+${2n+1\choose n}/(2n+1)$ vertices created by |all_trees(n,1)|
+is a lattice with interesting properties. See Huang and Tamari,
+@y
+The partial ordering that corresponds to the directed graph on
+${2n+1\choose n}/(2n+1)$ vertices created by |all_trees(n,1)|
+is a lattice with some interesting properties. See Huang and Tamari,
+@z
+
 @x l.1290
 Graph *binary(n,max_height,directed)
   unsigned long n; /* the number of internal nodes */

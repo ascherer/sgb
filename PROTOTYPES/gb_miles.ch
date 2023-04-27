@@ -71,6 +71,14 @@ Graph *miles(
     if (++j>(long)max_degree)
 @z
 
+@x l.389
+The result might be negative when an edge has been suppressed. Moreover,
+we can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
+@y
+The result might be negative when an edge has been suppressed.
+We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
+@z
+
 @x l.394
 @p long miles_distance(u,v)
   Vertex *u,*v;

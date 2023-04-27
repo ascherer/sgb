@@ -23,6 +23,12 @@ extern Graph *bi_lisa(unsigned long,unsigned long,@|
    unsigned long,long);
 @z
 
+@x l.76
+|@t\\{lisa\_pix}@>=lisa(360,250,255,0,360,0,250,0,255*360*250,area)|;
+@y
+|@t\\{lisa\_pix}@>=lisa(360,@/250,255,0,360,0,250,0,255*360*250,area)|;
+@z
+
 @x l.124
 extern char lisa_id[];
 @y
