@@ -2,6 +2,7 @@
 #include "gb_graph.h" /* define the standard GraphBase data structures */
 @y
 #include "gb_dijk.h" /* we use our own interface |@(gb_dijk.h@>| first */
+#include "gb_graph.h" /* define the standard GraphBase data structures */
 @z
 
 @x l.68
@@ -13,7 +14,8 @@ extern void print_dijkstra_result(); /* procedure to display the answer */
 @(gb_dijk.h@>=
 #ifndef GB_DIJK_H
 #define GB_DIJK_H
-#include "gb_graph.h" /* define the standard GraphBase data structures */
+typedef struct graph_struct Graph;
+typedef struct vertex_struct Vertex;
 extern long dijkstra(Vertex *,Vertex *,Graph *,long (*)(Vertex *));
    /* procedure to calculate shortest paths */
 #define print_dijkstra_result p_dijkstra_result /* shorthand for linker */
@@ -223,6 +225,5 @@ extern void init_128(long);
 extern Vertex *del_128(void);
 extern void enq_128(Vertex *,long);
 extern void req_128(Vertex *,long);
-@#
 #endif /* |GB_DIJK_H| */
 @z

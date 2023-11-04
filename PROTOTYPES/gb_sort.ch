@@ -4,7 +4,7 @@
 @y
 #include "gb_sort.h" /* we use our own interface |@(gb_sort.h@>| first */
 #include "gb_flip.h" /* we need to use the random number generator */
-#include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+#include <stddef.h> /* the \.{NULL} pointer (|NULL|) is defined here */
 @z
 
 @x l.69

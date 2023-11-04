@@ -4,7 +4,7 @@ extern Graph *bi_book();
 @y
 #ifndef GB_BOOKS_H
 #define GB_BOOKS_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
 extern Graph *book(char *,unsigned long,unsigned long,@|
    unsigned long,unsigned long,long,long,long);
 extern Graph *bi_book(char *,unsigned long,unsigned long,@|
@@ -13,13 +13,8 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
 
 @x l.148
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
-                        for random numbers */
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_books.h" /* we use our own interface |@(gb_books.h@>| first */
-#include "gb_flip.h" /* we will use the {\sc GB\_\,FLIP} routines
-                        for random numbers */
 @z
 
 @x l.158
@@ -97,7 +92,6 @@ register unsigned long k; /* all-purpose indices */
 #define in_count @t\quad@> y.I /* utility field |y| counts appearances in selected chapters */
 #define out_count @t\quad@> x.I /* utility field |x| counts appearances in other chapters */
 #define short_code @t\quad@> u.I /* utility field |u| contains a radix-36 number */
-@#
 #endif /* |GB_BOOKS_H| */
 @z
 

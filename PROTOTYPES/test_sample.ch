@@ -1,5 +1,4 @@
-@x l.26
-#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
+@x l.27
 #include "gb_io.h" /* and the GraphBase input/output routines */
 @y
 @z

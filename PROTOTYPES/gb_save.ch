@@ -6,7 +6,7 @@ extern Graph *restore_graph();
 @(gb_save.h@>=
 #ifndef GB_SAVE_H
 #define GB_SAVE_H
-#include "gb_graph.h" /* we use the data structures of {\sc GB\_\,GRAPH} */
+typedef struct graph_struct Graph;
 extern long save_graph(Graph *,char *);
 extern Graph *restore_graph(char *);
 #endif /* |GB_SAVE_H| */
@@ -14,8 +14,6 @@ extern Graph *restore_graph(char *);
 
 @x l.54
 #include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
-#include "gb_graph.h"
- /* and, of course, the data structures of {\sc GB\_\,GRAPH} */
 @y
 #include "gb_save.h" /* we use our own interface |@(gb_save.h@>| first */
 @z

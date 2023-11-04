@@ -3,7 +3,8 @@ extern Graph *miles();
 @y
 #ifndef GB_MILES_H
 #define GB_MILES_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
+typedef struct vertex_struct Vertex;
 extern Graph *miles(unsigned long,long,long,long,@|
   unsigned long,unsigned long,long);
 @z
@@ -16,13 +17,8 @@ extern Graph *miles(unsigned long,long,long,long,@|
 
 @x l.107
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_miles.h" /* we use our own interface |@(gb_miles.h@>| first */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.116
@@ -91,6 +87,5 @@ We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
 extern long miles_distance();
 @y
 extern long miles_distance(Vertex *,Vertex *);
-@#
 #endif /* |GB_MILES_H| */
 @z

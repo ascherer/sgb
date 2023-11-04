@@ -8,7 +8,7 @@
 @(gb_rand.h@>=
 #ifndef GB_RAND_H
 #define GB_RAND_H
-#include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
+typedef struct graph_struct Graph;
 @z
 
 @x l.28
@@ -33,6 +33,7 @@ extern long random_lengths(Graph *,long,long,long,long *,long);
 #include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
 @y
 #include "gb_rand.h" /* we use our own interface |@(gb_rand.h@>| first */
+#include "gb_graph.h" /* this header file teaches \CEE/ about GraphBase */
 @z
 
 @x l.139

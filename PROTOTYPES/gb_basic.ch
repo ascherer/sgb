@@ -15,9 +15,7 @@ extern Graph *induced(); /* a graph induced from another */
 @y
 #ifndef GB_BASIC_H
 #define GB_BASIC_H
-@#
-#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
-@#
+typedef struct graph_struct Graph;
 extern Graph *board(long,long,long,long,long,long,long);
    /* moves on generalized chessboards */
 extern Graph *simplex(unsigned long,long,long,long,long,long,long);
@@ -49,6 +47,7 @@ extern Graph *induced(Graph *,char *,long,long,long);
 #include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_basic.h" /* we use our own interface |@(gb_basic.h@>| first */
+#include "gb_graph.h" /* we use the {\sc GB\_\,GRAPH} data structures */
 @z
 
 @x l.176
@@ -461,7 +460,6 @@ extern Graph *wheel(); /* standard applications of |induced| */
 extern Graph *bi_complete(unsigned long,unsigned long,long);
 extern Graph *wheel(unsigned long,unsigned long,long);
    /* standard applications of |induced| */
-@#
 #endif /* |GB_BASIC_H| */
 @z
 

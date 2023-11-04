@@ -1,5 +1,4 @@
-@x l.51
-#include "gb_graph.h" /* the GraphBase data structures */
+@x l.52
 #include "gb_books.h" /* the |book| routine */
 #include "gb_io.h" /* the |imap_chr| routine */
 @y

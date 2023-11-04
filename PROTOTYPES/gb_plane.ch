@@ -10,7 +10,8 @@ extern void delaunay();
 @(gb_plane.h@>=
 #ifndef GB_PLANE_H
 #define GB_PLANE_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
+typedef struct vertex_struct Vertex;
 #define plane_miles p_miles /* abbreviation for Procrustean external linkage */
 extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
   unsigned long,unsigned long,long);
@@ -29,16 +30,15 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
 
 @x l.76
 #include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
-#include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */
-#include "gb_io.h"
- /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
 @y
 #include "gb_plane.h" /* we use our own interface |@(gb_plane.h@>| first */
 #include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_miles.h" /* and we might use {\sc GB\_\,MILES} for mileage data */
+@z
+
+@x l.80
+#include "gb_io.h"
+ /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
+@y
 @z
 
 @x l.92

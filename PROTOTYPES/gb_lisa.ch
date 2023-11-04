@@ -10,7 +10,8 @@ extern Graph *bi_lisa();
 @(gb_lisa.h@>=
 #ifndef GB_LISA_H
 #define GB_LISA_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct area_pointers*Area[1];
+typedef struct graph_struct Graph;
 #define plane_lisa p_lisa
 extern long* lisa(unsigned long,unsigned long,unsigned long,@|
    unsigned long,unsigned long,unsigned long,unsigned long,@|
@@ -33,13 +34,11 @@ extern Graph *bi_lisa(unsigned long,unsigned long,@|
 extern char lisa_id[];
 @y
 extern char lisa_id[];
-@#
 #endif /* |GB_LISA_H| */
 @z
 
 @x l.142
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_lisa.h" /* we use our own interface |@(gb_lisa.h@>| first */
 @z

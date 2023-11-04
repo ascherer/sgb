@@ -3,7 +3,7 @@ extern Graph *econ();
 @y
 #ifndef GB_ECON_H
 #define GB_ECON_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
 extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
 @z
 
@@ -12,7 +12,6 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
 @y
 @(gb_econ.h@>=
 #define flow @t\quad@> a.I /* utility field |a| specifies the flow in an arc */
-@#
 #endif /* |GB_ECON_H| */
 @z
 
@@ -28,14 +27,8 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
 
 @x l.181
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h"
- /* and of course we'll use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_econ.h" /* we use our own interface |@(gb_econ.h@>| first */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.190

@@ -3,7 +3,7 @@ extern Graph *games();
 @y
 #ifndef GB_GAMES_H
 #define GB_GAMES_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
 extern Graph *games(unsigned long,long,long,long,long,long,long,long);
 @z
 
@@ -65,19 +65,13 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
 #define NEUTRAL 2
 #define AWAY 3
 #define date @[b.I@]
-@#
 #endif /* |GB_GAMES_H| */
 @z
 
 @x l.164
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_games.h" /* we use our own interface |@(gb_games.h@>| first */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.174

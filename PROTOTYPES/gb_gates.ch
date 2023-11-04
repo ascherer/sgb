@@ -9,7 +9,7 @@ extern long run_risc(); /* simulate the microprocessor */
 @y
 #ifndef GB_GATES_H
 #define GB_GATES_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
 #define print_gates p_gates /* abbreviation for Procrustean linkers */
 extern Graph *risc(unsigned long);
    /* make a network for a microprocessor */
@@ -65,7 +65,6 @@ extern long run_risc(Graph *,unsigned long [],unsigned long,unsigned long);
 #define OR @t\quad@> '|'
 #define NOT @t\quad@> '~'
 #define XOR @t\quad@> '^'
-@#
 #endif /* |GB_GATES_H| */
 @z
 
@@ -83,13 +82,9 @@ long gate_eval(
 
 @x l.184
 #include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h"
- /* and we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_gates.h" /* we use our own interface |@(gb_gates.h@>| first */
 #include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.215

@@ -3,20 +3,14 @@ extern Graph *roget();
 @y
 #ifndef GB_ROGET_H
 #define GB_ROGET_H
-#include "gb_graph.h" /* we will use the {\sc GB\_\,GRAPH} data structures */
+typedef struct graph_struct Graph;
 extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
 @z
 
 @x l.70
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
-#include "gb_graph.h"
- /* and we will use the {\sc GB\_\,GRAPH} data structures */
 @y
 #include "gb_roget.h" /* we use our own interface |@(gb_roget.h@>| first */
-#include "gb_flip.h"
- /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
 @z
 
 @x l.78
@@ -53,7 +47,6 @@ Graph *roget(
 @y
 #define cat_no @t\quad@> u.I
   /* utility field |u| of each vertex holds the category number */
-@#
 #endif /* |GB_ROGET_H| */
 @z
 
