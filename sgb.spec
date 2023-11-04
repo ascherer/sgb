@@ -51,6 +51,7 @@ Patch18: 0018-Issue-7-Move-more-stuff-to-header-files.patch
 Patch19: 0019-Single-point-for-C-standard-headers.patch
 Patch20: 0020-Reference-the-interfaces-of-the-modules.patch
 Patch21: 0021-Issue-8-Fix-overfull-hboxes.patch
+Patch22: 0022-Forward-declare-Graph-and-Vertex-structures.patch
 %endif
 
 %description
