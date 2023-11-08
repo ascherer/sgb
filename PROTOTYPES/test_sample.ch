@@ -1,8 +1,3 @@
-@x l.27
-#include "gb_io.h" /* and the GraphBase input/output routines */
-@y
-@z
-
 @x l.32
 @t\4@>int main()
 @y

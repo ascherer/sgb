@@ -14,6 +14,7 @@ extern Vertex *find_word(char *,void (*)(Vertex *));
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @y
 #include "gb_words.h" /* we use our own interface |@(gb_words.h@>| first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @z
 
 @x l.162

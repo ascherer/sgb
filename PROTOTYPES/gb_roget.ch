@@ -11,6 +11,7 @@ extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @y
 #include "gb_roget.h" /* we use our own interface |@(gb_roget.h@>| first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @z
 
 @x l.78

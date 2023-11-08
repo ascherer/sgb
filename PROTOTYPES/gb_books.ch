@@ -15,6 +15,7 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
 #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @y
 #include "gb_books.h" /* we use our own interface |@(gb_books.h@>| first */
+#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
 @z
 
 @x l.158

@@ -16,6 +16,7 @@ extern Graph *restore_graph(char *);
 #include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
 @y
 #include "gb_save.h" /* we use our own interface |@(gb_save.h@>| first */
+#include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
 @z
 
 @x l.149

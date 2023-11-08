@@ -23,6 +23,7 @@ int main(void)
 @<Type declarations@>@;
 @y
 #include "gb_graph.h" /* we use our own interface |@(gb_graph.h@>| first */
+#include <stdlib.h> /* |@!calloc| et al.*/
 @h@#
 @z
 
@@ -35,9 +36,13 @@ Some system header files define an unsafe macro called |min|, which will
 interfere with GraphBase use of a useful identifier. We scotch that.
 @y
 @ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
-\.{gb\_graph.h}. For convenience, that header file also incorporates the
-standard system headers for input/output and string manipulation via
-\.{gb\_io.h}.
+\.{gb\_graph.h}.
+
+We will stick to standard \CEE/-type input conventions. We'll also have
+occasion to use some of the standard string operations.
+
+Some system header files define an unsafe macro called |min|, which will
+interfere with GraphBase use of a useful identifier. We scotch that.
 @z
 
 @x l.64
@@ -52,7 +57,13 @@ standard system headers for input/output and string manipulation via
 @y
 #ifndef GB_GRAPH_H
 #define GB_GRAPH_H
-#include "gb_io.h" /* central point with standard C interfaces */
+#include <stdio.h> /* |@!FILE| et al.*/
+#ifdef SYSV
+#include <string.h> /* |@!strcpy| et al.*/
+#else
+#include <strings.h>
+#endif
+#undef min
 @#
 @z
 

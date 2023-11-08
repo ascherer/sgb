@@ -4,6 +4,7 @@
 @y
 #include "gb_io.h"
   /* all users of {\sc GB\_\,IO} should include the header file |@(gb_io.h@>| */
+@<Header...@>@;
 @z
 
 @x l.34
@@ -19,6 +20,7 @@ int main(void)
 @<Header files to include@>@;
 @y
 #include "gb_io.h" /* we use our own interface |@(gb_io.h@>| first */
+@<Header files to include@>@;
 @z
 
 @x l.85
@@ -28,37 +30,6 @@ int main(void)
 @ @(gb_io.h@>=
 #ifndef GB_IO_H
 #define GB_IO_H
-@#
-@<Header files to include@>@;
-@z
-
-@x l.90
-@ We will stick to standard \CEE/-type input conventions. We'll also have
-occasion to use some of the standard string operations.
-@y
-@ We will stick to standard \CEE/-type input conventions. We'll also have
-occasion to use some of the standard string operations.
-
-Some system header files define an unsafe macro called |min|, which will
-interfere with GraphBase use of a useful identifier. We scotch that.
-@z
-
-@x l.94
-#include <stdio.h>
-#ifdef SYSV
-#include <string.h>
-#else
-#include <strings.h>
-#endif
-@y
-#include <stdio.h> /* |@!FILE| et al.*/
-#include <stdlib.h> /* |@!calloc| et al.*/
-#ifdef SYSV
-#include <string.h> /* |@!strcpy| et al.*/
-#else
-#include <strings.h>
-#endif
-#undef min
 @z
 
 @x l.123

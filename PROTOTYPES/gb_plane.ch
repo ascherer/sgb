@@ -35,12 +35,6 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
 #include "gb_flip.h"
 @z
 
-@x l.80
-#include "gb_io.h"
- /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
-@y
-@z
-
 @x l.92
 Graph *plane(n,x_range,y_range,extend,prob,seed)
   unsigned long n; /* number of vertices desired */
