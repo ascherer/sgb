@@ -1,7 +1,7 @@
-From bea169a371d6e5f6256a3626561df9fe986f816c Mon Sep 17 00:00:00 2001
+From b9ee21c98b481925a9169413c15e515cac36826e Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 24 May 2016 17:07:54 +0200
-Subject: [PATCH 06/22] Alternative fix for GCC 5.3.1.
+Subject: [PATCH 06/23] Alternative fix for GCC 5.3.1.
 
 The original type 'int' of variable(s) 'avail' was in fact correct all
 along. GCC 5.3.1 complains about the type for the '.*' string formatter.

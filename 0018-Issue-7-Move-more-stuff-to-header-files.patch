@@ -1,7 +1,7 @@
-From 3ae9b37acc2a6f8c2e00a5e7e6d2a627c0652449 Mon Sep 17 00:00:00 2001
+From aed4819cb520af6b8dab3e9fedece8fbf89a9c3e Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 6 Apr 2023 19:55:32 +0200
-Subject: [PATCH 18/22] Issue #7: Move more stuff to header files.
+Subject: [PATCH 18/23] Issue #7: Move more stuff to header files.
 
 Applying some simple rules from John Lakos greatly improves the
 interconnectedness of the SGB library modules.
