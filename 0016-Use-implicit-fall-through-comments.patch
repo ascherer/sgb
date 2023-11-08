@@ -1,7 +1,7 @@
-From 86014e35ad49b467ef8a640b5eafe8f91496c18c Mon Sep 17 00:00:00 2001
+From 684404b65656fd3701bfebdc10484a9e60b301e4 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:19:24 +0200
-Subject: [PATCH 16/22] Use implicit fall through comments.
+Subject: [PATCH 16/23] Use implicit fall through comments.
 
 ---
  PROTOTYPES/gb_roget.ch | 8 ++++++++
