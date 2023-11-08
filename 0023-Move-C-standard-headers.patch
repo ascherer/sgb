@@ -1,0 +1,271 @@
+From 1ff770daf6bde29f3775f1612c9e84d915ee40cb Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Wed, 8 Nov 2023 12:04:53 +0100
+Subject: [PATCH 23/23] Move C standard headers.
+
+Our central 'gb_graph.h' header is included by (almost) every other
+module and program, but 'gb_io.h' is loaded only by a dozen others.
+So it seems better to add the C standard header files to the 'fat'
+interface than to make the small interface much more prominent.
+---
+ PROTOTYPES/book_components.ch |  7 -------
+ PROTOTYPES/gb_books.ch        |  1 +
+ PROTOTYPES/gb_econ.ch         |  1 +
+ PROTOTYPES/gb_games.ch        |  1 +
+ PROTOTYPES/gb_graph.ch        | 19 +++++++++++++++----
+ PROTOTYPES/gb_io.ch           | 33 ++-------------------------------
+ PROTOTYPES/gb_lisa.ch         |  1 +
+ PROTOTYPES/gb_miles.ch        |  1 +
+ PROTOTYPES/gb_plane.ch        |  6 ------
+ PROTOTYPES/gb_roget.ch        |  1 +
+ PROTOTYPES/gb_save.ch         |  1 +
+ PROTOTYPES/gb_words.ch        |  1 +
+ PROTOTYPES/test_sample.ch     |  5 -----
+ 13 files changed, 25 insertions(+), 53 deletions(-)
+
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index 97edbf5..895f884 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -1,10 +1,3 @@
+-@x l.52
+-#include "gb_books.h" /* the |book| routine */
+-#include "gb_io.h" /* the |imap_chr| routine */
+-@y
+-#include "gb_books.h" /* the |book| routine */
+-@z
+-
+ @x l.58
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 41ead13..72a3326 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -15,6 +15,7 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_books.h" /* we use our own interface |@(gb_books.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.158
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index 2661df2..0fc295d 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -29,6 +29,7 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_econ.h" /* we use our own interface |@(gb_econ.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.190
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index d0523b0..fbb4d39 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -72,6 +72,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_games.h" /* we use our own interface |@(gb_games.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.174
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 7f648d4..7fff64a 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -23,6 +23,7 @@ int main(void)
+ @<Type declarations@>@;
+ @y
+ #include "gb_graph.h" /* we use our own interface |@(gb_graph.h@>| first */
++#include <stdlib.h> /* |@!calloc| et al.*/
+ @h@#
+ @z
+ 
+@@ -35,9 +36,13 @@ Some system header files define an unsafe macro called |min|, which will
+ interfere with GraphBase use of a useful identifier. We scotch that.
+ @y
+ @ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
+-\.{gb\_graph.h}. For convenience, that header file also incorporates the
+-standard system headers for input/output and string manipulation via
+-\.{gb\_io.h}.
++\.{gb\_graph.h}.
++
++We will stick to standard \CEE/-type input conventions. We'll also have
++occasion to use some of the standard string operations.
++
++Some system header files define an unsafe macro called |min|, which will
++interfere with GraphBase use of a useful identifier. We scotch that.
+ @z
+ 
+ @x l.64
+@@ -52,7 +57,13 @@ standard system headers for input/output and string manipulation via
+ @y
+ #ifndef GB_GRAPH_H
+ #define GB_GRAPH_H
+-#include "gb_io.h" /* central point with standard C interfaces */
++#include <stdio.h> /* |@!FILE| et al.*/
++#ifdef SYSV
++#include <string.h> /* |@!strcpy| et al.*/
++#else
++#include <strings.h>
++#endif
++#undef min
+ @#
+ @z
+ 
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index d681eb5..916946b 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -4,6 +4,7 @@
+ @y
+ #include "gb_io.h"
+   /* all users of {\sc GB\_\,IO} should include the header file |@(gb_io.h@>| */
++@<Header...@>@;
+ @z
+ 
+ @x l.34
+@@ -19,6 +20,7 @@ int main(void)
+ @<Header files to include@>@;
+ @y
+ #include "gb_io.h" /* we use our own interface |@(gb_io.h@>| first */
++@<Header files to include@>@;
+ @z
+ 
+ @x l.85
+@@ -28,37 +30,6 @@ int main(void)
+ @ @(gb_io.h@>=
+ #ifndef GB_IO_H
+ #define GB_IO_H
+-@#
+-@<Header files to include@>@;
+-@z
+-
+-@x l.90
+-@ We will stick to standard \CEE/-type input conventions. We'll also have
+-occasion to use some of the standard string operations.
+-@y
+-@ We will stick to standard \CEE/-type input conventions. We'll also have
+-occasion to use some of the standard string operations.
+-
+-Some system header files define an unsafe macro called |min|, which will
+-interfere with GraphBase use of a useful identifier. We scotch that.
+-@z
+-
+-@x l.94
+-#include <stdio.h>
+-#ifdef SYSV
+-#include <string.h>
+-#else
+-#include <strings.h>
+-#endif
+-@y
+-#include <stdio.h> /* |@!FILE| et al.*/
+-#include <stdlib.h> /* |@!calloc| et al.*/
+-#ifdef SYSV
+-#include <string.h> /* |@!strcpy| et al.*/
+-#else
+-#include <strings.h>
+-#endif
+-#undef min
+ @z
+ 
+ @x l.123
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index f134995..580a126 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -41,6 +41,7 @@ extern char lisa_id[];
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_lisa.h" /* we use our own interface |@(gb_lisa.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index c839e95..54277be 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -19,6 +19,7 @@ extern Graph *miles(unsigned long,long,long,long,@|
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_miles.h" /* we use our own interface |@(gb_miles.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.116
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 3ac25be..6b4718c 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -35,12 +35,6 @@ extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
+ #include "gb_flip.h"
+ @z
+ 
+-@x l.80
+-#include "gb_io.h"
+- /* and {\sc GB\_\,MILES} uses {\sc GB\_\,IO}, which has |str_buf| */
+-@y
+-@z
+-
+ @x l.92
+ Graph *plane(n,x_range,y_range,extend,prob,seed)
+   unsigned long n; /* number of vertices desired */
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 44eddcf..38b7814 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -11,6 +11,7 @@ extern Graph *roget(unsigned long,unsigned long,unsigned long,long);
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_roget.h" /* we use our own interface |@(gb_roget.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.78
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 58279eb..192d0ed 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -16,6 +16,7 @@ extern Graph *restore_graph(char *);
+ #include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
+ @y
+ #include "gb_save.h" /* we use our own interface |@(gb_save.h@>| first */
++#include "gb_io.h" /* we use the input/output conventions of {\sc GB\_\,IO} */
+ @z
+ 
+ @x l.149
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index b9ee450..a8d3728 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -14,6 +14,7 @@ extern Vertex *find_word(char *,void (*)(Vertex *));
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+ #include "gb_words.h" /* we use our own interface |@(gb_words.h@>| first */
++#include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @z
+ 
+ @x l.162
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index 4996616..f04eca8 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -1,8 +1,3 @@
+-@x l.27
+-#include "gb_io.h" /* and the GraphBase input/output routines */
+-@y
+-@z
+-
+ @x l.32
+ @t\4@>int main()
+ @y
+-- 
+2.42.0
+

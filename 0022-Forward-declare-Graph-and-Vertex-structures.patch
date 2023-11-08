@@ -1,7 +1,7 @@
-From 2fe778a7122f17da8a94a3313b19796de48300ce Mon Sep 17 00:00:00 2001
+From 27ced1ec6a24c496298a3095f1330e7836b95a85 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
-Subject: [PATCH 22/22] Forward-declare Graph and Vertex structures.
+Subject: [PATCH 22/23] Forward-declare Graph and Vertex structures.
 
 ---
  Makefile                       |  6 +++---
