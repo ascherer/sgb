@@ -1,4 +1,4 @@
-From 1a7edf0226321f42caa69912a4e6a5b12507fd78 Mon Sep 17 00:00:00 2001
+From 5b7d62ff81ef97a986fb1be5466d89a7f2c328de Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Apr 2023 17:04:22 +0200
 Subject: [PATCH 21/23] Issue #8: Fix overfull \hboxes.
