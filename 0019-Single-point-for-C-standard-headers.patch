@@ -1,4 +1,4 @@
-From c030b83e59fd17943611fef76b5d10ec499b2c14 Mon Sep 17 00:00:00 2001
+From 01a68a5fde8bfcbeee6abbfe8ded6f45d36cc3fe Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 9 Apr 2023 12:47:47 +0200
 Subject: [PATCH 19/23] Single point for C standard headers.
@@ -90,7 +90,7 @@ index 81686c0..af6db08 100644
  main(argc,argv)
    int argc; /* the number of command-line arguments */
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index ab0ba6d..d0bade0 100644
+index 67a783c..7537076 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -1,3 +1,8 @@
