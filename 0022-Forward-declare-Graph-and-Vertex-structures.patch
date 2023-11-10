@@ -1,4 +1,4 @@
-From 64f251c98f926f064337284ecdf069ca424f01b4 Mon Sep 17 00:00:00 2001
+From 12680526c04059702e09ddb90c4ded29392b75e5 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
 Subject: [PATCH 22/23] Forward-declare Graph and Vertex structures.
@@ -99,7 +99,7 @@ index af6db08..81686c0 100644
  main(argc,argv)
    int argc; /* the number of command-line arguments */
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index d0bade0..ab0ba6d 100644
+index 7537076..67a783c 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -1,8 +1,3 @@

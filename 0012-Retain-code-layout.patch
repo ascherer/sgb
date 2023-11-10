@@ -1,4 +1,4 @@
-From 9254352c1b3bca0c2ff8cb0901e477c64a9c03bd Mon Sep 17 00:00:00 2001
+From 7ad0d82a541c6907cf25f0360960620889dd14ac Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 17:17:35 +0100
 Subject: [PATCH 12/23] Retain code layout.
@@ -27,7 +27,7 @@ Subject: [PATCH 12/23] Retain code layout.
  20 files changed, 225 insertions(+), 161 deletions(-)
 
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index 34df318..df2e3f3 100644
+index 5814241..77083da 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -16,7 +16,7 @@ Vertex *prompt_for_team(char *s)
@@ -38,7 +38,7 @@ index 34df318..df2e3f3 100644
 +@x l.148
      fgets(buffer,30,stdin);
  @y
-     if (fgets(buffer,30,stdin)) {}
+     if (!fgets(buffer,30,stdin)) return NULL; /* something's wrong */
 @@ -32,7 +32,7 @@ node *new_node(@t\1\1@>
    long d@t\2\2@>) /* incremental change to |tot_len| */
  @z
