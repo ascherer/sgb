@@ -1,4 +1,4 @@
-From 57c07704cc8249020db2b9a9368ad3381b2587c5 Mon Sep 17 00:00:00 2001
+From 337cc359a1225a05767dea124da9ef34dee39c28 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 10 Jan 2017 10:19:52 +0100
 Subject: [PATCH 10/23] Fix compiler warnings when optimizing.
@@ -12,7 +12,7 @@ Subject: [PATCH 10/23] Fix compiler warnings when optimizing.
  4 files changed, 32 insertions(+)
 
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index 3be4af1..34df318 100644
+index 3be4af1..5814241 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -16,6 +16,12 @@ Vertex *prompt_for_team(char *s)
@@ -22,7 +22,7 @@ index 3be4af1..34df318 100644
 +@x
 +    fgets(buffer,30,stdin);
 +@y
-+    if (fgets(buffer,30,stdin)) {}
++    if (!fgets(buffer,30,stdin)) return NULL; /* something's wrong */
 +@z
 +
  @x l.207

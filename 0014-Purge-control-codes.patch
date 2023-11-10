@@ -1,4 +1,4 @@
-From eea89a632d9da01eb156513da44e64c1000b48a8 Mon Sep 17 00:00:00 2001
+From 4f549ef88aa25b36c0068a7e80801ff623528925 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:02:40 +0200
 Subject: [PATCH 14/23] Purge '@+' control codes.
@@ -43,7 +43,7 @@ index ea9d3d2..4e9afec 100644
 +} while(j!=best_j);
 +@z
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index df2e3f3..3853ee4 100644
+index 77083da..090a167 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -32,6 +32,18 @@ node *new_node(@t\1\1@>

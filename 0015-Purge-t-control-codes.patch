@@ -1,4 +1,4 @@
-From 9c3d544dcb0c0794f1c63dcbc2ef892608fc158e Mon Sep 17 00:00:00 2001
+From 4c601b0854a729859ad529bf9174e54aebf36942 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:14:14 +0200
 Subject: [PATCH 15/23] Purge '@t' control codes.
@@ -92,7 +92,7 @@ index 4e9afec..81686c0 100644
  @z
  
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
-index 3853ee4..ab0ba6d 100644
+index 090a167..67a783c 100644
 --- a/PROTOTYPES/football.ch
 +++ b/PROTOTYPES/football.ch
 @@ -3,9 +3,9 @@ main(argc,argv)
