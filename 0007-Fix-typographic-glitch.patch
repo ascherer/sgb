@@ -1,4 +1,4 @@
-From 8964aaa67a2de09df60ba3ba38f24183a3f739c3 Mon Sep 17 00:00:00 2001
+From cc7e979d7f8e2d479a718afec8b89b4eef562260 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 27 Nov 2016 16:17:57 +0100
 Subject: [PATCH 07/23] Fix typographic glitch.
