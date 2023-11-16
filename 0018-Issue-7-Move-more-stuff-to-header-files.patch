@@ -1,4 +1,4 @@
-From 5898000516761de54d82bbe7bde3f39730d8eb22 Mon Sep 17 00:00:00 2001
+From 43dc289c04d2f43cd487f5a246bd61827ad8d290 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 6 Apr 2023 19:55:32 +0200
 Subject: [PATCH 18/23] Issue #7: Move more stuff to header files.
