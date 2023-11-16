@@ -1,4 +1,4 @@
-From 2a4e48ee4596d3b8928ce08513992a20a11a52cb Mon Sep 17 00:00:00 2001
+From e4f2fe2ad4c1bcb7e12a3f123f460a689a078eee Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 20 Apr 2023 19:58:38 +0200
 Subject: [PATCH 20/23] Reference the interfaces of the modules.
