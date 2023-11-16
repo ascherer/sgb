@@ -1,10 +1,9 @@
-From 12680526c04059702e09ddb90c4ded29392b75e5 Mon Sep 17 00:00:00 2001
+From 605685f6375e8bbffdb96e71739e157dd432436d Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
 Subject: [PATCH 22/23] Forward-declare Graph and Vertex structures.
 
 ---
- Makefile                       |  6 +++---
  PROTOTYPES/assign_lisa.ch      |  5 -----
  PROTOTYPES/book_components.ch  |  3 +--
  PROTOTYPES/econ_order.ch       |  9 ---------
@@ -33,30 +32,8 @@ Subject: [PATCH 22/23] Forward-declare Graph and Vertex structures.
  PROTOTYPES/take_risc.ch        |  5 -----
  PROTOTYPES/test_sample.ch      |  3 +--
  PROTOTYPES/word_components.ch  |  5 -----
- 29 files changed, 35 insertions(+), 143 deletions(-)
+ 28 files changed, 32 insertions(+), 140 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 5c2a33f..5f56fc1 100644
---- a/Makefile
-+++ b/Makefile
-@@ -30,14 +30,14 @@ CWEBINPUTS = /usr/lib/cweb
- #CWEBINPUTS = .
- 
- #   Uncomment the next line if your C uses <string.h> but not <strings.h>:
--#SYS = -DSYSV
-+SYS = -DSYSV
- 
- #   If you prefer optimization to debugging, change -g to something like -O:
--CFLAGS = -g -I$(INCLUDEDIR) $(SYS) -fpic
-+CFLAGS = -O3 -Wall -Wextra -I$(INCLUDEDIR) $(SYS) -fpic
- 
- ########## You shouldn't have to change anything after this point ##########
- 
--LDFLAGS = -L. -L$(LIBDIR)
-+LDFLAGS = -s -L. -L$(LIBDIR)
- LDLIBS = -lgb
- LOADLIBES = $(LDLIBS)
- 
 diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
 index 70ddc49..086c6f9 100644
 --- a/PROTOTYPES/assign_lisa.ch

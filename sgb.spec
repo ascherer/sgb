@@ -75,8 +75,8 @@ master files stay intact.
 %endif
 %if ! %{with debuginfo}
 %{__perl} -pe "s/(CFLAGS =) -g/\1 -O3/" -i Makefile
-%{__perl} -pe "s/(LDFLAGS =)/\1 -s/" -i Makefile
 %endif
+%{__perl} -pe "s/(LOADLIBES)/#\1/" -i Makefile
 
 %build
 %{__make} tests demos
