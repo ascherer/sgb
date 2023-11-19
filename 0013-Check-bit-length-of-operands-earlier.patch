@@ -1,7 +1,7 @@
-From 09265118cc22466848a1110912c02112aa9fced3 Mon Sep 17 00:00:00 2001
+From faac211cb68c3324a078fc9434a46f7955d1af71 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 1 Dec 2018 12:28:19 +0100
-Subject: [PATCH 13/23] Check bit-length of operands earlier.
+Subject: [PATCH 13/24] Check bit-length of operands earlier.
 
 ---
  PROTOTYPES/multiply.ch | 46 ++++++++++++++++++++++++++++++++++++++++++
