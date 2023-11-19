@@ -1,7 +1,7 @@
-From 39587ca7934203d796b813b7813407b69aa29475 Mon Sep 17 00:00:00 2001
+From 84ce73fe15f50ba98eb2663a86895da7f330556d Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Thu, 16 Nov 2023 17:58:35 +0100
-Subject: [PATCH 01/23] sgb-2:20210130 base
+Date: Sun, 19 Nov 2023 17:40:48 +0100
+Subject: [PATCH 01/24] sgb-2:20210130 base
 
 ---
  +The+Stanford+GraphBase+       |    0
