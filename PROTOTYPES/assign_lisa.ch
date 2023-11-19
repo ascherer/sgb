@@ -16,6 +16,11 @@ for (k=0;k<(long)m;k++) {
   for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
 @z
 
+@x l.254
+\vadjust{\goodbreak}%
+@y
+@z
+
 @x l.309
   for (l=0; l<n; l++) {
 @y
