@@ -1,0 +1,28 @@
+From 9d087ee552666c5cd2bc6b643421c6baa24931b5 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sun, 19 Nov 2023 17:41:40 +0100
+Subject: [PATCH 24/24] Purge '\goodbreak'.
+
+---
+ PROTOTYPES/assign_lisa.ch | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 086c6f9..8188922 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -16,6 +16,11 @@ for (k=0;k<(long)m;k++) {
+   for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @z
+ 
++@x l.254
++\vadjust{\goodbreak}%
++@y
++@z
++
+ @x l.309
+   for (l=0; l<n; l++) {
+ @y
+-- 
+2.42.0
+

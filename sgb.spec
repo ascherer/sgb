@@ -53,6 +53,7 @@ Patch20: 0020-Reference-the-interfaces-of-the-modules.patch
 Patch21: 0021-Issue-8-Fix-overfull-hboxes.patch
 Patch22: 0022-Forward-declare-Graph-and-Vertex-structures.patch
 Patch23: 0023-Move-C-standard-headers.patch
+Patch24: 0024-Purge-goodbreak.patch
 %endif
 
 %description
