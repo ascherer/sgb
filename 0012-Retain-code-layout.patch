@@ -1,7 +1,7 @@
-From ce84093caae2c7db6689a11a65758954dc6dd144 Mon Sep 17 00:00:00 2001
+From db5f1894a871b8872a787109c20a2c068f8cfbc3 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 17:17:35 +0100
-Subject: [PATCH 12/23] Retain code layout.
+Subject: [PATCH 12/24] Retain code layout.
 
 ---
  PROTOTYPES/football.ch    |  6 ++--
