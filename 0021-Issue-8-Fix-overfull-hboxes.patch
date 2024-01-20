@@ -1,7 +1,7 @@
-From ef2e320c1be86f0c3633bc03d5fa94ebfe3870e8 Mon Sep 17 00:00:00 2001
+From ca70ec249015aadd772d9b536ef0f81cd30f2025 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Apr 2023 17:04:22 +0200
-Subject: [PATCH 21/24] Issue #8: Fix overfull \hboxes.
+Subject: [PATCH 21/25] Issue #8: Fix overfull \hboxes.
 
 ---
  PROTOTYPES/gb_basic.ch | 10 ++++++++++
@@ -67,5 +67,5 @@ index 1d89b8d..71f4b77 100644
  @p long miles_distance(u,v)
    Vertex *u,*v;
 -- 
-2.42.0
+2.43.0
 
