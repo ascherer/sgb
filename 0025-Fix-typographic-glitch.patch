@@ -1,0 +1,29 @@
+From df02b2bfec22019960e35d2c34827f8ba1e4ba8a Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Wed, 24 Jan 2024 10:06:14 +0100
+Subject: [PATCH 25/25] Fix typographic glitch.
+
+---
+ PROTOTYPES/gb_gates.ch | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 66aeae6..57d634f 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -178,6 +178,12 @@ static Vertex* make_xor(
+ @ @d first_of(n,t) new_vert(t);@+for (k=1;k<(long)n;k++)@+new_vert(t);
+ @z
+ 
++@x l.561
++strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');
++@y
++strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');@/
++@z
++
+ @x l.876
+ static void make_adder(n,x,y,z,carry,add)
+   unsigned long n; /* number of bits */
+-- 
+2.43.0
+

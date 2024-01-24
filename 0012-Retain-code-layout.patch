@@ -1,7 +1,7 @@
-From db5f1894a871b8872a787109c20a2c068f8cfbc3 Mon Sep 17 00:00:00 2001
+From f385ea839eaba5b0a8356653715b64f126d305fe Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 17:17:35 +0100
-Subject: [PATCH 12/24] Retain code layout.
+Subject: [PATCH 12/25] Retain code layout.
 
 ---
  PROTOTYPES/football.ch    |  6 ++--
@@ -1390,5 +1390,5 @@ index 62cbb7a..3adc970 100644
  @y
  if ((i=random_lengths(g,0L,10L,12L,dst,2L)))
 -- 
-2.42.0
+2.43.0
 
