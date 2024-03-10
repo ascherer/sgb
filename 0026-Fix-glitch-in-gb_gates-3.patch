@@ -1,0 +1,32 @@
+From bb62f124d553c0f449b3d549eed5822f097e875c Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sun, 10 Mar 2024 12:51:21 +0100
+Subject: [PATCH 26/26] =?UTF-8?q?Fix=20glitch=20in=20gb=5Fgates=C2=A73.?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ PROTOTYPES/gb_gates.ch | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 57d634f..6ac1542 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -80,6 +80,12 @@ long gate_eval(
+   char *out_vec) /* string for output values, or |NULL| */
+ @z
+ 
++@x l.144
++    @t\4\4@>@<Compute the value |t| of a classical logic gate@>;
++@y
++    @t\4@>@<Compute the value |t| of a classical logic gate@>@;
++@z
++
+ @x l.184
+ #include "gb_flip.h"
+ @y
+-- 
+2.43.2
+
