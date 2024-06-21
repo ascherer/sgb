@@ -1,7 +1,7 @@
-From c25fab28f318e3b51bee69331e8904210cb44cc2 Mon Sep 17 00:00:00 2001
+From d34158b78c9007463a4f8ad61b61280c7d65ca7f Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 26 Feb 2023 18:04:55 +0100
-Subject: [PATCH 17/28] Limit lengths of numeric values in strings.
+Subject: [PATCH 17/29] Limit lengths of numeric values in strings.
 
 ---
  PROTOTYPES/gb_gates.ch |  6 ++++++
