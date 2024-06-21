@@ -1,0 +1,514 @@
+From da048c954588badd7c8c926e7c1b0882e100fcda Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Fri, 21 Jun 2024 10:32:28 +0200
+Subject: [PATCH 28/28] Shift TOC to front of PDF.
+
+for f in PROTOTYPES/*.ch
+do
+  f=`basename $f .ch`
+  cweave -lX $f.w PROTOTYPES/$f.ch
+  pdftex $f; pdftex $f
+done
+---
+ PROTOTYPES/assign_lisa.ch      | 7 +++++++
+ PROTOTYPES/book_components.ch  | 7 +++++++
+ PROTOTYPES/econ_order.ch       | 7 +++++++
+ PROTOTYPES/football.ch         | 7 +++++++
+ PROTOTYPES/gb_basic.ch         | 7 +++++++
+ PROTOTYPES/gb_books.ch         | 7 +++++++
+ PROTOTYPES/gb_dijk.ch          | 7 +++++++
+ PROTOTYPES/gb_econ.ch          | 7 +++++++
+ PROTOTYPES/gb_flip.ch          | 8 ++++++++
+ PROTOTYPES/gb_games.ch         | 7 +++++++
+ PROTOTYPES/gb_gates.ch         | 7 +++++++
+ PROTOTYPES/gb_graph.ch         | 7 +++++++
+ PROTOTYPES/gb_io.ch            | 7 +++++++
+ PROTOTYPES/gb_lisa.ch          | 7 +++++++
+ PROTOTYPES/gb_miles.ch         | 7 +++++++
+ PROTOTYPES/gb_plane.ch         | 7 +++++++
+ PROTOTYPES/gb_raman.ch         | 7 +++++++
+ PROTOTYPES/gb_rand.ch          | 7 +++++++
+ PROTOTYPES/gb_roget.ch         | 7 +++++++
+ PROTOTYPES/gb_save.ch          | 7 +++++++
+ PROTOTYPES/gb_sort.ch          | 7 +++++++
+ PROTOTYPES/gb_words.ch         | 7 +++++++
+ PROTOTYPES/girth.ch            | 7 +++++++
+ PROTOTYPES/ladders.ch          | 7 +++++++
+ PROTOTYPES/miles_span.ch       | 7 +++++++
+ PROTOTYPES/multiply.ch         | 7 +++++++
+ PROTOTYPES/queen.ch            | 7 +++++++
+ PROTOTYPES/roget_components.ch | 7 +++++++
+ PROTOTYPES/take_risc.ch        | 7 +++++++
+ PROTOTYPES/test_sample.ch      | 7 +++++++
+ PROTOTYPES/word_components.ch  | 7 +++++++
+ 31 files changed, 218 insertions(+)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index d10a082..30deac2 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -1,3 +1,10 @@
++@x [0] l.12
++\prerequisite{GB\_\,LISA}
++@y
++\prerequisite{GB\_\,LISA}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.73
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index c578784..16d87aa 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,BOOKS}
++@y
++\prerequisite{GB\_\,BOOKS}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.58
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index 524f467..b0569e2 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,ECON}
++@y
++\prerequisite{GB\_\,ECON}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.80
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index 427a6e2..adcf6c4 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GAMES}
++@y
++\prerequisite{GB\_\,GAMES}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.61
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index c81327e..235e893 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GRAPH}
++@y
++\prerequisite{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.16
+ extern Graph *board(); /* moves on generalized chessboards */
+ extern Graph *simplex(); /* generalized triangular configurations */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 52280fb..01b6ebe 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.17
+ extern Graph *book();
+ extern Graph *bi_book();
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index 8ebe026..b4194d7 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GRAPH}
++@y
++\prerequisite{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.58
+ #include "gb_graph.h" /* define the standard GraphBase data structures */
+ @y
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index 1145969..d82b467 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.14
+ extern Graph *econ();
+ @y
+diff --git a/PROTOTYPES/gb_flip.ch b/PROTOTYPES/gb_flip.ch
+index c82bd29..b380818 100644
+--- a/PROTOTYPES/gb_flip.ch
++++ b/PROTOTYPES/gb_flip.ch
+@@ -1,3 +1,11 @@
++@x [0] l.5
++\hyphenation{semi-numer-ical}
++@y
++\hyphenation{semi-numer-ical}
++
++\input pdfwebtocfront
++@z
++
+ @x [2] l.35
+ #include "gb_flip.h"   /* all users of {\sc GB\_\,FLIP} should do this */
+ @y
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 2f399da..ca99790 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.14
+ extern Graph *games();
+ @y
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 6053762..60347bc 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GRAPH}
++@y
++\prerequisite{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.26
+ #define print_gates p_gates /* abbreviation for Procrustean linkers */
+ extern Graph *risc(); /* make a network for a microprocessor */
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 04ea56f..382e7cb 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -1,3 +1,10 @@
++@x [0] l.4
++\def\title{GB\_\,GRAPH}
++@y
++\def\title{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.25
+ #include "gb_graph.h"  /* all users of {\sc GB\_\,GRAPH} should do this */
+ @y
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index eadb648..0643dfa 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -1,3 +1,10 @@
++@x [0] l.4
++\def\title{GB\_\,IO}
++@y
++\def\title{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.30
+ #include "gb_io.h"
+   /* all users of {\sc GB\_\,IO} should include this header file */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 0608708..4c081d3 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.17
+ @d plane_lisa p_lisa /* abbreviation for Procrustean external linkage */
+ 
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 9ec8d97..fb59a25 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.14
+ extern Graph *miles();
+ @y
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 0fb2ee6..697bd99 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,MILES}
++@y
++\prerequisite{GB\_\,MILES}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.16
+ @d plane_miles p_miles /* abbreviation for Procrustean external linkage */
+ 
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index 5496475..d7265a5 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,GRAPH}
++@y
++\prerequisite{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.32
+ extern Graph *raman();
+ @y
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 5ac5d6c..1d50605 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GRAPH}
++@y
++\prerequisite{GB\_\,GRAPH}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.22
+ @d random_graph r_graph /* abbreviations for Procrustean external linkage */
+ @d random_bigraph r_bigraph
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 113b1cf..641df95 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.14
+ extern Graph *roget();
+ @y
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 4e36df0..745b9d6 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.46
+ @(gb_save.h@>=
+ extern long save_graph();
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index 3171756..acb2472 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -1,3 +1,10 @@
++@x [0] l.4
++\def\title{GB\_\,SORT}
++@y
++\def\title{GB\_\,SORT}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.10
+ #include <stdio.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+ #include "gb_flip.h" /* we need to use the random number generator */
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index edec030..b4cf2ab 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++@y
++\prerequisites{GB\_\,GRAPH}{GB\_\,IO}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.17
+ extern Graph *words();
+ extern Vertex *find_word();
+diff --git a/PROTOTYPES/girth.ch b/PROTOTYPES/girth.ch
+index 9de0b9b..83b6d38 100644
+--- a/PROTOTYPES/girth.ch
++++ b/PROTOTYPES/girth.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,RAMAN}
++@y
++\prerequisite{GB\_\,RAMAN}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.65
+ main()
+ @y
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index e6ffb6d..7d0ba78 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisites{GB\_WORDS}{GB\_\,DIJK}
++@y
++\prerequisites{GB\_WORDS}{GB\_\,DIJK}
++\input pdfwebtocfront
++@z
++
+ @x [3] l.91
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index da101d2..1ace8e5 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,MILES}
++@y
++\prerequisite{GB\_\,MILES}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.99
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/multiply.ch b/PROTOTYPES/multiply.ch
+index e46793a..f9a00fc 100644
+--- a/PROTOTYPES/multiply.ch
++++ b/PROTOTYPES/multiply.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GATES}
++@y
++\prerequisite{GB\_\,GATES}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.38
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/queen.ch b/PROTOTYPES/queen.ch
+index c9aadd1..61059b2 100644
+--- a/PROTOTYPES/queen.ch
++++ b/PROTOTYPES/queen.ch
+@@ -1,3 +1,10 @@
++@x [0] l.5
++\def\title{QUEEN}
++@y
++\def\title{QUEEN}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.26
+ main()
+ @y
+diff --git a/PROTOTYPES/roget_components.ch b/PROTOTYPES/roget_components.ch
+index 95c6a98..5742396 100644
+--- a/PROTOTYPES/roget_components.ch
++++ b/PROTOTYPES/roget_components.ch
+@@ -1,3 +1,10 @@
++@x [0] l.8
++\prerequisite{GB\_\,ROGET}
++@y
++\prerequisite{GB\_\,ROGET}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.45
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/take_risc.ch b/PROTOTYPES/take_risc.ch
+index b50a744..1a425b7 100644
+--- a/PROTOTYPES/take_risc.ch
++++ b/PROTOTYPES/take_risc.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_\,GATES}
++@y
++\prerequisite{GB\_\,GATES}
++\input pdfwebtocfront
++@z
++
+ @x [2] l.35
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index eeb23f4..2e5c225 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -1,3 +1,10 @@
++@x [0] l.5
++\def\title{TEST\_\,SAMPLE}
++@y
++\def\title{TEST\_\,SAMPLE}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.32
+ @t\4@>int main()
+ @y
+diff --git a/PROTOTYPES/word_components.ch b/PROTOTYPES/word_components.ch
+index 1a735e0..126807c 100644
+--- a/PROTOTYPES/word_components.ch
++++ b/PROTOTYPES/word_components.ch
+@@ -1,3 +1,10 @@
++@x [0] l.7
++\prerequisite{GB\_WORDS}
++@y
++\prerequisite{GB\_WORDS}
++\input pdfwebtocfront
++@z
++
+ @x [1] l.19
+ main()
+ @y
+-- 
+2.45.2
+

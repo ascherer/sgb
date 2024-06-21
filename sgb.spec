@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 32
+Release: 33
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -56,6 +56,8 @@ Patch23: 0023-Move-C-standard-headers.patch
 Patch24: 0024-Purge-goodbreak.patch
 Patch25: 0025-Fix-typographic-glitch.patch
 Patch26: 0026-Fix-glitch-in-gb_gates-3.patch
+Patch27: 0027-Fix-changefile-lines.patch
+Patch28: 0028-Shift-TOC-to-front-of-PDF.patch
 %endif
 
 %description
