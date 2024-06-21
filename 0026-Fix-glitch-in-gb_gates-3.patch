@@ -1,7 +1,7 @@
-From bb62f124d553c0f449b3d549eed5822f097e875c Mon Sep 17 00:00:00 2001
+From 5d52ae1681106b7f4e732a07e3ac772467b8b0bc Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 10 Mar 2024 12:51:21 +0100
-Subject: [PATCH 26/26] =?UTF-8?q?Fix=20glitch=20in=20gb=5Fgates=C2=A73.?=
+Subject: [PATCH 26/28] =?UTF-8?q?Fix=20glitch=20in=20gb=5Fgates=C2=A73.?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -28,5 +28,5 @@ index 57d634f..6ac1542 100644
  #include "gb_flip.h"
  @y
 -- 
-2.43.2
+2.45.2
 
