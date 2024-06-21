@@ -1,0 +1,41 @@
+From f3cb4aa3c052a8114087bc21983e0eaf44475535 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Fri, 21 Jun 2024 17:36:55 +0200
+Subject: [PATCH 29/29] Editor's Note.
+
+---
+ boilerplate.w | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/boilerplate.w b/boilerplate.w
+index 3292cc9..91d3aef 100644
+--- a/boilerplate.w
++++ b/boilerplate.w
+@@ -7,6 +7,15 @@
+ \font\ninett=cmtt9
+ \def\botofcontents{\vskip 0pt plus 1filll
+     \ninerm\baselineskip10pt
++\noindent Editor's Note:  The present variant of this GraphBase file has been
++heavily modified with an associated change file based on its historic precursor
++in the {\ninett PROTOTYPES} subdirectory. None of these modifications have been
++approved by Prof.~Knuth and he takes absolutely no responsibility for this
++incarnation.
++\smallskip\noindent Consult the online project
++\pdfURL{{\ninett https://github.com/ascherer/sgb}}{https://github.com/ascherer/sgb}
++for context and rationale.
++\vskip1in
+     \noindent\copyright\ 1993 Stanford University
+     \bigskip\noindent
+     This file may be freely copied and distributed, provided that
+@@ -26,7 +35,7 @@
+     \smallskip\noindent
+     Preliminary work on the Stanford GraphBase project
+     was supported in part by National Science
+-    Foundation grant CCR-86-10181.}
++    Foundation grant CCR-86-10181.\par}
+ 
+ \def\prerequisite#1{\def\startsection{\noindent
+     Important: Before reading {\sc\title},
+-- 
+2.45.2
+
