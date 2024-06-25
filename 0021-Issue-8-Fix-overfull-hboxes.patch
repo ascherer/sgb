@@ -1,7 +1,7 @@
-From 73dad1ed63ebad810573d6c77c91fee81d2993b5 Mon Sep 17 00:00:00 2001
+From 96e2573c59281d83b91682f7e2398cc179908b51 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Apr 2023 17:04:22 +0200
-Subject: [PATCH 21/29] Issue #8: Fix overfull \hboxes.
+Subject: [PATCH 21/30] Issue #8: Fix overfull \hboxes.
 
 ---
  PROTOTYPES/gb_basic.ch | 10 ++++++++++
