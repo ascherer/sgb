@@ -59,6 +59,7 @@ Patch26: 0026-Fix-glitch-in-gb_gates-3.patch
 Patch27: 0027-Fix-changefile-lines.patch
 Patch28: 0028-Shift-TOC-to-front-of-PDF.patch
 Patch29: 0029-Editor-s-Note.patch
+Patch30: 0030-Issue-13-Prototypical-example-code.patch
 %endif
 
 %description
