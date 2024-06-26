@@ -91,6 +91,10 @@ master files stay intact.
 %{__make} tests demos
 %{?with_tex:%{__pdftex} abstract.plaintex}
 
+%check
+%{__make} test_sample
+./test_sample
+
 %install
 %{__rm} -rf %{buildroot}
 
