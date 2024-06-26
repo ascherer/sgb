@@ -60,6 +60,7 @@ Patch27: 0027-Fix-changefile-lines.patch
 Patch28: 0028-Shift-TOC-to-front-of-PDF.patch
 Patch29: 0029-Editor-s-Note.patch
 Patch30: 0030-Issue-13-Prototypical-example-code.patch
+Patch31: 0031-Fix-line-break-with-cweave-f.patch
 %endif
 
 %description
