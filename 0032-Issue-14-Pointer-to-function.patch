@@ -1,0 +1,34 @@
+From b251c9bd8ec16fce068518751d9ebf763a5e74b4 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 27 Jun 2024 00:53:53 +0200
+Subject: [PATCH 32/32] Issue #14: Pointer-to-function.
+
+---
+ PROTOTYPES/gb_plane.ch | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 52763ae..352a400 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -24,7 +24,7 @@ extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
+   unsigned long,unsigned long,long);
+ extern Graph *plane_miles(unsigned long,long,long,long,@|
+   unsigned long,unsigned long,long);
+-extern void delaunay(Graph *,void (*)(Vertex *,Vertex *));
++extern void delaunay(Graph *,void @[@] (*)(Vertex *,Vertex *)@,);
+ #endif /* |GB_PLANE_H| */
+ @z
+ 
+@@ -94,7 +94,7 @@ void delaunay(g,f)
+ @y
+ void delaunay(
+   Graph *g, /* vertices in the plane */
+-  void @[@] (*f)(Vertex *,Vertex *))
++  void @[@] (*f)(Vertex *,Vertex *)@,)
+     /* procedure that absorbs the triangulated edges */
+ @z
+ 
+-- 
+2.45.2
+

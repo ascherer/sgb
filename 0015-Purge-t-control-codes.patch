@@ -1,7 +1,7 @@
-From af4ddac4bd76e4cd4b26879eed9faa9a082aa32a Mon Sep 17 00:00:00 2001
+From 5e714d445ea615977687fd8bca71afc128beab22 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:14:14 +0200
-Subject: [PATCH 15/31] Purge '@t' control codes.
+Subject: [PATCH 15/32] Purge '@t' control codes.
 
 Starting with CWEB 4.3, function parameters are indented by default.
 ---
