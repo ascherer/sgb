@@ -1,7 +1,7 @@
-From 3f1b1e726329338562634d674ad5ff21769a4df2 Mon Sep 17 00:00:00 2001
+From 5d7337841d5ceab4439dd584e89b060b236c8df5 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 9 Apr 2023 12:47:47 +0200
-Subject: [PATCH 19/30] Single point for C standard headers.
+Subject: [PATCH 19/31] Single point for C standard headers.
 
 Don't repeat yourself (incompletely). Both GB_GRAPH and GB_IO had a
 small group of standard C header files and the peculiar SYSV switch.
