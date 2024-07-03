@@ -1,7 +1,7 @@
-From bfea74a9dd076c9833d097387359af1eb40885b2 Mon Sep 17 00:00:00 2001
+From 0967958b33e320899c1be3f4b500536bb37b3bf2 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Tue, 8 Sep 2015 13:39:18 +0200
-Subject: [PATCH 05/32] GCC -Wall -Wextra.
+Subject: [PATCH 05/33] GCC -Wall -Wextra.
 
 Compile with '-Wall' and '-Wextra' and fix the inflicted source modules.
 ---
