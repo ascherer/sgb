@@ -1,4 +1,4 @@
-From d613b7e8eda1cbf02faf2b1d579bb5dcaa50444d Mon Sep 17 00:00:00 2001
+From 05e6aaca08903e17b870f7254afc41c09431a9e5 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Thu, 3 Sep 2015 11:19:38 +0200
 Subject: [PATCH 04/33] GCC -Wall.
