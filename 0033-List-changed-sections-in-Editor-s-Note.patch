@@ -1,14 +1,14 @@
-From 081b00164febbc5b0df92d5e786fea48d4509521 Mon Sep 17 00:00:00 2001
+From 099ccde41842c947111d71068bd2025d91b2162d Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Jul 2024 10:16:57 +0200
 Subject: [PATCH 33/33] List changed sections in Editor's Note.
 
 ---
- boilerplate.w | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ boilerplate.w | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
 
 diff --git a/boilerplate.w b/boilerplate.w
-index 91d3aef..712012b 100644
+index 91d3aef..a6c3256 100644
 --- a/boilerplate.w
 +++ b/boilerplate.w
 @@ -15,7 +15,8 @@ incarnation.
@@ -21,7 +21,7 @@ index 91d3aef..712012b 100644
      \noindent\copyright\ 1993 Stanford University
      \bigskip\noindent
      This file may be freely copied and distributed, provided that
-@@ -45,3 +46,19 @@ for context and rationale.
+@@ -45,3 +46,20 @@ for context and rationale.
      Important: Before reading {\sc\title}, please read
      or at least skim the programs for {\sc#1} and {\sc#2}.\bigskip
      \let\startsection=\stsec\stsec}}
@@ -40,6 +40,7 @@ index 91d3aef..712012b 100644
 +    \immediate\closeout\writechanges
 +    \let\ch=\CH \ch#1.
 +    \endgroup}
++\else\closein\testread % Second run
 +\fi
 -- 
 2.45.2

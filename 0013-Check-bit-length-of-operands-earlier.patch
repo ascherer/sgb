@@ -1,4 +1,4 @@
-From e61e5be700868be64d4dab6191a133db1bb7b76d Mon Sep 17 00:00:00 2001
+From da0b18e9c497054c68578b05a42cb8b2de4b56a2 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 1 Dec 2018 12:28:19 +0100
 Subject: [PATCH 13/33] Check bit-length of operands earlier.
