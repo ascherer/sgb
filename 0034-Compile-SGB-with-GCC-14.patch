@@ -1,0 +1,32 @@
+From 94e07f33263604168e71c2d0accb04913150143f Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Wed, 17 Jul 2024 09:01:00 +0200
+Subject: [PATCH 34/34] Compile SGB with GCC-14.
+
+---
+ PROTOTYPES/gb_graph.ch | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 382e7cb..1864d16 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -181,8 +181,15 @@ void make_double_compound_id(
+ 
+ @x [27] l.509
+   if (strlen(gg->id)+strlen(ggg->id)<avail)
++    sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3);
+ @y
+   if (strlen(gg->id)+strlen(ggg->id)<(siz_t)avail)
++  { int ret = snprintf(g->id,ID_FIELD_SIZE,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3);
++    if (ret < 0 || ret >= ID_FIELD_SIZE) {
++      fprintf(stderr,"Oops, snprintf failed! Format truncated?");
++      abort();
++    }
++  }
+ @z
+ 
+ @x [29] l.551
+-- 
+2.45.2
+

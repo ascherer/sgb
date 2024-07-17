@@ -1,7 +1,7 @@
-From ef4fce9e308f39d71eb188c1bb4341af59565cfd Mon Sep 17 00:00:00 2001
+From b7f43145af6e90b8fa1e4624d733b0d8fc7431c7 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Mon, 12 Dec 2016 17:47:24 +0100
-Subject: [PATCH 09/33] Update PROTOTYPES documentation.
+Subject: [PATCH 09/34] Update PROTOTYPES documentation.
 
 ---
  PROTOTYPES/README.PROTOTYPES | 13 +++++--------
