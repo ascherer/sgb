@@ -1,7 +1,7 @@
-From 9cdc524411477a0213f6be89f28509776d87814b Mon Sep 17 00:00:00 2001
+From 30751c5da1bb88689b8c89beb607038edbe30da0 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 8 Nov 2023 12:04:53 +0100
-Subject: [PATCH 23/33] Move C standard headers.
+Subject: [PATCH 23/34] Move C standard headers.
 
 Our central 'gb_graph.h' header is included by (almost) every other
 module and program, but 'gb_io.h' is loaded only by a dozen others.

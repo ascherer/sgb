@@ -1,7 +1,7 @@
-From e7b5a5988cf59cf1cc73bba5202ffa11611d6bd2 Mon Sep 17 00:00:00 2001
+From b8e2dc13a7e10ad031d3b49ce082464930bbf6c9 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 24 Jan 2024 10:06:14 +0100
-Subject: [PATCH 25/33] Fix typographic glitch.
+Subject: [PATCH 25/34] Fix typographic glitch.
 
 ---
  PROTOTYPES/gb_gates.ch | 6 ++++++
