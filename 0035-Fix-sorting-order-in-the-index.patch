@@ -1,0 +1,964 @@
+From c2ea6650723391caa91aec60f694b01db513c4a5 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Mon, 9 Sep 2024 19:45:08 +0200
+Subject: [PATCH 35/35] Fix sorting order in the index.
+
+---
+ PROTOTYPES/football.ch         |  72 +++++++++++++++++
+ PROTOTYPES/gb_basic.ch         |  32 +++++++-
+ PROTOTYPES/gb_econ.ch          |  48 +++++++++++
+ PROTOTYPES/gb_gates.ch         | 144 +++++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_io.ch            |  24 ++++++
+ PROTOTYPES/gb_lisa.ch          |  24 ++++++
+ PROTOTYPES/gb_raman.ch         |  24 ++++++
+ PROTOTYPES/gb_rand.ch          |  12 +++
+ PROTOTYPES/gb_save.ch          | 102 +++++++++++++++++++++++
+ PROTOTYPES/gb_sort.ch          |  44 ++++++++++
+ PROTOTYPES/miles_span.ch       |  72 +++++++++++++++++
+ PROTOTYPES/roget_components.ch |  24 ++++++
+ 12 files changed, 621 insertions(+), 1 deletion(-)
+
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index adcf6c4..5038198 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -29,6 +29,12 @@ Vertex *prompt_for_team(char *s)
+     if (!fgets(buffer,30,stdin)) return NULL; /* something's wrong */
+ @z
+ 
++@x [9] l.179
++@<Print the solution corresponding to |cur_node|@>;
++@y
++@<Print \9{t}the solution corresponding to |cur_node|@>;
++@z
++
+ @x [13] l.207
+ node *new_node(x,d)
+   node *x; /* an old node that the new node will call |prev| */
+@@ -39,6 +45,12 @@ node *new_node(
+   long d) /* incremental change to |tot_len| */
+ @z
+ 
++@x [15] l.235
++@<Print the solution corresponding to |cur_node|@>=
++@y
++@<Print \9{t}the solution corresponding to |cur_node|@>=
++@z
++
+ @x [15] l.237
+ do@+{@+register node*t;
+ @y
+@@ -51,6 +63,18 @@ do {@+register node*t;
+ } while (cur_node);
+ @z
+ 
++@x [15] l.246
++  @<Print the score of game |a| between |v| and |u|@>;
++@y
++  @<Print \9{t}the score of game |a| between |v| and |u|@>;
++@z
++
++@x [16] l.250
++@ @<Print the score of game |a| between |v| and |u|@>=
++@y
++@ @<Print \9{t}the score of game |a| between |v| and |u|@>=
++@z
++
+ @x [17] l.285
+     register Arc *best_arc; /* arc that achieves |del=d| */
+     register Arc *last_arc; /* arc that goes directly to |goal| */
+@@ -59,6 +83,12 @@ do {@+register node*t;
+     register Arc *last_arc=0; /* arc that goes directly to |goal| */
+ @z
+ 
++@x [17] l.292
++    @<Set |u->valid=v| for all |u| to which |v| might now move@>;
++@y
++    @<Set \9{u}|u->valid=v| for all |u| to which |v| might now move@>;
++@z
++
+ @x [17] l.294
+       if (a->del>d && a->tip->valid==v)
+         if (a->tip==goal) last_arc=a;
+@@ -70,6 +100,12 @@ do {@+register node*t;
+       }
+ @z
+ 
++@x [18] l.308
++@<Set |u->valid=v| for all |u| to which |v| might now move@>=
++@y
++@<Set \9{u}|u->valid=v| for all |u| to which |v| might now move@>=
++@z
++
+ @x [18] l.312
+ do@+{
+ @y
+@@ -82,6 +118,12 @@ do {
+ } while (u);
+ @z
+ 
++@x [19] l.352
++  @<Make |list[0]| through |list[n-1]| empty@>;
++@y
++  @<Make \9{l}|list[0]| through |list[n-1]| empty@>;
++@z
++
+ @x [19] l.355
+   do@+{
+ @y
+@@ -93,3 +135,33 @@ do {
+ @y
+   } while (m>0); /* exactly one node should be in |list[0]| (see below) */
+ @z
++
++@x [21] l.378
++@ @<Make |list[0]|...@>=
++@y
++@ @<Make \9{l}|list[0]|...@>=
++@z
++
++@x [27] l.478
++@<Make all vertices unseen and all arcs untagged, except for vertices
++@y
++@<Make \9{a}all vertices unseen and all arcs untagged, except for vertices
++@z
++
++@x [27] l.490
++    @<Set |h| to the number of vertices on paths between |u| and |goal|@>;
++@y
++    @<Set \9{h}|h| to the number of vertices on paths between |u| and |goal|@>;
++@z
++
++@x [28] l.504
++@<Make all vertices unseen and all arcs untagged, except for vertices
++@y
++@<Make \9{a}all vertices unseen and all arcs untagged, except for vertices
++@z
++
++@x [35] l.620
++@<Set |h| to the number of vertices on paths between |u| and |goal|@>=
++@y
++@<Set \9{h}|h| to the number of vertices on paths between |u| and |goal|@>=
++@z
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index 235e893..7b47fb6 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -78,10 +78,16 @@ Graph *board(
+ @y
+   (void) s; (void) i;
+   @<Normalize the board-size parameters@>@;
+-  @<Set up a graph with |n| vertices@>@;
++  @<Set up a graph with \9{n}|n| vertices@>@;
+   @<Insert arcs or edges for all legal moves@>@;
+ @z
+ 
++@x [13] l.265
++@<Set up a graph with |n| vertices@>=
++@y
++@<Set up a graph with \9{n}|n| vertices@>=
++@z
++
+ @x [22] l.410
+     do yy[k]+=nn[k];@+ while (yy[k]<0);
+ @y
+@@ -190,6 +196,18 @@ Graph *perms(
+   long directed) /* should the graph be directed? */
+ @z
+ 
++@x [44] l.908
++@<Determine |n| and the maximum possible number of inversions@>;
++@y
++@<Determine \9{n}|n| and the maximum possible number of inversions@>;
++@z
++
++@x [45] l.914
++@<Determine |n| and the maximum possible number of inversions@>=
++@y
++@<Determine \9{n}|n| and the maximum possible number of inversions@>=
++@z
++
+ @x [45] l.915
+ {@+register long ss; /* max inversions known to be possible */
+ @y
+@@ -492,3 +510,15 @@ Graph *induced(
+   (void) s; (void) d; (void) i;
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @z
++
++@x [106] l.2271
++@<Determine |n| and |nn|@>;
++@y
++@<Determine \9{n}|n| and \9{n}|nn|@>;
++@z
++
++@x [107] l.2280
++@ @<Determine |n| and |nn|@>=
++@y
++@ @<Determine \9{n}|n| and \9{n}|nn|@>=
++@z
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index d82b467..6b715e8 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -52,3 +52,51 @@ Graph *econ(
+   unsigned long threshold, /* minimum per-64K-age in arcs leading in */
+   long seed) /* random number seed */
+ @z
++
++@x [7] l.200
++  @<Read \.{econ.dat} and note the binary tree structure@>;
++@y
++  @<Read \9{e}\.{econ.dat} and note the binary tree structure@>;
++@z
++
++@x [14] l.274
++@ @<Read \.{econ.dat} and note the binary tree structure@>=
++@y
++@ @<Read \9{e}\.{econ.dat} and note the binary tree structure@>=
++@z
++
++@x [14] l.280
++@<Read and store the sector names and SIC numbers@>;
++@y
++@<Read \9{a}and store the sector names and SIC numbers@>;
++@z
++
++@x [14] l.282
++ @<Read and store the output coefficients for sector |k|@>;
++@y
++ @<Read \9{a}and store the output coefficients for sector |k|@>;
++@z
++
++@x [15] l.300
++@<Read and store the sector names...@>=
++@y
++@<Read \9{a}and store the sector names...@>=
++@z
++
++@x [16] l.332
++@<Read and store the output...@>=
++@y
++@<Read \9{a}and store the output...@>=
++@z
++
++@x [22] l.479
++    @<Set |p->table[2]|, |p->table[3]|, \dots\ to convolution of
++@y
++    @<Set \9{p}|p->table[2]|, |p->table[3]|, \dots\ to convolution of
++@z
++
++@x [23] l.485
++@ @<Set |p->table[2]|, |p->table[3]|, \dots\ to convolution...@>=
++@y
++@ @<Set \9{p}|p->table[2]|, |p->table[3]|, \dots\ to convolution...@>=
++@z
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 49eea27..867de48 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -185,6 +185,16 @@ static Vertex* make_xor(
+   Vertex *u,Vertex *v)
+ @z
+ 
++@x [17] l.537
++@<Create gates for the general logic operation@>;
++@<Create gates for the conditional load operations@>;
++@<Create gates for the arithmetic operations@>;
++@y
++@<Create gates for the \9{3}general logic operation@>;
++@<Create gates for the \9{2}conditional load operations@>;
++@<Create gates for the \9{1}arithmetic operations@>;
++@z
++
+ @x [19] l.558
+ @ @d first_of(n,t) new_vert(t);@+for (k=1;k<n;k++)@+new_vert(t);
+ @y
+@@ -197,6 +207,92 @@ strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');
+ strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');@/
+ @z
+ 
++@x [22] l.624
++@<Set |old_dest| to the present value of the destination register@>;
++@<Set |old_src| to the present value of the source register@>;
++@<Set |inc_dest| to |old_dest| plus \.{SRC}@>;
++@y
++@<Set \9{o}|old_dest| to the present value of the destination register@>;
++@<Set \9{o}|old_src| to the present value of the source register@>;
++@<Set \9{i}|inc_dest| to |old_dest| plus \.{SRC}@>;
++@z
++
++@x [23] l.639
++@<Set |old_dest| to the present value of the destination register@>=
++@y
++@<Set \9{o}|old_dest| to the present value of the destination register@>=
++@z
++
++@x [24] l.650
++@ @<Set |old_src| to the present value of the source register@>=
++@y
++@ @<Set \9{o}|old_src| to the present value of the source register@>=
++@z
++
++@x [26] l.673
++@ @<Create gates for the general logic operation@>=
++@y
++@ @<Create gates for the \9{3}general logic operation@>=
++@z
++
++@x [27] l.682
++@ @<Create gates for the conditional load operations@>=
++@y
++@ @<Create gates for the \9{2}conditional load operations@>=
++@z
++
++@x [29] l.706
++@<Create gates for the |next_loc| and |next_next_loc| bits@>;
++@<Create gates for the |result| bits@>;
++@<Create gates for the new values of registers 1 to |regs|@>;
++@<Create gates for the new values of \.S, \.N, \.K, and \.V@>;
++@<Create gates for the new values of the program register and |extra|@>;
++@<Create gates for the new values of register 0
++@y
++@<Create gates for the \9{5}|next_loc| and |next_next_loc| bits@>;
++@<Create gates for the \9{6}|result| bits@>;
++@<Create gates for the \9{4}new values of \9{2}registers 1 to |regs|@>;
++@<Create gates for the \9{4}new values of \9{3}\.S, \.N, \.K, and \.V@>;
++@<Create gates for the \9{4}new values of \9{4}the program register and |extra|@>;
++@<Create gates for the \9{4}new values of \9{1}register 0
++@z
++
++@x [30] l.714
++@ @<Create gates for the |next_loc|...@>=
++@y
++@ @<Create gates for the \9{5}|next_loc|...@>=
++@z
++
++@x [31] l.722
++@ @<Create gates for the |result| bits@>=
++@y
++@ @<Create gates for the \9{6}|result| bits@>=
++@z
++
++@x [32] l.754
++@<Create gates for the new values of the program reg...@>=
++@y
++@<Create gates for the \9{4}new values of \9{4}the program reg...@>=
++@z
++
++@x [34] l.768
++@ @<Create gates for the new values of registers 1 to |regs|@>=
++@y
++@ @<Create gates for the \9{4}new values of \9{2}registers 1 to |regs|@>=
++@z
++
++@x [35] l.778
++@ @<Create gates for the new values of \.S, \.N, \.K, and \.V@>=
++@y
++@ @<Create gates for the \9{4}new values of \9{3}\.S, \.N, \.K, and \.V@>=
++@z
++
++@x [36] l.822
++@<Create gates for the new values of register 0...@>=
++@y
++@<Create gates for the \9{4}new values of \9{1}register 0...@>=
++@z
++
+ @x [38] l.876
+ static void make_adder(n,x,y,z,carry,add)
+   unsigned long n; /* number of bits */
+@@ -219,6 +315,18 @@ static void make_adder(
+   for (;k<(long)n;k++) {
+ @z
+ 
++@x [39] l.909
++@<Set |inc_dest| to |old_dest| plus \.{SRC}@>=
++@y
++@<Set \9{i}|inc_dest| to |old_dest| plus \.{SRC}@>=
++@z
++
++@x [41] l.931
++@<Create gates for the arithmetic operations@>=
++@y
++@<Create gates for the \9{1}arithmetic operations@>=
++@z
++
+ @x [43] l.992
+ long run_risc(g,rom,size,trace_regs)
+   Graph *g; /* graph output by |risc| */
+@@ -297,6 +405,42 @@ static Graph* reduce(
+   Graph *g)
+ @z
+ 
++@x [53] l.1200
++    case NOT:@<Try to reduce an inverter, then |goto done|@>;
++    case AND:@<Try to reduce an {\sc AND} gate@>;@+goto test_single_arg;
++    case OR:@<Try to reduce an {\sc OR} gate@>;@+goto test_single_arg;
++    case XOR:@<Try to reduce an {\sc EXCLUSIVE-OR} gate@>;
++@y
++    case NOT:@<Try to reduce an \9{i}inverter, then |goto done|@>;
++    case AND:@<Try to reduce an \9{a}{\sc AND} gate@>;@+goto test_single_arg;
++    case OR:@<Try to reduce an \9{o}{\sc OR} gate@>;@+goto test_single_arg;
++    case XOR:@<Try to reduce an \9{e}{\sc EXCLUSIVE-OR} gate@>;
++@z
++
++@x [54] l.1216
++@ @<Try to reduce an inverter...@>=
++@y
++@ @<Try to reduce an \9{i}inverter...@>=
++@z
++
++@x [55] l.1228
++@ @<Try to reduce an {\sc AND} gate@>=
++@y
++@ @<Try to reduce an \9{a}{\sc AND} gate@>=
++@z
++
++@x [56] l.1246
++@ @<Try to reduce an {\sc OR} gate@>=
++@y
++@ @<Try to reduce an \9{o}{\sc OR} gate@>=
++@z
++
++@x [57] l.1264
++@ @<Try to reduce an {\sc EXCLUSIVE-OR} gate@>=
++@y
++@ @<Try to reduce an \9{e}{\sc EXCLUSIVE-OR} gate@>=
++@z
++
+ @x [61] l.1365
+   do@+{
+ @y
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 0643dfa..1ce5f15 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -23,6 +23,18 @@ int main()
+ int main(void)
+ @z
+ 
++@x [2] l.37
++  @<Test the |gb_open| routine; exit if there's trouble@>;
++@y
++  @<Test the \9{o}|gb_open| routine; exit if there's trouble@>;
++@z
++
++@x [2] l.39
++  @<Test the |gb_close| routine; exit if there's trouble@>;
++@y
++  @<Test the \9{c}|gb_close| routine; exit if there's trouble@>;
++@z
++
+ @x [4] l.70
+ @<Header files to include@>@;
+ @y
+@@ -224,6 +236,12 @@ char *gb_string(
+   char c) /* character following the string */
+ @z
+ 
++@x [28] l.420
++@<Test the |gb_open| routine...@>=
++@y
++@<Test the \9{o}|gb_open| routine...@>=
++@z
++
+ @x [29] l.424
+ @ @d gb_raw_open gb_r_open /* abbreviation for Procrustean external linkage */
+ 
+@@ -256,6 +274,12 @@ long gb_open(
+     char *f)
+ @z
+ 
++@x [38] l.531
++@<Test the |gb_close| routine; exit if there's trouble@>=
++@y
++@<Test the \9{c}|gb_close| routine; exit if there's trouble@>=
++@z
++
+ @x [39] l.536
+ long gb_close()
+ @y
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 4c081d3..8fe02e5 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -75,6 +75,12 @@ long *lisa(
+     /* where to allocate the matrix that will be output */
+ @z
+ 
++@x [6] l.159
++  @<Read \.{lisa.dat} and map it to the desired output form@>;
++@y
++  @<Read \9{l}\.{lisa.dat} and map it to the desired output form@>;
++@z
++
+ @x [8] l.183
+ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    m,n,d,m0,m1,n0,n1,d0,d1);
+@@ -84,6 +90,12 @@ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    d0&0xffffffff,d1&0xffffffff);
+ @z
+ 
++@x [10] l.190
++@ @<Read \.{lisa.dat} and map it to the desired output form@>=
++@y
++@ @<Read \9{l}\.{lisa.dat} and map it to the desired output form@>=
++@z
++
+ @x [12] l.229
+ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ @y
+@@ -116,6 +128,12 @@ for (k=kap=0; k<(long)m;k++) {
+   do {@+register long nk; /* giant row where something new might happen */
+ @z
+ 
++@x [13] l.255
++      @<Read a row of input into |in_row|@>;
++@y
++      @<Read \9{a}a row of input into |in_row|@>;
++@z
++
+ @x [13] l.263
+   }@+while (kap<next_kap);
+ @y
+@@ -179,6 +197,12 @@ for (i=0;i<m0;i++)
+ for (i=0;i<(long)m0;i++)
+ @z
+ 
++@x [21] l.344
++@ @<Read a row of input into |in_row|@>=
++@y
++@ @<Read \9{a}a row of input into |in_row|@>=
++@z
++
+ @x [23] l.405
+ @p Graph *plane_lisa(m,n,d,m0,m1,n0,n1,d0,d1)
+   unsigned long m,n; /* number of rows and columns desired */
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index d7265a5..ea6dd64 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -37,6 +37,12 @@ Graph *raman(
+     /* if nonzero, multiple edges and self-loops won't occur */
+ @z
+ 
++@x [4] l.101
++  @<Compute |p+1| generators that will define the graph's edges@>;
++@y
++  @<Compute \9{p}|p+1| generators that will define the graph's edges@>;
++@z
++
+ @x [16] l.283
+     else sprintf(name_buf,"{%ld,%ld}",a,aa);
+ @y
+@@ -53,6 +59,12 @@ Graph *raman(
+           (unsigned long)c&0x1fff);
+ @z
+ 
++@x [19] l.422
++@<Compute |p+1| generators...@>=
++@y
++@<Compute \9{p}|p+1| generators...@>=
++@z
++
+ @x [22] l.482
+ static void deposit(a,b,c,d)
+   long a,b,c,d; /* a solution to $a^2+b^2+c^2+d^2=p$ */
+@@ -61,6 +73,18 @@ static void deposit(
+   long a,long b,long c,long d) /* a solution to $a^2+b^2+c^2+d^2=p$ */
+ @z
+ 
++@x [27] l.673
++  @<Set |u| to the vertex whose label is |(a,b;c,d)|@>;
++@y
++  @<Set \9{u}|u| to the vertex whose label is |(a,b;c,d)|@>;
++@z
++
++@x [29] l.682
++@ @<Set |u|...@>=
++@y
++@ @<Set \9{u}|u|...@>=
++@z
++
+ @x [30] l.698
+ static long lin_frac(a,k)
+   long a; /* the number being transformed; $q$ represents $\infty$ */
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 1d50605..393e7f2 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -184,3 +184,15 @@ long random_lengths(
+ @y
+   magic_entry *dist_table=0; /* alias table for nonuniform generation */
+ @z
++
++@x [24] l.538
++  @<Check |dist| for validity, and set up the |dist_table|@>;
++@y
++  @<Check \9{d}|dist| for validity, and set up the |dist_table|@>;
++@z
++
++@x [26] l.549
++@ @<Check |dist| for validity...@>=
++@y
++@ @<Check \9{d}|dist| for validity...@>=
++@z
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 745b9d6..ec855ae 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -34,6 +34,12 @@ Graph *restore_graph(
+   char *f) /* the file name */
+ @z
+ 
++@x [6] l.205
++@<Fill in |g->n|, |g->m|, and |g|'s utility fields@>;
++@y
++@<Fill in \9{g}|g->n|, |g->m|, and |g|'s utility fields@>;
++@z
++
+ @x [7] l.225
+ static long fill_field(l,t)
+   util *l; /* location of field to be filled in */
+@@ -44,12 +50,54 @@ static long fill_field(
+   char t) /* its type code */
+ @z
+ 
++@x [7] l.237
++  case 'I': @<Fill in a numeric field@>;
++  case 'V': @<Fill in a vertex pointer@>;
++  case 'S': @<Fill in a string pointer@>;
++  case 'A': @<Fill in an arc pointer @>;
++@y
++  case 'I': @<Fill in \9{a}a numeric field@>;
++  case 'V': @<Fill in \9{a}a vertex pointer@>;
++  case 'S': @<Fill in \9{a}a string pointer@>;
++  case 'A': @<Fill in \9{a}an arc pointer @>;
++@z
++
++@x [9] l.256
++@ @<Fill in a numeric field@>=
++@y
++@ @<Fill in \9{a}a numeric field@>=
++@z
++
++@x [10] l.264
++@ @<Fill in a vertex pointer@>=
++@y
++@ @<Fill in \9{a}a vertex pointer@>=
++@z
++
++@x [11] l.273
++@ @<Fill in an arc pointer@>=
++@y
++@ @<Fill in \9{a}an arc pointer@>=
++@z
++
++@x [12] l.284
++@<Fill in a string pointer@>=
++@y
++@<Fill in \9{a}a string pointer@>=
++@z
++
+ @x [14] l.308
+ static long finish_record()
+ @y
+ static long finish_record(void)
+ @z
+ 
++@x [15] l.317
++@ @<Fill in |g->n|, |g->m|, and |g|'s utility fields@>=
++@y
++@ @<Fill in \9{g}|g->n|, |g->m|, and |g|'s utility fields@>=
++@z
++
+ @x [20] l.411
+ long save_graph(g,f)
+   Graph *g; /* graph to be saved */
+@@ -60,6 +108,18 @@ long save_graph(
+   char *f) /* name of the file to be created */
+ @z
+ 
++@x [20] l.420
++  @<Translate |g| into external format@>;
++@y
++  @<Translate \9{g}|g| into external format@>;
++@z
++
++@x [23] l.480
++@<Initialize the |blocks| array@>=
++@y
++@<Initialize the \9{b}|blocks| array@>=
++@z
++
+ @x [25] l.520
+ static void classify(l,t)
+   util *l; /* location of field to be classified */
+@@ -70,6 +130,12 @@ static void classify(
+   char t) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
+ @z
+ 
++@x [27] l.561
++  @<Initialize the |blocks| array@>;
++@y
++  @<Initialize the \9{b}|blocks| array@>;
++@z
++
+ @x [27] l.569
+   do@+{@+activity=0;
+ @y
+@@ -82,6 +148,12 @@ static void classify(
+   } while (activity);
+ @z
+ 
++@x [30] l.615
++@<Translate |g| into external format@>=
++@y
++@<Translate \9{g}|g| into external format@>=
++@z
++
+ @x [35] l.674
+ static void flushout() /* output the buffer to |save_file| */
+ @y
+@@ -131,3 +203,33 @@ static void translate_field(
+     @=/* fall through */@>@;
+  case 'Z': buf_ptr--; /* forget spurious comma */
+ @z
++
++@x [39] l.770
++  @<Translate a pointer variable@>;
++@y
++  @<Translate \9{a}a pointer variable@>;
++@z
++
++@x [40] l.774
++@ @<Translate a pointer variable@>=
++@y
++@ @<Translate \9{a}a pointer variable@>=
++@z
++
++@x [42] l.813
++      @<Translate all |Vertex| records in |cur_block|@>;
++@y
++      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
++@z
++
++@x [42] l.816
++      @<Translate all |Vertex| records in |cur_block|@>;
++@y
++      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
++@z
++
++@x [43] l.819
++@ @<Translate all |Vertex| records in |cur_block|@>=
++@y
++@ @<Translate \9{a}all |Vertex| records in |cur_block|@>=
++@z
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index acb2472..94f341f 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -40,3 +40,47 @@ void gb_linksort(l)
+ void gb_linksort(
+   node *l)
+ @z
++
++@x [5] l.101
++  @<Partition the |alt_sorted| lists into 256 random sublists |gb_sorted|@>;
++  @<Partition the |gb_sorted| lists into |alt_sorted| by low-order byte@>;
++  @<Partition the |alt_sorted| lists into |gb_sorted| by second-lowest byte@>;
++  @<Partition the |gb_sorted| lists into |alt_sorted| by second-highest byte@>;
++  @<Partition the |alt_sorted| lists into |gb_sorted| by high-order byte@>;
++@y
++  @<Partition the \9{a}|alt_sorted| lists into 256 random sublists |gb_sorted|@>;
++  @<Partition the \9{g}|gb_sorted| lists into |alt_sorted| by low-order byte@>;
++  @<Partition the \9{a}|alt_sorted| lists into |gb_sorted| by second-lowest byte@>;
++  @<Partition the \9{g}|gb_sorted| lists into |alt_sorted| by second-highest byte@>;
++  @<Partition the \9{a}|alt_sorted| lists into |gb_sorted| by high-order byte@>;
++@z
++
++@x [7] l.118
++@ @<Partition the |alt_sorted| lists into 256 random sublists |gb_sorted|@>=
++@y
++@ @<Partition the \9{a}|alt_sorted| lists into 256 random sublists |gb_sorted|@>=
++@z
++
++@x [8] l.129
++@ @<Partition the |gb_sorted| lists into |alt_sorted| by low-order byte@>=
++@y
++@ @<Partition the \9{g}|gb_sorted| lists into |alt_sorted| by low-order byte@>=
++@z
++
++@x [9] l.144
++@<Partition the |alt_sorted| lists into |gb_sorted| by second-lowest byte@>=
++@y
++@<Partition the \9{a}|alt_sorted| lists into |gb_sorted| by second-lowest byte@>=
++@z
++
++@x [10] l.155
++@ @<Partition the |gb_sorted| lists into |alt_sorted| by second-highest byte@>=
++@y
++@ @<Partition the \9{g}|gb_sorted| lists into |alt_sorted| by second-highest byte@>=
++@z
++
++@x [11] l.171
++@<Partition the |alt_sorted| lists into |gb_sorted| by high-order byte@>=
++@y
++@<Partition the \9{a}|alt_sorted| lists into |gb_sorted| by high-order byte@>=
++@z
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 1ace8e5..bef5869 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -15,6 +15,18 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [5] l.175
++@<Execute |jar_pr(g)| with binary heaps as the priority queue algorithm@>;
++@y
++@<Execute \9{j}|jar_pr(g)| with \9{b}binary heaps as the priority queue algorithm@>;
++@z
++
++@x [5] l.179
++@<Execute |jar_pr(g)| with Fibonacci heaps as
++@y
++@<Execute \9{j}|jar_pr(g)| with \9{f}Fibonacci heaps as
++@z
++
+ @x [7] l.197
+ report(u,v,l)
+   Vertex *u,*v; /* adjacent vertices in the minimum spanning tree */
+@@ -112,6 +124,12 @@ Vertex *del_heap(void)
+   register long j; /* child of that hole */
+ @z
+ 
++@x [28] l.709
++@<Execute |jar_pr(g)| with binary heaps as the priority queue algorithm@>=
++@y
++@<Execute \9{j}|jar_pr(g)| with \9{b}binary heaps as the priority queue algorithm@>=
++@z
++
+ @x [30] l.797
+ void init_F_heap(d)
+   long d;
+@@ -160,6 +178,12 @@ Vertex *del_F_heap(void)
+     } while (h<r);
+ @z
+ 
++@x [42] l.1064
++@ @<Execute |jar_pr(g)| with Fibonacci heaps...@>=
++@y
++@ @<Execute \9{j}|jar_pr(g)| with \9{f}Fibonacci heaps...@>=
++@z
++
+ @x [45] l.1155
+ qunite(m,q,mm,qq,h)
+   register long m,mm; /* number of nodes in the forests */
+@@ -174,12 +198,48 @@ void qunite(
+   Arc *h) /* |h->qsib| will get the result */
+ @z
+ 
++@x [45] l.1171
++    }@+else @<Combine |q| and |qq| into a ``carry'' tree, and continue
++@y
++    }@+else @<Combine \9{q}|q| and |qq| into a ``carry'' tree, and continue
++@z
++
++@x [46] l.1185
++@<Combine |q| and |qq| into a ``carry'' tree, and continue
++@y
++@<Combine \9{q}|q| and |qq| into a ``carry'' tree, and continue
++@z
++
+ @x [46] l.1189
+   register Arc *r,*rr; /* remainders of the input lists */
+ @y
+   register Arc *r=0,*rr=0; /* remainders of the input lists */
+ @z
+ 
++@x [46] l.1195
++    if ((m&k)==0) @<Merge |qq| into |c| and advance |qq|@>@;
++@y
++    if ((m&k)==0) @<Merge \9{2}|qq| into |c| and advance |qq|@>@;
++@z
++
++@x [46] l.1197
++      @<Merge |q| into |c| and advance |q|@>;
++@y
++      @<Merge \9{1}|q| into |c| and advance |q|@>;
++@z
++
++@x [48] l.1224
++@<Merge |q| into |c| and advance |q|@>=
++@y
++@<Merge \9{1}|q| into |c| and advance |q|@>=
++@z
++
++@x [49] l.1238
++@ @<Merge |qq| into |c| and advance |qq|@>=
++@y
++@ @<Merge \9{2}|qq| into |c| and advance |qq|@>=
++@z
++
+ @x [50] l.1257
+ qenque(h,a)
+   Arc *h; /* header of a binomial queue */
+@@ -251,6 +311,12 @@ do {a=qdel_min(v->pq);
+ } while (u==v); /* repeat until a new fragment is found */
+ @z
+ 
++@x [64] l.1583
++@<Execute Prim's algorithm on the reduced matrix@>;
++@y
++@<Execute \9{p}Prim's algorithm on the reduced matrix@>;
++@z
++
+ @x [67] l.1614
+ void note_edge(a)
+   Arc *a;
+@@ -258,3 +324,9 @@ void note_edge(a)
+ void note_edge(
+   Arc *a)
+ @z
++
++@x [69] l.1643
++@<Execute Prim's algorithm on the reduced matrix@>=
++@y
++@<Execute \9{p}Prim's algorithm on the reduced matrix@>=
++@z
+diff --git a/PROTOTYPES/roget_components.ch b/PROTOTYPES/roget_components.ch
+index 5742396..22537c7 100644
+--- a/PROTOTYPES/roget_components.ch
++++ b/PROTOTYPES/roget_components.ch
+@@ -14,3 +14,27 @@ int main(
+   int argc, /* the number of command-line arguments */
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
++
++@x [2] l.63
++  @<Perform Tarjan's algorithm on |g|@>;
++@y
++  @<Perform \9{t}Tarjan's algorithm on |g|@>;
++@z
++
++@x [10] l.228
++@<Perform Tarjan's algorithm on |g|@>=
++@y
++@<Perform \9{t}Tarjan's algorithm on |g|@>=
++@z
++
++@x [10] l.232
++    @<Perform a depth-first search with |vv| as the root, finding the
++@y
++    @<Perform \9{a}a depth-first search with |vv| as the root, finding the
++@z
++
++@x [13] l.254
++@<Perform a depth-first search with |vv| as the root...@>=
++@y
++@<Perform \9{a}a depth-first search with |vv| as the root...@>=
++@z
+-- 
+2.46.0
+
