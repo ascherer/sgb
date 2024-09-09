@@ -64,6 +64,7 @@ Patch31: 0031-Fix-line-break-with-cweave-f.patch
 Patch32: 0032-Issue-14-Pointer-to-function.patch
 Patch33: 0033-List-changed-sections-in-Editor-s-Note.patch
 Patch34: 0034-Compile-SGB-with-GCC-14.patch
+Patch35: 0035-Fix-sorting-order-in-the-index.patch
 %endif
 
 %description
