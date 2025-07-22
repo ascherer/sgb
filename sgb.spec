@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 33
+Release: 35
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
