@@ -1,7 +1,7 @@
-From 1d501975b944a166f35a48f96611213d7f5384ab Mon Sep 17 00:00:00 2001
+From 8992bf129e4535fd7e0866a360aed51eb0530022 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Mon, 12 Dec 2016 17:47:24 +0100
-Subject: [PATCH 09/35] Update PROTOTYPES documentation.
+Subject: [PATCH 09/36] Update PROTOTYPES documentation.
 
 ---
  PROTOTYPES/README.PROTOTYPES | 13 +++++--------
@@ -43,5 +43,5 @@ index 3f871b4..1b69d1a 100644
 +ideas for further improvements, contact the author of this contribution
 +via the Github project (https://github.com/ascherer/sgb).
 -- 
-2.46.0
+2.50.1
 

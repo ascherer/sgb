@@ -1,0 +1,43 @@
+From f5528f4cdfb5aeb3d87b68cb4796dd794646ed58 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Tue, 5 Aug 2025 11:49:22 +0200
+Subject: [PATCH 36/36] Issue #10: Make use of parameter 'd' in MILES_SPAN.
+
+---
+ PROTOTYPES/miles_span.ch | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index bef5869..a27bb99 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -72,12 +72,14 @@ unsigned long jar_pr(
+ @x [24] l.610
+ void init_heap(d) /* makes the heap empty */
+   long d;
+-{
+ @y
+ void init_heap(
+   long d) /* makes the heap empty */
+-{
+-  (void) d;
++@z
++@x [24] l.614
++  hsize=0;
++@y
++  hsize=d;
+ @z
+ 
+ @x [25] l.624
+@@ -137,7 +139,7 @@ void init_F_heap(d)
+ @y
+ void init_F_heap(
+   long d)
+-{@+(void)d;F_heap=NULL;@+}
++{@+F_heap=(void*)d;@+}
+ @z
+ 
+ @x [33] l.860
+-- 
+2.50.1
+

@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 35
+Release: 36
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -65,6 +65,7 @@ Patch32: 0032-Issue-14-Pointer-to-function.patch
 Patch33: 0033-List-changed-sections-in-Editor-s-Note.patch
 Patch34: 0034-Compile-SGB-with-GCC-14.patch
 Patch35: 0035-Fix-sorting-order-in-the-index.patch
+Patch36: 0036-Issue-10-Make-use-of-parameter-d-in-MILES_SPAN.patch
 %endif
 
 %description
