@@ -1,7 +1,7 @@
-From 990469309c655617054719e2cfe37aecd3cc4763 Mon Sep 17 00:00:00 2001
+From 17a0bdf901f370ceeb336bf093d1dabb83d5d9a0 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 May 2022 22:02:40 +0200
-Subject: [PATCH 14/36] Purge '@+' control codes.
+Subject: [PATCH 14/37] Purge '@+' control codes.
 
 Starting with CWEB 3.0, 'do ... while' loops are formatted in the
 desired compact form by default.

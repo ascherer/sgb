@@ -1,7 +1,7 @@
-From 6ca6c40ca02833a723887fe36ce25ee5a3976195 Mon Sep 17 00:00:00 2001
+From a3ce88a48eb50cc9e62f5d7c52d34e30299ceec2 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 26 Jun 2024 09:50:10 +0200
-Subject: [PATCH 31/36] Fix line break with 'cweave -f'.
+Subject: [PATCH 31/37] Fix line break with 'cweave -f'.
 
 ---
  PROTOTYPES/gb_gates.ch | 2 +-
