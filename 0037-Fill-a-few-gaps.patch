@@ -1,0 +1,167 @@
+From 2232815fe808b41ca18d4b5142ebe9a4bf8b4dec Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Fri, 15 Aug 2025 19:25:30 +0200
+Subject: [PATCH 37/37] Fill a few gaps.
+
+The empty sections call be refilled with appropriate code snippets.
+---
+ PROTOTYPES/gb_books.ch | 14 +++++++++++++-
+ PROTOTYPES/gb_gates.ch |  3 ++-
+ PROTOTYPES/gb_lisa.ch  | 38 +++++++++++++++++++++++++++++++++++++-
+ PROTOTYPES/gb_plane.ch | 24 +++++++++++++++++++++++-
+ 4 files changed, 75 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 01b6ebe..fbb6c82 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -121,6 +121,15 @@ Vertex *chap_base;
+ Vertex *chap_base=0;
+ @z
+ 
++@x [22] l.439
++We insert a reference to the first chapter that generated each edge, in
++utility field |chap_no| of the corresponding |Arc| record.
++
++@d chap_no a.I /* utility field |a| holds a chapter number */
++
++@y
++@z
++
+ @x [22] l.455
+       do@+{@+
+ @y
+@@ -137,7 +146,10 @@ Vertex *chap_base=0;
+ @ @(gb_books.h@>=
+ #define chap_no @[a.I@] /* utility field definition in the header file */
+ @y
+-@ (This section remains empty for historic reasons.)
++@ We insert a reference to the first chapter that generated each edge, in
++utility field |chap_no| of the corresponding |Arc| record.
++
++@d chap_no a.I /* utility field |a| holds a chapter number */
+ @z
+ 
+ @x [27] l.499
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 867de48..217bf08 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -364,6 +364,7 @@ long run_risc(
+ @z
+ 
+ @x [49] l.1094
++@d bit z.I /* field containing the constant value of a |'C'| gate */
+ @d print_gates p_gates /* abbreviation makes chopped-off name unique */
+ @y
+ @z
+@@ -394,7 +395,7 @@ void print_gates(
+ @ @(gb_gates.h@>=
+ #define bit @t\quad@> z.I
+ @y
+-@ (This section remains empty for historic reasons.)
++@ @d bit z.I /* field containing the constant value of a |'C'| gate */
+ @z
+ 
+ @x [51] l.1146
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 8fe02e5..97bc21e 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -203,6 +203,27 @@ for (i=0;i<(long)m0;i++)
+ @ @<Read \9{a}a row of input into |in_row|@>=
+ @z
+ 
++@x [23] l.388
++Utility fields |first_pixel| and |last_pixel| give, for each vertex,
++numbers of the form $k*n+l$, identifying the topmost/leftmost
++and bottommost/rightmost positions $[k,l]$ in the region corresponding
++to that vertex. Utility fields |matrix_rows| and |matrix_cols| in
++the |Graph| record contain the values of |m| and~|n|; thus, in particular,
++the value of |n| needed to decompose |first_pixel| and |last_pixel| into
++individual coordinates can be found in |g->matrix_cols|.
++
++The original pixel value of a vertex is placed into its |pixel_value|
++utility field.
++
++@d pixel_value x.I
++@d first_pixel y.I
++@d last_pixel z.I
++@d matrix_rows uu.I
++@d matrix_cols vv.I
++
++@y
++@z
++
+ @x [23] l.405
+ @p Graph *plane_lisa(m,n,d,m0,m1,n0,n1,d0,d1)
+   unsigned long m,n; /* number of rows and columns desired */
+@@ -232,7 +253,22 @@ for (i=0;i<(long)m0;i++)
+ #define matrix_rows @t\quad@> uu.I
+ #define matrix_cols @t\quad@> vv.I
+ @y
+-@ (This section remains empty for historic reasons.)
++@ Utility fields |first_pixel| and |last_pixel| give, for each vertex,
++numbers of the form $k*n+l$, identifying the topmost/leftmost
++and bottommost/rightmost positions $[k,l]$ in the region corresponding
++to that vertex. Utility fields |matrix_rows| and |matrix_cols| in
++the |Graph| record contain the values of |m| and~|n|; thus, in particular,
++the value of |n| needed to decompose |first_pixel| and |last_pixel| into
++individual coordinates can be found in |g->matrix_cols|.
++
++The original pixel value of a vertex is placed into its |pixel_value|
++utility field.
++
++@d pixel_value x.I
++@d first_pixel y.I
++@d last_pixel z.I
++@d matrix_rows uu.I
++@d matrix_cols vv.I
+ @z
+ 
+ @x [28] l.496
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 352a400..14b6de6 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -63,6 +63,21 @@ Graph *plane(
+     /* random number seed */
+ @z
+ 
++@x [6] l.118
++@ The coordinates are placed into utility fields |x_coord| and |y_coord|.
++A random ID number is also stored in utility field~|z_coord|; this number is
++used by the |delaunay| subroutine to break ties when points are equal or
++collinear or cocircular. No two vertices have the same ID number.
++(The header file \.{gb\_miles.h} defines |x_coord|, |y_coord|, and
++|index_no| to be |x.I|, |y.I|, and |z.I| respectively.)
++
++@d z_coord z.I
++
++@<Set up a graph with |n| uniform...@>=
++@y
++@ @<Set up a graph with |n| uniform...@>=
++@z
++
+ @x [6] l.135
+ for (k=0,v=new_graph->vertices; k<n; k++,v++) {
+ @y
+@@ -75,7 +90,14 @@ for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
+ #define y_coord @t\quad@> y.I
+ #define z_coord @t\quad@> z.I
+ @y
+-@ (This section remains empty for historic reasons.)
++@ The coordinates are placed into utility fields |x_coord| and |y_coord|.
++A random ID number is also stored in utility field~|z_coord|; this number is
++used by the |delaunay| subroutine to break ties when points are equal or
++collinear or cocircular. No two vertices have the same ID number.
++(The header file \.{gb\_miles.h} defines |x_coord|, |y_coord|, and
++|index_no| to be |x.I|, |y.I|, and |z.I| respectively.)
++
++@d z_coord z.I
+ @z
+ 
+ @x [9] l.215
+-- 
+2.50.1
+
