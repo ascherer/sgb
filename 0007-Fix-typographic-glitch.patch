@@ -1,4 +1,4 @@
-From 1025366d72859451de4300d70d2e05b8a2562e57 Mon Sep 17 00:00:00 2001
+From d89124c74c794cfe3e76ac576d032913db2c2500 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 27 Nov 2016 16:17:57 +0100
 Subject: [PATCH 07/37] Fix typographic glitch.
@@ -23,5 +23,5 @@ index 660f56e..f570585 100644
 +unsigned long memry[memry_size]={@t\1\1@>
 +@z
 -- 
-2.50.1
+2.51.0
 

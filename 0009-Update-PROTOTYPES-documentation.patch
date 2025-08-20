@@ -1,4 +1,4 @@
-From 91707ea8d3d0f6a229f4b2b9c243ca9e71a604a6 Mon Sep 17 00:00:00 2001
+From 99369b13561749452a6d2b27b58bd9c65ab3f2f0 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Mon, 12 Dec 2016 17:47:24 +0100
 Subject: [PATCH 09/37] Update PROTOTYPES documentation.
@@ -43,5 +43,5 @@ index 3f871b4..1b69d1a 100644
 +ideas for further improvements, contact the author of this contribution
 +via the Github project (https://github.com/ascherer/sgb).
 -- 
-2.50.1
+2.51.0
 

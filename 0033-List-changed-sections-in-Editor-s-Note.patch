@@ -1,4 +1,4 @@
-From 053b94c15f6e55ccd349a84a3a6c23485c1f6dc2 Mon Sep 17 00:00:00 2001
+From 68b9b40d472cb866b0a02ad7179dfb50078d6ea4 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Jul 2024 10:16:57 +0200
 Subject: [PATCH 33/37] List changed sections in Editor's Note.
@@ -43,5 +43,5 @@ index 91d3aef..a6c3256 100644
 +\else\closein\testread % Second run
 +\fi
 -- 
-2.50.1
+2.51.0
 

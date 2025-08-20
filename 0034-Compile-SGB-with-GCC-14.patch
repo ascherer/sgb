@@ -1,4 +1,4 @@
-From 0bb9ff2257fe28dd004fbd6d4e0e05763825b0f5 Mon Sep 17 00:00:00 2001
+From b4f2b1023dd57a4c7f07e45c1945e53e3705cdb5 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 17 Jul 2024 09:01:00 +0200
 Subject: [PATCH 34/37] Compile SGB with GCC-14.
@@ -28,5 +28,5 @@ index 382e7cb..1864d16 100644
  
  @x [29] l.551
 -- 
-2.50.1
+2.51.0
 
