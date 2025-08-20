@@ -1,4 +1,4 @@
-From 068f5b4a60b2b4dbbee39b31f615b43cface84b3 Mon Sep 17 00:00:00 2001
+From 07a067afbb809c9b40200f0a6704d6412da3012c Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 8 Nov 2023 12:04:53 +0100
 Subject: [PATCH 23/37] Move C standard headers.
@@ -189,7 +189,7 @@ index f134995..580a126 100644
  
  @x l.149
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index c839e95..54277be 100644
+index 4103126..5cf81ce 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -19,6 +19,7 @@ extern Graph *miles(unsigned long,long,long,long,@|
@@ -267,5 +267,5 @@ index 4996616..f04eca8 100644
  @t\4@>int main()
  @y
 -- 
-2.50.1
+2.51.0
 

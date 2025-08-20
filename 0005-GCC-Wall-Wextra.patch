@@ -1,4 +1,4 @@
-From 2ff4895e73487b6d2b58cd5bdcb9244e3add4157 Mon Sep 17 00:00:00 2001
+From 79b265c45bcdecd15d31c275ab7228e54f8c5f3d Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Tue, 8 Sep 2015 13:39:18 +0200
 Subject: [PATCH 05/37] GCC -Wall -Wextra.
@@ -1016,5 +1016,5 @@ index eebfdcd..660f56e 100644
 +  (void) argv;
  @z
 -- 
-2.50.1
+2.51.0
 

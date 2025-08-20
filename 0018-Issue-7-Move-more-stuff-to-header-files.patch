@@ -1,4 +1,4 @@
-From ec75775e5deeb13d09fa43d8d7e57b382fd925f1 Mon Sep 17 00:00:00 2001
+From 4399fb42396f0d8473cd51db5e10114b3eb5e77e Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 6 Apr 2023 19:55:32 +0200
 Subject: [PATCH 18/37] Issue #7: Move more stuff to header files.
@@ -28,7 +28,7 @@ forward declarations is left as an exercise to the reader.
  PROTOTYPES/gb_graph.ch    | 68 ++++++++++++++++++++++++++++++-
  PROTOTYPES/gb_io.ch       | 55 +++++++++++++++++++++++--
  PROTOTYPES/gb_lisa.ch     | 38 ++++++++++++++++-
- PROTOTYPES/gb_miles.ch    | 35 ++++++++++++++++
+ PROTOTYPES/gb_miles.ch    | 31 ++++++++++++++
  PROTOTYPES/gb_plane.ch    | 38 ++++++++++++++++-
  PROTOTYPES/gb_raman.ch    | 10 +++++
  PROTOTYPES/gb_rand.ch     | 20 +++++++++
@@ -37,7 +37,7 @@ forward declarations is left as an exercise to the reader.
  PROTOTYPES/gb_sort.ch     | 24 ++++++++++-
  PROTOTYPES/gb_words.ch    | 30 ++++++++++++++
  PROTOTYPES/test_sample.ch | 14 +++++++
- 19 files changed, 722 insertions(+), 14 deletions(-)
+ 19 files changed, 718 insertions(+), 14 deletions(-)
 
 diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
 index e42ed98..f6cfe26 100644
@@ -885,7 +885,7 @@ index 68b4630..161cf77 100644
      if (k<m) {
  @y
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 5001e35..6031e01 100644
+index 5001e35..20d64af 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -1,10 +1,31 @@
@@ -920,7 +920,7 @@ index 5001e35..6031e01 100644
  @x l.116
  Graph *miles(n,north_weight,west_weight,pop_weight,
      max_distance,max_degree,seed)
-@@ -27,6 +48,18 @@ Graph *miles(
+@@ -27,6 +48,14 @@ Graph *miles(
    long seed) /* random number seed */
  @z
  
@@ -928,18 +928,14 @@ index 5001e35..6031e01 100644
 +@d x_coord x.I
 +@d y_coord y.I
 +@d index_no z.I
-+@y
-+@z
-+
-+@x l.324
-+#define people @t\quad@> w.I
++@d people w.I
 +@y
 +@z
 +
  @x l.366
        if (j>max_distance)
  @y
-@@ -51,4 +84,6 @@ Graph *miles(
+@@ -51,4 +80,6 @@ Graph *miles(
  extern long miles_distance();
  @y
  extern long miles_distance(Vertex *,Vertex *);
@@ -1285,5 +1281,5 @@ index f04eca8..634dd62 100644
  if (i=random_lengths(g,0L,10L,12L,dst,2L))
  @y
 -- 
-2.50.1
+2.51.0
 

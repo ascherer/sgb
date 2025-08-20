@@ -1,4 +1,4 @@
-From 9a04181768329661231754853fd54bfb472d0670 Mon Sep 17 00:00:00 2001
+From 3bfd85e526e4343236c1acc31acf65c65f628ef2 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Apr 2023 17:04:22 +0200
 Subject: [PATCH 21/37] Issue #8: Fix overfull \hboxes.
@@ -48,10 +48,10 @@ index 566c8b9..d5c6f69 100644
  extern char lisa_id[];
  @y
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 1d89b8d..71f4b77 100644
+index 9dc3fd6..f4d1c5f 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
-@@ -71,6 +71,14 @@ Graph *miles(
+@@ -67,6 +67,14 @@ Graph *miles(
      if (++j>(long)max_degree)
  @z
  
@@ -67,5 +67,5 @@ index 1d89b8d..71f4b77 100644
  @p long miles_distance(u,v)
    Vertex *u,*v;
 -- 
-2.50.1
+2.51.0
 

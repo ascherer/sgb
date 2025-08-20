@@ -1,6 +1,6 @@
-From 88b5e2f01d404d948c0ce0250e3a1a7ad2a91f43 Mon Sep 17 00:00:00 2001
+From 57eeb433b138a0c3f87a7da19da56cd96f25d6c0 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Tue, 5 Aug 2025 12:29:26 +0200
+Date: Wed, 20 Aug 2025 18:38:54 +0200
 Subject: [PATCH 01/37] sgb-2:20210130 base
 
 ---
@@ -41586,5 +41586,5 @@ index 0000000..8bd70a6
 +zowie 4
 +* End of file "words.dat"
 -- 
-2.50.1
+2.51.0
 

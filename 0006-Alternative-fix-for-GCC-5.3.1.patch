@@ -1,4 +1,4 @@
-From d9d98cffe74ea949192e000789e112a916478725 Mon Sep 17 00:00:00 2001
+From 8161c13a0c2e81a521e5e26e1276d5ccbb49779c Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 24 May 2016 17:07:54 +0200
 Subject: [PATCH 06/37] Alternative fix for GCC 5.3.1.
@@ -58,5 +58,5 @@ index 9a32988..79b2929 100644
  
  @x l.549
 -- 
-2.50.1
+2.51.0
 

@@ -1,4 +1,4 @@
-From dd10dc6aaafb781f5bf4dc12da39fd6360297559 Mon Sep 17 00:00:00 2001
+From b1ca4f8f8a244b5887269b76a2d017bece633eb4 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 9 Sep 2024 19:45:08 +0200
 Subject: [PATCH 35/37] Fix sorting order in the index.
@@ -960,5 +960,5 @@ index 5742396..22537c7 100644
 +@<Perform \9{a}a depth-first search with |vv| as the root...@>=
 +@z
 -- 
-2.50.1
+2.51.0
 

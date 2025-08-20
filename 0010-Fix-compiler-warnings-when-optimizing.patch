@@ -1,4 +1,4 @@
-From 14e873676759e11415f672b7f827229f65278e70 Mon Sep 17 00:00:00 2001
+From 6c1ce26cb99524ecd244e86f769dd9007e344665 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 10 Jan 2017 10:19:52 +0100
 Subject: [PATCH 10/37] Fix compiler warnings when optimizing.
@@ -92,5 +92,5 @@ index 7cdc564..0d9e096 100644
  qenque(h,a)
    Arc *h; /* header of a binomial queue */
 -- 
-2.50.1
+2.51.0
 

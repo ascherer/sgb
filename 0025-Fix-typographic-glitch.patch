@@ -1,4 +1,4 @@
-From c0704df817b7c9d343fa2a6c46fcf2ba30ba4f59 Mon Sep 17 00:00:00 2001
+From d81d66b44d5dfcf22dbd1f5c16e5fe35a2bab4a0 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 24 Jan 2024 10:06:14 +0100
 Subject: [PATCH 25/37] Fix typographic glitch.
@@ -25,5 +25,5 @@ index 66aeae6..57d634f 100644
  static void make_adder(n,x,y,z,carry,add)
    unsigned long n; /* number of bits */
 -- 
-2.50.1
+2.51.0
 
