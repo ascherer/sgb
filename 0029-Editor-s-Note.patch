@@ -1,4 +1,4 @@
-From 9af6b816e3afa6acc042bdc063b677f3b1d7364c Mon Sep 17 00:00:00 2001
+From dda65296368ea1f73b2b3c49ca40844e7a6647b2 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 21 Jun 2024 17:36:55 +0200
 Subject: [PATCH 29/37] Editor's Note.
@@ -37,5 +37,5 @@ index 3292cc9..91d3aef 100644
  \def\prerequisite#1{\def\startsection{\noindent
      Important: Before reading {\sc\title},
 -- 
-2.50.1
+2.51.0
 

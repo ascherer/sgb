@@ -1,4 +1,4 @@
-From 601eabc00b3dbd2a890e9784b5ff912e8a696fd7 Mon Sep 17 00:00:00 2001
+From 8a7c22ec46b3dc66c3511e3b00de40e7cf030aab Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 10:32:28 +0200
 Subject: [PATCH 28/37] Shift TOC to front of PDF.
@@ -255,7 +255,7 @@ index 0608708..4c081d3 100644
  @d plane_lisa p_lisa /* abbreviation for Procrustean external linkage */
  
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 9ec8d97..fb59a25 100644
+index 08cef6c..1a47fbe 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -1,3 +1,10 @@
@@ -510,5 +510,5 @@ index 1a735e0..126807c 100644
  main()
  @y
 -- 
-2.50.1
+2.51.0
 

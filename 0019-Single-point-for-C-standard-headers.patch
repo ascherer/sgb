@@ -1,4 +1,4 @@
-From 9e239429a32e73af08bf93fa9bbd5bb98cf4dbdb Mon Sep 17 00:00:00 2001
+From 0942b7877f4bc255f8fd287a70b669fb7856354a Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 9 Apr 2023 12:47:47 +0200
 Subject: [PATCH 19/37] Single point for C standard headers.
@@ -233,7 +233,7 @@ index 161cf77..9722e4c 100644
  
  @x l.149
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 6031e01..8c1a9e7 100644
+index 20d64af..fa94879 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -21,7 +21,6 @@ extern Graph *miles(unsigned long,long,long,long,@|
@@ -441,5 +441,5 @@ index fa625d5..c604fd0 100644
  main()
  @y
 -- 
-2.50.1
+2.51.0
 

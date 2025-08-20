@@ -1,4 +1,4 @@
-From a15127330252cd7fe0d68de9268df9cf905a4008 Mon Sep 17 00:00:00 2001
+From fc7da187f2d477ee5f8d92217806eb5026e4505d Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 20 Apr 2023 19:58:38 +0200
 Subject: [PATCH 20/37] Reference the interfaces of the modules.
@@ -189,7 +189,7 @@ index 9722e4c..566c8b9 100644
  
  @x l.149
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 8c1a9e7..1d89b8d 100644
+index fa94879..9dc3fd6 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -20,7 +20,7 @@ extern Graph *miles(unsigned long,long,long,long,@|
@@ -305,5 +305,5 @@ index 48e6f71..0a70ab3 100644
   /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
  @z
 -- 
-2.50.1
+2.51.0
 

@@ -1,4 +1,4 @@
-From 3105c89ee5ad7bfb3075eb8a2c72db6f88421f21 Mon Sep 17 00:00:00 2001
+From c20158eb793ee15288caa6940ef333823b40852d Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
 Subject: [PATCH 22/37] Forward-declare Graph and Vertex structures.
@@ -316,7 +316,7 @@ index d5c6f69..f134995 100644
  #include "gb_lisa.h" /* we use our own interface |@(gb_lisa.h@>| first */
  @z
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 71f4b77..c839e95 100644
+index f4d1c5f..4103126 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -3,7 +3,8 @@ extern Graph *miles();
@@ -343,7 +343,7 @@ index 71f4b77..c839e95 100644
  @z
  
  @x l.116
-@@ -91,6 +87,5 @@ We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
+@@ -87,6 +83,5 @@ We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
  extern long miles_distance();
  @y
  extern long miles_distance(Vertex *,Vertex *);
@@ -653,5 +653,5 @@ index c604fd0..fa625d5 100644
  main()
  @y
 -- 
-2.50.1
+2.51.0
 

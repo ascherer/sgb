@@ -1,4 +1,4 @@
-From 58c73a3ab8c4fa6550fa0c0ce44e0dc14074b299 Mon Sep 17 00:00:00 2001
+From bb041f38cdf4c35b98a479f086bebf842621a4b6 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 10 Mar 2024 12:51:21 +0100
 Subject: [PATCH 26/37] =?UTF-8?q?Fix=20glitch=20in=20gb=5Fgates=C2=A73.?=
@@ -28,5 +28,5 @@ index 57d634f..6ac1542 100644
  #include "gb_flip.h"
  @y
 -- 
-2.50.1
+2.51.0
 

@@ -1,4 +1,4 @@
-From f09dce5f592531d66e2ab52d90dc942148966657 Mon Sep 17 00:00:00 2001
+From 34e2e4aacfabc9a0e72f2f18daacac911c12df78 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 09:13:41 +0200
 Subject: [PATCH 27/37] Fix changefile lines.
@@ -19,7 +19,7 @@ Add [section] numbers.
  PROTOTYPES/gb_graph.ch         |  58 +++++++++---------
  PROTOTYPES/gb_io.ch            |  72 +++++++++++-----------
  PROTOTYPES/gb_lisa.ch          |  66 ++++++++++----------
- PROTOTYPES/gb_miles.ch         |  22 +++----
+ PROTOTYPES/gb_miles.ch         |  20 +++---
  PROTOTYPES/gb_plane.ch         |  48 +++++++--------
  PROTOTYPES/gb_raman.ch         |  14 ++---
  PROTOTYPES/gb_rand.ch          |  34 +++++------
@@ -36,7 +36,7 @@ Add [section] numbers.
  PROTOTYPES/take_risc.ch        |   4 +-
  PROTOTYPES/test_sample.ch      |  12 ++--
  PROTOTYPES/word_components.ch  |   2 +-
- 31 files changed, 474 insertions(+), 474 deletions(-)
+ 31 files changed, 473 insertions(+), 473 deletions(-)
 
 diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
 index 8188922..d10a082 100644
@@ -2599,7 +2599,7 @@ index 580a126..0608708 100644
  @y
      if (c?*apos<(long)thresh:*apos>=(long)thresh) {
 diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
-index 54277be..9ec8d97 100644
+index 5cf81ce..08cef6c 100644
 --- a/PROTOTYPES/gb_miles.ch
 +++ b/PROTOTYPES/gb_miles.ch
 @@ -1,4 +1,4 @@
@@ -2632,7 +2632,7 @@ index 54277be..9ec8d97 100644
  Graph *miles(n,north_weight,west_weight,pop_weight,
      max_distance,max_degree,seed)
    unsigned long n; /* number of vertices desired */
-@@ -44,31 +44,31 @@ Graph *miles(
+@@ -44,7 +44,7 @@ Graph *miles(
    long seed) /* random number seed */
  @z
  
@@ -2641,12 +2641,7 @@ index 54277be..9ec8d97 100644
  @d x_coord x.I
  @d y_coord y.I
  @d index_no z.I
- @y
- @z
- 
--@x l.324
-+@x [16] l.324
- #define people @t\quad@> w.I
+@@ -52,19 +52,19 @@ Graph *miles(
  @y
  @z
  
@@ -2669,7 +2664,7 @@ index 54277be..9ec8d97 100644
  The result might be negative when an edge has been suppressed. Moreover,
  we can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
  @y
-@@ -76,7 +76,7 @@ The result might be negative when an edge has been suppressed.
+@@ -72,7 +72,7 @@ The result might be negative when an edge has been suppressed.
  We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
  @z
  
@@ -2678,7 +2673,7 @@ index 54277be..9ec8d97 100644
  @p long miles_distance(u,v)
    Vertex *u,*v;
  @y
-@@ -84,7 +84,7 @@ We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
+@@ -80,7 +80,7 @@ We can in fact have |miles_distance(u,v)<0| when |miles_distance(v,u)>0|,
    Vertex *u,Vertex *v)
  @z
  
@@ -3929,5 +3924,5 @@ index fa625d5..1a735e0 100644
  @y
  int main(void)
 -- 
-2.50.1
+2.51.0
 
