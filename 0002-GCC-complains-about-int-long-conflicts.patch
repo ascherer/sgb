@@ -1,7 +1,7 @@
-From 6163a2ca27da1c9fa2d823fc05b94735f0a76dfa Mon Sep 17 00:00:00 2001
+From 0429bd5e3bbacbd27666bc5134dc28107e778e86 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_coder@freenet.de>
 Date: Fri, 2 Sep 2011 09:39:05 +0200
-Subject: [PATCH 02/37] GCC complains about int/long conflicts.
+Subject: [PATCH 02/38] GCC complains about int/long conflicts.
 
 In very rare situations in the original SGB code, int/long conflicts occur.
 It's elementary how to fix these nits.

@@ -1,0 +1,60 @@
+From b7288f5a2ea2f9a802c9260e7b0e0c0673efa08f Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Tue, 26 Aug 2025 17:47:10 +0200
+Subject: [PATCH 38/38] Shuffle sections 15 and 16 of GB_MILES.
+
+---
+ PROTOTYPES/gb_miles.ch | 33 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 32 insertions(+), 1 deletion(-)
+
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 1a47fbe..24d31c3 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -51,11 +51,42 @@ Graph *miles(
+   long seed) /* random number seed */
+ @z
+ 
+-@x [15] l.303
++@x [15] l.298
++The coordinates computed here are compatible with those in the \TEX/ file
++\.{cities.texmap}. Users might want to incorporate edited copies of that file
++into documents that display results obtained with |miles| graphs.
++@.cities.texmap@>
++
+ @d x_coord x.I
+ @d y_coord y.I
+ @d index_no z.I
+ @d people w.I
++
++@<Add city |p->kk| to the graph@>=
++@y
++@(gb_miles.h@>=
++#define x_coord @t\quad@> x.I
++ /* utility field definitions for the header file */
++#define y_coord @t\quad@> y.I
++#define index_no @t\quad@> z.I
++#define people @t\quad@> w.I
++
++@ The coordinates computed here are compatible with those in the \TEX/ file
++\.{cities.texmap}. Users might want to incorporate edited copies of that file
++into documents that display results obtained with |miles| graphs.
++@.cities.texmap@>
++
++@<Add city |p->kk| to the graph@>=
++@z
++
++@x [16] l.319
++@ @(gb_miles.h@>=
++#define x_coord @t\quad@> x.I
++ /* utility field definitions for the header file */
++#define y_coord @t\quad@> y.I
++#define index_no @t\quad@> z.I
++#define people @t\quad@> w.I
++
+ @y
+ @z
+ 
+-- 
+2.51.0
+

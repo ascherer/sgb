@@ -1,9 +1,9 @@
-From 6f62be5882ad31e471f563f15c7697e5425a9f61 Mon Sep 17 00:00:00 2001
+From e57bb4e68de3a53769aa01cb7693fa0f4c8264d7 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 15 Aug 2025 19:25:30 +0200
-Subject: [PATCH 37/37] Fill a few gaps.
+Subject: [PATCH 37/38] Fill a few gaps.
 
-The empty sections call be refilled with appropriate code snippets.
+The empty sections can be refilled with appropriate code snippets.
 ---
  PROTOTYPES/gb_books.ch | 14 +++++++++++++-
  PROTOTYPES/gb_gates.ch |  3 ++-
