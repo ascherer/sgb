@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 38
+Release: 39
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -68,6 +68,7 @@ Patch35: 0035-Fix-sorting-order-in-the-index.patch
 Patch36: 0036-Issue-10-Make-use-of-parameter-d-in-MILES_SPAN.patch
 Patch37: 0037-Fill-a-few-gaps.patch
 Patch38: 0038-Shuffle-sections-15-and-16-of-GB_MILES.patch
+Patch39: 0039-Incorporate-ANSI-changes.patch
 %endif
 
 %description
@@ -81,7 +82,12 @@ master files stay intact.
 
 %prep
 %autosetup -c -p1
-%{__ln_s} PROTOTYPES/*.ch .
+%{__cp} PROTOTYPES/*.ch .
+for f in ANSI/*.ch
+do
+  f=$(basename $f .ch)
+  tie -c $f.ch $f.w ANSI/$f.ch PROTOTYPES/$f.ch
+done
 %{?with_sysv:%{__perl} -pe "s/#SYS/SYS/" -i Makefile}
 %if %{with patches}
 %{__perl} -pe "s/(CFLAGS = -g)/\1 -Wall -Wextra/" -i Makefile

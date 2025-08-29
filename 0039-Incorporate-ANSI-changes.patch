@@ -1,0 +1,56 @@
+From 9ae57371eb8b22fecd7d35174009607616b4f9c1 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Fri, 29 Aug 2025 16:11:13 +0200
+Subject: [PATCH 39/39] Incorporate ANSI changes.
+
+These were announced in PROTOTYPES/README.PROTOTYPES ages ago.
+Now we use 'tie -c' in sgb.spec.
+---
+ PROTOTYPES/gb_save.ch | 8 ++++----
+ PROTOTYPES/ladders.ch | 6 ++++++
+ 2 files changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index ec855ae..e3170b4 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -217,15 +217,15 @@ static void translate_field(
+ @z
+ 
+ @x [42] l.813
+-      @<Translate all |Vertex| records in |cur_block|@>;
++      @<Translate all |Vertex| records in |cur_block|@>@;
+ @y
+-      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
++      @<Translate \9{a}all |Vertex| records in |cur_block|@>@;
+ @z
+ 
+ @x [42] l.816
+-      @<Translate all |Vertex| records in |cur_block|@>;
++      @<Translate all |Vertex| records in |cur_block|@>@;
+ @y
+-      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
++      @<Translate \9{a}all |Vertex| records in |cur_block|@>@;
+ @z
+ 
+ @x [43] l.819
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index 7d0ba78..4c3047f 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -15,6 +15,12 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [9] l.192
++  for (u=g->vertices+g->n; u>g->vertices; u) {@+register Arc *a;
++@y
++  for (u=g->vertices+g->n; u>g->vertices; ) {@+register Arc *a;
++@z
++
+ @x [11] l.217
+ long freq_cost(v)
+   Vertex *v;
+-- 
+2.51.0
+
