@@ -1,0 +1,47 @@
+From e59300457334b08fab6b3e6303ee86f976832495 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Mon, 1 Sep 2025 14:09:41 +0200
+Subject: [PATCH 39/39] The number of teams is defined in GB_GAMES.
+
+---
+ PROTOTYPES/football.ch | 6 ++++++
+ PROTOTYPES/gb_games.ch | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index 5038198..07b61a8 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -136,6 +136,12 @@ do {
+   } while (m>0); /* exactly one node should be in |list[0]| (see below) */
+ @z
+ 
++@x [20] l.370
++@d MAX_N 120 /* the number of teams in \.{games.dat} */
++
++@y
++@z
++
+ @x [21] l.378
+ @ @<Make |list[0]|...@>=
+ @y
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index ca99790..93cbe73 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -21,11 +21,11 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+ @d ap u.I /* Associated Press scores: |(ap0<<16)+ap1| */
+ @d upi v.I /* United Press International scores |(upi0<<16)+upi1| */
+ @y
+-@d MAX_N 120
+ @d MAX_DAY 128
+ @d MAX_WEIGHT 131072
+ 
+ @(gb_games.h@>=
++#define MAX_N 120 /* the number of teams in \.{games.dat} */
+ #define ap @[u.I@] /* Associated Press scores: |(ap0<<16)+ap1| */
+ #define upi @[v.I@] /* United Press International scores |(upi0<<16)+upi1| */
+ @z
+-- 
+2.51.0
+
