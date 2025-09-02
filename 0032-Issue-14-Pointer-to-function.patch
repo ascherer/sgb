@@ -1,7 +1,7 @@
-From 884129693d70e49e978f10e7d427f2a64fcb220a Mon Sep 17 00:00:00 2001
+From c867341fcfe3cba715bd80cf5a84a2f016ec0fc6 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Jun 2024 00:53:53 +0200
-Subject: [PATCH 32/39] Issue #14: Pointer-to-function.
+Subject: [PATCH 32/41] Issue #14: Pointer-to-function.
 
 ---
  PROTOTYPES/gb_plane.ch | 4 ++--

@@ -1,7 +1,7 @@
-From 0619ca189e55791d5bd0f317d33be5fb0bc7a535 Mon Sep 17 00:00:00 2001
+From de39b67b5047f331180290d9ed5596cfb5c8c1b5 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 19 Nov 2023 17:41:40 +0100
-Subject: [PATCH 24/39] Purge '\goodbreak'.
+Subject: [PATCH 24/41] Purge '\goodbreak'.
 
 ---
  PROTOTYPES/assign_lisa.ch | 5 +++++

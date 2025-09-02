@@ -1,0 +1,64 @@
+From 46766399d23edbc2b7bf3293c32f44df75a48266 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 2 Sep 2025 14:06:09 +0200
+Subject: [PATCH 41/41] Couple MILES_SPAN to GB_DIJK.
+
+Reuse pointers to priority subroutimes and two preprocessor identifiers.
+
+Question: Why does the C compiler not tell about the shadowing of these
+global and exported names?
+---
+ PROTOTYPES/miles_span.ch | 25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
+
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index a27bb99..1acde49 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -5,6 +5,13 @@
+ \input pdfwebtocfront
+ @z
+ 
++@x [2] l.93
++#include "gb_miles.h" /* the |miles| routine */
++@y
++#include "gb_miles.h" /* the |miles| routine */
++#include "gb_dijk.h" /* pointers to priority queue subroutines */
++@z
++
+ @x [2] l.99
+ main(argc,argv)
+   int argc; /* the number of command-line arguments */
+@@ -45,20 +52,20 @@ unsigned long krusk(
+   Graph *g)
+ @z
+ 
+-@x [19] l.498
++@x [19] l.491
++As in {\sc GB\_\,DIJK}, we define pointers to priority queue subroutines
++so that the queueing mechanism can be varied.
++
++@d dist z.I /* this is the key field for vertices in the priority queue */
++@d backlink y.V /* this vertex is the stated |dist| away */
++
++@<Glob...@>=
+ void @[@] (*init_queue)(); /* create an empty priority queue */
+ void @[@] (*enqueue)(); /* insert a new element in the priority queue */
+ void @[@] (*requeue)(); /* decrease the key of an element in the queue */
+ Vertex *(*del_min)(); /* remove an element with smallest key */
++
+ @y
+-void @[@] (*init_queue)(long);
+-   /* create an empty priority queue */
+-void @[@] (*enqueue)(Vertex *,long);
+-   /* insert a new element in the priority queue */
+-void @[@] (*requeue)(Vertex *,long);
+-   /* decrease the key of an element in the queue */
+-Vertex *(*del_min)(void);
+-   /* remove an element with smallest key */
+ @z
+ 
+ @x [20] l.513
+-- 
+2.51.0
+

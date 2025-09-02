@@ -1,7 +1,7 @@
-From e9ff082aae8313f89edb3d0bbe362dabe83a2b09 Mon Sep 17 00:00:00 2001
+From 4d3e32a73a49e8e10521f13ae47ee8055e589814 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Jul 2024 10:16:57 +0200
-Subject: [PATCH 33/39] List changed sections in Editor's Note.
+Subject: [PATCH 33/41] List changed sections in Editor's Note.
 
 ---
  boilerplate.w | 20 +++++++++++++++++++-
