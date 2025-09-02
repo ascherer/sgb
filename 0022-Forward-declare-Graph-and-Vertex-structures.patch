@@ -1,7 +1,7 @@
-From 6e3cd981dd0dbeaa88a714f08d4940871a555bb1 Mon Sep 17 00:00:00 2001
+From 2a041f9881699d8b57efb6fe31b7f40226150786 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
-Subject: [PATCH 22/39] Forward-declare Graph and Vertex structures.
+Subject: [PATCH 22/41] Forward-declare Graph and Vertex structures.
 
 ---
  PROTOTYPES/assign_lisa.ch      |  5 -----

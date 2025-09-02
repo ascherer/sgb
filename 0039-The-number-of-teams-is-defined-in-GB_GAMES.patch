@@ -1,7 +1,7 @@
-From e59300457334b08fab6b3e6303ee86f976832495 Mon Sep 17 00:00:00 2001
+From 37f838f7cf685342794bf648799d69f4ce3fe606 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 1 Sep 2025 14:09:41 +0200
-Subject: [PATCH 39/39] The number of teams is defined in GB_GAMES.
+Subject: [PATCH 39/41] The number of teams is defined in GB_GAMES.
 
 ---
  PROTOTYPES/football.ch | 6 ++++++

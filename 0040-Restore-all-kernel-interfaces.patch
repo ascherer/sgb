@@ -1,0 +1,353 @@
+From 4b52cb7c1d902b02ec162870154d84ba5d53cd72 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 2 Sep 2025 13:26:29 +0200
+Subject: [PATCH 40/41] Restore all kernel interfaces.
+
+---
+ PROTOTYPES/gb_basic.ch    | 24 ++++++------------------
+ PROTOTYPES/gb_books.ch    |  5 +++--
+ PROTOTYPES/gb_dijk.ch     | 18 ++++++++++++++----
+ PROTOTYPES/gb_econ.ch     | 19 ++++++++++++++++---
+ PROTOTYPES/gb_games.ch    |  9 +--------
+ PROTOTYPES/gb_gates.ch    |  9 ++++-----
+ PROTOTYPES/gb_io.ch       | 13 +++++++++----
+ PROTOTYPES/gb_lisa.ch     | 18 +++++++-----------
+ PROTOTYPES/gb_plane.ch    |  9 ++++++---
+ PROTOTYPES/test_sample.ch |  7 +++++++
+ 10 files changed, 73 insertions(+), 58 deletions(-)
+
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index 7b47fb6..ab8d35d 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -407,17 +407,6 @@ Graph *lines(
+     } while (v->u.V==u->v.V);
+ @z
+ 
+-@x [94] l.2005
+-@(gb_basic.h@>=
+-#define cartesian 0
+-#define direct 1
+-#define strong 2
+-@y
+-@d cartesian 0
+-@d direct 1
+-@d strong 2
+-@z
+-
+ @x [95] l.2011
+ Graph *product(g,gg,type,directed)
+   Graph *g,*gg; /* graphs to be multiplied */
+@@ -440,10 +429,7 @@ Graph *product(
+ @x [100] l.2161
+ @d ind z.I
+ 
+-@(gb_basic.h@>=
+-#define ind @[z.I /* utility field |z| when used to induce a graph */@]
+ @y
+-@d ind z.I /* utility field |z| when used to induce a graph */@]
+ @z
+ 
+ @x [101] l.2171
+@@ -458,12 +444,14 @@ Graph *bi_complete(
+   long directed) /* should all arcs go from first part to second? */
+ @z
+ 
+-@x [102] l.2213
+-@(gb_basic.h@>=
+-#define IND_GRAPH 1000000000
+-#define subst @[y.G@]
++@x [102] l.2207
++vertices of~$g$ has $m'n+mn'^2$ arcs.
++
+ 
++@d IND_GRAPH 1000000000 /* when |ind| is a billion or more, */
++@d subst y.G /* we'll look at the |subst| field */
+ @y
++vertices of~$g$ has $m'n+mn'^2$ arcs.
+ @z
+ 
+ @x [103] l.2224
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index fbb6c82..212bf6b 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -100,7 +100,6 @@ register unsigned long k; /* all-purpose indices */
+ #define in_count @t\quad@> y.I /* utility field |y| counts appearances in selected chapters */
+ #define out_count @t\quad@> x.I /* utility field |x| counts appearances in other chapters */
+ #define short_code @t\quad@> u.I /* utility field |u| contains a radix-36 number */
+-#endif /* |GB_BOOKS_H| */
+ @z
+ 
+ @x [19] l.377
+@@ -149,7 +148,9 @@ utility field |chap_no| of the corresponding |Arc| record.
+ @ We insert a reference to the first chapter that generated each edge, in
+ utility field |chap_no| of the corresponding |Arc| record.
+ 
+-@d chap_no a.I /* utility field |a| holds a chapter number */
++@(gb_books.h@>=
++#define chap_no @[a.I@] /* utility field |a| holds a chapter number */
++#endif /* |GB_BOOKS_H| */
+ @z
+ 
+ @x [27] l.499
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index b4194d7..ce04569 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -30,12 +30,19 @@ extern void print_dijkstra_result(Vertex *);
+    /* procedure to display the answer */
+ @z
+ 
+-@x [5] l.118
++@x [5] l.114
++@d dist z.I /* distance from |uu|, modified by |hh|,
++                 appears in vertex utility field |z| */
++@d backlink y.V /* pointer to previous vertex appears in utility field |y| */
++
+ @(gb_dijk.h@>=
+ #define dist @[z.I@]
+ #define backlink @[y.V@]
+-
+ @y
++@(gb_dijk.h@>=
++#define dist @[z.I@] /* distance from |uu|, modified by |hh|,
++                 appears in vertex utility field |z| */
++#define backlink @[y.V@] /* pointer to previous vertex appears in utility field |y| */
+ @z
+ 
+ @x [6] l.143
+@@ -55,11 +62,14 @@ extern Vertex *(*del_min)(void);
+    /* remove an element with smallest key */
+ @z
+ 
+-@x [7] l.155
++@x [7] l.153
++@d hh_val x.I /* computed value of |hh(v)| */
++
+ @(gb_dijk.h@>=
+ #define hh_val @[x.I@]
+-
+ @y
++@(gb_dijk.h@>=
++#define hh_val @[x.I@] /* computed value of |hh(v)| */
+ @z
+ 
+ @x [8] l.162
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index 6b715e8..e825390 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -19,17 +19,30 @@ extern Graph *econ(unsigned long,unsigned long,unsigned long,long);
+ @y
+ @(gb_econ.h@>=
+ #define flow @t\quad@> a.I /* utility field |a| specifies the flow in an arc */
+-#endif /* |GB_ECON_H| */
+ @z
+ 
+-@x [5] l.162
++@x [4] l.155
++@d SIC_codes z.A /* utility field |z| leads to the SIC codes for a vertex */
++
++@y
+ @(gb_econ.h@>=
++#define SIC_codes @t\quad@> z.A /* utility field |z| leads to the SIC codes for a vertex */
++@z
++
++@x [5] l.160
++@d sector_total y.I /* utility field |y| holds the total flow in and out */
++
++@y
++@z
++@x [5] l.163
+ #define flow @t\quad@> a.I
+    /* definitions of utility fields in the header file */
+ #define SIC_codes @t\quad@> z.A
+ #define sector_total @t\quad@> y.I
+-
+ @y
++#define sector_total @t\quad@> y.I
++   /* utility field |y| holds the total flow in and out */
++#endif /* |GB_ECON_H| */
+ @z
+ 
+ @x [7] l.181
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 93cbe73..2ee343a 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -71,6 +71,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+ #define HOME 1
+ #define NEUTRAL 2
+ #define AWAY 3
++#define venue @[a.I@]
+ #define date @[b.I@]
+ #endif /* |GB_GAMES_H| */
+ @z
+@@ -110,11 +111,3 @@ static Vertex *team_lookup() /* read and decode an abbreviation */
+ @y
+ static Vertex *team_lookup(void) /* read and decode an abbreviation */
+ @z
+-
+-@x [24] l.459
+-@<Enter a new edge@>=
+-@y
+-@d venue a.I
+-
+-@<Enter a new edge@>=
+-@z
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 217bf08..a964a3f 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -72,7 +72,6 @@ extern long run_risc(Graph *,unsigned long [],unsigned long,unsigned long);
+ #define OR @t\quad@> '|'
+ #define NOT @t\quad@> '~'
+ #define XOR @t\quad@> '^'
+-#endif /* |GB_GATES_H| */
+ @z
+ 
+ @x [3] l.130
+@@ -363,7 +362,7 @@ long run_risc(
+   for (r=0;r<trace_regs;r++) printf(" r%-2lu ",r); /* register names */
+ @z
+ 
+-@x [49] l.1094
++@x [49] l.1093
+ @d bit z.I /* field containing the constant value of a |'C'| gate */
+ @d print_gates p_gates /* abbreviation makes chopped-off name unique */
+ @y
+@@ -391,11 +390,11 @@ void print_gates(
+   Graph *g)
+ @z
+ 
+-@x [50] l.1127
+-@ @(gb_gates.h@>=
++@x [50] l.1128
+ #define bit @t\quad@> z.I
+ @y
+-@ @d bit z.I /* field containing the constant value of a |'C'| gate */
++#define bit @t\quad@> z.I /* field containing the constant value of a |'C'| gate */
++#endif /* |GB_GATES_H| */
+ @z
+ 
+ @x [51] l.1146
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 1ce5f15..0b8787d 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -216,16 +216,21 @@ unsigned long gb_number(
+     a=a*d+icode[(unsigned char)*cur_pos++];
+ @z
+ 
+-@x [25] l.352
+-#define STR_BUF_LENGTH 160
+-extern char str_buf[]; /* safe place to receive output of |gb_string| */
++@x [25] l.354
+ extern char *gb_string(); /* |gb_string(p,c)| reads a string delimited by |c|
+ @y
+-extern char str_buf[]; /* safe place to receive output of |gb_string| */
+ extern char *gb_string(char *,char);
+   /* |gb_string(p,c)| reads a string delimited by |c|
+ @z
+ 
++@x [26] l.357
++@ @d STR_BUF_LENGTH 160
++
++@<External f...@>=
++@y
++@ @<External f...@>=
++@z
++
+ @x [26] l.361
+ char *gb_string(p,c)
+     char *p; /* where to put the result */
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 97bc21e..840b196 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -41,7 +41,6 @@ extern Graph *bi_lisa(unsigned long,unsigned long,@|
+ extern char lisa_id[];
+ @y
+ extern char lisa_id[];
+-#endif /* |GB_LISA_H| */
+ @z
+ 
+ @x [6] l.142
+@@ -247,11 +246,6 @@ utility field.
+ 
+ @x [25] l.431
+ @ @<gb_lisa.h@>=
+-#define pixel_value @t\quad@> x.I /* definitions for the header file */
+-#define first_pixel @t\quad@> y.I
+-#define last_pixel @t\quad@> z.I
+-#define matrix_rows @t\quad@> uu.I
+-#define matrix_cols @t\quad@> vv.I
+ @y
+ @ Utility fields |first_pixel| and |last_pixel| give, for each vertex,
+ numbers of the form $k*n+l$, identifying the topmost/leftmost
+@@ -264,11 +258,13 @@ individual coordinates can be found in |g->matrix_cols|.
+ The original pixel value of a vertex is placed into its |pixel_value|
+ utility field.
+ 
+-@d pixel_value x.I
+-@d first_pixel y.I
+-@d last_pixel z.I
+-@d matrix_rows uu.I
+-@d matrix_cols vv.I
++@<gb_lisa.h@>=
++@z
++@x [25] l.436
++#define matrix_cols @t\quad@> vv.I
++@y
++#define matrix_cols @t\quad@> vv.I
++#endif /* |GB_LISA_H| */
+ @z
+ 
+ @x [28] l.496
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 14b6de6..48f4475 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -25,14 +25,17 @@ extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
+ extern Graph *plane_miles(unsigned long,long,long,long,@|
+   unsigned long,unsigned long,long);
+ extern void delaunay(Graph *,void @[@] (*)(Vertex *,Vertex *)@,);
+-#endif /* |GB_PLANE_H| */
+ @z
+ 
+-@x [2] l.61
++@x [2] l.59
++@d INFTY 0x10000000L /* ``infinite'' length */
++
+ @(gb_plane.h@>=
+ #define INFTY @t\quad@> 0x10000000L
+-
+ @y
++@(gb_plane.h@>=
++#define INFTY @t\quad@> 0x10000000L /* ``infinite'' length */
++#endif /* |GB_PLANE_H| */
+ @z
+ 
+ @x [4] l.76
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index 2e5c225..4de6f3e 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -11,6 +11,13 @@
+ int main(void)
+ @z
+ 
++@x [2] l.44
++#include "gb_games.h" /* and the graphs based on football scores */
++@y
++#include "gb_games.h" /* and the graphs based on football scores */
++#undef MAX_N /* redefinition in \.{gb\_miles.h} below; unused */
++@z
++
+ @x [8] l.113
+ if (i=random_lengths(g,0L,10L,12L,dst,2L))
+ @y
+-- 
+2.51.0
+
