@@ -1,7 +1,7 @@
-From 123fe5a747cab8c2ce623e3912e3ceccdfbce156 Mon Sep 17 00:00:00 2001
+From 5030e302ea2c2ffc6ee099eef8054a608eee3d12 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Thu, 3 Sep 2015 11:19:38 +0200
-Subject: [PATCH 04/41] GCC -Wall.
+Subject: [PATCH 04/42] GCC -Wall.
 
 Compile with '-Wall' and fix the inflicted source modules.
 ---

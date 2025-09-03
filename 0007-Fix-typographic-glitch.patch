@@ -1,7 +1,7 @@
-From f0a63368d349df978bb59399a658855990ddea2b Mon Sep 17 00:00:00 2001
+From 0855df107ba57ad3f35eb254debdf0faf811e69f Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 27 Nov 2016 16:17:57 +0100
-Subject: [PATCH 07/41] Fix typographic glitch.
+Subject: [PATCH 07/42] Fix typographic glitch.
 
 The initialization material should be properly indented.
 ---

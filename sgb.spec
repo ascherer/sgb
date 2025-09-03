@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 41
+Release: 42
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20210130
@@ -71,6 +71,7 @@ Patch38: 0038-Shuffle-sections-15-and-16-of-GB_MILES.patch
 Patch39: 0039-The-number-of-teams-is-defined-in-GB_GAMES.patch
 Patch40: 0040-Restore-all-kernel-interfaces.patch
 Patch41: 0041-Couple-MILES_SPAN-to-GB_DIJK.patch
+Patch42: 0042-Simpler-signed-unsigned-patches-in-GB_IO-and-GB_LISA.patch
 %endif
 
 %description
