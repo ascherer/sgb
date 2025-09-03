@@ -1,4 +1,4 @@
-From b440058ccbed1f0d9a005ccacc9f4606009331cd Mon Sep 17 00:00:00 2001
+From e378b744b7f09d7f8014b5f59624664903afca4b Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_coder@freenet.de>
 Date: Fri, 2 Sep 2011 09:39:05 +0200
 Subject: [PATCH 02/41] GCC complains about int/long conflicts.
