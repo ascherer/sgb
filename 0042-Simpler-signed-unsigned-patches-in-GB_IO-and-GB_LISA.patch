@@ -1,0 +1,77 @@
+From 1018f989e0c90ebabb17505f0ff9c0e2a6a6ccf4 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Wed, 3 Sep 2025 13:19:51 +0200
+Subject: [PATCH 42/42] Simpler signed/unsigned patches in GB_IO and GB_LISA.
+
+---
+ PROTOTYPES/gb_io.ch   | 12 ++----------
+ PROTOTYPES/gb_lisa.ch | 13 +++++++------
+ 2 files changed, 9 insertions(+), 16 deletions(-)
+
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 0b8787d..0ce3182 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -88,18 +88,10 @@ char imap_chr(
+ }
+ @z
+ 
+-@x [12] l.197
+-long imap_ord(c)
+-  char c;
+-@y
+-long imap_ord(
+-  unsigned char c)
+-@z
+-
+ @x [12] l.201
+   return (c<0||c>255)? unexpected_char: icode[c];
+ @y
+-  return icode[c];
++  return icode[(unsigned char)c];
+ @z
+ 
+ @x [13] l.205
+@@ -109,7 +101,7 @@ extern long imap_ord(); /* the ordinal number of a given character */
+ @y
+ #define unexpected_char @t\quad@> 127 /* default |icode| value */
+ extern char imap_chr(long); /* the character that maps to a given character */
+-extern long imap_ord(unsigned char); /* the ordinal number of a given character */
++extern long imap_ord(char); /* the ordinal number of a given character */
+ @z
+ 
+ @x [15] l.213
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 840b196..559ea22 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -244,6 +244,13 @@ utility field.
+     /* lower and upper threshold of raw pixel scores */
+ @z
+ 
++@x [24] l.426
++register long j,k,l; /* all-purpose indices */
++@y
++register unsigned long j; /* all-purpose index */
++register long k,l; /* all-purpose indices */
++@z
++
+ @x [25] l.431
+ @ @<gb_lisa.h@>=
+ @y
+@@ -273,12 +280,6 @@ utility field.
+     if (k<(long)m) {
+ @z
+ 
+-@x [28] l.498
+-        for (j=l; f[j]!=j; j=f[j]) ; /* find the first element */
+-@y
+-        for (j=l; f[j]!=(unsigned long)j; j=f[j]) ; /* find the first element */
+-@z
+-
+ @x [28] l.501
+       }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
+ @y
+-- 
+2.51.0
+
