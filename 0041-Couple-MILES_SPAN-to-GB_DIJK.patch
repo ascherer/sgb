@@ -1,4 +1,4 @@
-From 46766399d23edbc2b7bf3293c32f44df75a48266 Mon Sep 17 00:00:00 2001
+From b88b11ee52737de4e653596243dc39a9def4eb5e Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 14:06:09 +0200
 Subject: [PATCH 41/41] Couple MILES_SPAN to GB_DIJK.

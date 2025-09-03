@@ -1,4 +1,4 @@
-From 160755cf2fb5c469b782cf0e174e10c738e4e59e Mon Sep 17 00:00:00 2001
+From 3cf61e725dbd5246a7c5cb8ef26e8933f1ddf485 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 24 May 2016 17:07:54 +0200
 Subject: [PATCH 06/41] Alternative fix for GCC 5.3.1.

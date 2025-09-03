@@ -1,4 +1,4 @@
-From 4d3e32a73a49e8e10521f13ae47ee8055e589814 Mon Sep 17 00:00:00 2001
+From 20d131e4a23e48891fb0cf273d6df13466e42b37 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Jul 2024 10:16:57 +0200
 Subject: [PATCH 33/41] List changed sections in Editor's Note.

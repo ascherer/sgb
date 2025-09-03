@@ -1,4 +1,4 @@
-From 4b52cb7c1d902b02ec162870154d84ba5d53cd72 Mon Sep 17 00:00:00 2001
+From 61403fd954f5bd5f0bda466c8ba351343935e5ac Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 13:26:29 +0200
 Subject: [PATCH 40/41] Restore all kernel interfaces.
@@ -173,7 +173,7 @@ index 6b715e8..e825390 100644
  
  @x [7] l.181
 diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
-index 93cbe73..2ee343a 100644
+index d5d8e9e..17683eb 100644
 --- a/PROTOTYPES/gb_games.ch
 +++ b/PROTOTYPES/gb_games.ch
 @@ -71,6 +71,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
