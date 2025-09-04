@@ -1,29 +1,25 @@
-From 1018f989e0c90ebabb17505f0ff9c0e2a6a6ccf4 Mon Sep 17 00:00:00 2001
+From eb1306d6bd413605e2a185b6f8c426096e6983b9 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Sep 2025 13:19:51 +0200
 Subject: [PATCH 42/42] Simpler signed/unsigned patches in GB_IO and GB_LISA.
 
 ---
- PROTOTYPES/gb_io.ch   | 12 ++----------
+ PROTOTYPES/gb_io.ch   |  6 +++---
  PROTOTYPES/gb_lisa.ch | 13 +++++++------
- 2 files changed, 9 insertions(+), 16 deletions(-)
+ 2 files changed, 10 insertions(+), 9 deletions(-)
 
 diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
-index 0b8787d..0ce3182 100644
+index 0b8787d..3012799 100644
 --- a/PROTOTYPES/gb_io.ch
 +++ b/PROTOTYPES/gb_io.ch
-@@ -88,18 +88,10 @@ char imap_chr(
- }
+@@ -93,13 +93,13 @@ long imap_ord(c)
+   char c;
+ @y
+ long imap_ord(
+-  unsigned char c)
++  char c)
  @z
  
--@x [12] l.197
--long imap_ord(c)
--  char c;
--@y
--long imap_ord(
--  unsigned char c)
--@z
--
  @x [12] l.201
    return (c<0||c>255)? unexpected_char: icode[c];
  @y
@@ -32,7 +28,7 @@ index 0b8787d..0ce3182 100644
  @z
  
  @x [13] l.205
-@@ -109,7 +101,7 @@ extern long imap_ord(); /* the ordinal number of a given character */
+@@ -109,7 +109,7 @@ extern long imap_ord(); /* the ordinal number of a given character */
  @y
  #define unexpected_char @t\quad@> 127 /* default |icode| value */
  extern char imap_chr(long); /* the character that maps to a given character */

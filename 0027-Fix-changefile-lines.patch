@@ -1,4 +1,4 @@
-From 1e0367604842115b50ed884ed9611c3fe05944f3 Mon Sep 17 00:00:00 2001
+From 9c6a10dbc58d3e49026d261a5aaabb60dfd82ab0 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 09:13:41 +0200
 Subject: [PATCH 27/42] Fix changefile lines.
