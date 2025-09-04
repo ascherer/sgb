@@ -1,4 +1,4 @@
-From 9e12bd0d28f41a1187a92ea9a7fe3e55c43a6c66 Mon Sep 17 00:00:00 2001
+From af474054e0ac60ad81789e6eae32866b3f95db5d Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Mon, 6 Jul 2015 12:24:55 +0200
 Subject: [PATCH 03/42] GCC -Wformat-security.
