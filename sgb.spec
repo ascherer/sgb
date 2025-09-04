@@ -103,7 +103,9 @@ master files stay intact.
 
 %check
 %{__make} test_sample
-./test_sample
+./test_sample > sample.out
+diff -u sample.correct sample.out
+diff -u test.correct test.gb
 
 %install
 %{__rm} -rf %{buildroot}
