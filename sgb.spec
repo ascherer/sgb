@@ -71,7 +71,7 @@ Patch38: 0038-Shuffle-sections-15-and-16-of-GB_MILES.patch
 Patch39: 0039-The-number-of-teams-is-defined-in-GB_GAMES.patch
 Patch40: 0040-Restore-all-kernel-interfaces.patch
 Patch41: 0041-Couple-MILES_SPAN-to-GB_DIJK.patch
-Patch42: 0042-Simpler-signed-unsigned-patches-in-GB_IO-and-GB_LISA.patch
+Patch42: 0042-Simpler-signed-unsigned-patches.patch
 %endif
 
 %description

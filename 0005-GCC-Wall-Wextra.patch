@@ -1,4 +1,4 @@
-From dce9312d3a47dac99be9fc7d26c4478fec1d9ed1 Mon Sep 17 00:00:00 2001
+From bae056b01a08b039141e5792ab4ff14e5f9a2e7f Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Tue, 8 Sep 2015 13:39:18 +0200
 Subject: [PATCH 05/42] GCC -Wall -Wextra.
