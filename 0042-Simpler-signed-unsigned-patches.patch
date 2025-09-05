@@ -1,0 +1,172 @@
+From d01becc49f220bdcb7ab8d331f89498519f79149 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Wed, 3 Sep 2025 13:19:51 +0200
+Subject: [PATCH 42/42] Simpler signed/unsigned patches.
+
+---
+ PROTOTYPES/gb_gates.ch | 72 ++----------------------------------------
+ PROTOTYPES/gb_io.ch    |  6 ++--
+ PROTOTYPES/gb_lisa.ch  | 13 ++++----
+ 3 files changed, 13 insertions(+), 78 deletions(-)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index a964a3f..fd3b883 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -461,10 +461,10 @@ Graph* prod(unsigned long m,unsigned long n)
+   /* lengths of the binary numbers to be multiplied */
+ @z
+ 
+-@x [69] l.1545
+-while (k<m_plus_n) {
++@x [68] l.1537
++unsigned long m_plus_n; /* guess what this variable holds */
+ @y
+-while (k<(long)m_plus_n) {
++long m_plus_n; /* guess what this variable holds */
+ @z
+ 
+ @x [72] l.1614
+@@ -479,12 +479,6 @@ for (j=0; j<(long)m; j++) {
+   for (k=0; k<(long)n; k++)
+ @z
+ 
+-@x [72] l.1621
+-  for (k=j+n; k<m_plus_n; k++) {
+-@y
+-  for (k=j+n; k<(long)m_plus_n; k++) {
+-@z
+-
+ @x [73] l.1629
+ @d a_pos(j) (j<m? j+1: m+5*((j-m)>>1)+3+(((j-m)&1)<<1))
+ @y
+@@ -497,66 +491,6 @@ for (j=0; j<m-2; j++) {
+ for (j=0; j<(long)m-2; j++) {
+ @z
+ 
+-@x [73] l.1636
+-  for (k=0; k<m_plus_n; k++)
+-@y
+-  for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [73] l.1639
+-  for (k=0; k<m_plus_n; k++)
+-@y
+-  for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [73] l.1644
+-  for (k=0; k<m_plus_n; k++)
+-@y
+-  for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [73] l.1647
+-  for (k=0; k<m_plus_n; k++)
+-@y
+-  for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [73] l.1653
+-  for (k=0; k<m_plus_n-1; k++)
+-@y
+-  for (k=0; k<(long)m_plus_n-1; k++)
+-@z
+-
+-@x [74] l.1665
+-for (k=0; k<m_plus_n; k++)
+-@y
+-for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [74] l.1668
+-for (k=0; k<m_plus_n; k++)
+-@y
+-for (k=0; k<(long)m_plus_n; k++)
+-@z
+-
+-@x [76] l.1756
+-for (i=3,j=2,k=3,l=3; l<=m_plus_n; l++) {
+-@y
+-for (i=3,j=2,k=3,l=3; l<=(long)m_plus_n; l++) {
+-@z
+-
+-@x [78] l.1782
+-for (k=2;k<m_plus_n;k++) {
+-@y
+-for (k=2;k<(long)m_plus_n;k++) {
+-@z
+-
+-@x [83] l.1846
+-for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
+-@y
+-for (k=0;k<(long)m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
+-@z
+-
+ @x [84] l.1897
+ Graph *partial_gates(g,r,prob,seed,buf)
+   Graph *g; /* generalized gate graph */
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 0b8787d..3012799 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -93,13 +93,13 @@ long imap_ord(c)
+   char c;
+ @y
+ long imap_ord(
+-  unsigned char c)
++  char c)
+ @z
+ 
+ @x [12] l.201
+   return (c<0||c>255)? unexpected_char: icode[c];
+ @y
+-  return icode[c];
++  return icode[(unsigned char)c];
+ @z
+ 
+ @x [13] l.205
+@@ -109,7 +109,7 @@ extern long imap_ord(); /* the ordinal number of a given character */
+ @y
+ #define unexpected_char @t\quad@> 127 /* default |icode| value */
+ extern char imap_chr(long); /* the character that maps to a given character */
+-extern long imap_ord(unsigned char); /* the ordinal number of a given character */
++extern long imap_ord(char); /* the ordinal number of a given character */
+ @z
+ 
+ @x [15] l.213
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 840b196..559ea22 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -244,6 +244,13 @@ utility field.
+     /* lower and upper threshold of raw pixel scores */
+ @z
+ 
++@x [24] l.426
++register long j,k,l; /* all-purpose indices */
++@y
++register unsigned long j; /* all-purpose index */
++register long k,l; /* all-purpose indices */
++@z
++
+ @x [25] l.431
+ @ @<gb_lisa.h@>=
+ @y
+@@ -273,12 +280,6 @@ utility field.
+     if (k<(long)m) {
+ @z
+ 
+-@x [28] l.498
+-        for (j=l; f[j]!=j; j=f[j]) ; /* find the first element */
+-@y
+-        for (j=l; f[j]!=(unsigned long)j; j=f[j]) ; /* find the first element */
+-@z
+-
+ @x [28] l.501
+       }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
+ @y
+-- 
+2.51.0
+
