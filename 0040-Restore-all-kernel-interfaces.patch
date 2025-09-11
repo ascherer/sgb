@@ -1,4 +1,4 @@
-From 057d100050c6f79b045b4dd1f35403e4ef711f19 Mon Sep 17 00:00:00 2001
+From 2de81658978b7c17d7d79c2129d3af77bf2c441b Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 13:26:29 +0200
 Subject: [PATCH 40/42] Restore all kernel interfaces.
@@ -12,9 +12,9 @@ Subject: [PATCH 40/42] Restore all kernel interfaces.
  PROTOTYPES/gb_gates.ch    |  9 ++++-----
  PROTOTYPES/gb_io.ch       | 13 +++++++++----
  PROTOTYPES/gb_lisa.ch     | 18 +++++++-----------
- PROTOTYPES/gb_plane.ch    |  9 ++++++---
+ PROTOTYPES/gb_plane.ch    | 12 ++++++++----
  PROTOTYPES/test_sample.ch |  7 +++++++
- 10 files changed, 73 insertions(+), 58 deletions(-)
+ 10 files changed, 75 insertions(+), 59 deletions(-)
 
 diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
 index 7b47fb6..ab8d35d 100644
@@ -306,10 +306,10 @@ index 97bc21e..840b196 100644
  
  @x [28] l.496
 diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
-index 14b6de6..48f4475 100644
+index 14b6de6..626cd5d 100644
 --- a/PROTOTYPES/gb_plane.ch
 +++ b/PROTOTYPES/gb_plane.ch
-@@ -25,14 +25,17 @@ extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
+@@ -25,14 +25,16 @@ extern Graph *plane(unsigned long,unsigned long,unsigned long,@|
  extern Graph *plane_miles(unsigned long,long,long,long,@|
    unsigned long,unsigned long,long);
  extern void delaunay(Graph *,void @[@] (*)(Vertex *,Vertex *)@,);
@@ -326,10 +326,20 @@ index 14b6de6..48f4475 100644
  @y
 +@(gb_plane.h@>=
 +#define INFTY @t\quad@> 0x10000000L /* ``infinite'' length */
-+#endif /* |GB_PLANE_H| */
  @z
  
  @x [4] l.76
+@@ -97,7 +99,9 @@ collinear or cocircular. No two vertices have the same ID number.
+ (The header file \.{gb\_miles.h} defines |x_coord|, |y_coord|, and
+ |index_no| to be |x.I|, |y.I|, and |z.I| respectively.)
+ 
+-@d z_coord z.I
++@(gb_plane.h@>=
++#define z_coord @t\quad@> z.I
++#endif /* |GB_PLANE_H| */
+ @z
+ 
+ @x [9] l.215
 diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
 index 2e5c225..4de6f3e 100644
 --- a/PROTOTYPES/test_sample.ch

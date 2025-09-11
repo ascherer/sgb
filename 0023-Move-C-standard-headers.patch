@@ -1,4 +1,4 @@
-From a897027b071437a2200041fab4f9f10ad88cec9b Mon Sep 17 00:00:00 2001
+From 2eb21cbd373600ff12bd56308660a27fcc8fcdfd Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 8 Nov 2023 12:04:53 +0100
 Subject: [PATCH 23/42] Move C standard headers.
