@@ -1,4 +1,4 @@
-From c0b46ae64bead0fb74ee6defb2b2d706f2307291 Mon Sep 17 00:00:00 2001
+From 365ee442f40d769ab53a670a69f76ae69214daeb Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 9 Apr 2023 12:47:47 +0200
 Subject: [PATCH 19/42] Single point for C standard headers.

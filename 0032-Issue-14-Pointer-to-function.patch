@@ -1,4 +1,4 @@
-From b78b81a50e5929a7e764ea3ab4d2867db14ec73d Mon Sep 17 00:00:00 2001
+From 4f609cf3eb8f537e7ea261a5f509807c22f3bdb6 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 27 Jun 2024 00:53:53 +0200
 Subject: [PATCH 32/42] Issue #14: Pointer-to-function.
