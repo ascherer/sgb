@@ -1,0 +1,39 @@
+From dbae28ceddc95b7fbc308bb2e5b92e1c60f07d69 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Sat, 4 Oct 2025 15:42:40 +0200
+Subject: [PATCH 43/43] Two issues fixed upstream.
+
+---
+ PROTOTYPES/gb_games.ch | 2 +-
+ PROTOTYPES/gb_gates.ch | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 17683eb..3704e45 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -19,7 +19,7 @@ extern Graph *games(unsigned long,long,long,long,long,long,long,long);
+ @d MAX_DAY 128
+ @d MAX_WEIGHT 131072
+ @d ap u.I /* Associated Press scores: |(ap0<<16)+ap1| */
+-@d upi v.I /* United Press International scores |(upi0<<16)+upi1| */
++@d upi v.I /* United Press International scores: |(upi0<<16)+upi1| */
+ @y
+ @d MAX_DAY 128
+ @d MAX_WEIGHT 131072
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index fd3b883..0658cfa 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -87,7 +87,7 @@ long gate_eval(
+ @z
+ 
+ @x [3] l.144
+-    @t\4\4@>@<Compute the value |t| of a classical logic gate@>;
++    @t\4@>@<Compute the value |t| of a classical logic gate@>;
+ @y
+   @/@t\4@>@<Compute the value |t| of a classical logic gate@>@;
+ @z
+-- 
+2.51.0
+

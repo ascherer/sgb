@@ -1,7 +1,7 @@
-From 4ed93e3978b3ed8a4b2cf4d96f660ce5be78e6dc Mon Sep 17 00:00:00 2001
+From 1bda964f4f3336d87452521a5a6f710f45e0ad47 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 09:13:41 +0200
-Subject: [PATCH 27/42] Fix changefile lines.
+Subject: [PATCH 27/43] Fix changefile lines.
 
 Add [section] numbers.
 ---
