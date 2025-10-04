@@ -12,7 +12,7 @@ Change file for ladders.w
   for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
     for (a=u->arcs; a; a=a->next)
 @y
-  for (u=g->vertices+g->n; u>g->vertices; u) {@+register Arc *a;
+  for (u=g->vertices+g->n; u>g->vertices; ) {@+register Arc *a;
     for (a=(--u)->arcs; a; a=a->next)
 @z
 

@@ -91,7 +91,7 @@ at most $2^{17}=131072$ in absolute value.
 @d MAX_DAY 128
 @d MAX_WEIGHT 131072
 @d ap u.I /* Associated Press scores: |(ap0<<16)+ap1| */
-@d upi v.I /* United Press International scores |(upi0<<16)+upi1| */
+@d upi v.I /* United Press International scores: |(upi0<<16)+upi1| */
 
 @ Most of the teams belong to a ``conference,'' and they play against
 almost every other team that belongs to the same conference. For

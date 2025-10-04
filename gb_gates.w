@@ -141,7 +141,7 @@ long gate_eval(g,in_vec,out_vec)
     switch (v->typ) { /* branch on type of gate */
     case 'I': continue; /* this input gate's value should be externally set */
     case 'L': t=v->alt->val;@+break;
-    @t\4\4@>@<Compute the value |t| of a classical logic gate@>;
+    @t\4@>@<Compute the value |t| of a classical logic gate@>;
     default: return -1; /* unknown gate type! */
     }
     v->val=t; /* assign the computed value */
