@@ -8,17 +8,17 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 42
+Release: 43
 
 %if "%{_vendor}" == "debbuild"
-Version: 2:20210130
+Version: 2:20250929
 Group: math
 Distribution: Kubuntu 24.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
 %else
-Version: 20210130
+Version: 20250929
 Group: Productivity/Scientific/Math
 Distribution: openSUSE 42 (x86_64)
 %global __echo %(which echo)
@@ -30,7 +30,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
 
 %if %{with patches}
-#Patch1: 0001-sgb-2-20210130-base.patch
+#Patch1: 0001-sgb-2-20250929-base.patch
 Patch2: 0002-GCC-complains-about-int-long-conflicts.patch
 Patch3: 0003-GCC-Wformat-security.patch
 Patch4: 0004-GCC-Wall.patch
@@ -72,6 +72,7 @@ Patch39: 0039-The-number-of-teams-is-defined-in-GB_GAMES.patch
 Patch40: 0040-Restore-all-kernel-interfaces.patch
 Patch41: 0041-Couple-MILES_SPAN-to-GB_DIJK.patch
 Patch42: 0042-Simpler-signed-unsigned-patches.patch
+Patch43: 0043-Two-issues-fixed-upstream.patch
 %endif
 
 %description

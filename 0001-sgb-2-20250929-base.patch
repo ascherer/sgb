@@ -1,7 +1,7 @@
-From 69911cccadf357c0104f464087696add752936a5 Mon Sep 17 00:00:00 2001
+From d66e9ba3530084301cd6533aafff838baab10074 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Wed, 10 Sep 2025 14:07:13 +0200
-Subject: [PATCH 01/42] sgb-2:20210130 base
+Date: Sat, 4 Oct 2025 15:38:56 +0200
+Subject: [PATCH 01/43] sgb-2:20250929 base
 
 ---
  +The+Stanford+GraphBase+       |    0
@@ -884,7 +884,7 @@ index 0000000..58b4b01
 +@z
 diff --git a/ANSI/ladders.ch b/ANSI/ladders.ch
 new file mode 100644
-index 0000000..55250fd
+index 0000000..934f27e
 --- /dev/null
 +++ b/ANSI/ladders.ch
 @@ -0,0 +1,26 @@
@@ -902,7 +902,7 @@ index 0000000..55250fd
 +  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
 +    for (a=u->arcs; a; a=a->next)
 +@y
-+  for (u=g->vertices+g->n; u>g->vertices; u) {@+register Arc *a;
++  for (u=g->vertices+g->n; u>g->vertices; ) {@+register Arc *a;
 +    for (a=(--u)->arcs; a; a=a->next)
 +@z
 +
@@ -17382,7 +17382,7 @@ index 0000000..83c9381
 +defined and used.
 diff --git a/gb_games.w b/gb_games.w
 new file mode 100644
-index 0000000..c3b8958
+index 0000000..a96fa5b
 --- /dev/null
 +++ b/gb_games.w
 @@ -0,0 +1,475 @@
@@ -17479,7 +17479,7 @@ index 0000000..c3b8958
 +@d MAX_DAY 128
 +@d MAX_WEIGHT 131072
 +@d ap u.I /* Associated Press scores: |(ap0<<16)+ap1| */
-+@d upi v.I /* United Press International scores |(upi0<<16)+upi1| */
++@d upi v.I /* United Press International scores: |(upi0<<16)+upi1| */
 +
 +@ Most of the teams belong to a ``conference,'' and they play against
 +almost every other team that belongs to the same conference. For
@@ -17863,7 +17863,7 @@ index 0000000..c3b8958
 +shows where the identifiers of \\{gb\_games} are defined and used.
 diff --git a/gb_gates.w b/gb_gates.w
 new file mode 100644
-index 0000000..464b191
+index 0000000..ee25151
 --- /dev/null
 +++ b/gb_gates.w
 @@ -0,0 +1,1934 @@
@@ -18010,7 +18010,7 @@ index 0000000..464b191
 +    switch (v->typ) { /* branch on type of gate */
 +    case 'I': continue; /* this input gate's value should be externally set */
 +    case 'L': t=v->alt->val;@+break;
-+    @t\4\4@>@<Compute the value |t| of a classical logic gate@>;
++    @t\4@>@<Compute the value |t| of a classical logic gate@>;
 +    default: return -1; /* unknown gate type! */
 +    }
 +    v->val=t; /* assign the computed value */
