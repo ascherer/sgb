@@ -11,14 +11,14 @@ Packager: Andreas Scherer <https://ascherer.github.io>
 Release: 43
 
 %if "%{_vendor}" == "debbuild"
-Version: 2:20250929
+Version: 2:20251228
 Group: math
 Distribution: Kubuntu 24.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
 %else
-Version: 20250929
+Version: 20251228
 Group: Productivity/Scientific/Math
 Distribution: openSUSE 42 (x86_64)
 %global __echo %(which echo)
