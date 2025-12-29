@@ -1,0 +1,110 @@
+@x [2]
+#define exit_test(m) /* we invoke this macro if something goes wrong */\
+@y
+@-m@> @-exit_test@>
+#define exit_test(m) /* we invoke this macro if something goes wrong */\
+@z
+
+@x [6]
+#ifndef GB_IO_H
+@y
+@-GB_IO_H@>
+#ifndef GB_IO_H
+@z
+
+@x [7]
+#ifdef SYSV
+@y
+@-SYSV@>
+#ifdef SYSV
+@z
+
+@x [10]
+Each character |c| in the actual encoding scheme being used has a
+@y
+Each character |c| in the actual encoding scheme being used has a @-c@>
+@z
+
+@x [15]
+character |imap[k]| has |icode| value~|k|. There are 96 characters
+@y
+character |imap[k]| has |icode| value~|k|. There are 96 characters @-k@>
+@z
+
+@x [24]
+@ The value of |d| should be at most 127, if users want their programs to be
+@y
+@r @-d@>
+@ The value of |d| should be at most 127, if users want their programs to be
+@z
+
+@x [25]
+stored at the end), the value returned will be |p+l+1|.
+@y
+stored at the end), the value returned will be |p+l+1|.
+@-c@> @-l@> @-p@>
+@z
+
+@x [27]
+`\.{123456789ABCDEF}'. The second line is completely blank. The third
+and final line says `\.{Oops:(intentional mistake)}'.
+@y
+`\.{123456789ABCDEF}'.
+
+The second line is completely blank.
+
+The third and final line says `\.{Oops:(intentional mistake)}'.
+@z
+
+@x [29]
+#define gb_raw_open gb_r_open
+@y
+@-gb_r_open@>
+#define gb_raw_open gb_r_open
+@z
+
+@x [31]
+#ifdef DATA_DIRECTORY
+@y
+@-DATA_DIRECTORY@>
+#ifdef DATA_DIRECTORY
+@z
+
+@x [34]
+$$\halign{\hskip5em\.{#}\hfill\cr
+@y
+\begingroup\ninepoint
+$$\halign{\.{#}\hfill\cr
+@z
+@x
+ * (Checksum parameters 5757,526296596)\cr}$$
+@y
+ * (Checksum parameters 5757,526296596)\cr}$$
+\endgroup
+@z
+@x
+$$\halign{\hskip5em\.{#}\hfill\cr
+@y
+\begingroup\ninepoint
+$$\halign{\.{#}\hfill\cr
+@z
+@x
+ * (Checksum parameters $l$,$m$)\cr}$$
+@y
+ * (Checksum parameters $l$,$m$)\cr}$$
+\endgroup
+@z
+
+@x [40]
+Example: The |restore_graph| subroutine in {\sc GB\_\,SAVE} uses
+@y
+Example: The |restore_graph| subroutine in {\sc GB\_\,SAVE} uses functions
+@z
+
+@x [41]
+#endif /* |GB_IO_H| */
+@y
+#endif /* |GB_IO_H| */
+@-GB_IO_H@>
+@-gb_r_close@>
+@z
