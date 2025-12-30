@@ -1,3 +1,17 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\def\startpdf{\def\pagemode{/PageMode /UseOutlines}
+  \ifpdflua\pdfcatalog{\pagemode}
+  \else\special{pdf: docview << \pagemode >>}\fi}
+@z
+
 @x [2]
 #define exit_test(m) /* we invoke this macro if something goes wrong */\
 @y
@@ -107,4 +121,10 @@ Example: The |restore_graph| subroutine in {\sc GB\_\,SAVE} uses functions
 #endif /* |GB_IO_H| */
 @-GB_IO_H@>
 @-gb_r_close@>
+@z
+
+@x [43]
+@* Index. Here is a list that shows where the identifiers of this program are
+defined and used.
+@y
 @z
