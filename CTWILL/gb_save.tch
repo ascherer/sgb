@@ -1,0 +1,28 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\def\startpdf{\def\pagemode{/PageMode /UseOutlines}
+  \ifpdflua\pdfcatalog{\pagemode}
+  \else\special{pdf: docview << \pagemode >>}\fi}
+@z
+
+@x [1]
+leads to graphs within graphs, is not permitted in that string.
+@y
+leads to graphs within graphs, is not permitted in that string.
+@-g@> @-u@> @-v@>
+@-GB_SAVE_H@>
+@z
+
+@x [3]
+beginning of the file; such lines are immune to checksumming.
+@y
+beginning of the file; such lines are immune to checksumming.
+@-a@>
+@z
