@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 43
+Release: 44
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20251228
@@ -30,7 +30,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Source: ftp://ftp.cs.stanford.edu/pub/sgb/%{name}.tar.gz
 
 %if %{with patches}
-#Patch1: 0001-sgb-2-20250929-base.patch
+#Patch1: 0001-sgb-2-20251228-base.patch
 Patch2: 0002-GCC-complains-about-int-long-conflicts.patch
 Patch3: 0003-GCC-Wformat-security.patch
 Patch4: 0004-GCC-Wall.patch
@@ -73,6 +73,7 @@ Patch40: 0040-Restore-all-kernel-interfaces.patch
 Patch41: 0041-Couple-MILES_SPAN-to-GB_DIJK.patch
 Patch42: 0042-Simpler-signed-unsigned-patches.patch
 Patch43: 0043-Two-issues-fixed-upstream.patch
+Patch44: 0044-Restore-wording-in-section-4-of-GB_GRAPH.patch
 %endif
 
 %description

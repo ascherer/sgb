@@ -1,7 +1,7 @@
-From d66e9ba3530084301cd6533aafff838baab10074 Mon Sep 17 00:00:00 2001
+From 7494ec6ed4784068cfda91fb707dde8a76745795 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Sat, 4 Oct 2025 15:38:56 +0200
-Subject: [PATCH 01/43] sgb-2:20250929 base
+Date: Thu, 1 Jan 2026 20:00:48 +0100
+Subject: [PATCH 01/44] sgb-2:20251228 base
 
 ---
  +The+Stanford+GraphBase+       |    0
@@ -103,7 +103,7 @@ Subject: [PATCH 01/43] sgb-2:20250929 base
  gb_raman.w                     |  724 ++++
  gb_rand.w                      |  586 ++++
  gb_roget.w                     |  229 ++
- gb_save.w                      |  883 +++++
+ gb_save.w                      |  891 +++++
  gb_sort.w                      |  183 +
  gb_types.w                     |    8 +
  gb_words.w                     |  555 +++
@@ -128,7 +128,7 @@ Subject: [PATCH 01/43] sgb-2:20250929 base
  word_components.w              |  127 +
  word_giant.ch                  |  125 +
  words.dat                      | 5762 ++++++++++++++++++++++++++++++++
- 124 files changed, 40590 insertions(+)
+ 124 files changed, 40598 insertions(+)
  create mode 100644 +The+Stanford+GraphBase+
  create mode 100644 AMIGA/README.AMIGA
  create mode 100644 AMIGA/SMakefile
@@ -24976,10 +24976,10 @@ index 0000000..5f667a6
 +defined and used.
 diff --git a/gb_save.w b/gb_save.w
 new file mode 100644
-index 0000000..678c46e
+index 0000000..fe13b99
 --- /dev/null
 +++ b/gb_save.w
-@@ -0,0 +1,883 @@
+@@ -0,0 +1,891 @@
 +% This file is part of the Stanford GraphBase (c) Stanford University 1993
 +@i boilerplate.w %<< legal stuff: PLEASE READ IT BEFORE MAKING ANY CHANGES!
 +@i gb_types.w
@@ -25389,7 +25389,15 @@ index 0000000..678c46e
 +static long anomalies; /* problems accumulated by |save_graph| */
 +static FILE *save_file; /* the file being written */
 +
-+@ @<External f...@>=
++@ We open the file in binary mode. This makes no difference on
++UNIX-like operating systems; but it prevents Windows-like systems
++from converting the single internal character |'\n'| to the
++two external characters |'\r'| and |'\n'|.
++(Indeed, with text mode, a graph saved under Windows
++cannot be restored under Linux!
++But with binary mode that problem goes away.)
++
++@<External f...@>=
 +long save_graph(g,f)
 +  Graph *g; /* graph to be saved */
 +  char *f; /* name of the file to be created */
@@ -25397,7 +25405,7 @@ index 0000000..678c46e
 +  if (g==NULL || g->vertices==NULL) return -1; /* where is |g|? */
 +  anomalies=0;
 +  @<Figure out the extent of |g|'s internal records@>;
-+  save_file=fopen(f,"w");
++  save_file=fopen(f,"wb");
 +  if (!save_file) return -2; /* oops, the operating system won't cooperate */
 +  @<Translate |g| into external format@>;
 +  @<Make notes at the end of the file about any changes that were necessary@>;
@@ -41586,5 +41594,5 @@ index 0000000..8bd70a6
 +zowie 4
 +* End of file "words.dat"
 -- 
-2.51.0
+2.52.0
 

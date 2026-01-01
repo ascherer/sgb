@@ -1,0 +1,63 @@
+From dcbacbebd47db7ac174bc723577c7f1e2a1e3036 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 1 Jan 2026 12:11:49 +0100
+Subject: [PATCH 44/44] Restore wording in section 4 of GB_GRAPH.
+
+We keep the standard headers in gb_graph.h, because it would be
+terrible repetitive to move the necessary #include directives to
+most of the other modules. Also, it's unclear where and how we
+should avoid any pre-defined occurrence of a 'min' macro.
+---
+ PROTOTYPES/gb_graph.ch | 21 ---------------------
+ 1 file changed, 21 deletions(-)
+
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 1864d16..220efef 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -36,20 +36,8 @@ int main(void)
+ 
+ @x [4] l.56
+ @ The type declarations of {\sc GB\_\,GRAPH} appear also in the header file
+-\.{gb\_graph.h}. For convenience, that header file also incorporates the
+-standard system headers for input/output and string manipulation.
+-
+-Some system header files define an unsafe macro called |min|, which will
+-interfere with GraphBase use of a useful identifier. We scotch that.
+ @y
+ @ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
+-\.{gb\_graph.h}.
+-
+-We will stick to standard \CEE/-type input conventions. We'll also have
+-occasion to use some of the standard string operations.
+-
+-Some system header files define an unsafe macro called |min|, which will
+-interfere with GraphBase use of a useful identifier. We scotch that.
+ @z
+ 
+ @x [4] l.64
+@@ -57,21 +45,12 @@ interfere with GraphBase use of a useful identifier. We scotch that.
+ #include <stdlib.h>
+ #ifdef SYSV
+ #include <string.h>
+-#else
+-#include <strings.h>
+-#endif
+-#undef min
+ @y
+ #ifndef GB_GRAPH_H
+ #define GB_GRAPH_H
+ #include <stdio.h> /* |@!FILE| et al.*/
+ #ifdef SYSV
+ #include <string.h> /* |@!strcpy| et al.*/
+-#else
+-#include <strings.h>
+-#endif
+-#undef min
+-@#
+ @z
+ 
+ @x [11] l.221
+-- 
+2.52.0
+

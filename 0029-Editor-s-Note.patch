@@ -1,7 +1,7 @@
-From c0ac8ba18daaf5630ccecb6e30e13b02491141c8 Mon Sep 17 00:00:00 2001
+From b935d2d9f54152a3867be1655df6072eb13ad3ee Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 21 Jun 2024 17:36:55 +0200
-Subject: [PATCH 29/43] Editor's Note.
+Subject: [PATCH 29/44] Editor's Note.
 
 ---
  boilerplate.w | 11 ++++++++++-
@@ -37,5 +37,5 @@ index 3292cc9..91d3aef 100644
  \def\prerequisite#1{\def\startsection{\noindent
      Important: Before reading {\sc\title},
 -- 
-2.51.0
+2.52.0
 

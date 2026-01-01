@@ -1,7 +1,7 @@
-From fb426f7cc0b0dbbc6dd2d543c2ac7a4e47a45bec Mon Sep 17 00:00:00 2001
+From 2382a64b8c744fd67b3d8e14eae61eed0c8e49f2 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 11:06:08 +0100
-Subject: [PATCH 11/43] Try to fix 'INF'inity.
+Subject: [PATCH 11/44] Try to fix 'INF'inity.
 
 See https://www-cs-staff.stanford.edu/~knuth/sgb.html for details.
 ---
@@ -329,5 +329,5 @@ index 50e73d7..3d3ac21 100644
  @y
      if (c?*apos<(long)thresh:*apos>=(long)thresh) {
 -- 
-2.51.0
+2.52.0
 
