@@ -1,4 +1,4 @@
-From 8a03fc2208b6918c48a8e3946fa3f8ffc58449ef Mon Sep 17 00:00:00 2001
+From 87cfa9937368b35c3524adb546a992c24187eb6a Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 09:13:41 +0200
 Subject: [PATCH 27/44] Fix changefile lines.
@@ -3158,7 +3158,7 @@ index 38b7814..113b1cf 100644
    case ' ': j=gb_number(10);@+break;
  @y
 diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
-index 192d0ed..4e36df0 100644
+index 192d0ed..474d143 100644
 --- a/PROTOTYPES/gb_save.ch
 +++ b/PROTOTYPES/gb_save.ch
 @@ -1,4 +1,4 @@
@@ -3205,7 +3205,7 @@ index 192d0ed..4e36df0 100644
  @z
  
 -@x l.410
-+@x [20] l.411
++@x [20] l.419
  long save_graph(g,f)
    Graph *g; /* graph to be saved */
    char *f; /* name of the file to be created */
@@ -3214,7 +3214,7 @@ index 192d0ed..4e36df0 100644
  @z
  
 -@x l.518
-+@x [25] l.520
++@x [25] l.528
  static void classify(l,t)
    util *l; /* location of field to be classified */
    char t; /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
@@ -3223,28 +3223,28 @@ index 192d0ed..4e36df0 100644
  @z
  
 -@x l.569
-+@x [27] l.569
++@x [27] l.577
    do@+{@+activity=0;
  @y
    do {@+activity=0;
  @z
  
 -@x l.578
-+@x [27] l.578
++@x [27] l.586
    }@+while (activity);
  @y
    } while (activity);
  @z
  
 -@x l.672
-+@x [35] l.674
++@x [35] l.682
  static void flushout() /* output the buffer to |save_file| */
  @y
  static void flushout(void) /* output the buffer to |save_file| */
  @z
  
 -@x l.686
-+@x [36] l.688
++@x [36] l.696
  static void prepare_string(s)
    char *s; /* string that is moved to |item_buf| */
  @y
@@ -3253,28 +3253,28 @@ index 192d0ed..4e36df0 100644
  @z
  
 -@x l.709
-+@x [37] l.711
++@x [37] l.719
  static void move_item()
  @y
  static void move_item(void)
  @z
  
 -@x l.718
-+@x [37] l.718
++@x [37] l.726
        do@+{
  @y
        do {
  @z
  
 -@x l.722
-+@x [37] l.722
++@x [37] l.730
        }@+while(l>78);
  @y
        } while(l>78);
  @z
  
 -@x l.747
-+@x [39] l.749
++@x [39] l.757
  static void translate_field(l,t)
    util *l; /* address of field to be output in symbolic form */
    char t; /* type of formatting desired */
@@ -3283,7 +3283,7 @@ index 192d0ed..4e36df0 100644
  @z
  
 -@x l.760
-+@x [39] l.760
++@x [39] l.768
      /* fall through to case \.Z */
   case 'Z': buf_ptr--; /* forget spurious comma */
  @y

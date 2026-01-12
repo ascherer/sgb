@@ -1,4 +1,4 @@
-From 81e69cca0bd841f175e72aa876ac09b7768c3fdc Mon Sep 17 00:00:00 2001
+From 8515f2de29c2b90a90c69c50161d742b541a1e51 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 10:32:28 +0200
 Subject: [PATCH 28/44] Shift TOC to front of PDF.
@@ -330,7 +330,7 @@ index 113b1cf..641df95 100644
  extern Graph *roget();
  @y
 diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
-index 4e36df0..745b9d6 100644
+index 474d143..c36f21f 100644
 --- a/PROTOTYPES/gb_save.ch
 +++ b/PROTOTYPES/gb_save.ch
 @@ -1,3 +1,10 @@

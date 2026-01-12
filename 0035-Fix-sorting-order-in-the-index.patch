@@ -1,4 +1,4 @@
-From 11fe22afc0f403a7c9e943698c067600e9bd2516 Mon Sep 17 00:00:00 2001
+From b65933d625ab33406f0aed928e556d12d6d66bda Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 9 Sep 2024 19:45:08 +0200
 Subject: [PATCH 35/44] Fix sorting order in the index.
@@ -604,7 +604,7 @@ index 1d50605..393e7f2 100644
 +@ @<Check \9{d}|dist| for validity...@>=
 +@z
 diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
-index 745b9d6..ec855ae 100644
+index c36f21f..c3f9f37 100644
 --- a/PROTOTYPES/gb_save.ch
 +++ b/PROTOTYPES/gb_save.ch
 @@ -34,6 +34,12 @@ Graph *restore_graph(
@@ -672,52 +672,52 @@ index 745b9d6..ec855ae 100644
 +@ @<Fill in \9{g}|g->n|, |g->m|, and |g|'s utility fields@>=
 +@z
 +
- @x [20] l.411
+ @x [20] l.419
  long save_graph(g,f)
    Graph *g; /* graph to be saved */
 @@ -60,6 +108,18 @@ long save_graph(
    char *f) /* name of the file to be created */
  @z
  
-+@x [20] l.420
++@x [20] l.428
 +  @<Translate |g| into external format@>;
 +@y
 +  @<Translate \9{g}|g| into external format@>;
 +@z
 +
-+@x [23] l.480
++@x [23] l.488
 +@<Initialize the |blocks| array@>=
 +@y
 +@<Initialize the \9{b}|blocks| array@>=
 +@z
 +
- @x [25] l.520
+ @x [25] l.528
  static void classify(l,t)
    util *l; /* location of field to be classified */
 @@ -70,6 +130,12 @@ static void classify(
    char t) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
  @z
  
-+@x [27] l.561
++@x [27] l.569
 +  @<Initialize the |blocks| array@>;
 +@y
 +  @<Initialize the \9{b}|blocks| array@>;
 +@z
 +
- @x [27] l.569
+ @x [27] l.577
    do@+{@+activity=0;
  @y
 @@ -82,6 +148,12 @@ static void classify(
    } while (activity);
  @z
  
-+@x [30] l.615
++@x [30] l.623
 +@<Translate |g| into external format@>=
 +@y
 +@<Translate \9{g}|g| into external format@>=
 +@z
 +
- @x [35] l.674
+ @x [35] l.682
  static void flushout() /* output the buffer to |save_file| */
  @y
 @@ -131,3 +203,33 @@ static void translate_field(
@@ -725,31 +725,31 @@ index 745b9d6..ec855ae 100644
   case 'Z': buf_ptr--; /* forget spurious comma */
  @z
 +
-+@x [39] l.770
++@x [39] l.778
 +  @<Translate a pointer variable@>;
 +@y
 +  @<Translate \9{a}a pointer variable@>;
 +@z
 +
-+@x [40] l.774
++@x [40] l.782
 +@ @<Translate a pointer variable@>=
 +@y
 +@ @<Translate \9{a}a pointer variable@>=
 +@z
 +
-+@x [42] l.813
++@x [42] l.821
 +      @<Translate all |Vertex| records in |cur_block|@>;
 +@y
 +      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
 +@z
 +
-+@x [42] l.816
++@x [42] l.824
 +      @<Translate all |Vertex| records in |cur_block|@>;
 +@y
 +      @<Translate \9{a}all |Vertex| records in |cur_block|@>;
 +@z
 +
-+@x [43] l.819
++@x [43] l.827
 +@ @<Translate all |Vertex| records in |cur_block|@>=
 +@y
 +@ @<Translate \9{a}all |Vertex| records in |cur_block|@>=

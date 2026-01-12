@@ -1,4 +1,4 @@
-From fe88e4dcfa733bfb61c45457aaf0f8e5c3e8604d Mon Sep 17 00:00:00 2001
+From b831890ebf2d29810b5aaac2ee80e93e8b3f894a Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 10 Jan 2017 10:19:52 +0100
 Subject: [PATCH 10/44] Fix compiler warnings when optimizing.

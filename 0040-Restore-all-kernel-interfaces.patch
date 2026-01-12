@@ -1,4 +1,4 @@
-From c1fc554d5df76907f6d2a1f5a062a8dacee1848c Mon Sep 17 00:00:00 2001
+From 037dc8fc65da028e7c9df61e2c90fa6f0baa3f72 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 13:26:29 +0200
 Subject: [PATCH 40/44] Restore all kernel interfaces.

@@ -1,4 +1,4 @@
-From 7f65a587307972ba86480bb03b782b153e6f3dfc Mon Sep 17 00:00:00 2001
+From 5a3a0b9ec8febf1a377b3d1b80725d773eb2ec48 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Nov 2023 15:38:35 +0100
 Subject: [PATCH 22/44] Forward-declare Graph and Vertex structures.
