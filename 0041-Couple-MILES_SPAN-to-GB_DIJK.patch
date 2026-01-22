@@ -1,7 +1,7 @@
-From 8447ba82a75c45542019f4f9fcb254b201ac6d39 Mon Sep 17 00:00:00 2001
+From 924d203e1ec6be14079d5d6cc1fa74b1dd83b117 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 14:06:09 +0200
-Subject: [PATCH 41/44] Couple MILES_SPAN to GB_DIJK.
+Subject: [PATCH 41/45] Couple MILES_SPAN to GB_DIJK.
 
 Reuse pointers to priority subroutimes and two preprocessor identifiers.
 

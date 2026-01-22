@@ -1,0 +1,95 @@
+From c97b412c28492a30c74e8aeeee4c236ed9993160 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 22 Jan 2026 16:22:05 +0100
+Subject: [PATCH 45/45] Purge unused variables in WORD_GIANT.
+
+Now you can
+
+$ ln -s PROTOTYPES/*.ch .
+$ make tests demos
+$ tie -m word_giant.w word_components.w PROTOTYPES/word_components.ch
+$ ctangle word_giant.{w,ch}
+$ gcc -o word_giant -Wall -Wextra -DSYSV word_giant.c -L. -lgb
+$ ./word_giant
+
+and
+
+$ cweave word_giant.{w,ch}
+$ pdftex word_giant ; pdftex word_giant
+
+without any faults.
+---
+ word_giant.ch | 31 +++++++++++++++++++++++++++++--
+ 1 file changed, 29 insertions(+), 2 deletions(-)
+
+diff --git a/word_giant.ch b/word_giant.ch
+index ece198d..297e48e 100644
+--- a/word_giant.ch
++++ b/word_giant.ch
+@@ -48,6 +48,14 @@ alphabetic distances are used (as in the \.{-a} option of {\sc LADDERS}).
+ #include "gb_basic.h" /* the |induced| routine */
+ @z
+ 
++@x purge unused variables
++  long n=0; /* the number of vertices in the component structure */
++  long isol=0; /* the number of isolated vertices in the component structure */
++  long comp=0; /* the current number of components */
++  long m=0; /* the current number of edges */
++@y
++@z
++
+ @x changes to the code of section 1
+   printf("Component analysis of %s\n",g->id);
+   for (v=g->vertices; v<g->vertices+g->n; v++) {
+@@ -59,7 +67,6 @@ alphabetic distances are used (as in the \.{-a} option of {\sc LADDERS}).
+   @<Display all unusual components@>;
+ @y we suppress printing
+   for (v=g->vertices; v<g->vertices+g->n; v++) {
+-    n++;
+     @<Add vertex |v| to the component structure, and change the lengths
+           of edges that connect it to previous vertices@>;
+   }
+@@ -83,19 +90,39 @@ for (; a; a=a->next) {@+register Vertex *u=a->tip;
+   register char *p=v->name+k,*q=u->name+k;
+   if (*p<*q) a->len=(a-1)->len=*q-*p;
+   else a->len=(a-1)->len=*p-*q; /* alphabetic distance */
+-  m++;
+   @<Merge the components of |u| and |v|, if they differ@>;
+ }
+ @z
+ 
++@x purge unused variables
++isol++;
++comp++;
++@y
++@z
+ @x delete printing in section 4
+     if (c++>0) printf("%s %s[%ld]", (c==2? " with": ","), u->name, u->size);
+ @y
+ @z
++@x purge unused variables
++    if (u->size==1) isol--;
++@y
++@z
+ @x delete more printing in section 4
+     if (c++>0) printf("%s %s[%ld]", (c==2? " with": ","), w->name, w->size);
+ @y
+ @z
++@x purge unused variables
++    if (u->size==1) isol--;
++@y
++@z
++@x purge unused variables
++    if (w->size==1) isol--;
++@y
++@z
++@x purge unused variables
++  comp--;
++@y
++@z
+ 
+ @x replace section 5
+ We consider all other components unusual, so we print them out when the
+-- 
+2.52.0
+
