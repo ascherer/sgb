@@ -1,0 +1,56 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\def\startpdf{\def\pagemode{/PageMode /UseOutlines}
+  \ifpdflua\pdfcatalog{\pagemode}
+  \else\special{pdf: docview << \pagemode >>}\fi}
+@z
+
+@x [3]
+@ The \CEE/ code for {\sc GB\_\,FLIP} doesn't have a main routine; it's just a
+@y
+@r @ The \CEE/ code for {\sc GB\_\,FLIP} doesn't have a main routine; it's just a
+@z
+
+@x [6]
+#ifndef GB_FLIP_H
+@y
+#ifndef GB_FLIP_H
+@-GB_FLIP_H@>
+@z
+
+@x [7]
+@ The user is not supposed to call |gb_flip_cycle| directly either.
+@y
+@r @ The user is not supposed to call |gb_flip_cycle| directly either.
+@z
+@x [7]
+@d mod_diff(x,y) (((x)-(y))&0x7fffffff) /* difference modulo $2^{31}$ */
+@y
+@d mod_diff(x,y) (((x)-(y))&0x7fffffff) /* difference modulo $2^{31}$ */
+@-x@> @-y@>
+@z
+
+@x [10]
+@ After the first 55 values have been computed as a function of |seed|,
+@y
+@r @ After the first 55 values have been computed as a function of |seed|,
+@z
+@x [13]
+#endif /* |GB_FLIP_H| */
+@y
+#endif /* |GB_FLIP_H| */
+@-GB_FLIP_H@>
+@z
+
+@x [14]
+@* Index. Here is a list that shows where the identifiers of this program are
+defined and used.
+@y
+@z
