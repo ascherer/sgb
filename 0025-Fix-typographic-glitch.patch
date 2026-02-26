@@ -1,7 +1,7 @@
-From f451144fb2c398ef83888adb3aa7222c25b543f5 Mon Sep 17 00:00:00 2001
+From d59a91e969270474370ecb2c7adbcb162d5c29f6 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 24 Jan 2024 10:06:14 +0100
-Subject: [PATCH 25/45] Fix typographic glitch.
+Subject: [PATCH 25/46] Fix typographic glitch.
 
 ---
  PROTOTYPES/gb_gates.ch | 6 ++++++
@@ -25,5 +25,5 @@ index 66aeae6..57d634f 100644
  static void make_adder(n,x,y,z,carry,add)
    unsigned long n; /* number of bits */
 -- 
-2.52.0
+2.53.0
 

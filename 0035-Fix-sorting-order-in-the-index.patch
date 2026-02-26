@@ -1,7 +1,7 @@
-From 0e7cdafd6fc5aad4bc90a2dd6e5f6cd148fe1b7f Mon Sep 17 00:00:00 2001
+From 27fd09ca75f0de90a311bc86a02412fbaa4f3c29 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 9 Sep 2024 19:45:08 +0200
-Subject: [PATCH 35/45] Fix sorting order in the index.
+Subject: [PATCH 35/46] Fix sorting order in the index.
 
 ---
  PROTOTYPES/football.ch         |  72 +++++++++++++++++
@@ -960,5 +960,5 @@ index 5742396..22537c7 100644
 +@<Perform \9{a}a depth-first search with |vv| as the root...@>=
 +@z
 -- 
-2.52.0
+2.53.0
 

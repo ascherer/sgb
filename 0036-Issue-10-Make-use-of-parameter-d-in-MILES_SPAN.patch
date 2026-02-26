@@ -1,7 +1,7 @@
-From 78e4e5e43cb0934c9dc8164eafe2aa5e7c0b9e13 Mon Sep 17 00:00:00 2001
+From 01e82fabbe28ab21e82a483979d00d6a8d0a9463 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Tue, 5 Aug 2025 11:49:22 +0200
-Subject: [PATCH 36/45] Issue #10: Make use of parameter 'd' in MILES_SPAN.
+Subject: [PATCH 36/46] Issue #10: Make use of parameter 'd' in MILES_SPAN.
 
 ---
  PROTOTYPES/miles_span.ch | 10 ++++++----
@@ -39,5 +39,5 @@ index bef5869..a27bb99 100644
  
  @x [33] l.860
 -- 
-2.52.0
+2.53.0
 

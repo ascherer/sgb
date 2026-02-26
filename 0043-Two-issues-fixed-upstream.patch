@@ -1,7 +1,7 @@
-From 630dd0e34f071f7e867718bd27024c181963f83f Mon Sep 17 00:00:00 2001
+From 9b6bb431c8ccfb1080e306aca68be7282e89ffe5 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Oct 2025 15:42:40 +0200
-Subject: [PATCH 43/45] Two issues fixed upstream.
+Subject: [PATCH 43/46] Two issues fixed upstream.
 
 ---
  PROTOTYPES/gb_games.ch | 2 +-
@@ -35,5 +35,5 @@ index fd3b883..0658cfa 100644
    @/@t\4@>@<Compute the value |t| of a classical logic gate@>@;
  @z
 -- 
-2.52.0
+2.53.0
 

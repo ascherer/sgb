@@ -1,0 +1,24 @@
+From 0b3563f590fec8e0ac8d099305aca1bd2a31d820 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 26 Feb 2026 17:18:40 +0100
+Subject: [PATCH 46/46] Move defines after include.
+
+---
+ PROTOTYPES/gb_flip.ch | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/PROTOTYPES/gb_flip.ch b/PROTOTYPES/gb_flip.ch
+index b380818..03b9d00 100644
+--- a/PROTOTYPES/gb_flip.ch
++++ b/PROTOTYPES/gb_flip.ch
+@@ -23,6 +23,7 @@ int main(void)
+ @<Private declarations@>@;
+ @y
+ #include "gb_flip.h" /* we use our own interface |@(gb_flip.h@>| first */
++@# @h
+ @<Private declarations@>@;
+ @z
+ 
+-- 
+2.53.0
+

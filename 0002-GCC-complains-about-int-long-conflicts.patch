@@ -1,7 +1,7 @@
-From fc8904ba113f56eccd68655cfc536497ee4e0461 Mon Sep 17 00:00:00 2001
+From 7ded5f3f6851ebd5f78ccb83da7ff8cf8538b083 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_coder@freenet.de>
 Date: Fri, 2 Sep 2011 09:39:05 +0200
-Subject: [PATCH 02/45] GCC complains about int/long conflicts.
+Subject: [PATCH 02/46] GCC complains about int/long conflicts.
 
 In very rare situations in the original SGB code, int/long conflicts occur.
 It's elementary how to fix these nits.
@@ -51,5 +51,5 @@ index 488a739..d4995bb 100644
  decimal_to_binary(x,s,n)
    char *x; /* decimal string */
 -- 
-2.52.0
+2.53.0
 

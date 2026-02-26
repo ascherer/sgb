@@ -1,7 +1,7 @@
-From 09238ce62f514e43610981a3ec7b9e903e892eb1 Mon Sep 17 00:00:00 2001
+From 25fef737ae7c2455985c6dbc596ccbdd1ca7e119 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 13:26:29 +0200
-Subject: [PATCH 40/45] Restore all kernel interfaces.
+Subject: [PATCH 40/46] Restore all kernel interfaces.
 
 ---
  PROTOTYPES/gb_basic.ch    | 24 ++++++------------------
@@ -359,5 +359,5 @@ index 2e5c225..4de6f3e 100644
  if (i=random_lengths(g,0L,10L,12L,dst,2L))
  @y
 -- 
-2.52.0
+2.53.0
 

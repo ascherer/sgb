@@ -1,7 +1,7 @@
-From c30444840162eff9fbc34da8003845892386915b Mon Sep 17 00:00:00 2001
+From 0411b60caed8a068d107f933fc9b49c227357bb6 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 17 Jul 2024 09:01:00 +0200
-Subject: [PATCH 34/45] Compile SGB with GCC-14.
+Subject: [PATCH 34/46] Compile SGB with GCC-14.
 
 ---
  PROTOTYPES/gb_graph.ch | 7 +++++++
@@ -28,5 +28,5 @@ index 382e7cb..1864d16 100644
  
  @x [29] l.551
 -- 
-2.52.0
+2.53.0
 
