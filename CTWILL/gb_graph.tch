@@ -96,39 +96,10 @@ graph~|g| by using the following program:
 @z
 
 @x [23]
-@ A new graph is created by calling |gb_new_graph(n)|, which returns a
-@y
-@r @ A new graph is created by calling |gb_new_graph(n)|, which returns a
-@z
-@x [23]
   long n) /* desired number of vertices */
 @y
   long n) /* desired number of vertices */
 @-n@>
-@z
-@x [23]
-  cur_graph=(Graph*)calloc(1,sizeof(Graph));
-@y
-  @+ cur_graph=(Graph*)calloc(1,sizeof(Graph));
-@z
-@x [23]
-    if (cur_graph->vertices) {Vertex *p;
-@y
-    if (cur_graph->vertices) {@+Vertex *p;
-@z
-@x [23]
-      free((char*)cur_graph);
-      cur_graph=NULL;
-@y
-      free((char*)cur_graph); @+
-      cur_graph=NULL;
-@z
-@x [23]
-  next_arc=bad_arc=NULL;
-  next_string=bad_string=NULL;
-@y
-  next_arc=bad_arc=NULL; @+
-  next_string=bad_string=NULL; @+
 @z
 
 @x [26]
