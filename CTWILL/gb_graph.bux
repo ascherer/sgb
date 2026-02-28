@@ -1,0 +1,22 @@
+@$alloc_fault {GB\_\,GRAPH}7 =$(-1)$@>
+@$no_room {GB\_\,GRAPH}7 =1@>
+@$early_data_fault {GB\_\,GRAPH}7 =10@>
+@$late_data_fault {GB\_\,GRAPH}7 =11@>
+@$syntax_error {GB\_\,GRAPH}7 =20@>
+@$bad_specs {GB\_\,GRAPH}7 =30@>
+@$very_bad_specs {GB\_\,GRAPH}7 =40@>
+@$missing_operand {GB\_\,GRAPH}7 =50@>
+@$invalid_operand {GB\_\,GRAPH}7 =60@>
+@$impossible {GB\_\,GRAPH}7 =90@>
+@$gb_typed_alloc {GB\_\,GRAPH}11 =macro $(\,)$@>
+@$init_area {GB\_\,GRAPH}12 =macro $(\,)$@>
+@$ID_FIELD_SIZE {GB\_\,GRAPH}20 =161@>
+@$n_1 {GB\_\,GRAPH}22 =macro@>
+@$mark_bipartite {GB\_\,GRAPH}22 =macro $(\,)$@>
+@$make_compound_id {GB\_\,GRAPH}26 \&{void} $(\,)$@>
+@$make_double_compound_id {GB\_\,GRAPH}27 \&{void} $(\,)$@>
+
+@$io_errors {GB\_\,IO}5 \&{long}@>
+
+@$restore_graph {GB\_\,SAVE}4 \&{Graph} ${}{*}{}$ $(\,)$@>
+@$save_graph {GB\_\,SAVE}20 \&{long} $(\,)$@>

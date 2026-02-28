@@ -1,0 +1,326 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\def\startpdf{\def\pagemode{/PageMode /UseOutlines}
+  \ifpdflua\pdfcatalog{\pagemode}
+  \else\special{pdf: docview << \pagemode >>}\fi}
+
+@s arc_struct int
+@s graph_struct int
+@s vertex_struct int
+@z
+
+@x [1]
+@* Introduction. This is {\sc GB\_\,GRAPH}, the data-structure module
+@y
+@* Introduction. This is {\sc GB\_\,GRAPH}, the module for the
+data-structures
+@z
+
+@x [4]
+@ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
+@y
+@r @ The type declarations of {\sc GB\_\,GRAPH} appear in the header file
+@z
+@x [4]
+#ifdef SYSV
+@y
+#ifdef SYSV
+@-SYSV@> @-GB_GRAPH_H@> @-min@>
+@z
+
+@x [10]
+If |a| points to an \&{Arc} in the list of arcs from vertex~|v|, it represents
+@y
+@-v@>
+If |a| points to an \&{Arc} in the list of arcs from vertex~|v|, it represents
+@z
+
+@x [11]
+#define gb_typed_alloc(n,t,s) @[@t\quad@>\
+@y
+@-n@> @-t@> @-s@>
+#define gb_typed_alloc(n,t,s) @[@t\quad@>\
+@z
+
+@x [12]
+#define init_area(s) @t\quad@> @[*s=NULL@]
+@y
+#define init_area(s) @t\quad@> @[*s=NULL@]
+@-n@> @-s@>
+@z
+
+@x [13]
+  Area s) /* storage area that will contain the new block */
+@y
+  Area s) /* storage area that will contain the new block */
+@-n@> @-s@> @-m@> @-t@>
+@z
+@x [13]
+    (*t)->first=loc;
+    (*t)->next=*s;
+    *s=*t;
+  }@+else gb_trouble_code|=1;
+@y
+    (*t)->first=loc; @+
+    (*t)->next=*s; @+
+    *s=*t;
+  }@+else gb_trouble_code|=1;
+@z
+
+@x [16]
+  Area s)
+@y
+  Area s)
+@-s@>
+@z
+
+@x [20]
+graph~|g| by using the following program:
+@y
+graph~|g| by using the following program:
+@-g@>
+@z
+
+@x [22]
+#define mark_bipartite(g,n1) @[g->n_1=n1,g->util_types[8]='I'@]
+@y
+#define mark_bipartite(g,n1) @[g->n_1=n1,g->util_types[8]='I'@]
+@-g@> @-n1@>
+@z
+
+@x [23]
+@ A new graph is created by calling |gb_new_graph(n)|, which returns a
+@y
+@r @ A new graph is created by calling |gb_new_graph(n)|, which returns a
+@z
+@x [23]
+  long n) /* desired number of vertices */
+@y
+  long n) /* desired number of vertices */
+@-n@>
+@z
+@x [23]
+  cur_graph=(Graph*)calloc(1,sizeof(Graph));
+@y
+  @+ cur_graph=(Graph*)calloc(1,sizeof(Graph));
+@z
+@x [23]
+    if (cur_graph->vertices) {Vertex *p;
+@y
+    if (cur_graph->vertices) {@+Vertex *p;
+@z
+@x [23]
+      free((char*)cur_graph);
+      cur_graph=NULL;
+@y
+      free((char*)cur_graph); @+
+      cur_graph=NULL;
+@z
+@x [23]
+  next_arc=bad_arc=NULL;
+  next_string=bad_string=NULL;
+@y
+  next_arc=bad_arc=NULL; @+
+  next_string=bad_string=NULL; @+
+@z
+
+@x [26]
+  char *s2) /* string for the end of the new |id| */
+@y
+  char *s2) /* string for the end of the new |id| */
+@-g@> @-s1@> @-gg@> @-s2@>
+@z
+
+@x [27]
+  char *s3) /* string for the end of the new |id| */
+@y
+  char *s3) /* string for the end of the new |id| */
+@-g@> @-s1@> @-gg@> @-s2@> @-ggg@> @-s3@>
+@z
+@x [27]
+  else sprintf(g->id,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+@y
+  @+ else sprintf(g->id,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+@z
+
+@x [28]
+@ But how do the arcs get there? That's where the private variables in
+|gb_new_graph| come in. If |next_arc| is unequal to |bad_arc|, it points to
+@y
+@ But how do the arcs get there? That's where the private stuff in
+|gb_new_graph| comes in. If |next_arc| is unequal to |bad_arc|, it points to
+@z
+
+@x [29]
+pointer to |dummy_arc|, so that the calling procedure can safely
+@y
+pointer to a virtual |dummy_arc|, so that the calling procedure can safely
+@z
+
+@x [30]
+  Vertex *u,Vertex *v, /* a newly created arc will go from |u| to |v| */
+  long len) /* its length */
+@y
+  @/Vertex *u,@/Vertex *v, /* a newly created arc will go from |u| to |v| */
+  long len) /* its length */
+@-u@> @-v@> @-len@>
+@z
+@x [30]
+{@+register Arc *cur_arc=gb_virgin_arc();
+@y
+{register Arc *cur_arc=gb_virgin_arc();
+@z
+
+@x [31]
+after |gb_new_edge| has created it, assuming that |u!=v|. The two arcs
+@y
+after procedure |gb_new_edge| has created it, assuming that |u!=v|. The two arcs
+@z
+@x [31]
+  Vertex *u,Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
+  long len) /* their length */
+@y
+  @/Vertex *u,@/Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
+  long len) /* their length */
+@-u@> @-v@> @-len@> @-a@>
+@z
+
+@x [32]
+is nonzero.
+@y
+is nonzero.
+@-a@>
+@z
+
+@x [35]
+  register char *s) /* the string to be copied */
+@y
+  register char *s) /* the string to be copied */
+@-s@>
+@z
+
+@x [36]
+@ The test routine illustrates some of these basic maneuvers.
+@y
+@ The test routine illustrates some of these basic maneuvers.
+@%
+@$g {GB\_\,GRAPH}37 \&{Graph} ${}{*}{}$@>
+@$u {GB\_\,GRAPH}37 \&{Vertex} ${}{*}{}$@>
+@$v {GB\_\,GRAPH}37 \&{Vertex} ${}{*}{}$@>
+@z
+
+@x [38]
+@ If the ``edge trick'' fails, the standard GraphBase routines are
+@y
+@r @ If the ``edge trick'' fails, the standard GraphBase routines are
+@z
+
+@x [39]
+  Graph *g)
+@y
+  Graph *g)
+@-g@>
+@z
+
+@x [40]
+  Graph *g)
+@y
+  Graph *g)
+@-g@>
+@z
+
+@x [41]
+@ @(gb_graph.h@>=
+@y
+@r @ @(gb_graph.h@>=
+@z
+@x [41]
+#define gb_new_edge gb_nuedge
+@y
+#define gb_new_edge gb_nuedge
+@-gb_nuarc@> @-gb_nuedge@> @-gb_nugraph@>
+@z
+
+@x [42]
+\smallskip}
+@y
+\smallskip}
+@-g@> @-s@>
+@z
+@x [42]
+#endif /* |GB_GRAPH_H| */
+@y
+#endif /* |GB_GRAPH_H| */
+@-GB_GRAPH_H@>
+@z
+
+@x [43]
+@ The lookup scheme is quite simple. We compute a more-or-less random
+@y
+@ The lookup scheme is quite simple:
+
+We compute a more-or-less random
+@z
+@x [43]
+utility fields |u.V| and |v.V|.
+@y
+utility fields |u.V| and |v.V|.
+@-g@> @-h@> @-u@> @-v@>
+@z
+
+@x [44]
+  Vertex *v)
+@y
+  Vertex *v)
+@-v@>
+@z
+
+@x [45]
+@ The hash code for a string $c_1c_2\ldots c_l$ of length $l$ is a
+@y
+@r @ The hash code for a string $c_1c_2\ldots c_l$ of length $l$ is a
+@z
+@x [45]
+@<Find vertex |u|...@>=
+@y
+@<Find vertex |u|...@>=
+@%
+@$t {GB\_\,GRAPH}44 \&{register} \&{char} ${}{*}{}$@>
+@$t {GB\_\,GRAPH}46 \&{register} \&{char} ${}{*}{}$@>
+@$u {GB\_\,GRAPH}44 \&{register} \&{Vertex} ${}{*}{}$@>
+@$u {GB\_\,GRAPH}46 \&{register} \&{Vertex} ${}{*}{}$@>
+@z
+
+@x [46]
+  char *s)
+@y-s@>
+  char *s)
+@-s@>
+@z
+
+@x [47]
+  Graph *g)
+@y
+  Graph *g)
+@-g@>
+@z
+
+@x [48]
+  Graph *g)
+@y
+  Graph *g)
+@-s@> @-g@>
+@z
+
+@x [49]
+@* Index. Here is a list that shows where the identifiers of this program are
+defined and used.
+@y
+@z
