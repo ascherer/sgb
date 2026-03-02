@@ -136,9 +136,12 @@ pointer to a virtual |dummy_arc|, so that the calling procedure can safely
 @z
 
 @x [30]
+void gb_new_arc(
   Vertex *u,Vertex *v, /* a newly created arc will go from |u| to |v| */
   long len) /* its length */
 @y
+@-gb_new_arc@>
+void gb_new_arc(
   @/Vertex *u,@/Vertex *v, /* a newly created arc will go from |u| to |v| */
   long len) /* its length */
 @-u@> @-v@> @-len@>
@@ -155,9 +158,12 @@ after |gb_new_edge| has created it, assuming that |u!=v|. The two arcs
 after procedure |gb_new_edge| has created it, assuming that |u!=v|. The two arcs
 @z
 @x [31]
+void gb_new_edge(
   Vertex *u,Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
   long len) /* their length */
 @y
+@-gb_new_edge@>
+void gb_new_edge(
   @/Vertex *u,@/Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
   long len) /* their length */
 @-u@> @-v@> @-len@> @-a@>

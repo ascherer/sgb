@@ -15,6 +15,8 @@
 @$mark_bipartite {GB\_\,GRAPH}22 =macro $(\,)$@>
 @$make_compound_id {GB\_\,GRAPH}26 \&{void} $(\,)$@>
 @$make_double_compound_id {GB\_\,GRAPH}27 \&{void} $(\,)$@>
+@$gb_new_arc {GB\_\,GRAPH}30 \&{void} $(\,)$@>
+@$gb_new_edge {GB\_\,GRAPH}31 \&{void} $(\,)$@>
 
 @$io_errors {GB\_\,IO}5 \&{long}@>
 
