@@ -13,10 +13,10 @@
 @z
 
 @x [2]
-#define exit_test(m) /* we invoke this macro if something goes wrong */\
+#define exit_test(m) /* we invoke this macro if something goes wrong */ @t\qquad\quad@>\
 @y
 @-m@> @-exit_test@>
-#define exit_test(m) /* we invoke this macro if something goes wrong */\
+#define exit_test(m) /* we invoke this macro if something goes wrong */ @t\qquad\quad@>\
 @z
 
 @x [6]

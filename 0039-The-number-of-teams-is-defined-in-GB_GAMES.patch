@@ -1,7 +1,7 @@
-From b1d7084621d102ca4ab7a706c904909515fe9f83 Mon Sep 17 00:00:00 2001
+From ff5d6b2f9822007f6d3bfb7d5c655af26c5293ac Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 1 Sep 2025 14:09:41 +0200
-Subject: [PATCH 39/46] The number of teams is defined in GB_GAMES.
+Subject: [PATCH 39/47] The number of teams is defined in GB_GAMES.
 
 Add missing colon, too.
 ---

@@ -1,0 +1,41 @@
+From f2b60cb79c029509a3600f1adda18b87210c58aa Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Tue, 24 Mar 2026 17:57:51 +0100
+Subject: [PATCH 47/47] Format TEST_IO consistently.
+
+---
+ PROTOTYPES/gb_io.ch | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 3012799..705cb29 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -8,18 +8,17 @@
+ @x [2] l.30
+ #include "gb_io.h"
+   /* all users of {\sc GB\_\,IO} should include this header file */
++#define exit_test(m) /* we invoke this macro if something goes wrong */\
++ {@+fprintf(stderr,"%s!\n(Error code = %ld)\n",m,io_errors);@+return -1;@+}
++@t\2@>@/
++int main()
+ @y
+ #include "gb_io.h"
+   /* all users of {\sc GB\_\,IO} should include the header file |@(gb_io.h@>| */
+ @<Header...@>@;
+-@z
+-
+-@x [2] l.34
+-@t\2@>@/
+-int main()
+-@y
++#define exit_test(m) /* we invoke this macro if something goes wrong */ @t\qquad\quad@>\
++ {@+fprintf(stderr,"%s!\n(Error code = %ld)\n",m,io_errors);@+return -1;@+}
+ @#
+-@t\2\4@>
+ int main(void)
+ @z
+ 
+-- 
+2.53.0
+

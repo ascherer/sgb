@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 46
+Release: 47
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20251228
@@ -76,6 +76,7 @@ Patch43: 0043-Two-issues-fixed-upstream.patch
 Patch44: 0044-Restore-wording-in-section-4-of-GB_GRAPH.patch
 Patch45: 0045-Purge-unused-variables-in-WORD_GIANT.patch
 Patch46: 0046-Move-defines-after-include.patch
+Patch47: 0047-Format-TEST_IO-consistently.patch
 %endif
 
 %description
