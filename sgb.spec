@@ -77,6 +77,7 @@ Patch44: 0044-Restore-wording-in-section-4-of-GB_GRAPH.patch
 Patch45: 0045-Purge-unused-variables-in-WORD_GIANT.patch
 Patch46: 0046-Move-defines-after-include.patch
 Patch47: 0047-Format-TEST_IO-consistently.patch
+Patch48: 0048-Prepare-SGB-for-CPLUSPLUS23.patch
 %endif
 
 %description
