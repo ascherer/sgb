@@ -1,7 +1,7 @@
-From e17de147cd72c6cae78d2058699ade882b67d100 Mon Sep 17 00:00:00 2001
+From f14819ee5c42f34460e94972da5a317e9a648058 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 11 Dec 2016 17:45:42 +0100
-Subject: [PATCH 08/63] Build SGB library as shared object.
+Subject: [PATCH 08/73] Build SGB library as shared object.
 
 Adapt all installation paths to the settings in sgb.spec.
 Simplify the make recipes where possible.

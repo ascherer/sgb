@@ -1,7 +1,7 @@
-From 15d7a75fd98bad014f91621bbce83ce014759588 Mon Sep 17 00:00:00 2001
+From d95a9f8ef3c3a2fac4593f404ca3cb8e7d388430 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 16:45:06 +0200
-Subject: [PATCH 61/63] gb_save++.
+Subject: [PATCH 61/73] gb_save++.
 
 ---
  PROTOTYPES/gb_save.ch | 106 ++++++++++++++++++++++++++++++++++++++++++

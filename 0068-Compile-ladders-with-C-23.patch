@@ -1,0 +1,96 @@
+From 87e03f58ea4eaf440ffe1d4e06fadc0131a80049 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 19:35:59 +0200
+Subject: [PATCH 68/73] Compile ladders with C++23.
+
+---
+ PROTOTYPES/ladders.ch | 42 ++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 38 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index 7d0ba78..5ce1c0c 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -15,12 +15,36 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [9] l.184
++if (alph) {@+register Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
++    register char *p=u->name;
++    for (a=u->arcs; a; a=a->next) {@+register char *q=a->tip->name;
++@y
++if (alph) {@+Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+Arc *a;
++    char *p=u->name;
++    for (a=u->arcs; a; a=a->next) {@+char *q=a->tip->name;
++@z
++
++@x [9] l.191
++}@+else if (freq) {@+register Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
++@y
++}@+else if (freq) {@+Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+Arc *a;
++@z
++
+ @x [11] l.217
+ long freq_cost(v)
+   Vertex *v;
++{@+register long acc=v->weight; /* the frequency, to be shifted right */
++  register long k=16;
+ @y
+ long freq_cost(
+   Vertex *v)
++{@+long acc=v->weight; /* the frequency, to be shifted right */
++  long k=16;
+ @z
+ 
+ @x [14] l.253
+@@ -40,7 +64,7 @@ long alph_dist(p,q)
+   register char *p, *q;
+ @y
+ long alph_dist(
+-  register char *p,register char *q)
++  char *p,char *q)
+ @z
+ 
+ @x [18] l.292
+@@ -56,7 +80,7 @@ long hamm_dist(p,q)
+   register char *p, *q;
+ @y
+ long hamm_dist(
+-  register char *p,register char *q)
++  char *p,char *q)
+ @z
+ 
+ @x [22] l.339
+@@ -75,12 +99,22 @@ long hamm_heur(
+   Vertex *v)
+ @z
+ 
++@x [25] l.361
++for (uu=g->vertices+gg->n-1; uu>=g->vertices+g->n; uu--) {@+register Arc *a;
++@y
++for (uu=g->vertices+gg->n-1; uu>=g->vertices+g->n; uu--) {@+Arc *a;
++@z
++
+ @x [27] l.381
+ long prompt_for_five(s,p)
+   char *s; /* string used in prompt message */
+   register char *p; /* where to put a string typed by the user */
++{@+register char *q; /* current position to store characters */
++  register long c; /* current character of input */
+ @y
+ long prompt_for_five(
+-  char *s, /* string used in prompt message */
+-  register char *p) /* where to put a string typed by the user */
++  const char *s, /* string used in prompt message */
++  char *p) /* where to put a string typed by the user */
++{@+char *q; /* current position to store characters */
++  long c; /* current character of input */
+ @z
+-- 
+2.54.0
+

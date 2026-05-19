@@ -1,0 +1,32 @@
+From c110e47c0f37f42e776196489cc672a472ecf6e4 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 20:06:29 +0200
+Subject: [PATCH 71/73] Compile queen with C++23.
+
+---
+ PROTOTYPES/queen.ch | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/PROTOTYPES/queen.ch b/PROTOTYPES/queen.ch
+index 61059b2..bd72f9e 100644
+--- a/PROTOTYPES/queen.ch
++++ b/PROTOTYPES/queen.ch
+@@ -10,3 +10,15 @@ main()
+ @y
+ int main(void)
+ @z
++
++@x [2] l.39
++  register Vertex *v; /* current vertex being visited */
++@y
++  Vertex *v; /* current vertex being visited */
++@z
++
++@x [2] l.44
++    register Arc *a; /* current arc from |v| */
++@y
++    Arc *a; /* current arc from |v| */
++@z
+-- 
+2.54.0
+

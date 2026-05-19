@@ -1,7 +1,7 @@
-From fdaffa02be02f1f01a7d5bccbfbd988967a5f94f Mon Sep 17 00:00:00 2001
+From 9ebd78d86b8c7da5fe3bc4e284edcf5bcedc1322 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 17:29:41 +0200
-Subject: [PATCH 63/63] Compile assign_lisa with C++23.
+Subject: [PATCH 63/73] Compile assign_lisa with C++23.
 
 ---
  PROTOTYPES/assign_lisa.ch | 56 ++++++++++++++++++++++++++++++++++++---

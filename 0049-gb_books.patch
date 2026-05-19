@@ -1,7 +1,7 @@
-From 34e3dc4643067b3073cdcc31dfc626d8af0cdce8 Mon Sep 17 00:00:00 2001
+From 613fd76eb945f49182746deb3b00031c2609fc2f Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 09:36:22 +0200
-Subject: [PATCH 49/63] gb_books++.
+Subject: [PATCH 49/73] gb_books++.
 
 ---
  PROTOTYPES/gb_books.ch | 91 ++++++++++++++++++++++++++++++++++++++++--

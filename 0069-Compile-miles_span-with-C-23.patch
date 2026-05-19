@@ -1,0 +1,304 @@
+From 73ef8e5e6f524233d6831b885d6f04402010dbca Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 19:57:24 +0200
+Subject: [PATCH 69/73] Compile miles_span with C++23.
+
+---
+ PROTOTYPES/miles_span.ch | 148 ++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 138 insertions(+), 10 deletions(-)
+
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 1acde49..6295b02 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -44,6 +44,14 @@ void report(
+   long l) /* the length of the edge between them */
+ @z
+ 
++@x [12] l.364
++  for (o,a=aucket[l];a;) {@+register long ll;
++    register Arc *aa=a;
++@y
++  for (o,a=aucket[l];a;) {@+long ll;
++    Arc *aa=a;
++@z
++
+ @x [14] l.378
+ unsigned long krusk(g)
+   Graph *g;
+@@ -52,6 +60,16 @@ unsigned long krusk(
+   Graph *g)
+ @z
+ 
++@x [15] l.402
++register Arc *a; /* current edge of interest */
++register long l; /* current bucket of interest */
++register Vertex *u,*v,*w; /* current vertices of interest */
++@y
++Arc *a; /* current edge of interest */
++long l; /* current bucket of interest */
++Vertex *u,*v,*w; /* current vertices of interest */
++@z
++
+ @x [19] l.491
+ As in {\sc GB\_\,DIJK}, we define pointers to priority queue subroutines
+ so that the queueing mechanism can be varied.
+@@ -71,9 +89,23 @@ Vertex *(*del_min)(); /* remove an element with smallest key */
+ @x [20] l.513
+ unsigned long jar_pr(g)
+   Graph *g;
++{@+register Vertex *t; /* vertex that is just becoming known */
+ @y
+ unsigned long jar_pr(
+   Graph *g)
++{@+Vertex *t; /* vertex that is just becoming known */
++@z
++
++@x [22] l.554
++{@+register Arc *a; /* an arc leading from |t| */
++@y
++{@+Arc *a; /* an arc leading from |t| */
++@z
++
++@x [22] l.556
++    register Vertex *v; /* a vertex adjacent to |t| */
++@y
++    Vertex *v; /* a vertex adjacent to |t| */
+ @z
+ 
+ @x [24] l.610
+@@ -93,20 +125,32 @@ void init_heap(
+ void enq_heap(v,d)
+   Vertex *v; /* vertex that is entering the queue */
+   long d; /* its key (aka |dist|) */
++{@+register unsigned long k; /* position of a ``hole'' in the heap */
++  register unsigned long j; /* the parent of that position */
++  register Vertex *u; /* |heap_elt(j)| */
+ @y
+ void enq_heap(
+   Vertex *v, /* vertex that is entering the queue */
+   long d) /* its key (aka |dist|) */
++{@+unsigned long k; /* position of a ``hole'' in the heap */
++  unsigned long j; /* the parent of that position */
++  Vertex *u; /* |heap_elt(j)| */
+ @z
+ 
+ @x [26] l.651
+ void req_heap(v,d)
+   Vertex *v; /* vertex whose key is being reduced */
+   long d; /* its new |dist| */
++{@+register unsigned long k; /* position of a ``hole'' in the heap */
++  register unsigned long j; /* the parent of that position */
++  register Vertex *u; /* |heap_elt(j)| */
+ @y
+ void req_heap(
+   Vertex *v, /* vertex whose key is being reduced */
+   long d) /* its new |dist| */
++{@+unsigned long k; /* position of a ``hole'' in the heap */
++  unsigned long j; /* the parent of that position */
++  Vertex *u; /* |heap_elt(j)| */
+ @z
+ 
+ @x [26] l.661
+@@ -127,10 +171,22 @@ Vertex *del_heap()
+ Vertex *del_heap(void)
+ @z
+ 
+-@x [27] l.686
++@x [27] l.684
++  register Vertex *u; /* vertex being sifted down */
++  register unsigned long k; /* hole in the heap */
+   register unsigned long j; /* child of that hole */
++  register long d; /* |u->dist|, the key of the vertex being sifted */
++@y
++  Vertex *u; /* vertex being sifted down */
++  unsigned long k; /* hole in the heap */
++  unsigned long j; /* child of that hole */
++  long d; /* |u->dist|, the key of the vertex being sifted */
++@z
++
++@x [27] l.694
++  while (j<=hsize) {
+ @y
+-  register long j; /* child of that hole */
++  while (j<=(unsigned long)hsize) {
+ @z
+ 
+ @x [28] l.709
+@@ -146,7 +202,15 @@ void init_F_heap(d)
+ @y
+ void init_F_heap(
+   long d)
+-{@+F_heap=(void*)d;@+}
++{@+F_heap=(Vertex*)d;@+}
++@z
++
++@x [32] l.831
++{@+register Arc *aa;
++  register Vertex *uu;
++@y
++{@+Arc *aa;
++  Vertex *uu;
+ @z
+ 
+ @x [33] l.860
+@@ -159,14 +223,26 @@ void enq_F_heap(
+   long d) /* its key (aka |dist|) */
+ @z
+ 
++@x [33] l.869
++  }@+else {@+register Vertex *u;
++@y
++  }@+else {@+Vertex *u;
++@z
++
+ @x [34] l.901
+ void req_F_heap(v,d)
+   Vertex *v; /* vertex whose key is being reduced */
+   long d; /* its new |dist| */
++{@+register Vertex *p,*pp; /* parent and grandparent of |v| */
++  register Vertex *u,*w; /* other vertices being modified */
++  register long r; /* twice the rank plus the tag */
+ @y
+ void req_F_heap(
+   Vertex *v, /* vertex whose key is being reduced */
+   long d) /* its new |dist| */
++{@+Vertex *p,*pp; /* parent and grandparent of |v| */
++  Vertex *u,*w; /* other vertices being modified */
++  long r; /* twice the rank plus the tag */
+ @z
+ 
+ @x [38] l.970
+@@ -175,6 +251,16 @@ Vertex *del_F_heap()
+ Vertex *del_F_heap(void)
+ @z
+ 
++@x [38] l.972
++  register Vertex *t,*u,*v,*w; /* registers for manipulation of links */
++  register long h=-1; /* the highest rank present in |new_roots| */
++  register long r; /* rank of current tree */
++@y
++  Vertex *t,*u,*v,*w; /* registers for manipulation of links */
++  long h=-1; /* the highest rank present in |new_roots| */
++  long r; /* rank of current tree */
++@z
++
+ @x [39] l.1004
+     do@+{
+ @y
+@@ -198,13 +284,17 @@ qunite(m,q,mm,qq,h)
+   register long m,mm; /* number of nodes in the forests */
+   register Arc *q,*qq; /* binomial trees in the forests, linked by |qsib| */
+   Arc *h; /* |h->qsib| will get the result */
++{@+register Arc *p; /* tail of the list built so far */
++  register long k=1; /* size of trees currently being processed */
+ @y
+ void qunite(
+-  register long m, /* number of nodes in the forests */
+-  register Arc *q, /* binomial trees in the forests, linked by |qsib| */
+-  register long mm, /* number of nodes in the forests */
+-  register Arc *qq, /* binomial trees in the forests, linked by |qsib| */
++  long m, /* number of nodes in the forests */
++  Arc *q, /* binomial trees in the forests, linked by |qsib| */
++  long mm, /* number of nodes in the forests */
++  Arc *qq, /* binomial trees in the forests, linked by |qsib| */
+   Arc *h) /* |h->qsib| will get the result */
++{@+Arc *p; /* tail of the list built so far */
++  long k=1; /* size of trees currently being processed */
+ @z
+ 
+ @x [45] l.1171
+@@ -219,10 +309,14 @@ void qunite(
+ @<Combine \9{q}|q| and |qq| into a ``carry'' tree, and continue
+ @z
+ 
+-@x [46] l.1189
++@x [46] l.1187
++{@+register Arc *c; /* the ``carry,'' a tree of size |2k| */
++  register long key; /* |c->len| */
+   register Arc *r,*rr; /* remainders of the input lists */
+ @y
+-  register Arc *r=0,*rr=0; /* remainders of the input lists */
++{@+Arc *c; /* the ``carry,'' a tree of size |2k| */
++  long key; /* |c->len| */
++  Arc *r=NULL,*rr=NULL; /* remainders of the input lists */
+ @z
+ 
+ @x [46] l.1195
+@@ -272,9 +366,21 @@ void qmerge(
+ @x [52] l.1291
+ Arc *qdel_min(h)
+   Arc *h; /* header of binomial queue */
++{@+register Arc *p,*pp; /* current node and its predecessor */
++  register Arc *q,*qq; /* current minimum node and its predecessor */
++  register long key; /* |q->len|, the smallest key known so far */
+ @y
+ Arc *qdel_min(
+   Arc *h) /* header of binomial queue */
++{@+Arc *p,*pp; /* current node and its predecessor */
++  Arc *q,*qq; /* current minimum node and its predecessor */
++  long key; /* |q->len|, the smallest key known so far */
++@z
++
++@x [52] l.1298
++  register long mm; /* number of nodes not yet considered */
++@y
++  long mm; /* number of nodes not yet considered */
+ @z
+ 
+ @x [53] l.1324
+@@ -293,11 +399,15 @@ Arc *qdel_min(
+ qtraverse(h,visit)
+   Arc *h; /* head of binomial queue to be unraveled */
+   void @[@] (*visit)(); /* procedure to be invoked on each node */
++{@+register long m; /* the number of nodes remaining */
++  register Arc *p,*q,*r; /* current position and neighboring positions */
+ @y
+ void qtraverse(
+   Arc *h, /* head of binomial queue to be unraveled */
+-  void @[@] (*visit)(register Arc *))
++  void @[@] (*visit)(Arc *))
+     /* procedure to be invoked on each node */
++{@+long m; /* the number of nodes remaining */
++  Arc *p,*q,*r; /* current position and neighboring positions */
+ @z
+ 
+ @x [55] l.1392
+@@ -308,6 +418,22 @@ unsigned long cher_tar_kar(
+   Graph *g)
+ @z
+ 
++@x [56] l.1416
++register Vertex *s,*t; /* beginning and end of the small list */
++@y
++Vertex *s,*t; /* beginning and end of the small list */
++@z
++
++@x [56] l.1420
++register Vertex *u,*v; /* registers for list manipulation */
++register Arc *a; /* and another */
++register long j,k; /* index registers for stage 2 */
++@y
++Vertex *u,*v; /* registers for list manipulation */
++Arc *a; /* and another */
++long j,k; /* index registers for stage 2 */
++@z
++
+ @x [60] l.1492
+ do@+{a=qdel_min(v->pq);
+ @y
+@@ -329,9 +455,11 @@ do {a=qdel_min(v->pq);
+ @x [67] l.1614
+ void note_edge(a)
+   Arc *a;
++{@+register long k;
+ @y
+ void note_edge(
+   Arc *a)
++{@+long k;
+ @z
+ 
+ @x [69] l.1643
+-- 
+2.54.0
+

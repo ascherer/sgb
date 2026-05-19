@@ -1,7 +1,7 @@
-From dcf6e8e14b056e55b52870559b44d4881df5cfeb Mon Sep 17 00:00:00 2001
+From b6929f1744fd4339338cae0cfb1905c560cb3443 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Mon, 18 May 2026 15:48:14 +0200
-Subject: [PATCH 48/63] Prepare SGB for CPLUSPLUS23.
+Subject: [PATCH 48/73] Prepare SGB for CPLUSPLUS23.
 
 Compile with Apple clang 21.0.0 and --std=c++23.
 

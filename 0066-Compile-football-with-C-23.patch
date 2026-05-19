@@ -1,0 +1,104 @@
+From c347ee6c22a7c5a9815590e1cc7df15a79544144 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 19:26:32 +0200
+Subject: [PATCH 66/73] Compile football with C++23.
+
+---
+ PROTOTYPES/football.ch | 44 +++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 39 insertions(+), 5 deletions(-)
+
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index 07b61a8..b834c8f 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -18,9 +18,13 @@ int main(
+ @x [7] l.140
+ Vertex *prompt_for_team(s)
+   char *s; /* string used in prompt message */
++{@+register char *q; /* current position in |buffer| */
++  register Vertex *v; /* current vertex being examined in sequential search */
+ @y
+-Vertex *prompt_for_team(char *s)
++Vertex *prompt_for_team(const char *s)
+   /* string used in prompt message */
++{@+char *q; /* current position in |buffer| */
++  Vertex *v; /* current vertex being examined in sequential search */
+ @z
+ 
+ @x [7] l.148
+@@ -54,7 +58,7 @@ node *new_node(
+ @x [15] l.237
+ do@+{@+register node*t;
+ @y
+-do {@+register node*t;
++do {@+node*t;
+ @z
+ 
+ @x [15] l.242
+@@ -71,16 +75,20 @@ do {@+register node*t;
+ 
+ @x [16] l.250
+ @ @<Print the score of game |a| between |v| and |u|@>=
++{@+register long d=a->date; /* date of the game, 0 means Aug 26 */
+ @y
+ @ @<Print \9{t}the score of game |a| between |v| and |u|@>=
++{@+long d=a->date; /* date of the game, 0 means Aug 26 */
+ @z
+ 
+-@x [17] l.285
++@x [17] l.284
++  for (v=start;v!=goal;v=cur_node->game->tip) {@+register long d=-10000;
+     register Arc *best_arc; /* arc that achieves |del=d| */
+     register Arc *last_arc; /* arc that goes directly to |goal| */
+ @y
+-    register Arc *best_arc=0; /* arc that achieves |del=d| */
+-    register Arc *last_arc=0; /* arc that goes directly to |goal| */
++  for (v=start;v!=goal;v=cur_node->game->tip) {@+long d=-10000;
++    Arc *best_arc=0; /* arc that achieves |del=d| */
++    Arc *last_arc=0; /* arc that goes directly to |goal| */
+ @z
+ 
+ @x [17] l.292
+@@ -148,6 +156,18 @@ do {
+ @ @<Make \9{l}|list[0]|...@>=
+ @z
+ 
++@x [22] l.393
++{@+register node *p,*q; /* node in list and its predecessor */
++@y
++{@+node *p,*q; /* node in list and its predecessor */
++@z
++
++@x [23] l.404
++{@+register node *r=NULL, *s=list[--m], *t;
++@y
++{@+node *r=NULL, *s=list[--m], *t;
++@z
++
+ @x [27] l.478
+ @<Make all vertices unseen and all arcs untagged, except for vertices
+ @y
+@@ -166,6 +186,20 @@ do {
+ @<Make \9{a}all vertices unseen and all arcs untagged, except for vertices
+ @z
+ 
++@x [32] l.546
++{@+register Vertex *u; /* a vertex adjacent to |v| */
++  register Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@y
++{@+Vertex *u; /* a vertex adjacent to |v| */
++  Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@z
++
++@x [33] l.590
++{@+if (v!=goal) {@+register Vertex *t; /* runs through the vertices of the
++@y
++{@+if (v!=goal) {@+Vertex *t; /* runs through the vertices of the
++@z
++
+ @x [35] l.620
+ @<Set |h| to the number of vertices on paths between |u| and |goal|@>=
+ @y
+-- 
+2.54.0
+

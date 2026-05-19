@@ -1,0 +1,61 @@
+From a95210f30a72d14904639b48be0374efd07c3e4e Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 20:11:03 +0200
+Subject: [PATCH 72/73] Compile roget_components with C++23.
+
+---
+ PROTOTYPES/roget_components.ch | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+
+diff --git a/PROTOTYPES/roget_components.ch b/PROTOTYPES/roget_components.ch
+index 22537c7..abd02e4 100644
+--- a/PROTOTYPES/roget_components.ch
++++ b/PROTOTYPES/roget_components.ch
+@@ -15,6 +15,12 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [2] l.49
++  register Vertex *v; /* the current vertex of interest */
++@y
++  Vertex *v; /* the current vertex of interest */
++@z
++
+ @x [2] l.63
+   @<Perform Tarjan's algorithm on |g|@>;
+ @y
+@@ -38,3 +44,31 @@ int main(
+ @y
+ @<Perform \9{a}a depth-first search with |vv| as the root...@>=
+ @z
++
++@x [15] l.278
++{@+register Vertex *u; /* a vertex adjacent to |v| */
++  register Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@y
++{@+Vertex *u; /* a vertex adjacent to |v| */
++  Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@z
++
++@x [16] l.348
++{@+register Vertex *t; /* runs through the vertices of the
++@y
++{@+Vertex *t; /* runs through the vertices of the
++@z
++
++@x [17] l.385
++for (v=settled_stack; v; v=v->link) {@+register Vertex *u=v->parent;
++  register Arc *a;
++@y
++for (v=settled_stack; v; v=v->link) {@+Vertex *u=v->parent;
++  Arc *a;
++@z
++
++@x [17] l.388
++  for (a=v->arcs; a; a=a->next) {@+register Vertex *w=a->tip->parent;
++@y
++  for (a=v->arcs; a; a=a->next) {@+Vertex *w=a->tip->parent;
++@z
+-- 
+2.54.0
+

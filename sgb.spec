@@ -93,6 +93,16 @@ Patch60: 0060-gb_dijk.patch
 Patch61: 0061-gb_save.patch
 Patch62: 0062-Run-make-tests-with-C-23.patch
 Patch63: 0063-Compile-assign_lisa-with-C-23.patch
+Patch64: 0064-Compile-book_components-with-C-23.patch
+Patch65: 0065-Compile-econ_order-with-C-23.patch
+Patch66: 0066-Compile-football-with-C-23.patch
+Patch67: 0067-Compile-girth-with-C-23.patch
+Patch68: 0068-Compile-ladders-with-C-23.patch
+Patch69: 0069-Compile-miles_span-with-C-23.patch
+Patch70: 0070-Compile-multiply-with-C-23.patch
+Patch71: 0071-Compile-queen-with-C-23.patch
+Patch72: 0072-Compile-roget_components-with-C-23.patch
+Patch73: 0073-Compile-word_components-with-C-23.patch
 %endif
 
 %description

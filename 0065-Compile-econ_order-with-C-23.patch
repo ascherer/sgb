@@ -1,0 +1,56 @@
+From a6569a212cbf743ea50a8a69d9f470cb89a2581f Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 19:15:15 +0200
+Subject: [PATCH 65/73] Compile econ_order with C++23.
+
+---
+ PROTOTYPES/econ_order.ch | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index b0569e2..58039ae 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -17,6 +17,12 @@ int main(
+ {@+long n=79; /* the desired number of sectors */
+ @z
+ 
++@x [2] l.88
++  register long j,k; /* all-purpose indices */
++@y
++  long j,k; /* all-purpose indices */
++@z
++
+ @x [3] l.109
+ @d INF 0x7fffffff /* infinity (or darn near) */
+ @y
+@@ -29,6 +35,26 @@ int main(
+   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
+ @z
+ 
++@x [5] l.138
++{@+register Vertex *v;
++  register Arc *a;
++@y
++{@+Vertex *v;
++  Arc *a;
++@z
++
++@x [6] l.172
++{@+register long sum=0;
++@y
++{@+long sum=0;
++@z
++
++@x [10] l.244
++for (k=0;k<n;k++) {@+register long d=0;
++@y
++for (k=0;k<n;k++) {@+long d=0;
++@z
++
+ @x [13] l.274
+ do@+{
+ @y
+-- 
+2.54.0
+
