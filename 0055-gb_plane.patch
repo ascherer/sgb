@@ -1,7 +1,7 @@
-From 3ea9e196e79a4c646cf744ec2a567ed713b7fea0 Mon Sep 17 00:00:00 2001
+From cd1bf97a70b34484e89c4170c692ed2457912cea Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 14:38:02 +0200
-Subject: [PATCH 55/62] gb_plane++.
+Subject: [PATCH 55/63] gb_plane++.
 
 ---
  PROTOTYPES/gb_plane.ch | 98 +++++++++++++++++++++++++++++++++++++++---

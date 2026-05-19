@@ -1,7 +1,7 @@
-From 9ecd35c84a364fb943f6ca3ac7cb71f4894d855c Mon Sep 17 00:00:00 2001
+From 9b509201ef1e3286c075714621dd96225c74e2f6 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 10:03:57 +0200
-Subject: [PATCH 51/62] gb_games++.
+Subject: [PATCH 51/63] gb_games++.
 
 ---
  PROTOTYPES/gb_games.ch | 62 ++++++++++++++++++++++++++++++++++++++++++

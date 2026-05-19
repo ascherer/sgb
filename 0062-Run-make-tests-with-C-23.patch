@@ -1,7 +1,7 @@
-From 7c272b3eda2fddcecb5ca0f1c336de2db1686501 Mon Sep 17 00:00:00 2001
+From 3c8c3c166529cbe9575569c159f8b0b624873f71 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 16:51:50 +0200
-Subject: [PATCH 62/62] Run 'make tests' with C++23.
+Subject: [PATCH 62/63] Run 'make tests' with C++23.
 
 ---
  PROTOTYPES/gb_books.ch    | 10 +++++-----

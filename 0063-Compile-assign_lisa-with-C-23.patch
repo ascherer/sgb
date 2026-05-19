@@ -1,0 +1,124 @@
+From fdaffa02be02f1f01a7d5bccbfbd988967a5f94f Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 17:29:41 +0200
+Subject: [PATCH 63/63] Compile assign_lisa with C++23.
+
+---
+ PROTOTYPES/assign_lisa.ch | 56 ++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 52 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 30deac2..5344ffe 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -1,3 +1,9 @@
++@x [0] l.10
++@s compl normal @q unreserve a C++ keyword @>
++@y
++@s complement normal @q unreserve a C++ keyword @>
++@z
++
+ @x [0] l.12
+ \prerequisite{GB\_\,LISA}
+ @y
+@@ -15,12 +21,30 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [2] l.84
++  printf("Assignment problem for %s%s\n",lisa_id,(compl?", complemented":""));
++@y
++  printf("Assignment problem for %s%s\n",lisa_id,(complement?", complemented":""));
++@z
++
++@x [4] l.112
++long compl=0; /* should the input values be complemented? */
++@y
++long complement=0; /* should the input values be complemented? */
++@z
++
++@x [5] l.135
++  } else if (strcmp(argv[argc],"-c")==0) compl=1;
++@y
++  } else if (strcmp(argv[argc],"-c")==0) complement=1;
++@z
++
+ @x [6] l.149
+ for (k=0;k<m;k++) {
+   for (l=0;l<n;l++) printf("% 4ld",compl?d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @y
+ for (k=0;k<(long)m;k++) {
+-  for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
++  for (l=0;l<(long)n;l++) printf("% 4ld",complement?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @z
+ 
+ @x [10] l.254
+@@ -46,6 +70,18 @@ for (k=0;k<(long)m;k++) {
+       for (k=0;k<(long)n;k++)
+ @z
+ 
++@x [13] l.321
++register long k; /* the current row of interest */
++register long l; /* the current column of interest */
++register long j; /* another interesting column */
++register long s; /* the current matrix element of interest */
++@y
++long k; /* the current row of interest */
++long l; /* the current column of interest */
++long j; /* another interesting column */
++long s; /* the current matrix element of interest */
++@z
++
+ @x [16] l.396
+ @d INF 0x7fffffff /* infinity (or darn near) */
+ @y
+@@ -90,8 +126,10 @@ for (k=0; k<(long)m; k++)
+ 
+ @x [19] l.469
+   for (l=0; l<n; l++)
++    if (o,slack[l]) {@+register long del;
+ @y
+   for (l=0; l<(long)n; l++)
++    if (o,slack[l]) {@+long del;
+ @z
+ 
+ @x [21] l.512
+@@ -134,9 +172,17 @@ for (l=0;l<(long)n;l++) if (col_inc[l]) k++;
+ if (k>(long)m) {
+ @z
+ 
+-@x [24] l.596
++@x [24] l.586
++it to maximize (except when |compl| is nonzero).
++@y
++it to maximize (except when |complement| is nonzero).
++@z
++
++@x [24] l.595
++if (compl==0)
+   for (k=0; k<m; k++) for (l=0; l<n; l++)
+ @y
++if (complement==0)
+   for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
+ @z
+ 
+@@ -158,12 +204,14 @@ if (k>(long)m) {
+     for (k=0;k<(long)m;k++) @<Output row |k| as a hexadecimal string@>;
+ @z
+ 
+-@x [30] l.684
++@x [30] l.683
++{@+register float conv=255.0/(float)d; register long x;
+   for (l=0; l<n; l++) {
+     x=(long)(conv*(float)(compl?d-aa(k,l):aa(k,l)));
+ @y
++{@+float conv=255.0/(float)d; long x;
+   for (l=0; l<(long)n; l++) {
+-    x=(long)(conv*(float)(compl?(long)d-aa(k,l):aa(k,l)));
++    x=(long)(conv*(float)(complement?(long)d-aa(k,l):aa(k,l)));
+ @z
+ 
+ @x [31] l.699
+-- 
+2.54.0
+

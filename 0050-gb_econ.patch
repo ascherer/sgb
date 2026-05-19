@@ -1,7 +1,7 @@
-From 62dd933f95cc46bad2f361fee6de57aacb2bff13 Mon Sep 17 00:00:00 2001
+From 21518f839f4b5924c9a67ea0991139b703c05c7f Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 09:46:13 +0200
-Subject: [PATCH 50/62] gb_econ++.
+Subject: [PATCH 50/63] gb_econ++.
 
 ---
  PROTOTYPES/gb_econ.ch | 68 +++++++++++++++++++++++++++++++++++++++++++

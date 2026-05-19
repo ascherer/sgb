@@ -1,7 +1,7 @@
-From 338f825f02d2431b1095a9c6394076cb4e9e9b63 Mon Sep 17 00:00:00 2001
+From dc5341c21bd599485c4cc77540fae5bdb6a3c076 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 14:12:03 +0200
-Subject: [PATCH 53/62] gb_lisa++.
+Subject: [PATCH 53/63] gb_lisa++.
 
 ---
  PROTOTYPES/gb_lisa.ch | 62 ++++++++++++++++++++++++++++++++++++++-----
