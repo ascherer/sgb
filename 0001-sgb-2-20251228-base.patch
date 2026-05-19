@@ -1,7 +1,7 @@
-From 3f816223c651a48f8d33244dffd68650cc67b52a Mon Sep 17 00:00:00 2001
+From bc5142111a06857394f66efd91bc55ebebec48d8 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
-Date: Tue, 19 May 2026 16:16:02 +0200
-Subject: [PATCH 01/60] sgb-2:20251228 base
+Date: Tue, 19 May 2026 17:09:56 +0200
+Subject: [PATCH 01/62] sgb-2:20251228 base
 
 ---
  +The+Stanford+GraphBase+       |    0

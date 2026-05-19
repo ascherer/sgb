@@ -1,0 +1,107 @@
+From 7c272b3eda2fddcecb5ca0f1c336de2db1686501 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 16:51:50 +0200
+Subject: [PATCH 62/62] Run 'make tests' with C++23.
+
+---
+ PROTOTYPES/gb_books.ch    | 10 +++++-----
+ PROTOTYPES/gb_save.ch     |  8 ++++----
+ PROTOTYPES/test_sample.ch |  6 ++++++
+ 3 files changed, 15 insertions(+), 9 deletions(-)
+
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 8b119ac..38fc5c0 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -12,9 +12,9 @@ extern Graph *bi_book();
+ #ifndef GB_BOOKS_H
+ #define GB_BOOKS_H
+ typedef struct graph_struct Graph;
+-extern Graph *book(char *,unsigned long,unsigned long,@|
++extern Graph *book(const char *,unsigned long,unsigned long,@|
+    unsigned long,unsigned long,long,long,long);
+-extern Graph *bi_book(char *,unsigned long,unsigned long,@|
++extern Graph *bi_book(const char *,unsigned long,unsigned long,@|
+   unsigned long,unsigned long,long,long,long);
+ @z
+ 
+@@ -48,7 +48,7 @@ static Graph *bgraph(bipartite,
+ @y
+ static Graph *bgraph(
+   long bipartite, /* should we make the graph bipartite? */
+-  char *title, /* identification of the selected book */
++  const char *title, /* identification of the selected book */
+   unsigned long n, /* number of vertices desired before exclusion */
+   unsigned long x, /* number of vertices to exclude */
+   unsigned long first_chapter, unsigned long last_chapter,
+@@ -64,7 +64,7 @@ Graph *book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
+   unsigned long n, x, first_chapter, last_chapter;
+   long in_weight,out_weight,seed;
+ @y
+-Graph *book(char *title,unsigned long n,unsigned long x,@|
++Graph *book(const char *title,unsigned long n,unsigned long x,@|
+   unsigned long first_chapter,unsigned long last_chapter,@|
+   long in_weight,long out_weight,long seed)
+ @z
+@@ -75,7 +75,7 @@ Graph *bi_book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
+   unsigned long n, x, first_chapter, last_chapter;
+   long in_weight,out_weight,seed;
+ @y
+-Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
++Graph *bi_book(const char *title,unsigned long n,unsigned long x,@|
+   unsigned long first_chapter,unsigned long last_chapter,@|
+   long in_weight,long out_weight,long seed)
+ @z
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index 1a260e0..49a52d0 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -14,8 +14,8 @@ extern Graph *restore_graph();
+ #ifndef GB_SAVE_H
+ #define GB_SAVE_H
+ typedef struct graph_struct Graph;
+-extern long save_graph(Graph *,char *);
+-extern Graph *restore_graph(char *);
++extern long save_graph(Graph *,const char *);
++extern Graph *restore_graph(const char *);
+ #endif /* |GB_SAVE_H| */
+ @z
+ 
+@@ -31,7 +31,7 @@ Graph *restore_graph(f)
+   char *f; /* the file name */
+ @y
+ Graph *restore_graph(
+-  char *f) /* the file name */
++  const char *f) /* the file name */
+ @z
+ 
+ @x [4] l.152
+@@ -131,7 +131,7 @@ long save_graph(g,f)
+ @y
+ long save_graph(
+   Graph *g, /* graph to be saved */
+-  char *f) /* name of the file to be created */
++  const char *f) /* name of the file to be created */
+ @z
+ 
+ @x [20] l.428
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index 4de6f3e..52b392c 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -54,6 +54,12 @@ static void pr_vert(
+   char *s) /* format for graph utility fields */
+ @z
+ 
++@x [14] l.206
++    if (l>0) {@+register Arc *a;
++@y
++    if (l>0) {@+Arc *a;
++@z
++
+ @x [15] l.216
+ static void pr_arc(a,l,s)
+   Arc *a; /* non-null arc to be printed */
+-- 
+2.54.0
+

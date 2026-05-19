@@ -1,7 +1,7 @@
-From dbbf3878e9f4ff11df50f43e528cb66687b03b3b Mon Sep 17 00:00:00 2001
+From 43b04d870610e20d0fc2f539a3cf32b240b2c957 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 13:52:22 +0200
-Subject: [PATCH 52/60] gb_gates++.
+Subject: [PATCH 52/62] gb_gates++.
 
 ---
  PROTOTYPES/gb_gates.ch | 134 +++++++++++++++++++++++++++++++++++++----

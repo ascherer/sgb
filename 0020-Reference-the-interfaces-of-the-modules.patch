@@ -1,7 +1,7 @@
-From b82ff016122aeacaefa59416b1a70666dfe43976 Mon Sep 17 00:00:00 2001
+From 95b3562211bef36833feddf8a8c2c8ed0213ab7f Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 20 Apr 2023 19:58:38 +0200
-Subject: [PATCH 20/60] Reference the interfaces of the modules.
+Subject: [PATCH 20/62] Reference the interfaces of the modules.
 
 ---
  PROTOTYPES/gb_basic.ch |  2 +-

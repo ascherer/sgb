@@ -1,7 +1,7 @@
-From d58055fa8b34118cb64300623798d531e9df8a80 Mon Sep 17 00:00:00 2001
+From b61e243667f7ae9a5071bc73a3b3e5130642ecde Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 15:34:41 +0200
-Subject: [PATCH 59/60] gb_words++.
+Subject: [PATCH 59/62] gb_words++.
 
 ---
  PROTOTYPES/gb_words.ch | 68 ++++++++++++++++++++++++++++++++++++++++++

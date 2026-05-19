@@ -1,7 +1,7 @@
-From 8bb41586eae93af7050210c2dae4b643e9ed51b4 Mon Sep 17 00:00:00 2001
+From 064d5509c5ba76c2cebea5cf06ba82418c4098d5 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 15:42:20 +0200
-Subject: [PATCH 60/60] gb_dijk++.
+Subject: [PATCH 60/62] gb_dijk++.
 
 ---
  PROTOTYPES/gb_dijk.ch | 40 ++++++++++++++++++++++++++++++++++++++++

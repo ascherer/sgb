@@ -90,6 +90,8 @@ Patch57: 0057-gb_rand.patch
 Patch58: 0058-gb_roget.patch
 Patch59: 0059-gb_words.patch
 Patch60: 0060-gb_dijk.patch
+Patch61: 0061-gb_save.patch
+Patch62: 0062-Run-make-tests-with-C-23.patch
 %endif
 
 %description

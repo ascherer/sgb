@@ -1,7 +1,7 @@
-From 0d4df3872db0eee41c951f14c8956e7806aac760 Mon Sep 17 00:00:00 2001
+From a581e820caf0fc356d1267e1610391a08baa0019 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 22 Jan 2026 16:22:05 +0100
-Subject: [PATCH 45/60] Purge unused variables in WORD_GIANT.
+Subject: [PATCH 45/62] Purge unused variables in WORD_GIANT.
 
 Now you can
 

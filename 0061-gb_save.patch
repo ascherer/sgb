@@ -1,0 +1,231 @@
+From 6b3bf446407358d6cb9a03e9cfe883e53834c223 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 16:45:06 +0200
+Subject: [PATCH 61/62] gb_save++.
+
+---
+ PROTOTYPES/gb_save.ch | 106 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 106 insertions(+)
+
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index c3f9f37..1a260e0 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -34,6 +34,12 @@ Graph *restore_graph(
+   char *f) /* the file name */
+ @z
+ 
++@x [4] l.152
++  register char *p; /* register for string manipulation */
++@y
++  char *p; /* register for string manipulation */
++@z
++
+ @x [6] l.205
+ @<Fill in |g->n|, |g->m|, and |g|'s utility fields@>;
+ @y
+@@ -44,10 +50,12 @@ Graph *restore_graph(
+ static long fill_field(l,t)
+   util *l; /* location of field to be filled in */
+   char t; /* its type code */
++{@+register char c; /* character just read */
+ @y
+ static long fill_field(
+   util *l, /* location of field to be filled in */
+   char t) /* its type code */
++{@+char c; /* character just read */
+ @z
+ 
+ @x [7] l.237
+@@ -86,6 +94,12 @@ static long fill_field(
+ @<Fill in \9{a}a string pointer@>=
+ @z
+ 
++@x [12] l.287
++else {@+register char* p;
++@y
++else {@+char* p;
++@z
++
+ @x [14] l.308
+ static long finish_record()
+ @y
+@@ -98,6 +112,18 @@ static long finish_record(void)
+ @ @<Fill in \9{g}|g->n|, |g->m|, and |g|'s utility fields@>=
+ @z
+ 
++@x [16] l.333
++{@+register Vertex* v;
++@y
++{@+Vertex* v;
++@z
++
++@x [17] l.352
++{@+register Arc* a;
++@y
++{@+Arc* a;
++@z
++
+ @x [20] l.419
+ long save_graph(g,f)
+   Graph *g; /* graph to be saved */
+@@ -120,14 +146,28 @@ long save_graph(
+ @<Initialize the \9{b}|blocks| array@>=
+ @z
+ 
++@x [24] l.506
++register block_rep *cur_block; /* the current block of interest */
++@y
++block_rep *cur_block; /* the current block of interest */
++@z
++
+ @x [25] l.528
+ static void classify(l,t)
+   util *l; /* location of field to be classified */
+   char t; /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
++{@+register block_rep *cur_block;
++  register char* loc;
++  register long tcat; /* category corresponding to |t| */
++  register long tsize; /* record size corresponding to |t| */
+ @y
+ static void classify(
+   util *l, /* location of field to be classified */
+   char t) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
++{@+block_rep *cur_block;
++  char* loc;
++  long tcat; /* category corresponding to |t| */
++  long tsize; /* record size corresponding to |t| */
+ @z
+ 
+ @x [27] l.569
+@@ -148,12 +188,30 @@ static void classify(
+   } while (activity);
+ @z
+ 
++@x [28] l.597
++{@+register Vertex*v;
++@y
++{@+Vertex*v;
++@z
++
++@x [29] l.611
++{@+register Arc*a;
++@y
++{@+Arc*a;
++@z
++
+ @x [30] l.623
+ @<Translate |g| into external format@>=
+ @y
+ @<Translate \9{g}|g| into external format@>=
+ @z
+ 
++@x [31] l.641
++register long s; /* accumulator register for arithmetic calculations */
++@y
++long s; /* accumulator register for arithmetic calculations */
++@z
++
+ @x [35] l.682
+ static void flushout() /* output the buffer to |save_file| */
+ @y
+@@ -163,15 +221,25 @@ static void flushout(void) /* output the buffer to |save_file| */
+ @x [36] l.696
+ static void prepare_string(s)
+   char *s; /* string that is moved to |item_buf| */
++{@+register char *p,*q;
+ @y
+ static void prepare_string(
+   char *s) /* string that is moved to |item_buf| */
++{@+char *p,*q;
+ @z
+ 
+ @x [37] l.719
+ static void move_item()
++{@+register long l=strlen(item_buf);
+ @y
+ static void move_item(void)
++{@+long l=strlen(item_buf);
++@z
++
++@x [37] l.723
++    else {@+register char *p=item_buf;
++@y
++    else {@+char *p=item_buf;
+ @z
+ 
+ @x [37] l.726
+@@ -186,14 +254,28 @@ static void move_item(void)
+       } while(l>78);
+ @z
+ 
++@x [38] l.744
++{@+register char*p;
++@y
++{@+char*p;
++@z
++
+ @x [39] l.757
+ static void translate_field(l,t)
+   util *l; /* address of field to be output in symbolic form */
+   char t; /* type of formatting desired */
++{@+register block_rep *cur_block;
++  register char* loc;
++  register long tcat; /* category corresponding to |t| */
++  register long tsize; /* record size corresponding to |t| */
+ @y
+ static void translate_field(
+   util *l, /* address of field to be output in symbolic form */
+   char t) /* type of formatting desired */
++{@+block_rep *cur_block;
++  char* loc;
++  long tcat; /* category corresponding to |t| */
++  long tsize; /* record size corresponding to |t| */
+ @z
+ 
+ @x [39] l.768
+@@ -204,6 +286,12 @@ static void translate_field(
+  case 'Z': buf_ptr--; /* forget spurious comma */
+ @z
+ 
++@x [39] l.772
++ case 'I': numeric: sprintf(item_buf,"%ld",l->I);@+goto ready;
++@y
++ case 'I': numeric: snprintf(item_buf,MAX_SV_STRING+3,"%ld",l->I);@+goto ready;
++@z
++
+ @x [39] l.778
+   @<Translate a pointer variable@>;
+ @y
+@@ -216,6 +304,18 @@ static void translate_field(
+ @ @<Translate \9{a}a pointer variable@>=
+ @z
+ 
++@x [40] l.795
++sprintf(item_buf,"%c%ld",t,
++@y
++snprintf(item_buf,MAX_SV_STRING+3,"%c%ld",t,
++@z
++
++@x [42] l.817
++{@+register Vertex* v;
++@y
++{@+Vertex* v;
++@z
++
+ @x [42] l.821
+       @<Translate all |Vertex| records in |cur_block|@>;
+ @y
+@@ -233,3 +333,9 @@ static void translate_field(
+ @y
+ @ @<Translate \9{a}all |Vertex| records in |cur_block|@>=
+ @z
++
++@x [44] l.843
++{@+register Arc* a;
++@y
++{@+Arc* a;
++@z
+-- 
+2.54.0
+

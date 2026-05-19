@@ -1,7 +1,7 @@
-From bcc817374b3072a4dbd83b9cc27fafc81ffae6df Mon Sep 17 00:00:00 2001
+From 31df561358bfc73d4ebbd5a6ac229ea03c320a60 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 2 Sep 2025 13:26:29 +0200
-Subject: [PATCH 40/60] Restore all kernel interfaces.
+Subject: [PATCH 40/62] Restore all kernel interfaces.
 
 ---
  PROTOTYPES/gb_basic.ch    | 24 ++++++------------------

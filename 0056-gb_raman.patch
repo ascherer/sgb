@@ -1,7 +1,7 @@
-From 53f26a85a9dea1804bac6bdf11df359257577a6f Mon Sep 17 00:00:00 2001
+From ee3b682127fb9c73331058971f55862f833f63b5 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 19 May 2026 15:00:15 +0200
-Subject: [PATCH 56/60] gb_raman++.
+Subject: [PATCH 56/62] gb_raman++.
 
 ---
  PROTOTYPES/gb_raman.ch | 64 ++++++++++++++++++++++++++++++++++++++++--
