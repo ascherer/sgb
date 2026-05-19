@@ -1,0 +1,164 @@
+From 71fe835aec7db473909a53bc44b8ab87f1ef669c Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 09:36:22 +0200
+Subject: [PATCH 49/60] gb_books++.
+
+---
+ PROTOTYPES/gb_books.ch | 91 ++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 87 insertions(+), 4 deletions(-)
+
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 212bf6b..8b119ac 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -18,6 +18,12 @@ extern Graph *bi_book(char *,unsigned long,unsigned long,@|
+   unsigned long,unsigned long,long,long,long);
+ @z
+ 
++@x [5] l.122
++char *chap_name[MAX_CHAPS]={""}; /* string names of those chapters */
++@y
++char *chap_name[MAX_CHAPS]; /* string names of those chapters */
++@z
++
+ @x [8] l.148
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+@@ -77,8 +83,26 @@ Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
+ @x [9] l.201
+ register long j,k; /* all-purpose indices */
+ @y
+-register long j; /* all-purpose indices */
+-register unsigned long k; /* all-purpose indices */
++long j; /* all-purpose indices */
++unsigned long k; /* all-purpose indices */
++@z
++
++@x [9] l.203
++register node *p; /* information about the current character */
++@y
++node *p; /* information about the current character */
++@z
++
++@x [10] l.214
++sprintf(file_name,"%.6s.dat",title);
++@y
++snprintf(file_name,11,"%.6s.dat",title);
++@z
++
++@x [16] l.280
++{@+register long c; /* current code entering the system */
++@y
++{@+long c; /* current code entering the system */
+ @z
+ 
+ @x [17] l.306
+@@ -90,6 +114,14 @@ register unsigned long k; /* all-purpose indices */
+ @y
+ @z
+ 
++@x [17] l.313
++{@+register long c; /* current code entering the system a second time */
++  while ((c=gb_number(36))!=0) {@+register Vertex *v=xnode[c]->vert;
++@y
++{@+long c; /* current code entering the system a second time */
++  while ((c=gb_number(36))!=0) {@+Vertex *v=xnode[c]->vert;
++@z
++
+ @x [18] l.335
+ #define desc @t\quad@> z.S /* utility field definitions for the header file */
+ #define in_count @t\quad@> y.I
+@@ -102,16 +134,34 @@ register unsigned long k; /* all-purpose indices */
+ #define short_code @t\quad@> u.I /* utility field |u| contains a radix-36 number */
+ @z
+ 
++@x [19] l.372
++  while (gb_char()!='\n') {@+register long c=gb_number(36);
++@y
++  while (gb_char()!='\n') {@+long c=gb_number(36);
++@z
++
+ @x [19] l.377
+     if (p->chap!=k) {
+ @y
+     if (p->chap!=(long)k) {
+ @z
+ 
++@x [20] l.412
++    if (k>=first_chapter && k<=last_chapter) {@+register Vertex *u=chap_base+k;
++@y
++    if (k>=first_chapter && k<=last_chapter) {@+Vertex *u=chap_base+k;
++@z
++
++@x [20] l.418
++      while (gb_char()!='\n') {@+register long c=gb_number(36);
++@y
++      while (gb_char()!='\n') {@+long c=gb_number(36);
++@z
++
+ @x [20] l.420
+         if (p->chap!=k) {@+register Vertex *v=p->vert;
+ @y
+-        if (p->chap!=(long)k) {@+register Vertex *v=p->vert;
++        if (p->chap!=(long)k) {@+Vertex *v=p->vert;
+ @z
+ 
+ @x [21] l.434
+@@ -129,9 +179,15 @@ utility field |chap_no| of the corresponding |Arc| record.
+ @y
+ @z
+ 
+-@x [22] l.455
++@x [22] l.452
++  if (k>=first_chapter && k<=last_chapter) {@+register long c=gb_char();
++    while (c!='\n') {@+register Vertex **pp=clique_table;
++      register Vertex **qq,**rr; /* pointers within the clique table */
+       do@+{@+
+ @y
++  if (k>=first_chapter && k<=last_chapter) {@+long c=gb_char();
++    while (c!='\n') {@+Vertex **pp=clique_table;
++      Vertex **qq,**rr; /* pointers within the clique table */
+       do {@+
+ @z
+ 
+@@ -153,6 +209,14 @@ utility field |chap_no| of the corresponding |Arc| record.
+ #endif /* |GB_BOOKS_H| */
+ @z
+ 
++@x [25] l.479
++{@+register Vertex *u=*qq, *v=*rr;
++  register Arc *a;
++@y
++{@+Vertex *u=*qq, *v=*rr;
++  Arc *a;
++@z
++
+ @x [27] l.499
+ if (n>characters) n=characters;
+ if (x>n) x=n;
+@@ -162,3 +226,22 @@ if ((long)n>characters) n=characters;
+ if (x>n) x=n;
+ if ((long)last_chapter>chapters) last_chapter=chapters;
+ @z
++
++@x [27] l.507
++sprintf(new_graph->id,"%sbook(\"%s\",%lu,%lu,%lu,%lu,%ld,%ld,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"%sbook(\"%s\",%lu,%lu,%lu,%lu,%ld,%ld,%ld)",
++@z
++
++@x [28] l.521
++{@+register Vertex *v=new_graph->vertices; /* the next vertex to define */
++@y
++{@+Vertex *v=new_graph->vertices; /* the next vertex to define */
++@z
++
++@x [29] l.539
++if (bipartite)
++@y
++chap_name[0]=gb_save_string("");
++if (bipartite)
++@z
+-- 
+2.54.0
+

@@ -1,0 +1,111 @@
+From 53f26a85a9dea1804bac6bdf11df359257577a6f Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 15:00:15 +0200
+Subject: [PATCH 56/60] gb_raman++.
+
+---
+ PROTOTYPES/gb_raman.ch | 64 ++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 61 insertions(+), 3 deletions(-)
+
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index ea6dd64..4072830 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -43,17 +43,49 @@ Graph *raman(
+   @<Compute \9{p}|p+1| generators that will define the graph's edges@>;
+ @z
+ 
+-@x [16] l.283
++@x [9] l.152
++register long a, aa, k; /* primary indices in loops */
++@y
++long a, aa, k; /* primary indices in loops */
++@z
++
++@x [9] l.156
++register Vertex *v; /* the current vertex of interest */
++@y
++Vertex *v; /* the current vertex of interest */
++@z
++
++@x [13] l.248
++sprintf(new_graph->id,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
++@z
++
++@x [14] l.263
++  sprintf(name_buf,"%ld",a);
++@y
++  snprintf(name_buf,19,"%ld",a);
++@z
++
++@x [16] l.282
++    if (aa==q) sprintf(name_buf,"{%ld,INF}",a);
+     else sprintf(name_buf,"{%ld,%ld}",a,aa);
+ @y
+-    else sprintf(name_buf,"{%ld,%ld}",
++    if (aa==q) snprintf(name_buf,19,"{%ld,INF}",a);
++    else snprintf(name_buf,19,"{%ld,%ld}",
+       (unsigned long)a&0xffff,(unsigned long)aa&0xffff);
+ @z
+ 
++@x [17] l.309
++        sprintf(name_buf,"(%ld,%ld;0,1)",v->x.I,b);
++@y
++        snprintf(name_buf,19,"(%ld,%ld;0,1)",v->x.I,b);
++@z
++
+ @x [17] l.314
+         sprintf(name_buf,"(%ld,%ld;1,%ld)",b,v->y.I,c);
+ @y
+-        sprintf(name_buf,"(%ld,%ld;1,%ld)",
++        snprintf(name_buf,19,"(%ld,%ld;1,%ld)",
+           (unsigned long)b&0x1fff,
+           (unsigned long)(v->y.I)&0x1fff,
+           (unsigned long)c&0x1fff);
+@@ -73,6 +105,24 @@ static void deposit(
+   long a,long b,long c,long d) /* a solution to $a^2+b^2+c^2+d^2=p$ */
+ @z
+ 
++@x [24] l.553
++{@+register long g,h;
++@y
++{@+long g,h;
++@z
++
++@x [26] l.633
++      register Vertex* u;
++@y
++      Vertex* u;
++@z
++
++@x [26] l.642
++      }@+else {@+register Arc* ap;
++@y
++      }@+else {@+Arc* ap;
++@z
++
+ @x [27] l.673
+   @<Set |u| to the vertex whose label is |(a,b;c,d)|@>;
+ @y
+@@ -89,8 +139,16 @@ static void deposit(
+ static long lin_frac(a,k)
+   long a; /* the number being transformed; $q$ represents $\infty$ */
+   long k; /* index into |gen| table */
++{@+register long q=q_inv[0]; /* the modulus */
+ @y
+ static long lin_frac(
+   long a, /* the number being transformed; $q$ represents $\infty$ */
+   long k) /* index into |gen| table */
++{@+long q=q_inv[0]; /* the modulus */
++@z
++
++@x [30] l.704
++  register long num, den; /* numerator and denominator */
++@y
++  long num, den; /* numerator and denominator */
+ @z
+-- 
+2.54.0
+

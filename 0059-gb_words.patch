@@ -1,0 +1,121 @@
+From d58055fa8b34118cb64300623798d531e9df8a80 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 15:34:41 +0200
+Subject: [PATCH 59/60] gb_words++.
+
+---
+ PROTOTYPES/gb_words.ch | 68 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index b4cf2ab..3235eba 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -38,6 +38,16 @@ Graph *words(
+   long seed) /* random number seed */
+ @z
+ 
++@x [9] l.198
++else {@+register double flacc;
++  register long *p,*q;
++  register long acc;
++@y
++else {@+double flacc;
++  long *p,*q;
++  long acc;
++@z
++
+ @x [10] l.210
+ static double flabs(x)
+   long x;
+@@ -54,6 +64,26 @@ static long iabs(
+   long x)
+ @z
+ 
++@x [14] l.265
++register long wt; /* the weight of the current word */
++@y
++long wt; /* the weight of the current word */
++@z
++
++@x [19] l.311
++{@+register long j; /* position in |word| */
++@y
++{@+long j; /* position in |word| */
++@z
++
++@x [21] l.350
++{@+register long *p,*q; /* pointers to $C_j$ and $w_j$ */
++  register long c; /* current count */
++@y
++{@+long *p,*q; /* pointers to $C_j$ and $w_j$ */
++  long c; /* current count */
++@z
++
+ @x [21] l.359
+   do@+{
+ @y
+@@ -66,6 +96,14 @@ static long iabs(
+   } while (gb_char()==',');
+ @z
+ 
++@x [22] l.385
++  register long j; /* runs through sorted lists */
++  register node *p; /* the current node being output */
++@y
++  long j; /* runs through sorted lists */
++  node *p; /* the current node being output */
++@z
++
+ @x [26] l.418
+ @d weight u.I /* weighted frequencies */
+ @d loc a.I /* index of difference (0, 1, 2, 3, or 4) */
+@@ -86,15 +124,45 @@ if (n==0 || nn<n)
+ if (n==0 || nn<(long)n)
+ @z
+ 
++@x [27] l.432
++  sprintf(new_graph->id,"words(%lu,0,%ld,%ld)",n,wt_threshold,seed);
++else sprintf(new_graph->id,
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"words(%lu,0,%ld,%ld)",n,wt_threshold,seed);
++else snprintf(new_graph->id,ID_FIELD_SIZE,
++@z
++
++@x [28] l.443
++{@+register char *q; /* the new word */
++@y
++{@+char *q; /* the new word */
++@z
++
++@x [29] l.462
++{@+register char *r; /* previous word possibly adjacent to |q| */
++  register Vertex **h; /* hash address for linear probing */
++  register long raw_hash; /* five-letter hash code before remaindering */
++@y
++{@+char *r; /* previous word possibly adjacent to |q| */
++  Vertex **h; /* hash address for linear probing */
++  long raw_hash; /* five-letter hash code before remaindering */
++@z
++
+ @x [30] l.508
+ @p Vertex *find_word(q,f)
+   char *q;
+   void @[@] (*f)(); /* |*f| should take one argument, of type |Vertex *|,
+                         or |f| should be |NULL| */
++{@+register char *r; /* previous word possibly adjacent to |q| */
++  register Vertex **h; /* hash address for linear probing */
++  register long raw_hash; /* five-letter hash code before remaindering */
+ @y
+ @p Vertex *find_word(
+   char *q,
+   void @[@] (*f)(Vertex *))
+     /* |*f| should take one argument, of type |Vertex *|,
+        or |f| should be |NULL| */
++{@+char *r; /* previous word possibly adjacent to |q| */
++  Vertex **h; /* hash address for linear probing */
++  long raw_hash; /* five-letter hash code before remaindering */
+ @z
+-- 
+2.54.0
+

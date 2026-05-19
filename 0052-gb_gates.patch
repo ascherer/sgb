@@ -1,0 +1,358 @@
+From dbbf3878e9f4ff11df50f43e528cb66687b03b3b Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 13:52:22 +0200
+Subject: [PATCH 52/60] gb_gates++.
+
+---
+ PROTOTYPES/gb_gates.ch | 134 +++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 122 insertions(+), 12 deletions(-)
+
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 0658cfa..773c16a 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -24,7 +24,7 @@ extern Graph *prod(unsigned long,unsigned long);
+    /* make a network for high-speed multiplication */
+ extern void print_gates(Graph *);
+    /* write a network to standard output file */
+-extern long gate_eval(Graph *,char *,char *);
++extern long gate_eval(Graph *,const char *,char *);
+    /* evaluate a network */
+ extern Graph *partial_gates(Graph *,unsigned long,unsigned long,long,char *);
+    /* reduce network size */
+@@ -79,11 +79,17 @@ long gate_eval(g,in_vec,out_vec)
+   Graph *g; /* graph with gates as vertices */
+   char *in_vec; /* string for input values, or |NULL| */
+   char *out_vec; /* string for output values, or |NULL| */
++{@+register Vertex *v; /* the current vertex of interest */
++  register Arc *a; /* the current arc of interest */
++  register char t; /* boolean value being computed */
+ @y
+ long gate_eval(
+   Graph *g, /* graph with gates as vertices */
+-  char *in_vec, /* string for input values, or |NULL| */
++  const char *in_vec, /* string for input values, or |NULL| */
+   char *out_vec) /* string for output values, or |NULL| */
++{@+Vertex *v; /* the current vertex of interest */
++  Arc *a; /* the current arc of interest */
++  char t; /* boolean value being computed */
+ @z
+ 
+ @x [3] l.144
+@@ -110,78 +116,110 @@ Graph *risc(
+ @x [9] l.230
+ register long k,r; /* all-purpose indices */
+ @y
+-register long k; /* all-purpose indices */
+-register unsigned long r; /* all-purpose indices */
++long k; /* all-purpose indices */
++unsigned long r; /* all-purpose indices */
+ @z
+ 
+ @x [11] l.412
+ static Vertex* new_vert(t)
+   char t; /* the type of the new gate */
++{@+register Vertex *v;
+ @y
+ static Vertex* new_vert(
+   char t) /* the type of the new gate */
++{@+Vertex *v;
++@z
++
++@x [11] l.418
++    sprintf(name_buf,"%s%ld",prefix,count);
++@y
++    snprintf(name_buf,100,"%s%ld",prefix,count);
+ @z
+ 
+ @x [12] l.427
+ @d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,b);@+count=0;
+ @y
+-@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,(b)&0xffff);@+count=0;
++@d numeric_prefix(a,b) snprintf(prefix,8,"%c%ld:",a,(b)&0xffff);@+count=0;
+ @z
+ 
+ @x [13] l.445
+ static Vertex* make2(t,v1,v2)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make2(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.454
+ static Vertex* make3(t,v1,v2,v3)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make3(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.464
+ static Vertex* make4(t,v1,v2,v3,v4)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3,*v4;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make4(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.475
+ static Vertex* make5(t,v1,v2,v3,v4,v5)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3,*v4,*v5;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make5(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4,Vertex *v5)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [14] l.496
+ static Vertex* comp(v)
+   Vertex *v;
++{@+register Vertex *u;
+ @y
+ static Vertex* comp(
+   Vertex *v)
++{@+Vertex *u;
++@z
++
++@x [14] l.502
++  sprintf(name_buf,"%s~",v->name);
++@y
++  snprintf(name_buf,100,"%s~",v->name);
+ @z
+ 
+ @x [15] l.514
+ static Vertex* make_xor(u,v)
+   Vertex *u,*v;
++{@+register Vertex *t1,*t2;
+ @y
+ static Vertex* make_xor(
+   Vertex *u,Vertex *v)
++{@+Vertex *t1,*t2;
++@z
++
++@x [16] l.529
++sprintf(new_graph->id,"risc(%lu)",regs);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"risc(%lu)",regs);
+ @z
+ 
+ @x [17] l.537
+@@ -292,6 +330,12 @@ strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');@/
+ @<Create gates for the \9{4}new values of \9{1}register 0...@>=
+ @z
+ 
++@x [36] l.844
++  {@+register Arc *a=gb_virgin_arc();
++@y
++  {@+Arc *a=gb_virgin_arc();
++@z
++
+ @x [38] l.876
+ static void make_adder(n,x,y,z,carry,add)
+   unsigned long n; /* number of bits */
+@@ -299,6 +343,7 @@ static void make_adder(n,x,y,z,carry,add)
+   Vertex *z[]; /* output gates */
+   Vertex *carry; /* add this to |y|, unless it's null */
+   char add; /* should we add or subtract? */
++{@+register long k;
+ @y
+ static void make_adder(
+   unsigned long n, /* number of bits */
+@@ -306,6 +351,7 @@ static void make_adder(
+   Vertex *z[], /* output gates */
+   Vertex *carry, /* add this to |y|, unless it's null */
+   char add) /* should we add or subtract? */
++{@+long k;
+ @z
+ 
+ @x [38] l.889
+@@ -332,6 +378,11 @@ long run_risc(g,rom,size,trace_regs)
+   unsigned long rom[]; /* contents of read-only memory */
+   unsigned long size; /* length of |rom| vector */
+   unsigned long trace_regs; /* if nonzero, this many registers will be traced */
++{@+register unsigned long l; /* memory address */
++  register unsigned long m; /* memory or register contents */
++  register Vertex *v; /* the current gate of interest */
++  register Arc *a; /* the current output list element of interest */
++  register long k,r; /* general-purpose indices */
+ @y
+ long run_risc(
+   Graph *g, /* graph output by |risc| */
+@@ -339,13 +390,12 @@ long run_risc(
+   unsigned long size, /* length of |rom| vector */
+   unsigned long trace_regs)
+     /* if nonzero, this many registers will be traced */
+-@z
+-
+-@x [43] l.1001
+-  register long k,r; /* general-purpose indices */
+-@y
+-  register long k; /* general-purpose indices */
+-  register unsigned long r; /* general-purpose indices */
++{@+unsigned long l; /* memory address */
++  unsigned long m; /* memory or register contents */
++  Vertex *v; /* the current gate of interest */
++  Arc *a; /* the current output list element of interest */
++  long k; /* general-purpose indices */
++  unsigned long r; /* general-purpose indices */
+ @z
+ 
+ @x [43] l.1004
+@@ -371,9 +421,11 @@ long run_risc(
+ @x [49] l.1097
+ static void pr_gate(v)
+   Vertex *v;
++{@+register Arc *a;
+ @y
+ static void pr_gate(
+   Vertex *v)
++{@+Arc *a;
+ @z
+ 
+ @x [49] l.1112
+@@ -385,9 +437,13 @@ static void pr_gate(
+ @x [49] l.1117
+ void print_gates(g)
+   Graph *g;
++{@+register Vertex *v;
++  register Arc *a;
+ @y
+ void print_gates(
+   Graph *g)
++{@+Vertex *v;
++  Arc *a;
+ @z
+ 
+ @x [50] l.1128
+@@ -405,6 +461,14 @@ static Graph* reduce(
+   Graph *g)
+ @z
+ 
++@x [51] l.1148
++{@+register Vertex *u, *v; /* the current vertices of interest */
++  register Arc *a, *b; /* the current arcs of interest */
++@y
++{@+Vertex *u, *v; /* the current vertices of interest */
++  Arc *a, *b; /* the current arcs of interest */
++@z
++
+ @x [53] l.1200
+     case NOT:@<Try to reduce an inverter, then |goto done|@>;
+     case AND:@<Try to reduce an {\sc AND} gate@>;@+goto test_single_arg;
+@@ -441,6 +505,12 @@ static Graph* reduce(
+ @ @<Try to reduce an \9{e}{\sc EXCLUSIVE-OR} gate@>=
+ @z
+ 
++@x [59] l.1328
++sprintf(name_buf,"%s~",u->name);
++@y
++snprintf(name_buf,100,"%s~",u->name);
++@z
++
+ @x [61] l.1365
+   do@+{
+ @y
+@@ -453,6 +523,12 @@ static Graph* reduce(
+   } while (v!=sentinel);
+ @z
+ 
++@x [65] l.1451
++  sprintf(name_buf,"%s>%s",v->name,u->name);
++@y
++  snprintf(name_buf,100,"%s>%s",v->name,u->name);
++@z
++
+ @x [66] l.1487
+ Graph* prod(m,n)
+   unsigned long m,n; /* lengths of the binary numbers to be multiplied */
+@@ -461,12 +537,26 @@ Graph* prod(unsigned long m,unsigned long n)
+   /* lengths of the binary numbers to be multiplied */
+ @z
+ 
++@x [67] l.1527
++sprintf(g->id,"prod(%lu,%lu)",m,n);
++@y
++snprintf(g->id,ID_FIELD_SIZE,"prod(%lu,%lu)",m,n);
++@z
++
+ @x [68] l.1537
+ unsigned long m_plus_n; /* guess what this variable holds */
+ @y
+ long m_plus_n; /* guess what this variable holds */
+ @z
+ 
++@x [71] l.1608
++register long i,j,k,l; /* all-purpose indices */
++register Vertex *v; /* current vertex of interest */
++@y
++long i,j,k,l; /* all-purpose indices */
++Vertex *v; /* current vertex of interest */
++@z
++
+ @x [72] l.1614
+ for (j=0; j<m; j++) {
+ @y
+@@ -491,6 +581,18 @@ for (j=0; j<m-2; j++) {
+ for (j=0; j<(long)m-2; j++) {
+ @z
+ 
++@x [80] l.1815
++    sprintf(name_buf,"%c%ld:%ld",a,k,j);
++@y
++    snprintf(name_buf,100,"%c%ld:%ld",a,k,j);
++@z
++
++@x [83] l.1846
++for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
++@y
++for (k=0;k<m_plus_n;k++) {@+Arc *a=gb_virgin_arc();
++@z
++
+ @x [84] l.1897
+ Graph *partial_gates(g,r,prob,seed,buf)
+   Graph *g; /* generalized gate graph */
+@@ -499,6 +601,7 @@ Graph *partial_gates(g,r,prob,seed,buf)
+    /* scaled probability of not touching subsequent input gates */
+   long seed; /* seed value for random number generation */
+   char *buf; /* optional parameter for information about partial assignment */
++{@+register Vertex *v; /* the current gate of interest */
+ @y
+ Graph *partial_gates(
+   Graph *g, /* generalized gate graph */
+@@ -508,6 +611,7 @@ Graph *partial_gates(
+   long seed, /* seed value for random number generation */
+   char *buf)
+     /* optional parameter for information about partial assignment */
++{@+Vertex *v; /* the current gate of interest */
+ @z
+ 
+ @x [84] l.1910
+@@ -515,3 +619,9 @@ Graph *partial_gates(
+ @y
+     case 'I': if ((gb_next_rand()>>15)>=(long)prob) {
+ @z
++
++@x [85] l.1930
++  sprintf(g->id,"partial_gates(%s,%lu,%lu,%ld)",name_buf,r,prob,seed);
++@y
++  snprintf(g->id,ID_FIELD_SIZE,"partial_gates(%s,%lu,%lu,%ld)",name_buf,r,prob,seed);
++@z
+-- 
+2.54.0
+

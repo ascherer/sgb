@@ -1,0 +1,37 @@
+From b64e17a553dd1d870f8c3117cd5dd9ea4fa38aba Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 15:24:36 +0200
+Subject: [PATCH 58/60] gb_roget++.
+
+---
+ PROTOTYPES/gb_roget.ch | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 641df95..630f6c9 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -37,6 +37,20 @@ Graph *roget(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.106
++sprintf(new_graph->id,"roget(%lu,%lu,%lu,%ld)",n,min_distance,prob,seed);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"roget(%lu,%lu,%lu,%ld)",n,min_distance,prob,seed);
++@z
++@x [9] l.136
++register long j,k; /* all-purpose indices */
++register Vertex *v; /* current vertex */
++@y
++long j,k; /* all-purpose indices */
++Vertex *v; /* current vertex */
++@z
++
++
+ @x [11] l.170
+ @d cat_no u.I /* utility field |u| of each vertex holds the category number */
+ 
+-- 
+2.54.0
+

@@ -1,0 +1,162 @@
+From 78591b1959c2eb815c406d5d8ce5c9e1abef1f98 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 14:12:03 +0200
+Subject: [PATCH 53/60] gb_lisa++.
+
+---
+ PROTOTYPES/gb_lisa.ch | 62 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 56 insertions(+), 6 deletions(-)
+
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 559ea22..816ed4f 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -80,11 +80,19 @@ long *lisa(
+   @<Read \9{l}\.{lisa.dat} and map it to the desired output form@>;
+ @z
+ 
++@x [7] l.165
++register long k,l; /* the current row and column of output */
++register long i,j; /* all-purpose indices */
++@y
++long k,l; /* the current row and column of output */
++long i,j; /* all-purpose indices */
++@z
++
+ @x [8] l.183
+ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    m,n,d,m0,m1,n0,n1,d0,d1);
+ @y
+-sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
++snprintf(lisa_id,63,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    m&0x1ff,n&0x1ff,d&0xffffffff,m0&0x1ff,m1&0x1ff,n0&0x1ff,n1&0x1ff,
+    d0&0xffffffff,d1&0xffffffff);
+ @z
+@@ -98,13 +106,13 @@ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+ @x [12] l.229
+ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ @y
+-for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
++for (l=lam=0; l<(long)n; l++) {@+long sum=0;
+ @z
+ 
+ @x [12] l.231
+   do@+{@+register long nl; /* giant column where something new might happen */
+ @y
+-  do {@+register long nl; /* giant column where something new might happen */
++  do {@+long nl; /* giant column where something new might happen */
+ @z
+ 
+ @x [12] l.237
+@@ -124,7 +132,7 @@ for (k=kap=0; k<(long)m;k++) {
+ @x [13] l.253
+   do@+{@+register long nk; /* giant row where something new might happen */
+ @y
+-  do {@+register long nk; /* giant row where something new might happen */
++  do {@+long nk; /* giant row where something new might happen */
+ @z
+ 
+ @x [13] l.255
+@@ -158,6 +166,12 @@ static long na_over_b(n,a,b)
+ static long na_over_b(long n,long a,long b)
+ @z
+ 
++@x [15] l.289
++  register long r,k,q,br;
++@y
++  long r,k,q,br;
++@z
++
+ @x [15] l.295
+   do@+{@+bit[k]=n&1; /* save the least significant bit of $n$ */
+ @y
+@@ -198,8 +212,10 @@ for (i=0;i<(long)m0;i++)
+ 
+ @x [21] l.344
+ @ @<Read a row of input into |in_row|@>=
++{@+register long dd;
+ @y
+ @ @<Read \9{a}a row of input into |in_row|@>=
++{@+long dd;
+ @z
+ 
+ @x [23] l.388
+@@ -247,8 +263,8 @@ utility field.
+ @x [24] l.426
+ register long j,k,l; /* all-purpose indices */
+ @y
+-register unsigned long j; /* all-purpose index */
+-register long k,l; /* all-purpose indices */
++unsigned long j; /* all-purpose index */
++long k,l; /* all-purpose indices */
+ @z
+ 
+ @x [25] l.431
+@@ -292,6 +308,12 @@ utility field.
+     if (k>0&&l<(long)n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+ @z
+ 
++@x [29] l.512
++sprintf(new_graph->id,"plane_%s",lisa_id);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane_%s",lisa_id);
++@z
++
+ @x [30] l.533
+ for (l=0;l<n;l++) u[l]=NULL;
+ for (k=0,apos=a,aloc=0;k<m;k++)
+@@ -302,6 +324,12 @@ for (k=0,apos=a,aloc=0;k<(long)m;k++)
+   for (l=0;l<(long)n;l++,apos++,aloc++) {
+ @z
+ 
++@x [30] l.538
++      sprintf(str_buf,"%ld",regs);
++@y
++      snprintf(str_buf,STR_BUF_LENGTH,"%ld",regs);
++@z
++
+ @x [32] l.562
+ static void adjac(u,v)
+   Vertex *u,*v;
+@@ -330,16 +358,38 @@ static void adjac(Vertex *u,Vertex *v)
+     /* should we prefer dark pixels to light pixels? */
+ @z
+ 
++@x [34] l.611
++register long k,l; /* all-purpose indices */
++@y
++long k,l; /* all-purpose indices */
++@z
++
++@x [34] l.615
++register Vertex *u,*v; /* current vertices of interest */
++@y
++Vertex *u,*v; /* current vertices of interest */
++@z
++
++@x [35] l.624
++sprintf(new_graph->id,"bi_lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%c)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"bi_lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%c)",
++@z
++
+ @x [35] l.628
+ for (k=0,v=new_graph->vertices;k<m;k++,v++) {
++  sprintf(str_buf,"r%ld",k); /* row vertices are called |"r0"|, |"r1"|, etc. */
+ @y
+ for (k=0,v=new_graph->vertices;k<(long)m;k++,v++) {
++  snprintf(str_buf,STR_BUF_LENGTH,"r%ld",k); /* row vertices are called |"r0"|, |"r1"|, etc. */
+ @z
+ 
+ @x [35] l.632
+ for (l=0;l<n;l++,v++) {
++  sprintf(str_buf,"c%ld",l); /* column vertices are called |"c0"|,
+ @y
+ for (l=0;l<(long)n;l++,v++) {
++  snprintf(str_buf,STR_BUF_LENGTH,"c%ld",l); /* column vertices are called |"c0"|,
+ @z
+ 
+ @x [36] l.644
+-- 
+2.54.0
+

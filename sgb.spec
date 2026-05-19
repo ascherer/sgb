@@ -78,6 +78,18 @@ Patch45: 0045-Purge-unused-variables-in-WORD_GIANT.patch
 Patch46: 0046-Move-defines-after-include.patch
 Patch47: 0047-Format-TEST_IO-consistently.patch
 Patch48: 0048-Prepare-SGB-for-CPLUSPLUS23.patch
+Patch49: 0049-gb_books.patch
+Patch50: 0050-gb_econ.patch
+Patch51: 0051-gb_games.patch
+Patch52: 0052-gb_gates.patch
+Patch53: 0053-gb_lisa.patch
+Patch54: 0054-gb_miles.patch
+Patch55: 0055-gb_plane.patch
+Patch56: 0056-gb_raman.patch
+Patch57: 0057-gb_rand.patch
+Patch58: 0058-gb_roget.patch
+Patch59: 0059-gb_words.patch
+Patch60: 0060-gb_dijk.patch
 %endif
 
 %description

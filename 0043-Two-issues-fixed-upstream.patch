@@ -1,7 +1,7 @@
-From 401cc5b71633973f8fdb9cf56ac5b7f5389c977e Mon Sep 17 00:00:00 2001
+From bb8fe1398b554b90056d5fdea7a6d2f19ee1a77e Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 4 Oct 2025 15:42:40 +0200
-Subject: [PATCH 43/48] Two issues fixed upstream.
+Subject: [PATCH 43/60] Two issues fixed upstream.
 
 ---
  PROTOTYPES/gb_games.ch | 2 +-

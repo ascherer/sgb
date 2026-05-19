@@ -1,0 +1,196 @@
+From 1a88c14880ac06dc881c52d4f57532c493f1bf30 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 15:20:00 +0200
+Subject: [PATCH 57/60] gb_rand++.
+
+---
+ PROTOTYPES/gb_rand.ch | 103 +++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 101 insertions(+), 2 deletions(-)
+
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 393e7f2..877091f 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -68,12 +68,30 @@ Graph *random_graph(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.173
++register long k; /* vertex being processed */
++@y
++long k; /* vertex being processed */
++@z
++
+ @x [7] l.181
+ for (k=0; k<n; k++) {
+   sprintf(name_buffer,"%ld",k);
+ @y
+ for (k=0; k<(long)n; k++) {
+-  sprintf(name_buffer,"%ld",k&0xffffffff);
++  snprintf(name_buffer,11,"%ld",k&0xffffffff);
++@z
++
++@x [7] l.185
++sprintf(new_graph->id,"random_graph(%lu,%lu,%d,%d,%d,%s,%s,%ld,%ld,%ld)",@|
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"random_graph(%lu,%lu,%d,%d,%d,%s,%s,%ld,%ld,%ld)",@|
++@z
++
++@x [9] l.195
++{@+register Vertex *u,*v;
++@y
++{@+Vertex *u,*v;
+ @z
+ 
+ @x [9] l.204
+@@ -85,6 +103,12 @@ for (k=0; k<(long)n; k++) {
+   }
+ @z
+ 
++@x [10] l.223
++else {@+register Arc *a;
++@y
++else {@+Arc *a;
++@z
++
+ @x [10] l.226
+     if (a->tip==v)
+ @y
+@@ -100,6 +124,15 @@ for (k=0; k<(long)n; k++) {
+     }
+ @z
+ 
++@x [11] l.248
++{@+register long acc; /* sum of probabilities */
++  register long *p; /* pointer to current probability of interest */
++@y
++{@+long acc; /* sum of probabilities */
++  long *p; /* pointer to current probability of interest */
++@z
++
++
+ @x [13] l.290
+     while (nn<n) nn+=nn, kk--;
+ @y
+@@ -112,6 +145,22 @@ for (k=0; k<(long)n; k++) {
+     while (nn<(long)n) nn+=nn, kk--;
+ @z
+ 
++@x [15] l.313
++{@+register magic_entry *magic;
++  register long uu=gb_next_rand(); /* uniform random number */
++@y
++{@+magic_entry *magic;
++  long uu=gb_next_rand(); /* uniform random number */
++@z
++
++@x [16] l.322
++{@+register magic_entry *magic;
++  register long uu=gb_next_rand(); /* uniform random number */
++@y
++{@+magic_entry *magic;
++  long uu=gb_next_rand(); /* uniform random number */
++@z
++
+ @x [18] l.369
+ static magic_entry *walker(n,nn,dist,g)
+   long n; /* length of |dist| vector */
+@@ -123,10 +172,28 @@ static magic_entry *walker(n,nn,dist,g)
+ static magic_entry *walker(
+   long n, /* length of |dist| vector */
+   long nn, /* $2^{\lceil\mskip1mu\lg n\rceil}$ */
+-  register long *dist, /* start of distribution table, which sums to $2^{30}$ */
++  long *dist, /* start of distribution table, which sums to $2^{30}$ */
+   Graph *g) /* tables will be allocated for this graph's vertices */
+ @z
+ 
++@x [18] l.378
++  register node *p, *q; /* pointer variables for list manipulation */
++@y
++  node *p, *q; /* pointer variables for list manipulation */
++@z
++
++@x [20] l.413
++{@+register magic_entry *r; register long x;
++@y
++{@+magic_entry *r; long x;
++@z
++
++@x [21] l.431
++{@+register magic_entry *r; register long x;
++@y
++{@+magic_entry *r; long x;
++@z
++
+ @x [22] l.454
+ Graph *random_bigraph(n1,n2,m,multi,dist1,dist2,min_len,max_len,seed)
+   unsigned long n1,n2; /* number of vertices desired in each part */
+@@ -151,6 +218,20 @@ Graph *random_bigraph(
+     /* random number seed */
+ @z
+ 
++@x [22] l.479
++  sprintf(new_graph->id,"random_bigraph(%lu,%lu,%lu,%d,%s,%s,%ld,%ld,%ld)",@|
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"random_bigraph(%lu,%lu,%lu,%d,%s,%s,%ld,%ld,%ld)",@|
++@z
++
++@x [23] l.493
++{@+register long *p, *q; /* traversers of the dists */
++  register long k; /* vertex count */
++@y
++{@+long *p, *q; /* traversers of the dists */
++  long k; /* vertex count */
++@z
++
+ @x [23] l.498
+   else for (k=0; k<n1; k++) *q++=(0x40000000+k)/n1;
+ @y
+@@ -170,6 +251,8 @@ long random_lengths(g,directed,min_len,max_len,dist,seed)
+   long min_len,max_len; /* bounds on random lengths */
+   long *dist; /* distribution of lengths */
+   long seed; /* random number seed */
++{@+register Vertex *u,*v; /* current vertices of interest */
++  register Arc *a; /* current arc of interest */
+ @y
+ long random_lengths(
+   Graph *g, /* graph whose lengths will be randomized */
+@@ -177,6 +260,8 @@ long random_lengths(
+   long min_len,long max_len, /* bounds on random lengths */
+   long *dist, /* distribution of lengths */
+   long seed) /* random number seed */
++{@+Vertex *u,*v; /* current vertices of interest */
++  Arc *a; /* current arc of interest */
+ @z
+ 
+ @x [24] l.532
+@@ -187,12 +272,26 @@ long random_lengths(
+ 
+ @x [24] l.538
+   @<Check |dist| for validity, and set up the |dist_table|@>;
++  sprintf(buffer,",%d,%ld,%ld,%s,%ld)",directed?1:0,@|
+ @y
+   @<Check \9{d}|dist| for validity, and set up the |dist_table|@>;
++  snprintf(buffer,43,",%d,%ld,%ld,%s,%ld)",directed?1:0,@|
+ @z
+ 
+ @x [26] l.549
+ @ @<Check |dist| for validity...@>=
++if (dist) {@+register long acc; /* sum of probabilities */
++  register long *p; /* pointer to current probability of interest */
++  register long n=max_len-min_len+1;
+ @y
+ @ @<Check \9{d}|dist| for validity...@>=
++if (dist) {@+long acc; /* sum of probabilities */
++  long *p; /* pointer to current probability of interest */
++  long n=max_len-min_len+1;
++@z
++
++@x [27] l.572
++    else {@+register long len; /* a random length */
++@y
++    else {@+long len; /* a random length */
+ @z
+-- 
+2.54.0
+

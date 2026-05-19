@@ -1,0 +1,106 @@
+From 4589d353b2dc36e71f3c3c6c4338e91b952eef9a Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 09:46:13 +0200
+Subject: [PATCH 50/60] gb_econ++.
+
+---
+ PROTOTYPES/gb_econ.ch | 68 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index e825390..8bfcb1f 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -72,6 +72,26 @@ Graph *econ(
+   @<Read \9{e}\.{econ.dat} and note the binary tree structure@>;
+ @z
+ 
++@x [8] l.216
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [10] l.229
++sprintf(new_graph->id,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
++@z
++
++@x [13] l.271
++register node *p,*pl,*pr; /* current node and its children */
++register node *q; /* register for list manipulation */
++@y
++node *p,*pl,*pr; /* current node and its children */
++node *q; /* register for list manipulation */
++@z
++
+ @x [14] l.274
+ @ @<Read \.{econ.dat} and note the binary tree structure@>=
+ @y
+@@ -96,10 +116,26 @@ Graph *econ(
+ @<Read \9{a}and store the sector names...@>=
+ @z
+ 
++@x [15] l.302
++for (p=node_block; p<node_block+NORM_N+NORM_N-1; p++) {@+register long c;
++@y
++for (p=node_block; p<node_block+NORM_N+NORM_N-1; p++) {@+long c;
++@z
++
+ @x [16] l.332
+ @<Read and store the output...@>=
++{@+register long s=0; /* row sum */
++  register long x; /* entry read from \.{econ.dat} */
+ @y
+ @<Read \9{a}and store the output...@>=
++{@+long s=0; /* row sum */
++  long x; /* entry read from \.{econ.dat} */
++@z
++
++@x [19] l.384
++{@+register node *special=node_index[MAX_N];
++@y
++{@+node *special=node_index[MAX_N];
+ @z
+ 
+ @x [22] l.479
+@@ -113,3 +149,35 @@ Graph *econ(
+ @y
+ @ @<Set \9{p}|p->table[2]|, |p->table[3]|, \dots\ to convolution...@>=
+ @z
++
++@x [23] l.487
++for (j=pl->table[0];j;j--) {@+register long t=pl->table[j];
++@y
++for (j=pl->table[0];j;j--) {@+long t=pl->table[j];
++@z
++
++@x [24] l.493
++{@+register long ss,rr;
++@y
++{@+long ss,rr;
++@z
++
++@x [25] l.537
++{@+register Vertex *v=new_graph->vertices+n;
++@y
++{@+Vertex *v=new_graph->vertices+n;
++@z
++
++@x [25] l.548
++    if ((p=node_index[j])!=NULL) {@+register Vertex *u=vert_index[j];
++@y
++    if ((p=node_index[j])!=NULL) {@+Vertex *u=vert_index[j];
++@z
++
++@x [29] l.591
++{@+register Arc *a=pl->SIC_list;
++  register long jj=pl->SIC, kk=pr->SIC;
++@y
++{@+Arc *a=pl->SIC_list;
++  long jj=pl->SIC, kk=pr->SIC;
++@z
+-- 
+2.54.0
+

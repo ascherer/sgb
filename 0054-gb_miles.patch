@@ -1,0 +1,76 @@
+From d110cb63b54cf8772428f769f3f81a1a12c62caa Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 14:19:22 +0200
+Subject: [PATCH 54/60] gb_miles++.
+
+---
+ PROTOTYPES/gb_miles.ch | 46 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 24d31c3..0dbf8e3 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -51,6 +51,32 @@ Graph *miles(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.142
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [8] l.155
++sprintf(new_graph->id,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@z
++
++@x [12] l.237
++{@+register node *p;
++@y
++{@+node *p;
++@z
++
++@x [14] l.280
++{@+register node *p; /* the current node being considered */
++  register Vertex *v=new_graph->vertices; /* the first unfilled vertex */
++@y
++{@+node *p; /* the current node being considered */
++  Vertex *v=new_graph->vertices; /* the first unfilled vertex */
++@z
++
+ @x [15] l.298
+ The coordinates computed here are compatible with those in the \TEX/ file
+ \.{cities.texmap}. Users might want to incorporate edited copies of that file
+@@ -90,6 +116,26 @@ into documents that display results obtained with |miles| graphs.
+ @y
+ @z
+ 
++@x [17] l.333
++{@+register Vertex *u,*v;
++@y
++{@+Vertex *u,*v;
++@z
++
++@x [18] l.345
++{@+register node *p;
++@y
++{@+node *p;
++@z
++
++@x [19] l.361
++{@+register node *q;
++  register node*s=NULL; /* list of nodes containing edges from city |k| */
++@y
++{@+node *q;
++  node*s=NULL; /* list of nodes containing edges from city |k| */
++@z
++
+ @x [19] l.366
+       if (j>max_distance)
+ @y
+-- 
+2.54.0
+

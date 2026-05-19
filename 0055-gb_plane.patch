@@ -1,0 +1,220 @@
+From 77c0644a691efbd0d590d8781bb3fe980eb8254e Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 14:38:02 +0200
+Subject: [PATCH 55/60] gb_plane++.
+
+---
+ PROTOTYPES/gb_plane.ch | 98 +++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 92 insertions(+), 6 deletions(-)
+
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 626cd5d..d76d4b3 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -65,6 +65,14 @@ Graph *plane(
+     /* random number seed */
+ @z
+ 
++@x [5] l.99
++  register Vertex *v; /* the current vertex of interest */
++  register long k; /* the canonical all-purpose index */
++@y
++  Vertex *v; /* the current vertex of interest */
++  long k; /* the canonical all-purpose index */
++@z
++
+ @x [6] l.118
+ @ The coordinates are placed into utility fields |x_coord| and |y_coord|.
+ A random ID number is also stored in utility field~|z_coord|; this number is
+@@ -80,12 +88,24 @@ collinear or cocircular. No two vertices have the same ID number.
+ @ @<Set up a graph with |n| uniform...@>=
+ @z
+ 
++@x [6] l.132
++sprintf(new_graph->id,"plane(%lu,%lu,%lu,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane(%lu,%lu,%lu,%lu,%lu,%ld)",
++@z
++
+ @x [6] l.135
+ for (k=0,v=new_graph->vertices; k<n; k++,v++) {
+ @y
+ for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
+ @z
+ 
++@x [6] l.139
++  sprintf(str_buf,"%ld",k);@+v->name=gb_save_string(str_buf);
++@y
++  snprintf(str_buf,STR_BUF_LENGTH,"%ld",k);@+v->name=gb_save_string(str_buf);
++@z
++
+ @x [7] l.147
+ @ @(gb_plane.h@>=
+ #define x_coord @t\quad@> x.I
+@@ -127,22 +147,22 @@ void delaunay(
+ @x [12] l.252
+ static void new_euclid_edge(u,v)
+   Vertex *u,*v;
+-@y
+-static void new_euclid_edge(Vertex *u,Vertex *v)
+-@z
+-
+-@x [12] l.255
++{@+register long dx,dy;
+   if ((gb_next_rand()>>15)>=gprob) {
+ @y
++static void new_euclid_edge(Vertex *u,Vertex *v)
++{@+long dx,dy;
+   if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
+ @z
+ 
+ @x [13] l.283
+ static long int_sqrt(x)
+   long x;
++{@+register long y, m, q=2; long k;
+ @y
+ static long int_sqrt(
+   long x)
++{@+long y, m, q=2; long k;
+ @z
+ 
+ @x [15] l.322
+@@ -153,36 +173,64 @@ static long sign_test(
+   long x1,long x2,long x3,long y1,long y2,long y3)
+ @z
+ 
++@x [15] l.326
++  register long t; /* temporary register for swapping */
++@y
++  long t; /* temporary register for swapping */
++@z
++
++@x [18] l.373
++{@+register long lx,rx,ly,ry;
++@y
++{@+long lx,rx,ly,ry;
++@z
++
+ @x [20] l.431
+ static long ccw(u,v,w)
+   Vertex *u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++  register long det=(u->x_coord-wx)*(v->y_coord-wy)
+ @y
+ static long ccw(
+   Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++  long det=(u->x_coord-wx)*(v->y_coord-wy)
+ @z
+ 
+ @x [21] l.474
+ static long incircle(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long incircle(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++@z
++
++@x [21] l.480
++  register long det=sign_test(tx*uy-ty*ux,ux*vy-uy*vx,vx*ty-vy*tx,@|
++@y
++  long det=sign_test(tx*uy-ty*ux,ux*vy-uy*vx,vx*ty-vy*tx,@|
+ @z
+ 
+ @x [24] l.542
+ static long ff(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long ff(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @z
+ 
+ @x [24] l.550
+ static long gg(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long gg(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @z
+ 
+ @x [24] l.558
+@@ -196,9 +244,17 @@ static long hh(
+ @x [24] l.563
+ static long jj(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long vx=v->x_coord, wy=w->y_coord;
+ @y
+ static long jj(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long vx=v->x_coord, wy=w->y_coord;
++@z
++
++@x [26] l.619
++register siz_t reg; /* used while computing mates */
++@y
++siz_t reg; /* used while computing mates */
+ @z
+ 
+ @x [35] l.751
+@@ -213,6 +269,30 @@ do {
+ } while (x->u);
+ @z
+ 
++@x [36] l.789
++else {@+register node *xp;
++@y
++else {@+node *xp;
++@z
++
++@x [38] l.827
++{@+register node *xp;
++@y
++{@+node *xp;
++@z
++
++@x [38] l.833
++  while (t!=r && (ccw(p,s,t))) {@+register node *xpp;
++@y
++  while (t!=r && (ccw(p,s,t))) {@+node *xpp;
++@z
++
++@x [39] l.859
++    register node *xp, *xpp;
++@y
++    node *xp, *xpp;
++@z
++
+ @x [40] l.882
+ static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
+   arc *c,*d,*e;
+@@ -228,7 +308,7 @@ static void flip(
+ @x [40] l.886
+ {@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+ @y
+-{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
++{@+arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+   (void) t; (void) tp;
+ @z
+ 
+@@ -259,6 +339,12 @@ Graph *plane_miles(
+     /* random number seed */
+ @z
+ 
++@x [42] l.963
++sprintf(new_graph->id,"plane_miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane_miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@z
++
+ @x [44] l.982
+ static void new_mile_edge(u,v)
+   Vertex *u,*v;
+-- 
+2.54.0
+

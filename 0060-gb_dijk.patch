@@ -1,0 +1,135 @@
+From 8bb41586eae93af7050210c2dae4b643e9ed51b4 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 15:42:20 +0200
+Subject: [PATCH 60/60] gb_dijk++.
+
+---
+ PROTOTYPES/gb_dijk.ch | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index ce04569..96f2006 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -88,12 +88,34 @@ long dijkstra(uu,vv,gg,hh)
+   Vertex *vv; /* the ending point */
+   Graph *gg; /* the graph they belong to */
+   long @[@] (*hh)(); /* heuristic function */
++{@+register Vertex *t; /* current vertex of interest */
+ @y
+ long dijkstra(
+   Vertex *uu, /* the starting point */
+   Vertex *vv, /* the ending point */
+   Graph *gg, /* the graph they belong to */
+   long @[@] (*hh)(Vertex *)) /* heuristic function */
++{@+Vertex *t; /* current vertex of interest */
++@z
++
++@x [11] l.204
++{@+register Arc *a; /* an arc leading from |t| */
++  register long d = t->dist - t->hh_val;
++@y
++{@+Arc *a; /* an arc leading from |t| */
++  long d = t->dist - t->hh_val;
++@z
++
++@x [11] l.207
++    register Vertex *v = a->tip; /* a vertex adjacent to |t| */
++@y
++    Vertex *v = a->tip; /* a vertex adjacent to |t| */
++@z
++
++@x [11] l.209
++      register long dd = d + a->len + v->hh_val;
++@y
++      long dd = d + a->len + v->hh_val;
+ @z
+ 
+ @x [14] l.254
+@@ -105,9 +127,11 @@ long dijkstra(
+ @x [14] l.257
+ void print_dijkstra_result(vv)
+   Vertex *vv; /* ending vertex */
++{@+register Vertex *t, *p, *q; /* registers for reversing links */
+ @y
+ void print_dijkstra_result(
+   Vertex *vv) /* ending vertex */
++{@+Vertex *t, *p, *q; /* registers for reversing links */
+ @z
+ 
+ @x [14] l.265
+@@ -168,20 +192,24 @@ void init_dlist(
+ void enlist(v,d)
+   Vertex *v;
+   long d;
++{@+register Vertex *t=head->llink;
+ @y
+ void enlist(
+   Vertex *v,
+   long d)
++{@+Vertex *t=head->llink;
+ @z
+ 
+ @x [18] l.340
+ void reenlist(v,d)
+   Vertex *v;
+   long d;
++{@+register Vertex *t=v->llink;
+ @y
+ void reenlist(
+   Vertex *v,
+   long d)
++{@+Vertex *t=v->llink;
+ @z
+ 
+ @x [19] l.353
+@@ -193,9 +221,11 @@ Vertex *del_first(void)
+ @x [21] l.374
+ void init_128(d)
+   long d;
++{@+register Vertex *u;
+ @y
+ void init_128(
+   long d)
++{@+Vertex *u;
+ @z
+ 
+ @x [22] l.386
+@@ -204,24 +234,34 @@ Vertex *del_128()
+ Vertex *del_128(void)
+ @z
+ 
++@x [22] l.388
++  register Vertex *u, *t;
++@y
++  Vertex *u, *t;
++@z
++
+ @x [23] l.402
+ void enq_128(v,d)
+   Vertex *v; /* new vertex for the queue */
+   long d; /* its |dist| */
++{@+register Vertex *u=head+(d&0x7f);
+ @y
+ void enq_128(
+   Vertex *v, /* new vertex for the queue */
+   long d) /* its |dist| */
++{@+Vertex *u=head+(d&0x7f);
+ @z
+ 
+ @x [24] l.425
+ void req_128(v,d)
+   Vertex *v; /* vertex to be moved to another list */
+   long d; /* its new |dist| */
++{@+register Vertex *u=head+(d&0x7f);
+ @y
+ void req_128(
+   Vertex *v, /* vertex to be moved to another list */
+   long d) /* its new |dist| */
++{@+Vertex *u=head+(d&0x7f);
+ @z
+ 
+ @x [25] l.442
+-- 
+2.54.0
+

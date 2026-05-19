@@ -1,0 +1,87 @@
+From edef3eb702081716cdc461d4316eb5bdebacc0b7 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 19 May 2026 10:03:57 +0200
+Subject: [PATCH 51/60] gb_games++.
+
+---
+ PROTOTYPES/gb_games.ch | 62 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
+
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 3704e45..875ed83 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -106,8 +106,70 @@ Graph *games(
+   long seed) /* random number seed */
+ @z
+ 
++@x [8] l.204
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [10] l.220
++sprintf(new_graph->id,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
++@z
++
++@x [15] l.304
++{@+register node *p;
++  register char *q;
++@y
++{@+node *p;
++  char *q;
++@z
++
++@x [19] l.371
++{@+register node *p; /* the current node being considered */
++  register Vertex *v=new_graph->vertices; /* the next vertex to use */
++@y
++{@+node *p; /* the current node being considered */
++  Vertex *v=new_graph->vertices; /* the next vertex to use */
++@z
++
++@x [21] l.398
++{@+register Vertex *u,*v;
++  register long today=0; /* current day of play */
++@y
++{@+Vertex *u,*v;
++  long today=0; /* current day of play */
++@z
++
++@x [22] l.422
++{@+register char c=gb_char(); /* month code */
++  register long d; /* day of football season */
++@y
++{@+char c=gb_char(); /* month code */
++  long d; /* day of football season */
++@z
++
+ @x [23] l.440
+ static Vertex *team_lookup() /* read and decode an abbreviation */
+ @y
+ static Vertex *team_lookup(void) /* read and decode an abbreviation */
+ @z
++
++@x [23] l.441
++{@+register char *q=str_buf; /* position in |str_buf| */
++  register long h=0; /* hash code */
++  register node *p; /* position in hash list */
++@y
++{@+char *q=str_buf; /* position in |str_buf| */
++  long h=0; /* hash code */
++  node *p; /* position in hash list */
++@z
++
++@x [24] l.460
++{@+register Arc *a;
++  if (u>v) {@+register Vertex *w; register long sw;
++@y
++{@+Arc *a;
++  if (u>v) {@+Vertex *w; long sw;
++@z
+-- 
+2.54.0
+
