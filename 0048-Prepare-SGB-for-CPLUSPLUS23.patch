@@ -1,0 +1,3875 @@
+From 06ea29c379268c8aceb72f29a2e371205abe20f5 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Mon, 18 May 2026 15:48:14 +0200
+Subject: [PATCH 48/48] Prepare SGB for CPLUSPLUS23.
+
+Compile with Apple clang 21.0.0 and --std=c++23.
+
+* sprintf is deprecated: Replace with snprintf.
+  Be extra carefull with appended material (pointers p and q)!
+* register is not allowed in C++17.
+* C++ keyword compl must be replaced.
+
+This finishes issue #10. 'make tests demos' compiles with
+C23 and C++23 flawlessly. It doesn't get better than this.
+---
+ PROTOTYPES/assign_lisa.ch      |  55 +++-
+ PROTOTYPES/book_components.ch  |  22 ++
+ PROTOTYPES/econ_order.ch       |  26 ++
+ PROTOTYPES/football.ch         |  44 +++-
+ PROTOTYPES/gb_basic.ch         | 444 ++++++++++++++++++++++++++++++++-
+ PROTOTYPES/gb_books.ch         | 101 +++++++-
+ PROTOTYPES/gb_dijk.ch          |  40 +++
+ PROTOTYPES/gb_econ.ch          |  68 +++++
+ PROTOTYPES/gb_flip.ch          |  10 +
+ PROTOTYPES/gb_games.ch         |  62 +++++
+ PROTOTYPES/gb_gates.ch         | 134 +++++++++-
+ PROTOTYPES/gb_graph.ch         |  72 +++++-
+ PROTOTYPES/gb_io.ch            |  42 +++-
+ PROTOTYPES/gb_lisa.ch          |  62 ++++-
+ PROTOTYPES/gb_miles.ch         |  46 ++++
+ PROTOTYPES/gb_plane.ch         |  98 +++++++-
+ PROTOTYPES/gb_raman.ch         |  64 ++++-
+ PROTOTYPES/gb_rand.ch          | 103 +++++++-
+ PROTOTYPES/gb_roget.ch         |  14 ++
+ PROTOTYPES/gb_save.ch          | 114 ++++++++-
+ PROTOTYPES/gb_sort.ch          |   6 +
+ PROTOTYPES/gb_words.ch         |  68 +++++
+ PROTOTYPES/girth.ch            |  16 ++
+ PROTOTYPES/ladders.ch          |  42 +++-
+ PROTOTYPES/miles_span.ch       | 148 ++++++++++-
+ PROTOTYPES/multiply.ch         |  22 +-
+ PROTOTYPES/queen.ch            |  12 +
+ PROTOTYPES/roget_components.ch |  34 +++
+ PROTOTYPES/test_sample.ch      |   6 +
+ PROTOTYPES/word_components.ch  |  18 ++
+ 30 files changed, 1898 insertions(+), 95 deletions(-)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 30deac2..9ec0c19 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -1,3 +1,8 @@
++@x [0] l.10
++@s compl normal @q unreserve a C++ keyword @>
++@y
++@z
++
+ @x [0] l.12
+ \prerequisite{GB\_\,LISA}
+ @y
+@@ -15,12 +20,30 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [2] l.84
++  printf("Assignment problem for %s%s\n",lisa_id,(compl?", complemented":""));
++@y
++  printf("Assignment problem for %s%s\n",lisa_id,(complement?", complemented":""));
++@z
++
++@x [4] l.112
++long compl=0; /* should the input values be complemented? */
++@y
++long complement=0; /* should the input values be complemented? */
++@z
++
++@x [5] l.135
++  } else if (strcmp(argv[argc],"-c")==0) compl=1;
++@y
++  } else if (strcmp(argv[argc],"-c")==0) complement=1;
++@z
++
+ @x [6] l.149
+ for (k=0;k<m;k++) {
+   for (l=0;l<n;l++) printf("% 4ld",compl?d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @y
+ for (k=0;k<(long)m;k++) {
+-  for (l=0;l<(long)n;l++) printf("% 4ld",compl?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
++  for (l=0;l<(long)n;l++) printf("% 4ld",complement?(long)d-*(mtx+k*n+l):*(mtx+k*n+l));
+ @z
+ 
+ @x [10] l.254
+@@ -46,6 +69,18 @@ for (k=0;k<(long)m;k++) {
+       for (k=0;k<(long)n;k++)
+ @z
+ 
++@x [13] l.321
++register long k; /* the current row of interest */
++register long l; /* the current column of interest */
++register long j; /* another interesting column */
++register long s; /* the current matrix element of interest */
++@y
++long k; /* the current row of interest */
++long l; /* the current column of interest */
++long j; /* another interesting column */
++long s; /* the current matrix element of interest */
++@z
++
+ @x [16] l.396
+ @d INF 0x7fffffff /* infinity (or darn near) */
+ @y
+@@ -90,8 +125,10 @@ for (k=0; k<(long)m; k++)
+ 
+ @x [19] l.469
+   for (l=0; l<n; l++)
++    if (o,slack[l]) {@+register long del;
+ @y
+   for (l=0; l<(long)n; l++)
++    if (o,slack[l]) {@+long del;
+ @z
+ 
+ @x [21] l.512
+@@ -134,9 +171,17 @@ for (l=0;l<(long)n;l++) if (col_inc[l]) k++;
+ if (k>(long)m) {
+ @z
+ 
+-@x [24] l.596
++@x [24] l.586
++it to maximize (except when |compl| is nonzero).
++@y
++it to maximize (except when |complement| is nonzero).
++@z
++
++@x [24] l.595
++if (compl==0)
+   for (k=0; k<m; k++) for (l=0; l<n; l++)
+ @y
++if (complement==0)
+   for (k=0; k<(long)m; k++) for (l=0; l<(long)n; l++)
+ @z
+ 
+@@ -158,12 +203,14 @@ if (k>(long)m) {
+     for (k=0;k<(long)m;k++) @<Output row |k| as a hexadecimal string@>;
+ @z
+ 
+-@x [30] l.684
++@x [30] l.683
++{@+register float conv=255.0/(float)d; register long x;
+   for (l=0; l<n; l++) {
+     x=(long)(conv*(float)(compl?d-aa(k,l):aa(k,l)));
+ @y
++{@+float conv=255.0/(float)d; long x;
+   for (l=0; l<(long)n; l++) {
+-    x=(long)(conv*(float)(compl?(long)d-aa(k,l):aa(k,l)));
++    x=(long)(conv*(float)(complement?(long)d-aa(k,l):aa(k,l)));
+ @z
+ 
+ @x [31] l.699
+diff --git a/PROTOTYPES/book_components.ch b/PROTOTYPES/book_components.ch
+index 16d87aa..2825651 100644
+--- a/PROTOTYPES/book_components.ch
++++ b/PROTOTYPES/book_components.ch
+@@ -15,6 +15,14 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [2] l.62
++  register Vertex *v; /* the current vertex of interest */
++  char *t="anna"; /* the book to use */
++@y
++  Vertex *v; /* the current vertex of interest */
++  const char *t="anna"; /* the book to use */
++@z
++
+ @x [4] l.111
+ char *vertex_name(v,i) /* return (as a string) the name of vertex |v| */
+   Vertex *v;
+@@ -24,3 +32,17 @@ char *vertex_name( /* return (as a string) the name of vertex |v| */
+   Vertex *v,
+   unsigned char i) /* |i| should be 0, 1, or 2 to avoid clash in |code_name| array */
+ @z
++
++@x [17] l.336
++{@+register Vertex *u; /* a vertex adjacent to |v| */
++  register Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@y
++{@+Vertex *u; /* a vertex adjacent to |v| */
++  Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@z
++
++@x [19] l.414
++}@+else {@+register Vertex *t; /* runs through the vertices of the
++@y
++}@+else {@+Vertex *t; /* runs through the vertices of the
++@z
+diff --git a/PROTOTYPES/econ_order.ch b/PROTOTYPES/econ_order.ch
+index b0569e2..58039ae 100644
+--- a/PROTOTYPES/econ_order.ch
++++ b/PROTOTYPES/econ_order.ch
+@@ -17,6 +17,12 @@ int main(
+ {@+long n=79; /* the desired number of sectors */
+ @z
+ 
++@x [2] l.88
++  register long j,k; /* all-purpose indices */
++@y
++  long j,k; /* all-purpose indices */
++@z
++
+ @x [3] l.109
+ @d INF 0x7fffffff /* infinity (or darn near) */
+ @y
+@@ -29,6 +35,26 @@ int main(
+   if (sscanf(argv[argc],"-n%ld",&n)==1) ;
+ @z
+ 
++@x [5] l.138
++{@+register Vertex *v;
++  register Arc *a;
++@y
++{@+Vertex *v;
++  Arc *a;
++@z
++
++@x [6] l.172
++{@+register long sum=0;
++@y
++{@+long sum=0;
++@z
++
++@x [10] l.244
++for (k=0;k<n;k++) {@+register long d=0;
++@y
++for (k=0;k<n;k++) {@+long d=0;
++@z
++
+ @x [13] l.274
+ do@+{
+ @y
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index 07b61a8..b834c8f 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -18,9 +18,13 @@ int main(
+ @x [7] l.140
+ Vertex *prompt_for_team(s)
+   char *s; /* string used in prompt message */
++{@+register char *q; /* current position in |buffer| */
++  register Vertex *v; /* current vertex being examined in sequential search */
+ @y
+-Vertex *prompt_for_team(char *s)
++Vertex *prompt_for_team(const char *s)
+   /* string used in prompt message */
++{@+char *q; /* current position in |buffer| */
++  Vertex *v; /* current vertex being examined in sequential search */
+ @z
+ 
+ @x [7] l.148
+@@ -54,7 +58,7 @@ node *new_node(
+ @x [15] l.237
+ do@+{@+register node*t;
+ @y
+-do {@+register node*t;
++do {@+node*t;
+ @z
+ 
+ @x [15] l.242
+@@ -71,16 +75,20 @@ do {@+register node*t;
+ 
+ @x [16] l.250
+ @ @<Print the score of game |a| between |v| and |u|@>=
++{@+register long d=a->date; /* date of the game, 0 means Aug 26 */
+ @y
+ @ @<Print \9{t}the score of game |a| between |v| and |u|@>=
++{@+long d=a->date; /* date of the game, 0 means Aug 26 */
+ @z
+ 
+-@x [17] l.285
++@x [17] l.284
++  for (v=start;v!=goal;v=cur_node->game->tip) {@+register long d=-10000;
+     register Arc *best_arc; /* arc that achieves |del=d| */
+     register Arc *last_arc; /* arc that goes directly to |goal| */
+ @y
+-    register Arc *best_arc=0; /* arc that achieves |del=d| */
+-    register Arc *last_arc=0; /* arc that goes directly to |goal| */
++  for (v=start;v!=goal;v=cur_node->game->tip) {@+long d=-10000;
++    Arc *best_arc=0; /* arc that achieves |del=d| */
++    Arc *last_arc=0; /* arc that goes directly to |goal| */
+ @z
+ 
+ @x [17] l.292
+@@ -148,6 +156,18 @@ do {
+ @ @<Make \9{l}|list[0]|...@>=
+ @z
+ 
++@x [22] l.393
++{@+register node *p,*q; /* node in list and its predecessor */
++@y
++{@+node *p,*q; /* node in list and its predecessor */
++@z
++
++@x [23] l.404
++{@+register node *r=NULL, *s=list[--m], *t;
++@y
++{@+node *r=NULL, *s=list[--m], *t;
++@z
++
+ @x [27] l.478
+ @<Make all vertices unseen and all arcs untagged, except for vertices
+ @y
+@@ -166,6 +186,20 @@ do {
+ @<Make \9{a}all vertices unseen and all arcs untagged, except for vertices
+ @z
+ 
++@x [32] l.546
++{@+register Vertex *u; /* a vertex adjacent to |v| */
++  register Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@y
++{@+Vertex *u; /* a vertex adjacent to |v| */
++  Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@z
++
++@x [33] l.590
++{@+if (v!=goal) {@+register Vertex *t; /* runs through the vertices of the
++@y
++{@+if (v!=goal) {@+Vertex *t; /* runs through the vertices of the
++@z
++
+ @x [35] l.620
+ @<Set |h| to the number of vertices on paths between |u| and |goal|@>=
+ @y
+diff --git a/PROTOTYPES/gb_basic.ch b/PROTOTYPES/gb_basic.ch
+index ab8d35d..857ffcc 100644
+--- a/PROTOTYPES/gb_basic.ch
++++ b/PROTOTYPES/gb_basic.ch
+@@ -82,12 +82,48 @@ Graph *board(
+   @<Insert arcs or edges for all legal moves@>@;
+ @z
+ 
++@x [9] l.200
++register long i,j,k; /* all-purpose indices */
++register long d; /* the number of dimensions */
++register Vertex *v; /* the current vertex of interest */
++register long s; /* accumulator */
++@y
++long i,j,k; /* all-purpose indices */
++long d; /* the number of dimensions */
++Vertex *v; /* the current vertex of interest */
++long s; /* accumulator */
++@z
++
+ @x [13] l.265
+ @<Set up a graph with |n| vertices@>=
+ @y
+ @<Set up a graph with \9{n}|n| vertices@>=
+ @z
+ 
++@x [13] l.275
++  sprintf(new_graph->id,"board(%ld,%ld,%ld,%ld,%ld,%ld,%d)",
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"board(%ld,%ld,%ld,%ld,%ld,%ld,%d)",
++@z
++
++@x [14] l.295
++{@+register char *q; /* string pointer */
++@y
++{@+char *q; /* string pointer */
++@z
++
++@x [14] l.301
++      sprintf(q,".%ld",xx[k]);
++@y
++      snprintf(q,BUF_SIZE-(q-buffer),".%ld",xx[k]);
++@z
++
++@x [16] l.342
++{@+register long w=wrap;
++@y
++{@+long w=wrap;
++@z
++
+ @x [22] l.410
+     do yy[k]+=nn[k];@+ while (yy[k]<0);
+ @y
+@@ -142,6 +178,18 @@ Graph *simplex(
+         else {@+if (n4>(long)n) n4=n;
+ @z
+ 
++@x [28] l.541
++sprintf(new_graph->id,"simplex(%lu,%ld,%ld,%ld,%ld,%ld,%d)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"simplex(%lu,%ld,%ld,%ld,%ld,%ld,%d)",
++@z
++
++@x [29] l.551
++  register long *coef=gb_typed_alloc(n+1,long,working_storage);
++@y
++  long *coef=gb_typed_alloc(n+1,long,working_storage);
++@z
++
+ @x [30] l.575
+   for (k=1;k<=n;k++) {
+ @y
+@@ -156,6 +204,36 @@ if (yy[0]>=(long)n) {
+   k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
+ @z
+ 
++@x [34] l.647
++{@+register char *p=buffer; /* string pointer */
++@y
++{@+char *p=buffer; /* string pointer */
++@z
++
++@x [34] l.649
++    sprintf(p,".%ld",xx[k]);
++@y
++    snprintf(p,BUF_SIZE-(p-buffer),".%ld",xx[k]);
++@z
++
++@x [35] l.663
++  if (xx[j]) {@+register Vertex *u; /* previous vertex adjacent to |v| */
++@y
++  if (xx[j]) {@+Vertex *u; /* previous vertex adjacent to |v| */
++@z
++
++@x [35] l.666
++      if (xx[k]<nn[k]) {@+register char *p=buffer; /* string pointer */
++@y
++      if (xx[k]<nn[k]) {@+char *p=buffer; /* string pointer */
++@z
++
++@x [35] l.669
++          sprintf(p,".%ld",xx[i]);
++@y
++          snprintf(p,BUF_SIZE-(p-buffer),".%ld",xx[i]);
++@z
++
+ @x [37] l.733
+ Graph *subsets(n,n0,n1,n2,n3,n4,size_bits,directed)
+   unsigned long n; /* the number of elements in the multiset */
+@@ -170,6 +248,12 @@ Graph *subsets(
+   long directed) /* should the graph be directed? */
+ @z
+ 
++@x [38] l.752
++sprintf(new_graph->id,"subsets(%lu,%ld,%ld,%ld,%ld,%ld,0x%lx,%d)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"subsets(%lu,%ld,%ld,%ld,%ld,%ld,0x%lx,%d)",
++@z
++
+ @x [39] l.763
+ if (yy[0]>=n) {
+   k=0;@+xx[0]=(yy[1]>=n? 0: n-yy[1]);
+@@ -178,9 +262,13 @@ if (yy[0]>=(long)n) {
+   k=0;@+xx[0]=(yy[1]>=(long)n? 0: n-yy[1]);
+ @z
+ 
+-@x [40] l.790
++@x [40] l.788
++{@+register Vertex *u;
++  for (u=new_graph->vertices;u<=v;u++) {@+register char *p=u->name;
+     long ss=0; /* the number of elements common to |u| and |v| */
+ @y
++{@+Vertex *u;
++  for (u=new_graph->vertices;u<=v;u++) {@+char *p=u->name;
+     unsigned long ss=0; /* the number of elements common to |u| and |v| */
+ @z
+ 
+@@ -196,6 +284,12 @@ Graph *perms(
+   long directed) /* should the graph be directed? */
+ @z
+ 
++@x [43] l.892
++  register long n; /* total number of elements in multiset */
++@y
++  long n; /* total number of elements in multiset */
++@z
++
+ @x [44] l.908
+ @<Determine |n| and the maximum possible number of inversions@>;
+ @y
+@@ -211,7 +305,13 @@ Graph *perms(
+ @x [45] l.915
+ {@+register long ss; /* max inversions known to be possible */
+ @y
+-{@+register unsigned long ss; /* max inversions known to be possible */
++{@+unsigned long ss; /* max inversions known to be possible */
++@z
++
++@x [46] l.934
++  register long *coef=gb_typed_alloc(max_inv+1,long,working_storage);
++@y
++  long *coef=gb_typed_alloc(max_inv+1,long,working_storage);
+ @z
+ 
+ @x [46] l.940
+@@ -220,12 +320,30 @@ Graph *perms(
+   for (k=1,nverts=1;k<=(long)max_inv;k++) {
+ @z
+ 
++@x [46] l.948
++  sprintf(new_graph->id,"perms(%ld,%ld,%ld,%ld,%ld,%lu,%d)",
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"perms(%ld,%ld,%ld,%ld,%ld,%lu,%d)",
++@z
++
++@x [47] l.959
++for (k=1;k<=nn[j];k++) {@+register long ii;
++@y
++for (k=1;k<=nn[j];k++) {@+long ii;
++@z
++
+ @x [47] l.961
+   for (i=k,ii=0;i<=max_inv;i++,ii++) {
+ @y
+   for (i=k,ii=0;i<=(long)max_inv;i++,ii++) {
+ @z
+ 
++@x [48] l.981
++{@+register long *xtab,*ytab,*ztab; /* permutations and their inversions */
++@y
++{@+long *xtab,*ytab,*ztab; /* permutations and their inversions */
++@z
++
+ @x [50] l.1017
+   if (m<max_inv && ytab[k]<k-1)
+ @y
+@@ -236,13 +354,25 @@ Graph *perms(
+ static char *short_imap="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+ abcdefghijklmnopqrstuvwxyz_^~&@@,;.:?!%#$+-*/|<=>()[]{}`'";
+ @y
+-static char *short_imap=
++static const char *short_imap=
+   "0123456789"@|
+   "ABCDEFGHIJKLMNOPQRSTUVWXYZ"@|
+   "abcdefghijklmnopqrstuvwxyz"@|
+   "_^~&@@,;.:?!%#$+-*/|<=>()[]{}`'";
+ @z
+ 
++@x [52] l.1042
++{@+register char *p; register long *q;
++@y
++{@+char *p; long *q;
++@z
++
++@x [53] l.1056
++  if (xtab[j]>xtab[j+1]) {@+register Vertex *u;
++@y
++  if (xtab[j]>xtab[j+1]) {@+Vertex *u;
++@z
++
+ @x [55] l.1099
+ Graph *parts(n,max_parts,max_size,directed)
+   unsigned long n; /* the number being partitioned */
+@@ -257,6 +387,12 @@ Graph *parts(
+   long directed) /* should the graph be directed? */
+ @z
+ 
++@x [56] l.1124
++  register long *coef=gb_typed_alloc(n+1,long,working_storage);
++@y
++  long *coef=gb_typed_alloc(n+1,long,working_storage);
++@z
++
+ @x [56] l.1127
+   for (k=1;k<=max_parts;k++) {
+ @y
+@@ -269,12 +405,44 @@ Graph *parts(
+     for (j=k,i=0;j<=(long)n;i++,j++) {
+ @z
+ 
++@x [56] l.1139
++  sprintf(new_graph->id,"parts(%lu,%lu,%lu,%d)",
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"parts(%lu,%lu,%lu,%d)",
++@z
++
++@x [60] l.1190
++{@+register char *p=buffer; /* string pointer */
++@y
++{@+char *p=buffer; /* string pointer */
++@z
++
++@x [60] l.1192
++    sprintf(p,"+%ld",xx[k]);
++@y
++    snprintf(p,BUF_SIZE-(p-buffer),"+%ld",xx[k]);
++@z
++
+ @x [61] l.1207
+ if (d<max_parts) {
+ @y
+ if (d<(long)max_parts) {
+ @z
+ 
++@x [62] l.1226
++{@+register Vertex *u; /* previous vertex adjacent to |v| */
++  register char *p=buffer;
++@y
++{@+Vertex *u; /* previous vertex adjacent to |v| */
++  char *p=buffer;
++@z
++
++@x [62] l.1234
++    sprintf(p,"+%ld",nn[k]);
++@y
++    snprintf(p,BUF_SIZE-(p-buffer),"+%ld",nn[k]);
++@z
++
+ @x [63] l.1277
+ The partial ordering corresponding to the directed graph on
+ ${2n+1\choose n}/(2n+1)$ vertices created by |all_trees(n,1)|
+@@ -305,18 +473,50 @@ Graph *binary(
+     for (j=2;j<=(long)max_height;j++)
+ @z
+ 
++@x [65] l.1339
++  sprintf(new_graph->id,"binary(%lu,%lu,%d)",
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"binary(%lu,%lu,%d)",
++@z
++
++@x [66] l.1349
++{@+register float ss;
++@y
++{@+float ss;
++@z
++
+ @x [66] l.1356
+     for (j=2;j<=max_height;j++) {
+ @y
+     for (j=2;j<=(long)max_height;j++) {
+ @z
+ 
++@x [67] l.1410
++{@+register long *xtab,*ytab,*ltab,*stab;
++@y
++{@+long *xtab,*ytab,*ltab,*stab;
++@z
++
+ @x [67] l.1413
+   if (ltab[0]>n) {
+ @y
+   if (ltab[0]>(long)n) {
+ @z
+ 
++@x [71] l.1478
++{@+register char *p=buffer; /* string pointer */
++@y
++{@+char *p=buffer; /* string pointer */
++@z
++
++@x [72] l.1498
++    {@+register char *p=buffer; /* string pointer */
++      register Vertex *u;
++@y
++    {@+char *p=buffer; /* string pointer */
++      Vertex *u;
++@z
++
+ @x [74] l.1546
+ Graph *complement(g,copy,self,directed)
+   Graph *g; /* graph to be complemented */
+@@ -331,13 +531,37 @@ Graph *complement(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [74] l.1555
++@x [74] l.1552
++  register long n;
++  register Vertex *u;
++  register siz_t delta; /* difference in memory addresses */
+   if (g==NULL) panic(missing_operand); /* where's |g|? */
+ @y
++  long n;
++  Vertex *u;
++  siz_t delta; /* difference in memory addresses */
+   (void) s; (void) d; (void) k; (void) j; (void) i;
+   if (g==NULL) panic(missing_operand); /* where's |g|? */
+ @z
+ 
++@x [74] l.1557
++  sprintf(buffer,",%d,%d,%d)",copy?1:0,self?1:0,directed?1:0);
++@y
++  snprintf(buffer,BUF_SIZE,",%d,%d,%d)",copy?1:0,self?1:0,directed?1:0);
++@z
++
++@x [76] l.1592
++for (v=g->vertices;v<g->vertices+n;v++) {@+register Vertex *vv;
++@y
++for (v=g->vertices;v<g->vertices+n;v++) {@+Vertex *vv;
++@z
++
++@x [76] l.1595
++  {@+register Arc *a;
++@y
++  {@+Arc *a;
++@z
++
+ @x [78] l.1643
+ Graph *gunion(g,gg,multi,directed)
+   Graph *g,*gg; /* graphs to be united */
+@@ -350,15 +574,45 @@ Graph *gunion(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [78] l.1651
++@x [78] l.1648
++  register long n;
++  register Vertex *u;
++  register siz_t delta,ddelta; /* differences in memory addresses */
+   if (g==NULL || gg==NULL) panic(missing_operand);
+     /* where are |g| and |gg|? */
+ @y
++  long n;
++  Vertex *u;
++  siz_t delta,ddelta; /* differences in memory addresses */
+   (void) s; (void) d; (void) k; (void) j; (void) i;
+   if (g==NULL || gg==NULL) panic(missing_operand);
+     /* where are |g| and |gg|? */
+ @z
+ 
++@x [78] l.1654
++  sprintf(buffer,",%d,%d)",multi?1:0,directed?1:0);
++@y
++  snprintf(buffer,BUF_SIZE,",%d,%d)",multi?1:0,directed?1:0);
++@z
++
++@x [79] l.1668
++  register Arc *a;
++  register Vertex *vv=vert_offset(v,delta);
++      /* vertex in |new_graph| corresponding to |v| in |g| */
++  register Vertex *vvv=vert_offset(vv,-ddelta);
++@y
++  Arc *a;
++  Vertex *vv=vert_offset(v,delta);
++      /* vertex in |new_graph| corresponding to |v| in |g| */
++  Vertex *vvv=vert_offset(vv,-ddelta);
++@z
++
++@x [80] l.1702
++{@+register Arc *b;
++@y
++{@+Arc *b;
++@z
++
+ @x [81] l.1724
+ Graph *intersection(g,gg,multi,directed)
+   Graph *g,*gg; /* graphs to be intersected */
+@@ -371,13 +625,43 @@ Graph *intersection(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [81] l.1732
++@x [81] l.1729
++  register long n;
++  register Vertex *u;
++  register siz_t delta,ddelta; /* differences in memory addresses */
+   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+ @y
++  long n;
++  Vertex *u;
++  siz_t delta,ddelta; /* differences in memory addresses */
+   (void) s; (void) d; (void) k; (void) j; (void) i;
+   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+ @z
+ 
++@x [81] l.1734
++  sprintf(buffer,",%d,%d)",multi?1:0,directed?1:0);
++@y
++  snprintf(buffer,BUF_SIZE,",%d,%d)",multi?1:0,directed?1:0);
++@z
++
++@x [82] l.1752
++for (v=g->vertices;v<g->vertices+n;v++) {@+register Arc *a;
++  register Vertex *vv=vert_offset(v,delta);
++      /* vertex in |new_graph| corresponding to |v| in |g| */
++  register Vertex *vvv=vert_offset(vv,-ddelta);
++@y
++for (v=g->vertices;v<g->vertices+n;v++) {@+Arc *a;
++  Vertex *vv=vert_offset(v,delta);
++      /* vertex in |new_graph| corresponding to |v| in |g| */
++  Vertex *vvv=vert_offset(vv,-ddelta);
++@z
++
++@x [84] l.1790
++{@+register Arc *b=u->tlen; /* previous arc or edge from |vv| to |u| */
++@y
++{@+Arc *b=u->tlen; /* previous arc or edge from |vv| to |u| */
++@z
++
+ @x [87] l.1837
+ Graph *lines(g,directed)
+   Graph *g; /* graph whose lines will become vertices */
+@@ -388,13 +672,33 @@ Graph *lines(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [87] l.1843
++@x [87] l.1841
++  register long m; /* the number of lines */
++  register Vertex *u;
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @y
++  long m; /* the number of lines */
++  Vertex *u;
+   (void) s; (void) d; (void) k; (void) j; (void) i;
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @z
+ 
++@x [89] l.1898
++for (v=g->vertices+g->n-1;v>=g->vertices;v--) {@+register Arc *a;
++  register long mapped=0; /* has |v->map| been set? */
++  for (a=v->arcs;a;a=a->next) {@+register Vertex *vv=a->tip;
++@y
++for (v=g->vertices+g->n-1;v>=g->vertices;v--) {@+Arc *a;
++  long mapped=0; /* has |v->map| been set? */
++  for (a=v->arcs;a;a=a->next) {@+Vertex *vv=a->tip;
++@z
++
++@x [91] l.1939
++sprintf(buffer,"%.*s-%c%.*s",(BUF_SIZE-3)/2,v->name,@|
++@y
++snprintf(buffer,BUF_SIZE,"%.*s-%c%.*s",(BUF_SIZE-3)/2,v->name,@|
++@z
++
+ @x [92] l.1948
+     do@+{gb_new_arc(u,v,1L);
+ @y
+@@ -407,6 +711,14 @@ Graph *lines(
+     } while (v->u.V==u->v.V);
+ @z
+ 
++@x [93] l.1963
++for (u=new_graph->vertices;u<new_graph->vertices+m;u++) {@+register Vertex *vv;
++  register Arc *a;@+register long mapped=0;
++@y
++for (u=new_graph->vertices;u<new_graph->vertices+m;u++) {@+Vertex *vv;
++  Arc *a;@+long mapped=0;
++@z
++
+ @x [95] l.2011
+ Graph *product(g,gg,type,directed)
+   Graph *g,*gg; /* graphs to be multiplied */
+@@ -419,13 +731,51 @@ Graph *product(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [95] l.2018
++@x [95] l.2016
++  register Vertex *u,*vv;
++  register long n; /* the number of vertices in the product graph */
+   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+ @y
++  Vertex *u,*vv;
++  long n; /* the number of vertices in the product graph */
+   (void) s; (void) d; (void) k; (void) j; (void) i;
+   if (g==NULL || gg==NULL) panic(missing_operand); /* where are |g| and |gg|? */
+ @z
+ 
++@x [96] l.2047
++  sprintf(buffer,"%.*s,%.*s",BUF_SIZE/2-1,v->name,(BUF_SIZE-1)/2,vv->name);
++@y
++  snprintf(buffer,BUF_SIZE,"%.*s,%.*s",BUF_SIZE/2-1,v->name,(BUF_SIZE-1)/2,vv->name);
++@z
++
++@x [96] l.2051
++sprintf(buffer,",%d,%d)",(type?2:0)-(int)(type&1),directed?1:0);
++@y
++snprintf(buffer,BUF_SIZE,",%d,%d)",(type?2:0)-(int)(type&1),directed?1:0);
++@z
++
++@x [97] l.2055
++{@+register Vertex *uu,*uuu;
++  register Arc *a;
++  register siz_t delta; /* difference in memory addresses */
++@y
++{@+Vertex *uu,*uuu;
++  Arc *a;
++  siz_t delta; /* difference in memory addresses */
++@z
++
++@x [99] l.2094
++  register siz_t delta,ddelta;
++@y
++  siz_t delta,ddelta;
++@z
++
++@x [99] l.2103
++      for (u=gg->vertices;u<gg->vertices+gg->n;u++) {@+register Arc *aa;
++@y
++      for (u=gg->vertices;u<gg->vertices+gg->n;u++) {@+Arc *aa;
++@z
++
+ @x [100] l.2161
+ @d ind z.I
+ 
+@@ -444,6 +794,12 @@ Graph *bi_complete(
+   long directed) /* should all arcs go from first part to second? */
+ @z
+ 
++@x [101] l.2181
++      sprintf(new_graph->id,"bi_complete(%lu,%lu,%d)",@|
++@y
++      snprintf(new_graph->id,ID_FIELD_SIZE,"bi_complete(%lu,%lu,%d)",@|
++@z
++
+ @x [102] l.2207
+ vertices of~$g$ has $m'n+mn'^2$ arcs.
+ 
+@@ -466,6 +822,12 @@ Graph *wheel(
+   long directed) /* should all arcs go from center to rim and around? */
+ @z
+ 
++@x [103] l.2237
++      sprintf(new_graph->id,"wheel(%lu,%lu,%d)",@|
++@y
++      snprintf(new_graph->id,ID_FIELD_SIZE,"wheel(%lu,%lu,%d)",@|
++@z
++
+ @x [104] l.2245
+ extern Graph *bi_complete();
+ extern Graph *wheel(); /* standard applications of |induced| */
+@@ -492,9 +854,15 @@ Graph *induced(
+   long directed) /* should the graph be directed? */
+ @z
+ 
+-@x [105] l.2259
++@x [105] l.2256
++  register Vertex *u;
++  register long n=0; /* total number of vertices in induced graph */
++  register long nn=0; /* number of negative vertices in induced graph */
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @y
++  Vertex *u;
++  long n=0; /* total number of vertices in induced graph */
++  long nn=0; /* number of negative vertices in induced graph */
+   (void) s; (void) d; (void) i;
+   if (g==NULL) panic(missing_operand); /* where is |g|? */
+ @z
+@@ -505,8 +873,66 @@ Graph *induced(
+ @<Determine \9{n}|n| and \9{n}|nn|@>;
+ @z
+ 
++@x [106] l.2276
++sprintf(buffer,",%s,%d,%d,%d)",@|description?description:null_string,@|
++@y
++snprintf(buffer,BUF_SIZE,",%s,%d,%d,%d)",@|description?description:null_string,@|
++@z
++
+ @x [107] l.2280
+ @ @<Determine |n| and |nn|@>=
+ @y
+ @ @<Determine \9{n}|n| and \9{n}|nn|@>=
+ @z
++
++@x [108] l.2310
++  sprintf(buffer,"%ld",-k);
++@y
++  snprintf(buffer,BUF_SIZE,"%ld",-k);
++@z
++
++@x [108] l.2322
++        sprintf(buffer,"%s'",v->name);
++@y
++        snprintf(buffer,BUF_SIZE,"%s'",v->name);
++@z
++
++@x [108] l.2328
++      sprintf(buffer,"%.*s:%ld",BUF_SIZE-12,v->name,j);
++@y
++      snprintf(buffer,BUF_SIZE,"%.*s:%ld",BUF_SIZE-12,v->name,j);
++@z
++
++@x [110] l.2359
++  if (u) {@+register Arc *a;@+register Vertex *uu,*vv;
++@y
++  if (u) {@+Arc *a;@+Vertex *uu,*vv;
++@z
++
++@x [113] l.2411
++{@+register Arc *b=uu->tlen; /* existing arc or edge from |u| to |uu| */
++@y
++{@+Arc *b=uu->tlen; /* existing arc or edge from |u| to |uu| */
++@z
++
++@x [114] l.2423
++{@+register Graph *gg=v->subst;
++  register Vertex *vv=gg->vertices;
++  register Arc *a;
++@y
++{@+Graph *gg=v->subst;
++  Vertex *vv=gg->vertices;
++  Arc *a;
++@z
++
++@x [114] l.2428
++    sprintf(buffer,"%.*s:%.*s",BUF_SIZE/2-1,v->name,(BUF_SIZE-1)/2,vv->name);
++@y
++    snprintf(buffer,BUF_SIZE,"%.*s:%.*s",BUF_SIZE/2-1,v->name,(BUF_SIZE-1)/2,vv->name);
++@z
++
++@x [114] l.2430
++    for (a=vv->arcs;a;a=a->next) {@+register Vertex *vvv=a->tip;
++@y
++    for (a=vv->arcs;a;a=a->next) {@+Vertex *vvv=a->tip;
++@z
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 212bf6b..38fc5c0 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -12,12 +12,18 @@ extern Graph *bi_book();
+ #ifndef GB_BOOKS_H
+ #define GB_BOOKS_H
+ typedef struct graph_struct Graph;
+-extern Graph *book(char *,unsigned long,unsigned long,@|
++extern Graph *book(const char *,unsigned long,unsigned long,@|
+    unsigned long,unsigned long,long,long,long);
+-extern Graph *bi_book(char *,unsigned long,unsigned long,@|
++extern Graph *bi_book(const char *,unsigned long,unsigned long,@|
+   unsigned long,unsigned long,long,long,long);
+ @z
+ 
++@x [5] l.122
++char *chap_name[MAX_CHAPS]={""}; /* string names of those chapters */
++@y
++char *chap_name[MAX_CHAPS]; /* string names of those chapters */
++@z
++
+ @x [8] l.148
+ #include "gb_io.h" /* we will use the {\sc GB\_\,IO} routines for input */
+ @y
+@@ -42,7 +48,7 @@ static Graph *bgraph(bipartite,
+ @y
+ static Graph *bgraph(
+   long bipartite, /* should we make the graph bipartite? */
+-  char *title, /* identification of the selected book */
++  const char *title, /* identification of the selected book */
+   unsigned long n, /* number of vertices desired before exclusion */
+   unsigned long x, /* number of vertices to exclude */
+   unsigned long first_chapter, unsigned long last_chapter,
+@@ -58,7 +64,7 @@ Graph *book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
+   unsigned long n, x, first_chapter, last_chapter;
+   long in_weight,out_weight,seed;
+ @y
+-Graph *book(char *title,unsigned long n,unsigned long x,@|
++Graph *book(const char *title,unsigned long n,unsigned long x,@|
+   unsigned long first_chapter,unsigned long last_chapter,@|
+   long in_weight,long out_weight,long seed)
+ @z
+@@ -69,7 +75,7 @@ Graph *bi_book(title,n,x,first_chapter,last_chapter,in_weight,out_weight,seed)
+   unsigned long n, x, first_chapter, last_chapter;
+   long in_weight,out_weight,seed;
+ @y
+-Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
++Graph *bi_book(const char *title,unsigned long n,unsigned long x,@|
+   unsigned long first_chapter,unsigned long last_chapter,@|
+   long in_weight,long out_weight,long seed)
+ @z
+@@ -77,8 +83,26 @@ Graph *bi_book(char *title,unsigned long n,unsigned long x,@|
+ @x [9] l.201
+ register long j,k; /* all-purpose indices */
+ @y
+-register long j; /* all-purpose indices */
+-register unsigned long k; /* all-purpose indices */
++long j; /* all-purpose indices */
++unsigned long k; /* all-purpose indices */
++@z
++
++@x [9] l.203
++register node *p; /* information about the current character */
++@y
++node *p; /* information about the current character */
++@z
++
++@x [10] l.214
++sprintf(file_name,"%.6s.dat",title);
++@y
++snprintf(file_name,11,"%.6s.dat",title);
++@z
++
++@x [16] l.280
++{@+register long c; /* current code entering the system */
++@y
++{@+long c; /* current code entering the system */
+ @z
+ 
+ @x [17] l.306
+@@ -90,6 +114,14 @@ register unsigned long k; /* all-purpose indices */
+ @y
+ @z
+ 
++@x [17] l.313
++{@+register long c; /* current code entering the system a second time */
++  while ((c=gb_number(36))!=0) {@+register Vertex *v=xnode[c]->vert;
++@y
++{@+long c; /* current code entering the system a second time */
++  while ((c=gb_number(36))!=0) {@+Vertex *v=xnode[c]->vert;
++@z
++
+ @x [18] l.335
+ #define desc @t\quad@> z.S /* utility field definitions for the header file */
+ #define in_count @t\quad@> y.I
+@@ -102,16 +134,34 @@ register unsigned long k; /* all-purpose indices */
+ #define short_code @t\quad@> u.I /* utility field |u| contains a radix-36 number */
+ @z
+ 
++@x [19] l.372
++  while (gb_char()!='\n') {@+register long c=gb_number(36);
++@y
++  while (gb_char()!='\n') {@+long c=gb_number(36);
++@z
++
+ @x [19] l.377
+     if (p->chap!=k) {
+ @y
+     if (p->chap!=(long)k) {
+ @z
+ 
++@x [20] l.412
++    if (k>=first_chapter && k<=last_chapter) {@+register Vertex *u=chap_base+k;
++@y
++    if (k>=first_chapter && k<=last_chapter) {@+Vertex *u=chap_base+k;
++@z
++
++@x [20] l.418
++      while (gb_char()!='\n') {@+register long c=gb_number(36);
++@y
++      while (gb_char()!='\n') {@+long c=gb_number(36);
++@z
++
+ @x [20] l.420
+         if (p->chap!=k) {@+register Vertex *v=p->vert;
+ @y
+-        if (p->chap!=(long)k) {@+register Vertex *v=p->vert;
++        if (p->chap!=(long)k) {@+Vertex *v=p->vert;
+ @z
+ 
+ @x [21] l.434
+@@ -129,9 +179,15 @@ utility field |chap_no| of the corresponding |Arc| record.
+ @y
+ @z
+ 
+-@x [22] l.455
++@x [22] l.452
++  if (k>=first_chapter && k<=last_chapter) {@+register long c=gb_char();
++    while (c!='\n') {@+register Vertex **pp=clique_table;
++      register Vertex **qq,**rr; /* pointers within the clique table */
+       do@+{@+
+ @y
++  if (k>=first_chapter && k<=last_chapter) {@+long c=gb_char();
++    while (c!='\n') {@+Vertex **pp=clique_table;
++      Vertex **qq,**rr; /* pointers within the clique table */
+       do {@+
+ @z
+ 
+@@ -153,6 +209,14 @@ utility field |chap_no| of the corresponding |Arc| record.
+ #endif /* |GB_BOOKS_H| */
+ @z
+ 
++@x [25] l.479
++{@+register Vertex *u=*qq, *v=*rr;
++  register Arc *a;
++@y
++{@+Vertex *u=*qq, *v=*rr;
++  Arc *a;
++@z
++
+ @x [27] l.499
+ if (n>characters) n=characters;
+ if (x>n) x=n;
+@@ -162,3 +226,22 @@ if ((long)n>characters) n=characters;
+ if (x>n) x=n;
+ if ((long)last_chapter>chapters) last_chapter=chapters;
+ @z
++
++@x [27] l.507
++sprintf(new_graph->id,"%sbook(\"%s\",%lu,%lu,%lu,%lu,%ld,%ld,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"%sbook(\"%s\",%lu,%lu,%lu,%lu,%ld,%ld,%ld)",
++@z
++
++@x [28] l.521
++{@+register Vertex *v=new_graph->vertices; /* the next vertex to define */
++@y
++{@+Vertex *v=new_graph->vertices; /* the next vertex to define */
++@z
++
++@x [29] l.539
++if (bipartite)
++@y
++chap_name[0]=gb_save_string("");
++if (bipartite)
++@z
+diff --git a/PROTOTYPES/gb_dijk.ch b/PROTOTYPES/gb_dijk.ch
+index ce04569..96f2006 100644
+--- a/PROTOTYPES/gb_dijk.ch
++++ b/PROTOTYPES/gb_dijk.ch
+@@ -88,12 +88,34 @@ long dijkstra(uu,vv,gg,hh)
+   Vertex *vv; /* the ending point */
+   Graph *gg; /* the graph they belong to */
+   long @[@] (*hh)(); /* heuristic function */
++{@+register Vertex *t; /* current vertex of interest */
+ @y
+ long dijkstra(
+   Vertex *uu, /* the starting point */
+   Vertex *vv, /* the ending point */
+   Graph *gg, /* the graph they belong to */
+   long @[@] (*hh)(Vertex *)) /* heuristic function */
++{@+Vertex *t; /* current vertex of interest */
++@z
++
++@x [11] l.204
++{@+register Arc *a; /* an arc leading from |t| */
++  register long d = t->dist - t->hh_val;
++@y
++{@+Arc *a; /* an arc leading from |t| */
++  long d = t->dist - t->hh_val;
++@z
++
++@x [11] l.207
++    register Vertex *v = a->tip; /* a vertex adjacent to |t| */
++@y
++    Vertex *v = a->tip; /* a vertex adjacent to |t| */
++@z
++
++@x [11] l.209
++      register long dd = d + a->len + v->hh_val;
++@y
++      long dd = d + a->len + v->hh_val;
+ @z
+ 
+ @x [14] l.254
+@@ -105,9 +127,11 @@ long dijkstra(
+ @x [14] l.257
+ void print_dijkstra_result(vv)
+   Vertex *vv; /* ending vertex */
++{@+register Vertex *t, *p, *q; /* registers for reversing links */
+ @y
+ void print_dijkstra_result(
+   Vertex *vv) /* ending vertex */
++{@+Vertex *t, *p, *q; /* registers for reversing links */
+ @z
+ 
+ @x [14] l.265
+@@ -168,20 +192,24 @@ void init_dlist(
+ void enlist(v,d)
+   Vertex *v;
+   long d;
++{@+register Vertex *t=head->llink;
+ @y
+ void enlist(
+   Vertex *v,
+   long d)
++{@+Vertex *t=head->llink;
+ @z
+ 
+ @x [18] l.340
+ void reenlist(v,d)
+   Vertex *v;
+   long d;
++{@+register Vertex *t=v->llink;
+ @y
+ void reenlist(
+   Vertex *v,
+   long d)
++{@+Vertex *t=v->llink;
+ @z
+ 
+ @x [19] l.353
+@@ -193,9 +221,11 @@ Vertex *del_first(void)
+ @x [21] l.374
+ void init_128(d)
+   long d;
++{@+register Vertex *u;
+ @y
+ void init_128(
+   long d)
++{@+Vertex *u;
+ @z
+ 
+ @x [22] l.386
+@@ -204,24 +234,34 @@ Vertex *del_128()
+ Vertex *del_128(void)
+ @z
+ 
++@x [22] l.388
++  register Vertex *u, *t;
++@y
++  Vertex *u, *t;
++@z
++
+ @x [23] l.402
+ void enq_128(v,d)
+   Vertex *v; /* new vertex for the queue */
+   long d; /* its |dist| */
++{@+register Vertex *u=head+(d&0x7f);
+ @y
+ void enq_128(
+   Vertex *v, /* new vertex for the queue */
+   long d) /* its |dist| */
++{@+Vertex *u=head+(d&0x7f);
+ @z
+ 
+ @x [24] l.425
+ void req_128(v,d)
+   Vertex *v; /* vertex to be moved to another list */
+   long d; /* its new |dist| */
++{@+register Vertex *u=head+(d&0x7f);
+ @y
+ void req_128(
+   Vertex *v, /* vertex to be moved to another list */
+   long d) /* its new |dist| */
++{@+Vertex *u=head+(d&0x7f);
+ @z
+ 
+ @x [25] l.442
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index e825390..8bfcb1f 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -72,6 +72,26 @@ Graph *econ(
+   @<Read \9{e}\.{econ.dat} and note the binary tree structure@>;
+ @z
+ 
++@x [8] l.216
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [10] l.229
++sprintf(new_graph->id,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
++@z
++
++@x [13] l.271
++register node *p,*pl,*pr; /* current node and its children */
++register node *q; /* register for list manipulation */
++@y
++node *p,*pl,*pr; /* current node and its children */
++node *q; /* register for list manipulation */
++@z
++
+ @x [14] l.274
+ @ @<Read \.{econ.dat} and note the binary tree structure@>=
+ @y
+@@ -96,10 +116,26 @@ Graph *econ(
+ @<Read \9{a}and store the sector names...@>=
+ @z
+ 
++@x [15] l.302
++for (p=node_block; p<node_block+NORM_N+NORM_N-1; p++) {@+register long c;
++@y
++for (p=node_block; p<node_block+NORM_N+NORM_N-1; p++) {@+long c;
++@z
++
+ @x [16] l.332
+ @<Read and store the output...@>=
++{@+register long s=0; /* row sum */
++  register long x; /* entry read from \.{econ.dat} */
+ @y
+ @<Read \9{a}and store the output...@>=
++{@+long s=0; /* row sum */
++  long x; /* entry read from \.{econ.dat} */
++@z
++
++@x [19] l.384
++{@+register node *special=node_index[MAX_N];
++@y
++{@+node *special=node_index[MAX_N];
+ @z
+ 
+ @x [22] l.479
+@@ -113,3 +149,35 @@ Graph *econ(
+ @y
+ @ @<Set \9{p}|p->table[2]|, |p->table[3]|, \dots\ to convolution...@>=
+ @z
++
++@x [23] l.487
++for (j=pl->table[0];j;j--) {@+register long t=pl->table[j];
++@y
++for (j=pl->table[0];j;j--) {@+long t=pl->table[j];
++@z
++
++@x [24] l.493
++{@+register long ss,rr;
++@y
++{@+long ss,rr;
++@z
++
++@x [25] l.537
++{@+register Vertex *v=new_graph->vertices+n;
++@y
++{@+Vertex *v=new_graph->vertices+n;
++@z
++
++@x [25] l.548
++    if ((p=node_index[j])!=NULL) {@+register Vertex *u=vert_index[j];
++@y
++    if ((p=node_index[j])!=NULL) {@+Vertex *u=vert_index[j];
++@z
++
++@x [29] l.591
++{@+register Arc *a=pl->SIC_list;
++  register long jj=pl->SIC, kk=pr->SIC;
++@y
++{@+Arc *a=pl->SIC_list;
++  long jj=pl->SIC, kk=pr->SIC;
++@z
+diff --git a/PROTOTYPES/gb_flip.ch b/PROTOTYPES/gb_flip.ch
+index 03b9d00..88654f8 100644
+--- a/PROTOTYPES/gb_flip.ch
++++ b/PROTOTYPES/gb_flip.ch
+@@ -49,16 +49,22 @@ extern long gb_flip_cycle(void); /* compute 55 more pseudo-random numbers */
+ 
+ @x [7] l.134
+ long gb_flip_cycle()
++{@+register long *ii, *jj;
+ @y
+ long gb_flip_cycle(void)
++{@+long *ii, *jj;
+ @z
+ 
+ @x [8] l.159
+ void gb_init_rand(seed)
+     long seed;
++{@+register long i;
++  register long prev=seed, next=1;
+ @y
+ void gb_init_rand(
+     long seed)
++{@+long i;
++  long prev=seed, next=1;
+ @z
+ 
+ @x [10] l.223
+@@ -82,9 +88,13 @@ extern void gb_init_rand(long);
+ @x [12] l.252
+ long gb_unif_rand(m)
+     long m;
++{@+register unsigned long t=two_to_the_31-(two_to_the_31 % m);
++  register long r;
+ @y
+ long gb_unif_rand(
+     long m)
++{@+unsigned long t=two_to_the_31-(two_to_the_31 % m);
++  long r;
+ @z
+ 
+ @x [12] l.256
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 3704e45..875ed83 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -106,8 +106,70 @@ Graph *games(
+   long seed) /* random number seed */
+ @z
+ 
++@x [8] l.204
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [10] l.220
++sprintf(new_graph->id,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
++@z
++
++@x [15] l.304
++{@+register node *p;
++  register char *q;
++@y
++{@+node *p;
++  char *q;
++@z
++
++@x [19] l.371
++{@+register node *p; /* the current node being considered */
++  register Vertex *v=new_graph->vertices; /* the next vertex to use */
++@y
++{@+node *p; /* the current node being considered */
++  Vertex *v=new_graph->vertices; /* the next vertex to use */
++@z
++
++@x [21] l.398
++{@+register Vertex *u,*v;
++  register long today=0; /* current day of play */
++@y
++{@+Vertex *u,*v;
++  long today=0; /* current day of play */
++@z
++
++@x [22] l.422
++{@+register char c=gb_char(); /* month code */
++  register long d; /* day of football season */
++@y
++{@+char c=gb_char(); /* month code */
++  long d; /* day of football season */
++@z
++
+ @x [23] l.440
+ static Vertex *team_lookup() /* read and decode an abbreviation */
+ @y
+ static Vertex *team_lookup(void) /* read and decode an abbreviation */
+ @z
++
++@x [23] l.441
++{@+register char *q=str_buf; /* position in |str_buf| */
++  register long h=0; /* hash code */
++  register node *p; /* position in hash list */
++@y
++{@+char *q=str_buf; /* position in |str_buf| */
++  long h=0; /* hash code */
++  node *p; /* position in hash list */
++@z
++
++@x [24] l.460
++{@+register Arc *a;
++  if (u>v) {@+register Vertex *w; register long sw;
++@y
++{@+Arc *a;
++  if (u>v) {@+Vertex *w; long sw;
++@z
+diff --git a/PROTOTYPES/gb_gates.ch b/PROTOTYPES/gb_gates.ch
+index 0658cfa..773c16a 100644
+--- a/PROTOTYPES/gb_gates.ch
++++ b/PROTOTYPES/gb_gates.ch
+@@ -24,7 +24,7 @@ extern Graph *prod(unsigned long,unsigned long);
+    /* make a network for high-speed multiplication */
+ extern void print_gates(Graph *);
+    /* write a network to standard output file */
+-extern long gate_eval(Graph *,char *,char *);
++extern long gate_eval(Graph *,const char *,char *);
+    /* evaluate a network */
+ extern Graph *partial_gates(Graph *,unsigned long,unsigned long,long,char *);
+    /* reduce network size */
+@@ -79,11 +79,17 @@ long gate_eval(g,in_vec,out_vec)
+   Graph *g; /* graph with gates as vertices */
+   char *in_vec; /* string for input values, or |NULL| */
+   char *out_vec; /* string for output values, or |NULL| */
++{@+register Vertex *v; /* the current vertex of interest */
++  register Arc *a; /* the current arc of interest */
++  register char t; /* boolean value being computed */
+ @y
+ long gate_eval(
+   Graph *g, /* graph with gates as vertices */
+-  char *in_vec, /* string for input values, or |NULL| */
++  const char *in_vec, /* string for input values, or |NULL| */
+   char *out_vec) /* string for output values, or |NULL| */
++{@+Vertex *v; /* the current vertex of interest */
++  Arc *a; /* the current arc of interest */
++  char t; /* boolean value being computed */
+ @z
+ 
+ @x [3] l.144
+@@ -110,78 +116,110 @@ Graph *risc(
+ @x [9] l.230
+ register long k,r; /* all-purpose indices */
+ @y
+-register long k; /* all-purpose indices */
+-register unsigned long r; /* all-purpose indices */
++long k; /* all-purpose indices */
++unsigned long r; /* all-purpose indices */
+ @z
+ 
+ @x [11] l.412
+ static Vertex* new_vert(t)
+   char t; /* the type of the new gate */
++{@+register Vertex *v;
+ @y
+ static Vertex* new_vert(
+   char t) /* the type of the new gate */
++{@+Vertex *v;
++@z
++
++@x [11] l.418
++    sprintf(name_buf,"%s%ld",prefix,count);
++@y
++    snprintf(name_buf,100,"%s%ld",prefix,count);
+ @z
+ 
+ @x [12] l.427
+ @d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,b);@+count=0;
+ @y
+-@d numeric_prefix(a,b) sprintf(prefix,"%c%ld:",a,(b)&0xffff);@+count=0;
++@d numeric_prefix(a,b) snprintf(prefix,8,"%c%ld:",a,(b)&0xffff);@+count=0;
+ @z
+ 
+ @x [13] l.445
+ static Vertex* make2(t,v1,v2)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make2(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.454
+ static Vertex* make3(t,v1,v2,v3)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make3(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.464
+ static Vertex* make4(t,v1,v2,v3,v4)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3,*v4;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make4(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [13] l.475
+ static Vertex* make5(t,v1,v2,v3,v4,v5)
+   char t; /* the type of the new gate */
+   Vertex *v1,*v2,*v3,*v4,*v5;
++{@+register Vertex *v=new_vert(t);
+ @y
+ static Vertex* make5(
+   char t, /* the type of the new gate */
+   Vertex *v1,Vertex *v2,Vertex *v3,Vertex *v4,Vertex *v5)
++{@+Vertex *v=new_vert(t);
+ @z
+ 
+ @x [14] l.496
+ static Vertex* comp(v)
+   Vertex *v;
++{@+register Vertex *u;
+ @y
+ static Vertex* comp(
+   Vertex *v)
++{@+Vertex *u;
++@z
++
++@x [14] l.502
++  sprintf(name_buf,"%s~",v->name);
++@y
++  snprintf(name_buf,100,"%s~",v->name);
+ @z
+ 
+ @x [15] l.514
+ static Vertex* make_xor(u,v)
+   Vertex *u,*v;
++{@+register Vertex *t1,*t2;
+ @y
+ static Vertex* make_xor(
+   Vertex *u,Vertex *v)
++{@+Vertex *t1,*t2;
++@z
++
++@x [16] l.529
++sprintf(new_graph->id,"risc(%lu)",regs);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"risc(%lu)",regs);
+ @z
+ 
+ @x [17] l.537
+@@ -292,6 +330,12 @@ strcpy(prefix,"RUN");@+count=-1;@+run_bit=new_vert('I');@/
+ @<Create gates for the \9{4}new values of \9{1}register 0...@>=
+ @z
+ 
++@x [36] l.844
++  {@+register Arc *a=gb_virgin_arc();
++@y
++  {@+Arc *a=gb_virgin_arc();
++@z
++
+ @x [38] l.876
+ static void make_adder(n,x,y,z,carry,add)
+   unsigned long n; /* number of bits */
+@@ -299,6 +343,7 @@ static void make_adder(n,x,y,z,carry,add)
+   Vertex *z[]; /* output gates */
+   Vertex *carry; /* add this to |y|, unless it's null */
+   char add; /* should we add or subtract? */
++{@+register long k;
+ @y
+ static void make_adder(
+   unsigned long n, /* number of bits */
+@@ -306,6 +351,7 @@ static void make_adder(
+   Vertex *z[], /* output gates */
+   Vertex *carry, /* add this to |y|, unless it's null */
+   char add) /* should we add or subtract? */
++{@+long k;
+ @z
+ 
+ @x [38] l.889
+@@ -332,6 +378,11 @@ long run_risc(g,rom,size,trace_regs)
+   unsigned long rom[]; /* contents of read-only memory */
+   unsigned long size; /* length of |rom| vector */
+   unsigned long trace_regs; /* if nonzero, this many registers will be traced */
++{@+register unsigned long l; /* memory address */
++  register unsigned long m; /* memory or register contents */
++  register Vertex *v; /* the current gate of interest */
++  register Arc *a; /* the current output list element of interest */
++  register long k,r; /* general-purpose indices */
+ @y
+ long run_risc(
+   Graph *g, /* graph output by |risc| */
+@@ -339,13 +390,12 @@ long run_risc(
+   unsigned long size, /* length of |rom| vector */
+   unsigned long trace_regs)
+     /* if nonzero, this many registers will be traced */
+-@z
+-
+-@x [43] l.1001
+-  register long k,r; /* general-purpose indices */
+-@y
+-  register long k; /* general-purpose indices */
+-  register unsigned long r; /* general-purpose indices */
++{@+unsigned long l; /* memory address */
++  unsigned long m; /* memory or register contents */
++  Vertex *v; /* the current gate of interest */
++  Arc *a; /* the current output list element of interest */
++  long k; /* general-purpose indices */
++  unsigned long r; /* general-purpose indices */
+ @z
+ 
+ @x [43] l.1004
+@@ -371,9 +421,11 @@ long run_risc(
+ @x [49] l.1097
+ static void pr_gate(v)
+   Vertex *v;
++{@+register Arc *a;
+ @y
+ static void pr_gate(
+   Vertex *v)
++{@+Arc *a;
+ @z
+ 
+ @x [49] l.1112
+@@ -385,9 +437,13 @@ static void pr_gate(
+ @x [49] l.1117
+ void print_gates(g)
+   Graph *g;
++{@+register Vertex *v;
++  register Arc *a;
+ @y
+ void print_gates(
+   Graph *g)
++{@+Vertex *v;
++  Arc *a;
+ @z
+ 
+ @x [50] l.1128
+@@ -405,6 +461,14 @@ static Graph* reduce(
+   Graph *g)
+ @z
+ 
++@x [51] l.1148
++{@+register Vertex *u, *v; /* the current vertices of interest */
++  register Arc *a, *b; /* the current arcs of interest */
++@y
++{@+Vertex *u, *v; /* the current vertices of interest */
++  Arc *a, *b; /* the current arcs of interest */
++@z
++
+ @x [53] l.1200
+     case NOT:@<Try to reduce an inverter, then |goto done|@>;
+     case AND:@<Try to reduce an {\sc AND} gate@>;@+goto test_single_arg;
+@@ -441,6 +505,12 @@ static Graph* reduce(
+ @ @<Try to reduce an \9{e}{\sc EXCLUSIVE-OR} gate@>=
+ @z
+ 
++@x [59] l.1328
++sprintf(name_buf,"%s~",u->name);
++@y
++snprintf(name_buf,100,"%s~",u->name);
++@z
++
+ @x [61] l.1365
+   do@+{
+ @y
+@@ -453,6 +523,12 @@ static Graph* reduce(
+   } while (v!=sentinel);
+ @z
+ 
++@x [65] l.1451
++  sprintf(name_buf,"%s>%s",v->name,u->name);
++@y
++  snprintf(name_buf,100,"%s>%s",v->name,u->name);
++@z
++
+ @x [66] l.1487
+ Graph* prod(m,n)
+   unsigned long m,n; /* lengths of the binary numbers to be multiplied */
+@@ -461,12 +537,26 @@ Graph* prod(unsigned long m,unsigned long n)
+   /* lengths of the binary numbers to be multiplied */
+ @z
+ 
++@x [67] l.1527
++sprintf(g->id,"prod(%lu,%lu)",m,n);
++@y
++snprintf(g->id,ID_FIELD_SIZE,"prod(%lu,%lu)",m,n);
++@z
++
+ @x [68] l.1537
+ unsigned long m_plus_n; /* guess what this variable holds */
+ @y
+ long m_plus_n; /* guess what this variable holds */
+ @z
+ 
++@x [71] l.1608
++register long i,j,k,l; /* all-purpose indices */
++register Vertex *v; /* current vertex of interest */
++@y
++long i,j,k,l; /* all-purpose indices */
++Vertex *v; /* current vertex of interest */
++@z
++
+ @x [72] l.1614
+ for (j=0; j<m; j++) {
+ @y
+@@ -491,6 +581,18 @@ for (j=0; j<m-2; j++) {
+ for (j=0; j<(long)m-2; j++) {
+ @z
+ 
++@x [80] l.1815
++    sprintf(name_buf,"%c%ld:%ld",a,k,j);
++@y
++    snprintf(name_buf,100,"%c%ld:%ld",a,k,j);
++@z
++
++@x [83] l.1846
++for (k=0;k<m_plus_n;k++) {@+register Arc *a=gb_virgin_arc();
++@y
++for (k=0;k<m_plus_n;k++) {@+Arc *a=gb_virgin_arc();
++@z
++
+ @x [84] l.1897
+ Graph *partial_gates(g,r,prob,seed,buf)
+   Graph *g; /* generalized gate graph */
+@@ -499,6 +601,7 @@ Graph *partial_gates(g,r,prob,seed,buf)
+    /* scaled probability of not touching subsequent input gates */
+   long seed; /* seed value for random number generation */
+   char *buf; /* optional parameter for information about partial assignment */
++{@+register Vertex *v; /* the current gate of interest */
+ @y
+ Graph *partial_gates(
+   Graph *g, /* generalized gate graph */
+@@ -508,6 +611,7 @@ Graph *partial_gates(
+   long seed, /* seed value for random number generation */
+   char *buf)
+     /* optional parameter for information about partial assignment */
++{@+Vertex *v; /* the current gate of interest */
+ @z
+ 
+ @x [84] l.1910
+@@ -515,3 +619,9 @@ Graph *partial_gates(
+ @y
+     case 'I': if ((gb_next_rand()>>15)>=(long)prob) {
+ @z
++
++@x [85] l.1930
++  sprintf(g->id,"partial_gates(%s,%lu,%lu,%ld)",name_buf,r,prob,seed);
++@y
++  snprintf(g->id,ID_FIELD_SIZE,"partial_gates(%s,%lu,%lu,%ld)",name_buf,r,prob,seed);
++@z
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index 220efef..c660d09 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -107,15 +107,21 @@ Graph *gb_new_graph(
+   long n) /* desired number of vertices */
+ @z
+ 
++@x [23] l.454
++      sprintf(cur_graph->id,"gb_new_graph(%ld)",n);
++@y
++      snprintf(cur_graph->id,ID_FIELD_SIZE,"gb_new_graph(%ld)",n);
++@z
++
+ @x [25] l.478
+ extern void make_compound_id();
+   /* routine to set one |id| field from another */
+ extern void make_double_compound_id(); /* ditto, but from two others */
+ @y
+-extern void make_compound_id(Graph *,char *,Graph *,char *);
++extern void make_compound_id(Graph *,const char *,Graph *,const char *);
+   /* routine to set one |id| field from another */
+-extern void make_double_compound_id(Graph *,char *,Graph *,char *,@|
+-  Graph *,char *); /* ditto, but from two others */
++extern void make_double_compound_id(Graph *,const char *,Graph *,const char *,@|
++  Graph *,const char *); /* ditto, but from two others */
+ @z
+ 
+ @x [26] l.487
+@@ -125,17 +131,19 @@ void make_compound_id(g,s1,gg,s2) /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
+   Graph *gg; /* graph whose |id| is to be copied */
+   char *s2; /* string for the end of the new |id| */
+ @y
+-void make_compound_id( /* |sprintf(g->id,"%s%s%s",s1,gg->id,s2)| */
++void make_compound_id( /* |snprintf(g->id,ID_FIELD_SIZE,"%s%s%s",s1,gg->id,s2)| */
+   Graph *g, /* graph whose |id| is to be set */
+-  char *s1, /* string for the beginning of the new |id| */
++  const char *s1, /* string for the beginning of the new |id| */
+   Graph *gg, /* graph whose |id| is to be copied */
+-  char *s2) /* string for the end of the new |id| */
++  const char *s2) /* string for the end of the new |id| */
+ @z
+ 
+ @x [26] l.495
+   if (strlen(tmp)<avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
++  else sprintf(g->id,"%s%.*s...)%s",s1,avail-5,tmp,s2);
+ @y
+-  if (strlen(tmp)<(siz_t)avail) sprintf(g->id,"%s%s%s",s1,tmp,s2);
++  if (strlen(tmp)<(siz_t)avail) snprintf(g->id,ID_FIELD_SIZE,"%s%s%s",s1,tmp,s2);
++  else snprintf(g->id,ID_FIELD_SIZE,"%s%.*s...)%s",s1,avail-5,tmp,s2);
+ @z
+ 
+ @x [27] l.500
+@@ -149,18 +157,19 @@ void make_double_compound_id(g,s1,gg,s2,ggg,s3)
+   char *s3; /* string for the end of the new |id| */
+ @y
+ void make_double_compound_id(
+-    /* |sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
++    /* |snprintf(g->id,ID_FIELD_SIZE,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3)| */
+   Graph *g, /* graph whose |id| is to be set */
+-  char *s1, /* string for the beginning of the new |id| */
++  const char *s1, /* string for the beginning of the new |id| */
+   Graph *gg, /* first graph whose |id| is to be copied */
+-  char *s2, /* string for the middle of the new |id| */
++  const char *s2, /* string for the middle of the new |id| */
+   Graph *ggg, /* second graph whose |id| is to be copied */
+-  char *s3) /* string for the end of the new |id| */
++  const char *s3) /* string for the end of the new |id| */
+ @z
+ 
+ @x [27] l.509
+   if (strlen(gg->id)+strlen(ggg->id)<avail)
+     sprintf(g->id,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3);
++  else sprintf(g->id,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+ @y
+   if (strlen(gg->id)+strlen(ggg->id)<(siz_t)avail)
+   { int ret = snprintf(g->id,ID_FIELD_SIZE,"%s%s%s%s%s",s1,gg->id,s2,ggg->id,s3);
+@@ -169,22 +178,27 @@ void make_double_compound_id(
+       abort();
+     }
+   }
++  else snprintf(g->id,ID_FIELD_SIZE,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+ @z
+ 
+ @x [29] l.551
+ Arc *gb_virgin_arc()
++{@+register Arc *cur_arc=next_arc;
+ @y
+ Arc *gb_virgin_arc(void)
++{@+Arc *cur_arc=next_arc;
+ @z
+ 
+ @x [30] l.583
+ void gb_new_arc(u,v,len)
+   Vertex *u, *v; /* a newly created arc will go from |u| to |v| */
+   long len; /* its length */
++{@+register Arc *cur_arc=gb_virgin_arc();
+ @y
+ void gb_new_arc(
+   Vertex *u,Vertex *v, /* a newly created arc will go from |u| to |v| */
+   long len) /* its length */
++{@+Arc *cur_arc=gb_virgin_arc();
+ @z
+ 
+ @x [31] l.623
+@@ -199,18 +213,24 @@ void gb_new_arc(
+ void gb_new_edge(u,v,len)
+   Vertex *u, *v; /* new arcs will go from |u| to |v| and from |v| to |u| */
+   long len; /* their length */
++{@+register Arc *cur_arc=gb_virgin_arc();
+ @y
+ void gb_new_edge(
+   Vertex *u,Vertex *v, /* new arcs will go from |u| to |v| and from |v| to |u| */
+   long len) /* their length */
++{@+Arc *cur_arc=gb_virgin_arc();
+ @z
+ 
+ @x [35] l.691
+ char *gb_save_string(s)
+   register char *s; /* the string to be copied */
++{@+register char *p=s;
++  register long len;
+ @y
+ char *gb_save_string(
+-  register char *s) /* the string to be copied */
++  const char *s) /* the string to be copied */
++{@+char *p=(char*)s;
++  long len;
+ @z
+ 
+ @x [39] l.774
+@@ -246,7 +266,7 @@ extern Arc*gb_virgin_arc(void);
+    /* allocate a new |Arc| record */
+ extern void gb_new_edge(Vertex *,Vertex *,long);
+    /* append an edge (two arcs) to the current graph */
+-extern char*gb_save_string(register char *);
++extern char*gb_save_string(const char *);
+    /* store a string in the current graph */
+ extern void switch_to_graph(Graph *);
+    /* save allocation variables, swap in others */
+@@ -275,17 +295,31 @@ extern Vertex* hash_lookup(char *,Graph *);
+ @x [44] l.857
+ void hash_in(v)
+   Vertex *v;
++{@+  register char *t=v->name;
++  register Vertex *u;
+ @y
+ void hash_in(
+   Vertex *v)
++{@+char *t=v->name;
++  Vertex *u;
++@z
++
++@x [45] l.885
++{@+register long h;
++@y
++{@+long h;
+ @z
+ 
+ @x [46] l.900
+ Vertex* hash_out(s)
+   char* s;
++{@+register char *t=s;
++  register Vertex *u;
+ @y
+ Vertex* hash_out(
+   char *s)
++{@+char *t=s;
++  Vertex *u;
+ @z
+ 
+ @x [47] l.911
+@@ -296,6 +330,12 @@ void hash_setup(
+   Graph *g)
+ @z
+ 
++@x [47] l.914
++  if (g && g->n>0) {@+register Vertex *v;
++@y
++  if (g && g->n>0) {@+Vertex *v;
++@z
++
+ @x [48] l.926
+ Vertex* hash_lookup(s,g)
+   char *s;
+@@ -305,3 +345,9 @@ Vertex* hash_lookup(
+   char *s,
+   Graph *g)
+ @z
++
++@x [48] l.930
++  if (g && g->n>0) {@+register Vertex *v;
++@y
++  if (g && g->n>0) {@+Vertex *v;
++@z
+diff --git a/PROTOTYPES/gb_io.ch b/PROTOTYPES/gb_io.ch
+index 705cb29..da5513e 100644
+--- a/PROTOTYPES/gb_io.ch
++++ b/PROTOTYPES/gb_io.ch
+@@ -52,8 +52,10 @@ int main(void)
+ 
+ @x [9] l.123
+ static void fill_buf()
++{@+register char *p;
+ @y
+ static void fill_buf(void)
++{@+char *p;
+ @z
+ 
+ @x [11] l.182
+@@ -66,7 +68,7 @@ static void fill_buf(void)
+ static char *imap="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+ abcdefghijklmnopqrstuvwxyz_^~&@@,;.:?!%#$+-*/|\\<=>()[]{}`'\" \n";
+ @y
+-static char *imap=
++static const char *imap=
+    "0123456789"@|
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"@|
+    "abcdefghijklmnopqrstuvwxyz"@|
+@@ -113,14 +115,18 @@ extern long imap_ord(char); /* the ordinal number of a given character */
+ 
+ @x [15] l.213
+ static void icode_setup()
++{@+register long k;
++  register char *p;
+ @y
+ static void icode_setup(void)
++{@+long k;
++  char *p;
+ @z
+ 
+ @x [15] l.217
+   for (p=imap,k=0; *p; p++,k++) icode[*p]=k;
+ @y
+-  for (p=imap,k=0; *p; p++,k++) icode[(unsigned char)*p]=k;
++  for (p=(char*)imap,k=0; *p; p++,k++) icode[(unsigned char)*p]=k;
+ @z
+ 
+ @x [16] l.225
+@@ -135,10 +141,14 @@ extern long new_checksum(char *,long); /* compute change in magic number */
+ long new_checksum(s,old_checksum)
+   char *s; /* a string */
+   long old_checksum;
++{@+register long a=old_checksum;
++  register char*p;
+ @y
+ long new_checksum(
+   char *s, /* a string */
+   long old_checksum)
++{@+long a=old_checksum;
++  char*p;
+ @z
+ 
+ @x [18] l.245
+@@ -204,9 +214,11 @@ long gb_digit(
+ @x [24] l.323
+ unsigned long gb_number(d)
+     char d;
++{@+register unsigned long a=0;
+ @y
+ unsigned long gb_number(
+     char d)
++{@+unsigned long a=0;
+ @z
+ 
+ @x [24] l.328
+@@ -258,8 +270,8 @@ char *gb_string(
+ extern void gb_raw_open(); /* open a file for GraphBase input */
+ extern long gb_open(); /* open a GraphBase data file; return 0 if OK */
+ @y
+-extern void gb_raw_open(char *); /* open a file for GraphBase input */
+-extern long gb_open(char *); /* open a GraphBase data file; return 0 if OK */
++extern void gb_raw_open(const char *); /* open a file for GraphBase input */
++extern long gb_open(const char *); /* open a GraphBase data file; return 0 if OK */
+ @z
+ 
+ @x [30] l.432
+@@ -267,7 +279,13 @@ void gb_raw_open(f)
+     char *f;
+ @y
+ void gb_raw_open(
+-    char *f)
++    const char *f)
++@z
++
++@x [31] l.458
++  sprintf(str_buf,"%s%s",DATA_DIRECTORY,f);
++@y
++  snprintf(str_buf,STR_BUF_LENGTH,"%s%s",DATA_DIRECTORY,f);
+ @z
+ 
+ @x [32] l.464
+@@ -275,7 +293,13 @@ long gb_open(f)
+     char *f;
+ @y
+ long gb_open(
+-    char *f)
++    const char *f)
++@z
++
++@x [34] l.501
++sprintf(str_buf,"* File \"%s\"",f);
++@y
++snprintf(str_buf,STR_BUF_LENGTH,"* File \"%s\"",f);
+ @z
+ 
+ @x [38] l.531
+@@ -290,6 +314,12 @@ long gb_close()
+ long gb_close(void)
+ @z
+ 
++@x [39] l.541
++  sprintf(str_buf,"* End of file \"%s\"",file_name);
++@y
++  snprintf(str_buf,STR_BUF_LENGTH,"* End of file \"%s\"",file_name);
++@z
++
+ @x [41] l.565
+ @ @d gb_raw_close gb_r_close /* for Procrustean external linkage */
+ 
+diff --git a/PROTOTYPES/gb_lisa.ch b/PROTOTYPES/gb_lisa.ch
+index 559ea22..816ed4f 100644
+--- a/PROTOTYPES/gb_lisa.ch
++++ b/PROTOTYPES/gb_lisa.ch
+@@ -80,11 +80,19 @@ long *lisa(
+   @<Read \9{l}\.{lisa.dat} and map it to the desired output form@>;
+ @z
+ 
++@x [7] l.165
++register long k,l; /* the current row and column of output */
++register long i,j; /* all-purpose indices */
++@y
++long k,l; /* the current row and column of output */
++long i,j; /* all-purpose indices */
++@z
++
+ @x [8] l.183
+ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    m,n,d,m0,m1,n0,n1,d0,d1);
+ @y
+-sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
++snprintf(lisa_id,63,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+    m&0x1ff,n&0x1ff,d&0xffffffff,m0&0x1ff,m1&0x1ff,n0&0x1ff,n1&0x1ff,
+    d0&0xffffffff,d1&0xffffffff);
+ @z
+@@ -98,13 +106,13 @@ sprintf(lisa_id,"lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
+ @x [12] l.229
+ for (l=lam=0; l<n; l++) {@+register long sum=0;
+ @y
+-for (l=lam=0; l<(long)n; l++) {@+register long sum=0;
++for (l=lam=0; l<(long)n; l++) {@+long sum=0;
+ @z
+ 
+ @x [12] l.231
+   do@+{@+register long nl; /* giant column where something new might happen */
+ @y
+-  do {@+register long nl; /* giant column where something new might happen */
++  do {@+long nl; /* giant column where something new might happen */
+ @z
+ 
+ @x [12] l.237
+@@ -124,7 +132,7 @@ for (k=kap=0; k<(long)m;k++) {
+ @x [13] l.253
+   do@+{@+register long nk; /* giant row where something new might happen */
+ @y
+-  do {@+register long nk; /* giant row where something new might happen */
++  do {@+long nk; /* giant row where something new might happen */
+ @z
+ 
+ @x [13] l.255
+@@ -158,6 +166,12 @@ static long na_over_b(n,a,b)
+ static long na_over_b(long n,long a,long b)
+ @z
+ 
++@x [15] l.289
++  register long r,k,q,br;
++@y
++  long r,k,q,br;
++@z
++
+ @x [15] l.295
+   do@+{@+bit[k]=n&1; /* save the least significant bit of $n$ */
+ @y
+@@ -198,8 +212,10 @@ for (i=0;i<(long)m0;i++)
+ 
+ @x [21] l.344
+ @ @<Read a row of input into |in_row|@>=
++{@+register long dd;
+ @y
+ @ @<Read \9{a}a row of input into |in_row|@>=
++{@+long dd;
+ @z
+ 
+ @x [23] l.388
+@@ -247,8 +263,8 @@ utility field.
+ @x [24] l.426
+ register long j,k,l; /* all-purpose indices */
+ @y
+-register unsigned long j; /* all-purpose index */
+-register long k,l; /* all-purpose indices */
++unsigned long j; /* all-purpose index */
++long k,l; /* all-purpose indices */
+ @z
+ 
+ @x [25] l.431
+@@ -292,6 +308,12 @@ utility field.
+     if (k>0&&l<(long)n-1&&*(apos-n)==*(apos-n+1)) f[l+1]=l;
+ @z
+ 
++@x [29] l.512
++sprintf(new_graph->id,"plane_%s",lisa_id);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane_%s",lisa_id);
++@z
++
+ @x [30] l.533
+ for (l=0;l<n;l++) u[l]=NULL;
+ for (k=0,apos=a,aloc=0;k<m;k++)
+@@ -302,6 +324,12 @@ for (k=0,apos=a,aloc=0;k<(long)m;k++)
+   for (l=0;l<(long)n;l++,apos++,aloc++) {
+ @z
+ 
++@x [30] l.538
++      sprintf(str_buf,"%ld",regs);
++@y
++      snprintf(str_buf,STR_BUF_LENGTH,"%ld",regs);
++@z
++
+ @x [32] l.562
+ static void adjac(u,v)
+   Vertex *u,*v;
+@@ -330,16 +358,38 @@ static void adjac(Vertex *u,Vertex *v)
+     /* should we prefer dark pixels to light pixels? */
+ @z
+ 
++@x [34] l.611
++register long k,l; /* all-purpose indices */
++@y
++long k,l; /* all-purpose indices */
++@z
++
++@x [34] l.615
++register Vertex *u,*v; /* current vertices of interest */
++@y
++Vertex *u,*v; /* current vertices of interest */
++@z
++
++@x [35] l.624
++sprintf(new_graph->id,"bi_lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%c)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"bi_lisa(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%c)",
++@z
++
+ @x [35] l.628
+ for (k=0,v=new_graph->vertices;k<m;k++,v++) {
++  sprintf(str_buf,"r%ld",k); /* row vertices are called |"r0"|, |"r1"|, etc. */
+ @y
+ for (k=0,v=new_graph->vertices;k<(long)m;k++,v++) {
++  snprintf(str_buf,STR_BUF_LENGTH,"r%ld",k); /* row vertices are called |"r0"|, |"r1"|, etc. */
+ @z
+ 
+ @x [35] l.632
+ for (l=0;l<n;l++,v++) {
++  sprintf(str_buf,"c%ld",l); /* column vertices are called |"c0"|,
+ @y
+ for (l=0;l<(long)n;l++,v++) {
++  snprintf(str_buf,STR_BUF_LENGTH,"c%ld",l); /* column vertices are called |"c0"|,
+ @z
+ 
+ @x [36] l.644
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 24d31c3..0dbf8e3 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -51,6 +51,32 @@ Graph *miles(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.142
++register long j,k; /* all-purpose indices */
++@y
++long j,k; /* all-purpose indices */
++@z
++
++@x [8] l.155
++sprintf(new_graph->id,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@z
++
++@x [12] l.237
++{@+register node *p;
++@y
++{@+node *p;
++@z
++
++@x [14] l.280
++{@+register node *p; /* the current node being considered */
++  register Vertex *v=new_graph->vertices; /* the first unfilled vertex */
++@y
++{@+node *p; /* the current node being considered */
++  Vertex *v=new_graph->vertices; /* the first unfilled vertex */
++@z
++
+ @x [15] l.298
+ The coordinates computed here are compatible with those in the \TEX/ file
+ \.{cities.texmap}. Users might want to incorporate edited copies of that file
+@@ -90,6 +116,26 @@ into documents that display results obtained with |miles| graphs.
+ @y
+ @z
+ 
++@x [17] l.333
++{@+register Vertex *u,*v;
++@y
++{@+Vertex *u,*v;
++@z
++
++@x [18] l.345
++{@+register node *p;
++@y
++{@+node *p;
++@z
++
++@x [19] l.361
++{@+register node *q;
++  register node*s=NULL; /* list of nodes containing edges from city |k| */
++@y
++{@+node *q;
++  node*s=NULL; /* list of nodes containing edges from city |k| */
++@z
++
+ @x [19] l.366
+       if (j>max_distance)
+ @y
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index 626cd5d..d76d4b3 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -65,6 +65,14 @@ Graph *plane(
+     /* random number seed */
+ @z
+ 
++@x [5] l.99
++  register Vertex *v; /* the current vertex of interest */
++  register long k; /* the canonical all-purpose index */
++@y
++  Vertex *v; /* the current vertex of interest */
++  long k; /* the canonical all-purpose index */
++@z
++
+ @x [6] l.118
+ @ The coordinates are placed into utility fields |x_coord| and |y_coord|.
+ A random ID number is also stored in utility field~|z_coord|; this number is
+@@ -80,12 +88,24 @@ collinear or cocircular. No two vertices have the same ID number.
+ @ @<Set up a graph with |n| uniform...@>=
+ @z
+ 
++@x [6] l.132
++sprintf(new_graph->id,"plane(%lu,%lu,%lu,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane(%lu,%lu,%lu,%lu,%lu,%ld)",
++@z
++
+ @x [6] l.135
+ for (k=0,v=new_graph->vertices; k<n; k++,v++) {
+ @y
+ for (k=0,v=new_graph->vertices; k<(long)n; k++,v++) {
+ @z
+ 
++@x [6] l.139
++  sprintf(str_buf,"%ld",k);@+v->name=gb_save_string(str_buf);
++@y
++  snprintf(str_buf,STR_BUF_LENGTH,"%ld",k);@+v->name=gb_save_string(str_buf);
++@z
++
+ @x [7] l.147
+ @ @(gb_plane.h@>=
+ #define x_coord @t\quad@> x.I
+@@ -127,22 +147,22 @@ void delaunay(
+ @x [12] l.252
+ static void new_euclid_edge(u,v)
+   Vertex *u,*v;
+-@y
+-static void new_euclid_edge(Vertex *u,Vertex *v)
+-@z
+-
+-@x [12] l.255
++{@+register long dx,dy;
+   if ((gb_next_rand()>>15)>=gprob) {
+ @y
++static void new_euclid_edge(Vertex *u,Vertex *v)
++{@+long dx,dy;
+   if ((unsigned long)(gb_next_rand()>>15)>=gprob) {
+ @z
+ 
+ @x [13] l.283
+ static long int_sqrt(x)
+   long x;
++{@+register long y, m, q=2; long k;
+ @y
+ static long int_sqrt(
+   long x)
++{@+long y, m, q=2; long k;
+ @z
+ 
+ @x [15] l.322
+@@ -153,36 +173,64 @@ static long sign_test(
+   long x1,long x2,long x3,long y1,long y2,long y3)
+ @z
+ 
++@x [15] l.326
++  register long t; /* temporary register for swapping */
++@y
++  long t; /* temporary register for swapping */
++@z
++
++@x [18] l.373
++{@+register long lx,rx,ly,ry;
++@y
++{@+long lx,rx,ly,ry;
++@z
++
+ @x [20] l.431
+ static long ccw(u,v,w)
+   Vertex *u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++  register long det=(u->x_coord-wx)*(v->y_coord-wy)
+ @y
+ static long ccw(
+   Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++  long det=(u->x_coord-wx)*(v->y_coord-wy)
+ @z
+ 
+ @x [21] l.474
+ static long incircle(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long incircle(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
++@z
++
++@x [21] l.480
++  register long det=sign_test(tx*uy-ty*ux,ux*vy-uy*vx,vx*ty-vy*tx,@|
++@y
++  long det=sign_test(tx*uy-ty*ux,ux*vy-uy*vx,vx*ty-vy*tx,@|
+ @z
+ 
+ @x [24] l.542
+ static long ff(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long ff(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @z
+ 
+ @x [24] l.550
+ static long gg(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @y
+ static long gg(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long wx=w->x_coord, wy=w->y_coord; /* $x_w$, $y_w$ */
+ @z
+ 
+ @x [24] l.558
+@@ -196,9 +244,17 @@ static long hh(
+ @x [24] l.563
+ static long jj(t,u,v,w)
+   Vertex *t,*u,*v,*w;
++{@+register long vx=v->x_coord, wy=w->y_coord;
+ @y
+ static long jj(
+   Vertex *t,Vertex *u,Vertex *v,Vertex *w)
++{@+long vx=v->x_coord, wy=w->y_coord;
++@z
++
++@x [26] l.619
++register siz_t reg; /* used while computing mates */
++@y
++siz_t reg; /* used while computing mates */
+ @z
+ 
+ @x [35] l.751
+@@ -213,6 +269,30 @@ do {
+ } while (x->u);
+ @z
+ 
++@x [36] l.789
++else {@+register node *xp;
++@y
++else {@+node *xp;
++@z
++
++@x [38] l.827
++{@+register node *xp;
++@y
++{@+node *xp;
++@z
++
++@x [38] l.833
++  while (t!=r && (ccw(p,s,t))) {@+register node *xpp;
++@y
++  while (t!=r && (ccw(p,s,t))) {@+node *xpp;
++@z
++
++@x [39] l.859
++    register node *xp, *xpp;
++@y
++    node *xp, *xpp;
++@z
++
+ @x [40] l.882
+ static void flip(c,d,e,t,tp,tpp,p,xp,xpp)
+   arc *c,*d,*e;
+@@ -228,7 +308,7 @@ static void flip(
+ @x [40] l.886
+ {@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+ @y
+-{@+register arc *ep=e->next, *cp=c->next, *cpp=cp->next;
++{@+arc *ep=e->next, *cp=c->next, *cpp=cp->next;
+   (void) t; (void) tp;
+ @z
+ 
+@@ -259,6 +339,12 @@ Graph *plane_miles(
+     /* random number seed */
+ @z
+ 
++@x [42] l.963
++sprintf(new_graph->id,"plane_miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"plane_miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
++@z
++
+ @x [44] l.982
+ static void new_mile_edge(u,v)
+   Vertex *u,*v;
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index ea6dd64..4072830 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -43,17 +43,49 @@ Graph *raman(
+   @<Compute \9{p}|p+1| generators that will define the graph's edges@>;
+ @z
+ 
+-@x [16] l.283
++@x [9] l.152
++register long a, aa, k; /* primary indices in loops */
++@y
++long a, aa, k; /* primary indices in loops */
++@z
++
++@x [9] l.156
++register Vertex *v; /* the current vertex of interest */
++@y
++Vertex *v; /* the current vertex of interest */
++@z
++
++@x [13] l.248
++sprintf(new_graph->id,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
++@z
++
++@x [14] l.263
++  sprintf(name_buf,"%ld",a);
++@y
++  snprintf(name_buf,19,"%ld",a);
++@z
++
++@x [16] l.282
++    if (aa==q) sprintf(name_buf,"{%ld,INF}",a);
+     else sprintf(name_buf,"{%ld,%ld}",a,aa);
+ @y
+-    else sprintf(name_buf,"{%ld,%ld}",
++    if (aa==q) snprintf(name_buf,19,"{%ld,INF}",a);
++    else snprintf(name_buf,19,"{%ld,%ld}",
+       (unsigned long)a&0xffff,(unsigned long)aa&0xffff);
+ @z
+ 
++@x [17] l.309
++        sprintf(name_buf,"(%ld,%ld;0,1)",v->x.I,b);
++@y
++        snprintf(name_buf,19,"(%ld,%ld;0,1)",v->x.I,b);
++@z
++
+ @x [17] l.314
+         sprintf(name_buf,"(%ld,%ld;1,%ld)",b,v->y.I,c);
+ @y
+-        sprintf(name_buf,"(%ld,%ld;1,%ld)",
++        snprintf(name_buf,19,"(%ld,%ld;1,%ld)",
+           (unsigned long)b&0x1fff,
+           (unsigned long)(v->y.I)&0x1fff,
+           (unsigned long)c&0x1fff);
+@@ -73,6 +105,24 @@ static void deposit(
+   long a,long b,long c,long d) /* a solution to $a^2+b^2+c^2+d^2=p$ */
+ @z
+ 
++@x [24] l.553
++{@+register long g,h;
++@y
++{@+long g,h;
++@z
++
++@x [26] l.633
++      register Vertex* u;
++@y
++      Vertex* u;
++@z
++
++@x [26] l.642
++      }@+else {@+register Arc* ap;
++@y
++      }@+else {@+Arc* ap;
++@z
++
+ @x [27] l.673
+   @<Set |u| to the vertex whose label is |(a,b;c,d)|@>;
+ @y
+@@ -89,8 +139,16 @@ static void deposit(
+ static long lin_frac(a,k)
+   long a; /* the number being transformed; $q$ represents $\infty$ */
+   long k; /* index into |gen| table */
++{@+register long q=q_inv[0]; /* the modulus */
+ @y
+ static long lin_frac(
+   long a, /* the number being transformed; $q$ represents $\infty$ */
+   long k) /* index into |gen| table */
++{@+long q=q_inv[0]; /* the modulus */
++@z
++
++@x [30] l.704
++  register long num, den; /* numerator and denominator */
++@y
++  long num, den; /* numerator and denominator */
+ @z
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 393e7f2..877091f 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -68,12 +68,30 @@ Graph *random_graph(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.173
++register long k; /* vertex being processed */
++@y
++long k; /* vertex being processed */
++@z
++
+ @x [7] l.181
+ for (k=0; k<n; k++) {
+   sprintf(name_buffer,"%ld",k);
+ @y
+ for (k=0; k<(long)n; k++) {
+-  sprintf(name_buffer,"%ld",k&0xffffffff);
++  snprintf(name_buffer,11,"%ld",k&0xffffffff);
++@z
++
++@x [7] l.185
++sprintf(new_graph->id,"random_graph(%lu,%lu,%d,%d,%d,%s,%s,%ld,%ld,%ld)",@|
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"random_graph(%lu,%lu,%d,%d,%d,%s,%s,%ld,%ld,%ld)",@|
++@z
++
++@x [9] l.195
++{@+register Vertex *u,*v;
++@y
++{@+Vertex *u,*v;
+ @z
+ 
+ @x [9] l.204
+@@ -85,6 +103,12 @@ for (k=0; k<(long)n; k++) {
+   }
+ @z
+ 
++@x [10] l.223
++else {@+register Arc *a;
++@y
++else {@+Arc *a;
++@z
++
+ @x [10] l.226
+     if (a->tip==v)
+ @y
+@@ -100,6 +124,15 @@ for (k=0; k<(long)n; k++) {
+     }
+ @z
+ 
++@x [11] l.248
++{@+register long acc; /* sum of probabilities */
++  register long *p; /* pointer to current probability of interest */
++@y
++{@+long acc; /* sum of probabilities */
++  long *p; /* pointer to current probability of interest */
++@z
++
++
+ @x [13] l.290
+     while (nn<n) nn+=nn, kk--;
+ @y
+@@ -112,6 +145,22 @@ for (k=0; k<(long)n; k++) {
+     while (nn<(long)n) nn+=nn, kk--;
+ @z
+ 
++@x [15] l.313
++{@+register magic_entry *magic;
++  register long uu=gb_next_rand(); /* uniform random number */
++@y
++{@+magic_entry *magic;
++  long uu=gb_next_rand(); /* uniform random number */
++@z
++
++@x [16] l.322
++{@+register magic_entry *magic;
++  register long uu=gb_next_rand(); /* uniform random number */
++@y
++{@+magic_entry *magic;
++  long uu=gb_next_rand(); /* uniform random number */
++@z
++
+ @x [18] l.369
+ static magic_entry *walker(n,nn,dist,g)
+   long n; /* length of |dist| vector */
+@@ -123,10 +172,28 @@ static magic_entry *walker(n,nn,dist,g)
+ static magic_entry *walker(
+   long n, /* length of |dist| vector */
+   long nn, /* $2^{\lceil\mskip1mu\lg n\rceil}$ */
+-  register long *dist, /* start of distribution table, which sums to $2^{30}$ */
++  long *dist, /* start of distribution table, which sums to $2^{30}$ */
+   Graph *g) /* tables will be allocated for this graph's vertices */
+ @z
+ 
++@x [18] l.378
++  register node *p, *q; /* pointer variables for list manipulation */
++@y
++  node *p, *q; /* pointer variables for list manipulation */
++@z
++
++@x [20] l.413
++{@+register magic_entry *r; register long x;
++@y
++{@+magic_entry *r; long x;
++@z
++
++@x [21] l.431
++{@+register magic_entry *r; register long x;
++@y
++{@+magic_entry *r; long x;
++@z
++
+ @x [22] l.454
+ Graph *random_bigraph(n1,n2,m,multi,dist1,dist2,min_len,max_len,seed)
+   unsigned long n1,n2; /* number of vertices desired in each part */
+@@ -151,6 +218,20 @@ Graph *random_bigraph(
+     /* random number seed */
+ @z
+ 
++@x [22] l.479
++  sprintf(new_graph->id,"random_bigraph(%lu,%lu,%lu,%d,%s,%s,%ld,%ld,%ld)",@|
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"random_bigraph(%lu,%lu,%lu,%d,%s,%s,%ld,%ld,%ld)",@|
++@z
++
++@x [23] l.493
++{@+register long *p, *q; /* traversers of the dists */
++  register long k; /* vertex count */
++@y
++{@+long *p, *q; /* traversers of the dists */
++  long k; /* vertex count */
++@z
++
+ @x [23] l.498
+   else for (k=0; k<n1; k++) *q++=(0x40000000+k)/n1;
+ @y
+@@ -170,6 +251,8 @@ long random_lengths(g,directed,min_len,max_len,dist,seed)
+   long min_len,max_len; /* bounds on random lengths */
+   long *dist; /* distribution of lengths */
+   long seed; /* random number seed */
++{@+register Vertex *u,*v; /* current vertices of interest */
++  register Arc *a; /* current arc of interest */
+ @y
+ long random_lengths(
+   Graph *g, /* graph whose lengths will be randomized */
+@@ -177,6 +260,8 @@ long random_lengths(
+   long min_len,long max_len, /* bounds on random lengths */
+   long *dist, /* distribution of lengths */
+   long seed) /* random number seed */
++{@+Vertex *u,*v; /* current vertices of interest */
++  Arc *a; /* current arc of interest */
+ @z
+ 
+ @x [24] l.532
+@@ -187,12 +272,26 @@ long random_lengths(
+ 
+ @x [24] l.538
+   @<Check |dist| for validity, and set up the |dist_table|@>;
++  sprintf(buffer,",%d,%ld,%ld,%s,%ld)",directed?1:0,@|
+ @y
+   @<Check \9{d}|dist| for validity, and set up the |dist_table|@>;
++  snprintf(buffer,43,",%d,%ld,%ld,%s,%ld)",directed?1:0,@|
+ @z
+ 
+ @x [26] l.549
+ @ @<Check |dist| for validity...@>=
++if (dist) {@+register long acc; /* sum of probabilities */
++  register long *p; /* pointer to current probability of interest */
++  register long n=max_len-min_len+1;
+ @y
+ @ @<Check \9{d}|dist| for validity...@>=
++if (dist) {@+long acc; /* sum of probabilities */
++  long *p; /* pointer to current probability of interest */
++  long n=max_len-min_len+1;
++@z
++
++@x [27] l.572
++    else {@+register long len; /* a random length */
++@y
++    else {@+long len; /* a random length */
+ @z
+diff --git a/PROTOTYPES/gb_roget.ch b/PROTOTYPES/gb_roget.ch
+index 641df95..630f6c9 100644
+--- a/PROTOTYPES/gb_roget.ch
++++ b/PROTOTYPES/gb_roget.ch
+@@ -37,6 +37,20 @@ Graph *roget(
+   long seed) /* random number seed */
+ @z
+ 
++@x [6] l.106
++sprintf(new_graph->id,"roget(%lu,%lu,%lu,%ld)",n,min_distance,prob,seed);
++@y
++snprintf(new_graph->id,ID_FIELD_SIZE,"roget(%lu,%lu,%lu,%ld)",n,min_distance,prob,seed);
++@z
++@x [9] l.136
++register long j,k; /* all-purpose indices */
++register Vertex *v; /* current vertex */
++@y
++long j,k; /* all-purpose indices */
++Vertex *v; /* current vertex */
++@z
++
++
+ @x [11] l.170
+ @d cat_no u.I /* utility field |u| of each vertex holds the category number */
+ 
+diff --git a/PROTOTYPES/gb_save.ch b/PROTOTYPES/gb_save.ch
+index c3f9f37..49a52d0 100644
+--- a/PROTOTYPES/gb_save.ch
++++ b/PROTOTYPES/gb_save.ch
+@@ -14,8 +14,8 @@ extern Graph *restore_graph();
+ #ifndef GB_SAVE_H
+ #define GB_SAVE_H
+ typedef struct graph_struct Graph;
+-extern long save_graph(Graph *,char *);
+-extern Graph *restore_graph(char *);
++extern long save_graph(Graph *,const char *);
++extern Graph *restore_graph(const char *);
+ #endif /* |GB_SAVE_H| */
+ @z
+ 
+@@ -31,7 +31,13 @@ Graph *restore_graph(f)
+   char *f; /* the file name */
+ @y
+ Graph *restore_graph(
+-  char *f) /* the file name */
++  const char *f) /* the file name */
++@z
++
++@x [4] l.152
++  register char *p; /* register for string manipulation */
++@y
++  char *p; /* register for string manipulation */
+ @z
+ 
+ @x [6] l.205
+@@ -44,10 +50,12 @@ Graph *restore_graph(
+ static long fill_field(l,t)
+   util *l; /* location of field to be filled in */
+   char t; /* its type code */
++{@+register char c; /* character just read */
+ @y
+ static long fill_field(
+   util *l, /* location of field to be filled in */
+   char t) /* its type code */
++{@+char c; /* character just read */
+ @z
+ 
+ @x [7] l.237
+@@ -86,6 +94,12 @@ static long fill_field(
+ @<Fill in \9{a}a string pointer@>=
+ @z
+ 
++@x [12] l.287
++else {@+register char* p;
++@y
++else {@+char* p;
++@z
++
+ @x [14] l.308
+ static long finish_record()
+ @y
+@@ -98,6 +112,18 @@ static long finish_record(void)
+ @ @<Fill in \9{g}|g->n|, |g->m|, and |g|'s utility fields@>=
+ @z
+ 
++@x [16] l.333
++{@+register Vertex* v;
++@y
++{@+Vertex* v;
++@z
++
++@x [17] l.352
++{@+register Arc* a;
++@y
++{@+Arc* a;
++@z
++
+ @x [20] l.419
+ long save_graph(g,f)
+   Graph *g; /* graph to be saved */
+@@ -105,7 +131,7 @@ long save_graph(g,f)
+ @y
+ long save_graph(
+   Graph *g, /* graph to be saved */
+-  char *f) /* name of the file to be created */
++  const char *f) /* name of the file to be created */
+ @z
+ 
+ @x [20] l.428
+@@ -120,14 +146,28 @@ long save_graph(
+ @<Initialize the \9{b}|blocks| array@>=
+ @z
+ 
++@x [24] l.506
++register block_rep *cur_block; /* the current block of interest */
++@y
++block_rep *cur_block; /* the current block of interest */
++@z
++
+ @x [25] l.528
+ static void classify(l,t)
+   util *l; /* location of field to be classified */
+   char t; /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
++{@+register block_rep *cur_block;
++  register char* loc;
++  register long tcat; /* category corresponding to |t| */
++  register long tsize; /* record size corresponding to |t| */
+ @y
+ static void classify(
+   util *l, /* location of field to be classified */
+   char t) /* its type code, from the set $\{\.Z,\.I,\.V,\.S,\.A\}$ */
++{@+block_rep *cur_block;
++  char* loc;
++  long tcat; /* category corresponding to |t| */
++  long tsize; /* record size corresponding to |t| */
+ @z
+ 
+ @x [27] l.569
+@@ -148,12 +188,30 @@ static void classify(
+   } while (activity);
+ @z
+ 
++@x [28] l.597
++{@+register Vertex*v;
++@y
++{@+Vertex*v;
++@z
++
++@x [29] l.611
++{@+register Arc*a;
++@y
++{@+Arc*a;
++@z
++
+ @x [30] l.623
+ @<Translate |g| into external format@>=
+ @y
+ @<Translate \9{g}|g| into external format@>=
+ @z
+ 
++@x [31] l.641
++register long s; /* accumulator register for arithmetic calculations */
++@y
++long s; /* accumulator register for arithmetic calculations */
++@z
++
+ @x [35] l.682
+ static void flushout() /* output the buffer to |save_file| */
+ @y
+@@ -163,15 +221,25 @@ static void flushout(void) /* output the buffer to |save_file| */
+ @x [36] l.696
+ static void prepare_string(s)
+   char *s; /* string that is moved to |item_buf| */
++{@+register char *p,*q;
+ @y
+ static void prepare_string(
+   char *s) /* string that is moved to |item_buf| */
++{@+char *p,*q;
+ @z
+ 
+ @x [37] l.719
+ static void move_item()
++{@+register long l=strlen(item_buf);
+ @y
+ static void move_item(void)
++{@+long l=strlen(item_buf);
++@z
++
++@x [37] l.723
++    else {@+register char *p=item_buf;
++@y
++    else {@+char *p=item_buf;
+ @z
+ 
+ @x [37] l.726
+@@ -186,14 +254,28 @@ static void move_item(void)
+       } while(l>78);
+ @z
+ 
++@x [38] l.744
++{@+register char*p;
++@y
++{@+char*p;
++@z
++
+ @x [39] l.757
+ static void translate_field(l,t)
+   util *l; /* address of field to be output in symbolic form */
+   char t; /* type of formatting desired */
++{@+register block_rep *cur_block;
++  register char* loc;
++  register long tcat; /* category corresponding to |t| */
++  register long tsize; /* record size corresponding to |t| */
+ @y
+ static void translate_field(
+   util *l, /* address of field to be output in symbolic form */
+   char t) /* type of formatting desired */
++{@+block_rep *cur_block;
++  char* loc;
++  long tcat; /* category corresponding to |t| */
++  long tsize; /* record size corresponding to |t| */
+ @z
+ 
+ @x [39] l.768
+@@ -204,6 +286,12 @@ static void translate_field(
+  case 'Z': buf_ptr--; /* forget spurious comma */
+ @z
+ 
++@x [39] l.772
++ case 'I': numeric: sprintf(item_buf,"%ld",l->I);@+goto ready;
++@y
++ case 'I': numeric: snprintf(item_buf,MAX_SV_STRING+3,"%ld",l->I);@+goto ready;
++@z
++
+ @x [39] l.778
+   @<Translate a pointer variable@>;
+ @y
+@@ -216,6 +304,18 @@ static void translate_field(
+ @ @<Translate \9{a}a pointer variable@>=
+ @z
+ 
++@x [40] l.795
++sprintf(item_buf,"%c%ld",t,
++@y
++snprintf(item_buf,MAX_SV_STRING+3,"%c%ld",t,
++@z
++
++@x [42] l.817
++{@+register Vertex* v;
++@y
++{@+Vertex* v;
++@z
++
+ @x [42] l.821
+       @<Translate all |Vertex| records in |cur_block|@>;
+ @y
+@@ -233,3 +333,9 @@ static void translate_field(
+ @y
+ @ @<Translate \9{a}all |Vertex| records in |cur_block|@>=
+ @z
++
++@x [44] l.843
++{@+register Arc* a;
++@y
++{@+Arc* a;
++@z
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index 94f341f..dea017b 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -36,9 +36,15 @@ extern node* gb_sorted[]; /* the results of |gb_linksort| */
+ @x [5] l.95
+ void gb_linksort(l)
+   node *l;
++{@+register long k; /* index to destination list */
++  register node **pp; /* current place in list of pointers */
++  register node *p, *q; /* pointers for list manipulation */
+ @y
+ void gb_linksort(
+   node *l)
++{@+long k; /* index to destination list */
++  node **pp; /* current place in list of pointers */
++  node *p, *q; /* pointers for list manipulation */
+ @z
+ 
+ @x [5] l.101
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index b4cf2ab..3235eba 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -38,6 +38,16 @@ Graph *words(
+   long seed) /* random number seed */
+ @z
+ 
++@x [9] l.198
++else {@+register double flacc;
++  register long *p,*q;
++  register long acc;
++@y
++else {@+double flacc;
++  long *p,*q;
++  long acc;
++@z
++
+ @x [10] l.210
+ static double flabs(x)
+   long x;
+@@ -54,6 +64,26 @@ static long iabs(
+   long x)
+ @z
+ 
++@x [14] l.265
++register long wt; /* the weight of the current word */
++@y
++long wt; /* the weight of the current word */
++@z
++
++@x [19] l.311
++{@+register long j; /* position in |word| */
++@y
++{@+long j; /* position in |word| */
++@z
++
++@x [21] l.350
++{@+register long *p,*q; /* pointers to $C_j$ and $w_j$ */
++  register long c; /* current count */
++@y
++{@+long *p,*q; /* pointers to $C_j$ and $w_j$ */
++  long c; /* current count */
++@z
++
+ @x [21] l.359
+   do@+{
+ @y
+@@ -66,6 +96,14 @@ static long iabs(
+   } while (gb_char()==',');
+ @z
+ 
++@x [22] l.385
++  register long j; /* runs through sorted lists */
++  register node *p; /* the current node being output */
++@y
++  long j; /* runs through sorted lists */
++  node *p; /* the current node being output */
++@z
++
+ @x [26] l.418
+ @d weight u.I /* weighted frequencies */
+ @d loc a.I /* index of difference (0, 1, 2, 3, or 4) */
+@@ -86,15 +124,45 @@ if (n==0 || nn<n)
+ if (n==0 || nn<(long)n)
+ @z
+ 
++@x [27] l.432
++  sprintf(new_graph->id,"words(%lu,0,%ld,%ld)",n,wt_threshold,seed);
++else sprintf(new_graph->id,
++@y
++  snprintf(new_graph->id,ID_FIELD_SIZE,"words(%lu,0,%ld,%ld)",n,wt_threshold,seed);
++else snprintf(new_graph->id,ID_FIELD_SIZE,
++@z
++
++@x [28] l.443
++{@+register char *q; /* the new word */
++@y
++{@+char *q; /* the new word */
++@z
++
++@x [29] l.462
++{@+register char *r; /* previous word possibly adjacent to |q| */
++  register Vertex **h; /* hash address for linear probing */
++  register long raw_hash; /* five-letter hash code before remaindering */
++@y
++{@+char *r; /* previous word possibly adjacent to |q| */
++  Vertex **h; /* hash address for linear probing */
++  long raw_hash; /* five-letter hash code before remaindering */
++@z
++
+ @x [30] l.508
+ @p Vertex *find_word(q,f)
+   char *q;
+   void @[@] (*f)(); /* |*f| should take one argument, of type |Vertex *|,
+                         or |f| should be |NULL| */
++{@+register char *r; /* previous word possibly adjacent to |q| */
++  register Vertex **h; /* hash address for linear probing */
++  register long raw_hash; /* five-letter hash code before remaindering */
+ @y
+ @p Vertex *find_word(
+   char *q,
+   void @[@] (*f)(Vertex *))
+     /* |*f| should take one argument, of type |Vertex *|,
+        or |f| should be |NULL| */
++{@+char *r; /* previous word possibly adjacent to |q| */
++  Vertex **h; /* hash address for linear probing */
++  long raw_hash; /* five-letter hash code before remaindering */
+ @z
+diff --git a/PROTOTYPES/girth.ch b/PROTOTYPES/girth.ch
+index 83b6d38..16adc3c 100644
+--- a/PROTOTYPES/girth.ch
++++ b/PROTOTYPES/girth.ch
+@@ -10,3 +10,19 @@ main()
+ @y
+ int main(void)
+ @z
++
++@x [12] l.303
++  register Vertex *v; /* current vertex in list at distance $k-1$ */
++  register Vertex *u; /* head of list for distance $k$ */
++@y
++  Vertex *v; /* current vertex in list at distance $k-1$ */
++  Vertex *u; /* head of list for distance $k$ */
++@z
++
++@x [13] l.321
++{@+register Arc *a;
++  for (a=v->arcs;a;a=a->next) {@+register Vertex *w;
++@y
++{@+Arc *a;
++  for (a=v->arcs;a;a=a->next) {@+Vertex *w;
++@z
+diff --git a/PROTOTYPES/ladders.ch b/PROTOTYPES/ladders.ch
+index 7d0ba78..5ce1c0c 100644
+--- a/PROTOTYPES/ladders.ch
++++ b/PROTOTYPES/ladders.ch
+@@ -15,12 +15,36 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [9] l.184
++if (alph) {@+register Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
++    register char *p=u->name;
++    for (a=u->arcs; a; a=a->next) {@+register char *q=a->tip->name;
++@y
++if (alph) {@+Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+Arc *a;
++    char *p=u->name;
++    for (a=u->arcs; a; a=a->next) {@+char *q=a->tip->name;
++@z
++
++@x [9] l.191
++}@+else if (freq) {@+register Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+register Arc *a;
++@y
++}@+else if (freq) {@+Vertex *u;
++  for (u=g->vertices+g->n-1; u>=g->vertices; u--) {@+Arc *a;
++@z
++
+ @x [11] l.217
+ long freq_cost(v)
+   Vertex *v;
++{@+register long acc=v->weight; /* the frequency, to be shifted right */
++  register long k=16;
+ @y
+ long freq_cost(
+   Vertex *v)
++{@+long acc=v->weight; /* the frequency, to be shifted right */
++  long k=16;
+ @z
+ 
+ @x [14] l.253
+@@ -40,7 +64,7 @@ long alph_dist(p,q)
+   register char *p, *q;
+ @y
+ long alph_dist(
+-  register char *p,register char *q)
++  char *p,char *q)
+ @z
+ 
+ @x [18] l.292
+@@ -56,7 +80,7 @@ long hamm_dist(p,q)
+   register char *p, *q;
+ @y
+ long hamm_dist(
+-  register char *p,register char *q)
++  char *p,char *q)
+ @z
+ 
+ @x [22] l.339
+@@ -75,12 +99,22 @@ long hamm_heur(
+   Vertex *v)
+ @z
+ 
++@x [25] l.361
++for (uu=g->vertices+gg->n-1; uu>=g->vertices+g->n; uu--) {@+register Arc *a;
++@y
++for (uu=g->vertices+gg->n-1; uu>=g->vertices+g->n; uu--) {@+Arc *a;
++@z
++
+ @x [27] l.381
+ long prompt_for_five(s,p)
+   char *s; /* string used in prompt message */
+   register char *p; /* where to put a string typed by the user */
++{@+register char *q; /* current position to store characters */
++  register long c; /* current character of input */
+ @y
+ long prompt_for_five(
+-  char *s, /* string used in prompt message */
+-  register char *p) /* where to put a string typed by the user */
++  const char *s, /* string used in prompt message */
++  char *p) /* where to put a string typed by the user */
++{@+char *q; /* current position to store characters */
++  long c; /* current character of input */
+ @z
+diff --git a/PROTOTYPES/miles_span.ch b/PROTOTYPES/miles_span.ch
+index 1acde49..6295b02 100644
+--- a/PROTOTYPES/miles_span.ch
++++ b/PROTOTYPES/miles_span.ch
+@@ -44,6 +44,14 @@ void report(
+   long l) /* the length of the edge between them */
+ @z
+ 
++@x [12] l.364
++  for (o,a=aucket[l];a;) {@+register long ll;
++    register Arc *aa=a;
++@y
++  for (o,a=aucket[l];a;) {@+long ll;
++    Arc *aa=a;
++@z
++
+ @x [14] l.378
+ unsigned long krusk(g)
+   Graph *g;
+@@ -52,6 +60,16 @@ unsigned long krusk(
+   Graph *g)
+ @z
+ 
++@x [15] l.402
++register Arc *a; /* current edge of interest */
++register long l; /* current bucket of interest */
++register Vertex *u,*v,*w; /* current vertices of interest */
++@y
++Arc *a; /* current edge of interest */
++long l; /* current bucket of interest */
++Vertex *u,*v,*w; /* current vertices of interest */
++@z
++
+ @x [19] l.491
+ As in {\sc GB\_\,DIJK}, we define pointers to priority queue subroutines
+ so that the queueing mechanism can be varied.
+@@ -71,9 +89,23 @@ Vertex *(*del_min)(); /* remove an element with smallest key */
+ @x [20] l.513
+ unsigned long jar_pr(g)
+   Graph *g;
++{@+register Vertex *t; /* vertex that is just becoming known */
+ @y
+ unsigned long jar_pr(
+   Graph *g)
++{@+Vertex *t; /* vertex that is just becoming known */
++@z
++
++@x [22] l.554
++{@+register Arc *a; /* an arc leading from |t| */
++@y
++{@+Arc *a; /* an arc leading from |t| */
++@z
++
++@x [22] l.556
++    register Vertex *v; /* a vertex adjacent to |t| */
++@y
++    Vertex *v; /* a vertex adjacent to |t| */
+ @z
+ 
+ @x [24] l.610
+@@ -93,20 +125,32 @@ void init_heap(
+ void enq_heap(v,d)
+   Vertex *v; /* vertex that is entering the queue */
+   long d; /* its key (aka |dist|) */
++{@+register unsigned long k; /* position of a ``hole'' in the heap */
++  register unsigned long j; /* the parent of that position */
++  register Vertex *u; /* |heap_elt(j)| */
+ @y
+ void enq_heap(
+   Vertex *v, /* vertex that is entering the queue */
+   long d) /* its key (aka |dist|) */
++{@+unsigned long k; /* position of a ``hole'' in the heap */
++  unsigned long j; /* the parent of that position */
++  Vertex *u; /* |heap_elt(j)| */
+ @z
+ 
+ @x [26] l.651
+ void req_heap(v,d)
+   Vertex *v; /* vertex whose key is being reduced */
+   long d; /* its new |dist| */
++{@+register unsigned long k; /* position of a ``hole'' in the heap */
++  register unsigned long j; /* the parent of that position */
++  register Vertex *u; /* |heap_elt(j)| */
+ @y
+ void req_heap(
+   Vertex *v, /* vertex whose key is being reduced */
+   long d) /* its new |dist| */
++{@+unsigned long k; /* position of a ``hole'' in the heap */
++  unsigned long j; /* the parent of that position */
++  Vertex *u; /* |heap_elt(j)| */
+ @z
+ 
+ @x [26] l.661
+@@ -127,10 +171,22 @@ Vertex *del_heap()
+ Vertex *del_heap(void)
+ @z
+ 
+-@x [27] l.686
++@x [27] l.684
++  register Vertex *u; /* vertex being sifted down */
++  register unsigned long k; /* hole in the heap */
+   register unsigned long j; /* child of that hole */
++  register long d; /* |u->dist|, the key of the vertex being sifted */
++@y
++  Vertex *u; /* vertex being sifted down */
++  unsigned long k; /* hole in the heap */
++  unsigned long j; /* child of that hole */
++  long d; /* |u->dist|, the key of the vertex being sifted */
++@z
++
++@x [27] l.694
++  while (j<=hsize) {
+ @y
+-  register long j; /* child of that hole */
++  while (j<=(unsigned long)hsize) {
+ @z
+ 
+ @x [28] l.709
+@@ -146,7 +202,15 @@ void init_F_heap(d)
+ @y
+ void init_F_heap(
+   long d)
+-{@+F_heap=(void*)d;@+}
++{@+F_heap=(Vertex*)d;@+}
++@z
++
++@x [32] l.831
++{@+register Arc *aa;
++  register Vertex *uu;
++@y
++{@+Arc *aa;
++  Vertex *uu;
+ @z
+ 
+ @x [33] l.860
+@@ -159,14 +223,26 @@ void enq_F_heap(
+   long d) /* its key (aka |dist|) */
+ @z
+ 
++@x [33] l.869
++  }@+else {@+register Vertex *u;
++@y
++  }@+else {@+Vertex *u;
++@z
++
+ @x [34] l.901
+ void req_F_heap(v,d)
+   Vertex *v; /* vertex whose key is being reduced */
+   long d; /* its new |dist| */
++{@+register Vertex *p,*pp; /* parent and grandparent of |v| */
++  register Vertex *u,*w; /* other vertices being modified */
++  register long r; /* twice the rank plus the tag */
+ @y
+ void req_F_heap(
+   Vertex *v, /* vertex whose key is being reduced */
+   long d) /* its new |dist| */
++{@+Vertex *p,*pp; /* parent and grandparent of |v| */
++  Vertex *u,*w; /* other vertices being modified */
++  long r; /* twice the rank plus the tag */
+ @z
+ 
+ @x [38] l.970
+@@ -175,6 +251,16 @@ Vertex *del_F_heap()
+ Vertex *del_F_heap(void)
+ @z
+ 
++@x [38] l.972
++  register Vertex *t,*u,*v,*w; /* registers for manipulation of links */
++  register long h=-1; /* the highest rank present in |new_roots| */
++  register long r; /* rank of current tree */
++@y
++  Vertex *t,*u,*v,*w; /* registers for manipulation of links */
++  long h=-1; /* the highest rank present in |new_roots| */
++  long r; /* rank of current tree */
++@z
++
+ @x [39] l.1004
+     do@+{
+ @y
+@@ -198,13 +284,17 @@ qunite(m,q,mm,qq,h)
+   register long m,mm; /* number of nodes in the forests */
+   register Arc *q,*qq; /* binomial trees in the forests, linked by |qsib| */
+   Arc *h; /* |h->qsib| will get the result */
++{@+register Arc *p; /* tail of the list built so far */
++  register long k=1; /* size of trees currently being processed */
+ @y
+ void qunite(
+-  register long m, /* number of nodes in the forests */
+-  register Arc *q, /* binomial trees in the forests, linked by |qsib| */
+-  register long mm, /* number of nodes in the forests */
+-  register Arc *qq, /* binomial trees in the forests, linked by |qsib| */
++  long m, /* number of nodes in the forests */
++  Arc *q, /* binomial trees in the forests, linked by |qsib| */
++  long mm, /* number of nodes in the forests */
++  Arc *qq, /* binomial trees in the forests, linked by |qsib| */
+   Arc *h) /* |h->qsib| will get the result */
++{@+Arc *p; /* tail of the list built so far */
++  long k=1; /* size of trees currently being processed */
+ @z
+ 
+ @x [45] l.1171
+@@ -219,10 +309,14 @@ void qunite(
+ @<Combine \9{q}|q| and |qq| into a ``carry'' tree, and continue
+ @z
+ 
+-@x [46] l.1189
++@x [46] l.1187
++{@+register Arc *c; /* the ``carry,'' a tree of size |2k| */
++  register long key; /* |c->len| */
+   register Arc *r,*rr; /* remainders of the input lists */
+ @y
+-  register Arc *r=0,*rr=0; /* remainders of the input lists */
++{@+Arc *c; /* the ``carry,'' a tree of size |2k| */
++  long key; /* |c->len| */
++  Arc *r=NULL,*rr=NULL; /* remainders of the input lists */
+ @z
+ 
+ @x [46] l.1195
+@@ -272,9 +366,21 @@ void qmerge(
+ @x [52] l.1291
+ Arc *qdel_min(h)
+   Arc *h; /* header of binomial queue */
++{@+register Arc *p,*pp; /* current node and its predecessor */
++  register Arc *q,*qq; /* current minimum node and its predecessor */
++  register long key; /* |q->len|, the smallest key known so far */
+ @y
+ Arc *qdel_min(
+   Arc *h) /* header of binomial queue */
++{@+Arc *p,*pp; /* current node and its predecessor */
++  Arc *q,*qq; /* current minimum node and its predecessor */
++  long key; /* |q->len|, the smallest key known so far */
++@z
++
++@x [52] l.1298
++  register long mm; /* number of nodes not yet considered */
++@y
++  long mm; /* number of nodes not yet considered */
+ @z
+ 
+ @x [53] l.1324
+@@ -293,11 +399,15 @@ Arc *qdel_min(
+ qtraverse(h,visit)
+   Arc *h; /* head of binomial queue to be unraveled */
+   void @[@] (*visit)(); /* procedure to be invoked on each node */
++{@+register long m; /* the number of nodes remaining */
++  register Arc *p,*q,*r; /* current position and neighboring positions */
+ @y
+ void qtraverse(
+   Arc *h, /* head of binomial queue to be unraveled */
+-  void @[@] (*visit)(register Arc *))
++  void @[@] (*visit)(Arc *))
+     /* procedure to be invoked on each node */
++{@+long m; /* the number of nodes remaining */
++  Arc *p,*q,*r; /* current position and neighboring positions */
+ @z
+ 
+ @x [55] l.1392
+@@ -308,6 +418,22 @@ unsigned long cher_tar_kar(
+   Graph *g)
+ @z
+ 
++@x [56] l.1416
++register Vertex *s,*t; /* beginning and end of the small list */
++@y
++Vertex *s,*t; /* beginning and end of the small list */
++@z
++
++@x [56] l.1420
++register Vertex *u,*v; /* registers for list manipulation */
++register Arc *a; /* and another */
++register long j,k; /* index registers for stage 2 */
++@y
++Vertex *u,*v; /* registers for list manipulation */
++Arc *a; /* and another */
++long j,k; /* index registers for stage 2 */
++@z
++
+ @x [60] l.1492
+ do@+{a=qdel_min(v->pq);
+ @y
+@@ -329,9 +455,11 @@ do {a=qdel_min(v->pq);
+ @x [67] l.1614
+ void note_edge(a)
+   Arc *a;
++{@+register long k;
+ @y
+ void note_edge(
+   Arc *a)
++{@+long k;
+ @z
+ 
+ @x [69] l.1643
+diff --git a/PROTOTYPES/multiply.ch b/PROTOTYPES/multiply.ch
+index f9a00fc..734aa87 100644
+--- a/PROTOTYPES/multiply.ch
++++ b/PROTOTYPES/multiply.ch
+@@ -15,6 +15,14 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [5] l.96
++register char *p,*q,*r; /* pointers for string manipulation */
++register long a,b; /* amounts being carried over while doing radix conversion */
++@y
++char *p,*q,*r; /* pointers for string manipulation */
++long a,b; /* amounts being carried over while doing radix conversion */
++@z
++
+ @x [7] l.117
+ @d retry(s,t)
+     {@+printf(s);@+goto t;@+}
+@@ -29,7 +37,7 @@ strcpy(x,p);
+ strcpy(x,p);@+strcpy(z,x);
+ decimal_to_binary(z,buffer,m);
+ if (*z) {
+-  sprintf(buffer,"(Sorry, %s has more than %ld bits.)\n",x,m);
++  snprintf(buffer,2000,"(Sorry, %s has more than %ld bits.)\n",x,m);
+   retry(buffer,step1);
+ }
+ @z
+@@ -40,7 +48,7 @@ strcpy(y,p);
+ strcpy(y,p);@+strcpy(z,y);
+ decimal_to_binary(z,buffer+m,n);
+ if (*z) {
+-  sprintf(buffer+m,"(Sorry, %s has more than %ld bits.)\n\n",y,n);
++  snprintf(buffer+m,2000-m,"(Sorry, %s has more than %ld bits.)\n\n",y,n);
+   retry(buffer+m,step2);
+ }
+ @z
+@@ -56,11 +64,17 @@ decimal_to_binary(x,s,n)
+   char *x; /* decimal string */
+   char *s; /* binary string */
+   long n; /* length of |s| */
++{@+register long k;
++  register char *p,*q; /* pointers for string manipulation */
++  register long r; /* remainder */
+ @y
+ void decimal_to_binary(
+   char *x, /* decimal string */
+   char *s, /* binary string */
+   long n) /* length of |s| */
++{@+long k;
++  char *p,*q; /* pointers for string manipulation */
++  long r; /* remainder */
+ @z
+ 
+ @x [11] l.227
+@@ -82,7 +96,11 @@ if (*z) {
+ @x [13] l.282
+ long depth(g)
+   Graph *g; /* graph with gates as vertices */
++{@+register Vertex *v; /* the current vertex of interest */
++  register Arc *a; /* the current arc of interest */
+ @y
+ long depth(
+   Graph *g) /* graph with gates as vertices */
++{@+Vertex *v; /* the current vertex of interest */
++  Arc *a; /* the current arc of interest */
+ @z
+diff --git a/PROTOTYPES/queen.ch b/PROTOTYPES/queen.ch
+index 61059b2..bd72f9e 100644
+--- a/PROTOTYPES/queen.ch
++++ b/PROTOTYPES/queen.ch
+@@ -10,3 +10,15 @@ main()
+ @y
+ int main(void)
+ @z
++
++@x [2] l.39
++  register Vertex *v; /* current vertex being visited */
++@y
++  Vertex *v; /* current vertex being visited */
++@z
++
++@x [2] l.44
++    register Arc *a; /* current arc from |v| */
++@y
++    Arc *a; /* current arc from |v| */
++@z
+diff --git a/PROTOTYPES/roget_components.ch b/PROTOTYPES/roget_components.ch
+index 22537c7..abd02e4 100644
+--- a/PROTOTYPES/roget_components.ch
++++ b/PROTOTYPES/roget_components.ch
+@@ -15,6 +15,12 @@ int main(
+   char *argv[]) /* an array of strings containing those arguments */
+ @z
+ 
++@x [2] l.49
++  register Vertex *v; /* the current vertex of interest */
++@y
++  Vertex *v; /* the current vertex of interest */
++@z
++
+ @x [2] l.63
+   @<Perform Tarjan's algorithm on |g|@>;
+ @y
+@@ -38,3 +44,31 @@ int main(
+ @y
+ @<Perform \9{a}a depth-first search with |vv| as the root...@>=
+ @z
++
++@x [15] l.278
++{@+register Vertex *u; /* a vertex adjacent to |v| */
++  register Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@y
++{@+Vertex *u; /* a vertex adjacent to |v| */
++  Arc *a=v->untagged; /* |v|'s first remaining untagged arc, if any */
++@z
++
++@x [16] l.348
++{@+register Vertex *t; /* runs through the vertices of the
++@y
++{@+Vertex *t; /* runs through the vertices of the
++@z
++
++@x [17] l.385
++for (v=settled_stack; v; v=v->link) {@+register Vertex *u=v->parent;
++  register Arc *a;
++@y
++for (v=settled_stack; v; v=v->link) {@+Vertex *u=v->parent;
++  Arc *a;
++@z
++
++@x [17] l.388
++  for (a=v->arcs; a; a=a->next) {@+register Vertex *w=a->tip->parent;
++@y
++  for (a=v->arcs; a; a=a->next) {@+Vertex *w=a->tip->parent;
++@z
+diff --git a/PROTOTYPES/test_sample.ch b/PROTOTYPES/test_sample.ch
+index 4de6f3e..52b392c 100644
+--- a/PROTOTYPES/test_sample.ch
++++ b/PROTOTYPES/test_sample.ch
+@@ -54,6 +54,12 @@ static void pr_vert(
+   char *s) /* format for graph utility fields */
+ @z
+ 
++@x [14] l.206
++    if (l>0) {@+register Arc *a;
++@y
++    if (l>0) {@+Arc *a;
++@z
++
+ @x [15] l.216
+ static void pr_arc(a,l,s)
+   Arc *a; /* non-null arc to be printed */
+diff --git a/PROTOTYPES/word_components.ch b/PROTOTYPES/word_components.ch
+index 126807c..3f99ec8 100644
+--- a/PROTOTYPES/word_components.ch
++++ b/PROTOTYPES/word_components.ch
+@@ -10,3 +10,21 @@ main()
+ @y
+ int main(void)
+ @z
++
++@x [2] l.48
++  for (; a; a=a->next) {@+register Vertex *u=a->tip;
++@y
++  for (; a; a=a->next) {@+Vertex *u=a->tip;
++@z
++
++@x [4] l.87
++if (u!=v->master) {@+register Vertex *w=v->master, *t;
++@y
++if (u!=v->master) {@+Vertex *w=v->master, *t;
++@z
++
++@x [5] l.116
++  if (v->master==v && v->size>1 && v->size+v->size<g->n) {@+register Vertex *u;
++@y
++  if (v->master==v && v->size>1 && v->size+v->size<g->n) {@+Vertex *u;
++@z
+-- 
+2.54.0
+

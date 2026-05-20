@@ -1,7 +1,7 @@
-From c5cc5a672d8200f30b0f418f3368a5a01a3961c1 Mon Sep 17 00:00:00 2001
+From d0e472236ef304d2bc1a338aea14872dfb3d7527 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 22 Jan 2026 16:22:05 +0100
-Subject: [PATCH 45/47] Purge unused variables in WORD_GIANT.
+Subject: [PATCH 45/48] Purge unused variables in WORD_GIANT.
 
 Now you can
 
@@ -91,5 +91,5 @@ index ece198d..297e48e 100644
  @x replace section 5
  We consider all other components unusual, so we print them out when the
 -- 
-2.53.0
+2.54.0
 

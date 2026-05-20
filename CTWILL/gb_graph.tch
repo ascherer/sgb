@@ -103,22 +103,22 @@ graph~|g| by using the following program:
 @z
 
 @x [26]
-  char *s2) /* string for the end of the new |id| */
+  const char *s2) /* string for the end of the new |id| */
 @y
-  char *s2) /* string for the end of the new |id| */
+  const char *s2) /* string for the end of the new |id| */
 @-g@> @-s1@> @-gg@> @-s2@>
 @z
 
 @x [27]
-  char *s3) /* string for the end of the new |id| */
+  const char *s3) /* string for the end of the new |id| */
 @y
-  char *s3) /* string for the end of the new |id| */
+  const char *s3) /* string for the end of the new |id| */
 @-g@> @-s1@> @-gg@> @-s2@> @-ggg@> @-s3@>
 @z
 @x [27]
-  else sprintf(g->id,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+  else snprintf(g->id,ID_FIELD_SIZE,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
 @y
-  @+ else sprintf(g->id,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
+  @+ else snprintf(g->id,ID_FIELD_SIZE,"%s%.*s...)%s%.*s...)%s",s1,avail/2-5,gg->id,
 @z
 
 @x [28]
@@ -147,9 +147,9 @@ void gb_new_arc(
 @-u@> @-v@> @-len@>
 @z
 @x [30]
-{@+register Arc *cur_arc=gb_virgin_arc();
+{@+Arc *cur_arc=gb_virgin_arc();
 @y
-{register Arc *cur_arc=gb_virgin_arc();
+{Arc *cur_arc=gb_virgin_arc();
 @z
 
 @x [31]
@@ -177,9 +177,9 @@ is nonzero.
 @z
 
 @x [35]
-  register char *s) /* the string to be copied */
+  const char *s) /* the string to be copied */
 @y
-  register char *s) /* the string to be copied */
+  const char *s) /* the string to be copied */
 @-s@>
 @z
 
@@ -269,10 +269,10 @@ utility fields |u.V| and |v.V|.
 @y
 @<Find vertex |u|...@>=
 @%
-@$t {GB\_\,GRAPH}44 \&{register} \&{char} ${}{*}{}$@>
-@$t {GB\_\,GRAPH}46 \&{register} \&{char} ${}{*}{}$@>
-@$u {GB\_\,GRAPH}44 \&{register} \&{Vertex} ${}{*}{}$@>
-@$u {GB\_\,GRAPH}46 \&{register} \&{Vertex} ${}{*}{}$@>
+@$t {GB\_\,GRAPH}44 \&{char} ${}{*}{}$@>
+@$t {GB\_\,GRAPH}46 \&{char} ${}{*}{}$@>
+@$u {GB\_\,GRAPH}44 \&{Vertex} ${}{*}{}$@>
+@$u {GB\_\,GRAPH}46 \&{Vertex} ${}{*}{}$@>
 @z
 
 @x [46]

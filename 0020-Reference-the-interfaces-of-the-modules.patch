@@ -1,7 +1,7 @@
-From c482a427823ea513963fc31d20fd5efb61de8962 Mon Sep 17 00:00:00 2001
+From f899040fc252e48795f2cbb00ca0aa4c66b0e823 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 20 Apr 2023 19:58:38 +0200
-Subject: [PATCH 20/47] Reference the interfaces of the modules.
+Subject: [PATCH 20/48] Reference the interfaces of the modules.
 
 ---
  PROTOTYPES/gb_basic.ch |  2 +-
@@ -305,5 +305,5 @@ index 48e6f71..0a70ab3 100644
   /* we will use the {\sc GB\_\,FLIP} routines for random numbers */
  @z
 -- 
-2.53.0
+2.54.0
 

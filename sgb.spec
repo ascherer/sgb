@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 47
+Release: 48
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20251228
@@ -77,6 +77,7 @@ Patch44: 0044-Restore-wording-in-section-4-of-GB_GRAPH.patch
 Patch45: 0045-Purge-unused-variables-in-WORD_GIANT.patch
 Patch46: 0046-Move-defines-after-include.patch
 Patch47: 0047-Format-TEST_IO-consistently.patch
+Patch48: 0048-Prepare-SGB-for-CPLUSPLUS23.patch
 %endif
 
 %description
@@ -163,6 +164,9 @@ diff -u test.correct test.gb
 %{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
 
 %changelog
+* Wed May 20 2026 Andreas Scherer <andreas_tex@freenet.de> 20251228-48
+- Prepare The Stanford GraphBase for compilation with C++23.
+
 * Fri Apr 07 2023 Andreas Scherer <andreas_tex@freenet.de> 20210130-28
 - Use library interfaces in their respective modules
 

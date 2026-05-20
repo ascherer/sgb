@@ -1,7 +1,7 @@
-From f710032b7397fdcf84148f8208b9f5cde47fe4d7 Mon Sep 17 00:00:00 2001
+From 564f6083b0b9231425626d88879ad4f01eff768f Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 1 Dec 2018 12:28:19 +0100
-Subject: [PATCH 13/47] Check bit-length of operands earlier.
+Subject: [PATCH 13/48] Check bit-length of operands earlier.
 
 ---
  PROTOTYPES/multiply.ch | 46 ++++++++++++++++++++++++++++++++++++++++++
@@ -72,5 +72,5 @@ index c919adc..3e8e5d7 100644
  long depth(g)
    Graph *g; /* graph with gates as vertices */
 -- 
-2.53.0
+2.54.0
 
