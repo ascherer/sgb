@@ -102,6 +102,13 @@ graph~|g| by using the following program:
 @-n@>
 @z
 
+@x [25]
+extern void make_double_compound_id(Graph *,const char *,Graph *,const char *,@|
+@y
+extern void make_double_compound_id(Graph *,const char *,@|
+  Graph *,const char *,@|
+@z
+
 @x [26]
   const char *s2) /* string for the end of the new |id| */
 @y
