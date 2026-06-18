@@ -1,0 +1,43 @@
+From 5a994630e91c19732afbadc80e2ef4b14c2bfb36 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Thu, 18 Jun 2026 17:11:30 +0200
+Subject: [PATCH 49/49] Compile with g++-16 16.1.0.
+
+A few more buffer warnings.
+---
+ PROTOTYPES/gb_raman.ch | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/PROTOTYPES/gb_raman.ch b/PROTOTYPES/gb_raman.ch
+index 4072830..ae35ab4 100644
+--- a/PROTOTYPES/gb_raman.ch
++++ b/PROTOTYPES/gb_raman.ch
+@@ -64,14 +64,14 @@ snprintf(new_graph->id,ID_FIELD_SIZE,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
+ @x [14] l.263
+   sprintf(name_buf,"%ld",a);
+ @y
+-  snprintf(name_buf,19,"%ld",a);
++  snprintf(name_buf,19,"%ld",a&0xffff);
+ @z
+ 
+ @x [16] l.282
+     if (aa==q) sprintf(name_buf,"{%ld,INF}",a);
+     else sprintf(name_buf,"{%ld,%ld}",a,aa);
+ @y
+-    if (aa==q) snprintf(name_buf,19,"{%ld,INF}",a);
++    if (aa==q) snprintf(name_buf,19,"{%ld,INF}",a&0xffff);
+     else snprintf(name_buf,19,"{%ld,%ld}",
+       (unsigned long)a&0xffff,(unsigned long)aa&0xffff);
+ @z
+@@ -79,7 +79,7 @@ snprintf(new_graph->id,ID_FIELD_SIZE,"raman(%ld,%ld,%lu,%lu)",p,q,type,reduce);
+ @x [17] l.309
+         sprintf(name_buf,"(%ld,%ld;0,1)",v->x.I,b);
+ @y
+-        snprintf(name_buf,19,"(%ld,%ld;0,1)",v->x.I,b);
++        snprintf(name_buf,19,"(%ld,%ld;0,1)",v->x.I&0xffff,b&0xffff);
+ @z
+ 
+ @x [17] l.314
+-- 
+2.54.0
+

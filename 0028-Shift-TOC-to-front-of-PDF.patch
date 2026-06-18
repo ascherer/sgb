@@ -1,7 +1,7 @@
-From 8a0d5a60296ffe74319620c1c097e0e8ab81e544 Mon Sep 17 00:00:00 2001
+From f846f6a8a8c29173500b761f2e0766aa8629f9d6 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 21 Jun 2024 10:32:28 +0200
-Subject: [PATCH 28/48] Shift TOC to front of PDF.
+Subject: [PATCH 28/49] Shift TOC to front of PDF.
 
 for f in PROTOTYPES/*.ch
 do

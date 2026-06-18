@@ -1,7 +1,7 @@
-From 47e8bda4b1e946cc04d6303bc422fd4f8cd53b60 Mon Sep 17 00:00:00 2001
+From 1909393d71e21d2f40d937fd2b503240f42a8a24 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_scherer@alice.de>
 Date: Mon, 6 Jul 2015 12:24:55 +0200
-Subject: [PATCH 03/48] GCC -Wformat-security.
+Subject: [PATCH 03/49] GCC -Wformat-security.
 
 GCC warns about uses of format functions that represent possible
 security problems.
