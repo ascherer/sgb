@@ -1,4 +1,4 @@
-From fedaf28f9ae13abc05c0feac8e31718e8c4b378f Mon Sep 17 00:00:00 2001
+From 9c69393659b4dfde8d66ed4d1501249ca54aab3e Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 11 Dec 2016 17:45:42 +0100
 Subject: [PATCH 08/50] Build SGB library as shared object.

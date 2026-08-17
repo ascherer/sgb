@@ -1,4 +1,4 @@
-From f25fde29b32a7cef98567829fbc096e5336ecaba Mon Sep 17 00:00:00 2001
+From 319e59cf2647d50b444afdb4fd1bb8b3f31ed080 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sun, 19 Nov 2023 17:41:40 +0100
 Subject: [PATCH 24/50] Purge '\goodbreak'.

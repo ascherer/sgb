@@ -1,4 +1,4 @@
-From 3e1f0e957c75f84cc7d28d8e56859317cf72c745 Mon Sep 17 00:00:00 2001
+From 0bf3d42c7e1f3dc942abd3f1199252ad7020a7bb Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 17 Aug 2026 18:31:52 +0200
 Subject: [PATCH 50/50] Forward declare struct types.
@@ -17,9 +17,9 @@ gb_graph's 'struct arc_type' (Arc) as described in the related TeX part.
  PROTOTYPES/gb_miles.ch | 13 +++++++++++++
  PROTOTYPES/gb_plane.ch | 35 +++++++++++++++++++++++++++++++++++
  PROTOTYPES/gb_rand.ch  | 13 +++++++++++++
- PROTOTYPES/gb_sort.ch  |  6 ++++++
+ PROTOTYPES/gb_sort.ch  | 12 ++++++++++++
  PROTOTYPES/gb_words.ch | 13 +++++++++++++
- 10 files changed, 176 insertions(+)
+ 10 files changed, 182 insertions(+)
 
 diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
 index b834c8f..86738cd 100644
@@ -273,13 +273,19 @@ index 877091f..2334daa 100644
  static magic_entry *walker(n,nn,dist,g)
    long n; /* length of |dist| vector */
 diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
-index dea017b..1aae5b4 100644
+index dea017b..fbf4ac0 100644
 --- a/PROTOTYPES/gb_sort.ch
 +++ b/PROTOTYPES/gb_sort.ch
-@@ -14,6 +14,12 @@
+@@ -14,6 +14,18 @@
  #include <stddef.h> /* the \.{NULL} pointer (|NULL|) is defined here */
  @z
  
++@x [2] l.36
++is `|struct| \\{this\_struct\_type} |*link|'. Further fields are not
++@y
++is `|node| |*link|'. Further fields are not
++@z
++
 +@x [2] l.66
 +  struct node_struct *link; /* the next node on a list */
 +@y

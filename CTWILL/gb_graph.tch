@@ -10,10 +10,6 @@
 \def\startpdf{\def\pagemode{/PageMode /UseOutlines}
   \ifpdflua\pdfcatalog{\pagemode}
   \else\special{pdf: docview << \pagemode >>}\fi}
-
-@s arc_struct int
-@s graph_struct int
-@s vertex_struct int
 @z
 
 @x [1]
