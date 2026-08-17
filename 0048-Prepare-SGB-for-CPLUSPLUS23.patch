@@ -1,7 +1,7 @@
-From d81c0776e83fbe610235826b8d827cbac9209947 Mon Sep 17 00:00:00 2001
+From 2cefeade9c5d59060dde1a088b21b154134610b8 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Mon, 18 May 2026 15:48:14 +0200
-Subject: [PATCH 48/49] Prepare SGB for CPLUSPLUS23.
+Subject: [PATCH 48/50] Prepare SGB for CPLUSPLUS23.
 
 Compile with Apple clang 21.0.0 and --std=c++23.
 
@@ -3871,5 +3871,5 @@ index 126807c..3f99ec8 100644
 +  if (v->master==v && v->size>1 && v->size+v->size<g->n) {@+Vertex *u;
 +@z
 -- 
-2.54.0
+2.55.0
 

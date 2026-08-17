@@ -1,0 +1,318 @@
+From 3e1f0e957c75f84cc7d28d8e56859317cf72c745 Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Mon, 17 Aug 2026 18:31:52 +0200
+Subject: [PATCH 50/50] Forward declare struct types.
+
+Note that gb_sort actually makes 'struct_node' public as a placeholder
+for concrete local 'node' types.
+
+Note also that gb_plane's 'struct a_struct' (arc) is different from
+gb_graph's 'struct arc_type' (Arc) as described in the related TeX part.
+---
+ PROTOTYPES/football.ch | 15 +++++++++++++++
+ PROTOTYPES/gb_books.ch | 13 +++++++++++++
+ PROTOTYPES/gb_econ.ch  | 20 ++++++++++++++++++++
+ PROTOTYPES/gb_games.ch | 19 +++++++++++++++++++
+ PROTOTYPES/gb_graph.ch | 29 +++++++++++++++++++++++++++++
+ PROTOTYPES/gb_miles.ch | 13 +++++++++++++
+ PROTOTYPES/gb_plane.ch | 35 +++++++++++++++++++++++++++++++++++
+ PROTOTYPES/gb_rand.ch  | 13 +++++++++++++
+ PROTOTYPES/gb_sort.ch  |  6 ++++++
+ PROTOTYPES/gb_words.ch | 13 +++++++++++++
+ 10 files changed, 176 insertions(+)
+
+diff --git a/PROTOTYPES/football.ch b/PROTOTYPES/football.ch
+index b834c8f..86738cd 100644
+--- a/PROTOTYPES/football.ch
++++ b/PROTOTYPES/football.ch
+@@ -39,6 +39,21 @@ Vertex *prompt_for_team(const char *s)
+ @<Print \9{t}the solution corresponding to |cur_node|@>;
+ @z
+ 
++@x [10] l.189
++typedef struct node_struct {
++@y
++typedef struct node_struct node;
++typedef struct node_struct {
++@z
++
++@x [10] l.192
++  struct node_struct *prev; /* node that gave us the current team */
++  struct node_struct *next;
++@y
++  node *prev; /* node that gave us the current team */
++  node *next;
++@z
++
+ @x [13] l.207
+ node *new_node(x,d)
+   node *x; /* an old node that the new node will call |prev| */
+diff --git a/PROTOTYPES/gb_books.ch b/PROTOTYPES/gb_books.ch
+index 38fc5c0..864fee0 100644
+--- a/PROTOTYPES/gb_books.ch
++++ b/PROTOTYPES/gb_books.ch
+@@ -99,6 +99,19 @@ sprintf(file_name,"%.6s.dat",title);
+ snprintf(file_name,11,"%.6s.dat",title);
+ @z
+ 
++@x [13] l.248
++@<Type dec...@>=
++@y
++@s node int
++@<Type dec...@>=
++@z
++
++@x [13] l.251
++  struct node_struct *link; /* pointer to next record */
++@y
++  node *link; /* pointer to next record */
++@z
++
+ @x [16] l.280
+ {@+register long c; /* current code entering the system */
+ @y
+diff --git a/PROTOTYPES/gb_econ.ch b/PROTOTYPES/gb_econ.ch
+index 8bfcb1f..01dae37 100644
+--- a/PROTOTYPES/gb_econ.ch
++++ b/PROTOTYPES/gb_econ.ch
+@@ -84,6 +84,26 @@ sprintf(new_graph->id,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
+ snprintf(new_graph->id,ID_FIELD_SIZE,"econ(%lu,%lu,%lu,%ld)",n,omit,threshold,seed);
+ @z
+ 
++@x [11] l.246
++@<Type declarations@>=
++@y
++@s node int
++@<Type declarations@>=
++typedef struct node_struct node;
++@z
++
++@x [11] l.248
++  struct node_struct *rchild; /* pointer to right child of macro-sector */
++@y
++  node *rchild; /* pointer to right child of macro-sector */
++@z
++
++@x [11] l.255
++  struct node_struct *link; /* next smallest unexplored sector */
++@y
++  node *link; /* next smallest unexplored sector */
++@z
++
+ @x [13] l.271
+ register node *p,*pl,*pr; /* current node and its children */
+ register node *q; /* register for list manipulation */
+diff --git a/PROTOTYPES/gb_games.ch b/PROTOTYPES/gb_games.ch
+index 875ed83..b9ba611 100644
+--- a/PROTOTYPES/gb_games.ch
++++ b/PROTOTYPES/gb_games.ch
+@@ -118,6 +118,25 @@ sprintf(new_graph->id,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
+ snprintf(new_graph->id,ID_FIELD_SIZE,"games(%lu,%ld,%ld,%ld,%ld,%ld,%ld,%ld)",
+ @z
+ 
++@x [11] l.230
++@<Type decl...@>=
++@y
++@s node int
++@<Type decl...@>=
++@z
++
++@x [11] l.233
++  struct node_struct *link; /* pointer to next record */
++@y
++  node *link; /* pointer to next record */
++@z
++
++@x [11] l.239
++  struct node_struct *hash_link; /* pointer to next \.{ABBR} in hash list */
++@y
++  node *hash_link; /* pointer to next \.{ABBR} in hash list */
++@z
++
+ @x [15] l.304
+ {@+register node *p;
+   register char *q;
+diff --git a/PROTOTYPES/gb_graph.ch b/PROTOTYPES/gb_graph.ch
+index c660d09..674808d 100644
+--- a/PROTOTYPES/gb_graph.ch
++++ b/PROTOTYPES/gb_graph.ch
+@@ -53,6 +53,35 @@ int main(void)
+ #include <string.h> /* |@!strcpy| et al.*/
+ @z
+ 
++@x [8] l.137
++typedef union {
++  struct vertex_struct *V; /* pointer to \&{Vertex} */
++  struct arc_struct *A; /* pointer to \&{Arc} */
++  struct graph_struct *G; /* pointer to \&{Graph} */
++@y
++typedef struct vertex_struct Vertex;
++typedef struct arc_struct Arc;
++typedef struct graph_struct Graph;
++typedef union {
++  Vertex *V; /* pointer to \&{Vertex} */
++  Arc *A; /* pointer to \&{Arc} */
++  Graph *G; /* pointer to \&{Graph} */
++@z
++
++@x [9] l.164
++  struct arc_struct *arcs; /* linked list of arcs coming out of this vertex */
++@y
++  Arc *arcs; /* linked list of arcs coming out of this vertex */
++@z
++
++@x [10] l.183
++  struct vertex_struct *tip; /* the arc points to this vertex */
++  struct arc_struct *next; /* another arc pointing from the same vertex */
++@y
++  Vertex *tip; /* the arc points to this vertex */
++  Arc *next; /* another arc pointing from the same vertex */
++@z
++
+ @x [11] l.221
+ @d gb_typed_alloc(n,t,s) @[(t*)@]gb_alloc((long)((n)*@[sizeof@](t)),s)
+ @y
+diff --git a/PROTOTYPES/gb_miles.ch b/PROTOTYPES/gb_miles.ch
+index 0dbf8e3..408df21 100644
+--- a/PROTOTYPES/gb_miles.ch
++++ b/PROTOTYPES/gb_miles.ch
+@@ -63,6 +63,19 @@ sprintf(new_graph->id,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
+ snprintf(new_graph->id,ID_FIELD_SIZE,"miles(%lu,%ld,%ld,%ld,%lu,%lu,%ld)",
+ @z
+ 
++@x [9] l.165
++@<Type decl...@>=
++@y
++@s node int
++@<Type decl...@>=
++@z
++
++@x [9] l.168
++  struct node_struct *link; /* pointer to next record */
++@y
++  node *link; /* pointer to next record */
++@z
++
+ @x [12] l.237
+ {@+register node *p;
+ @y
+diff --git a/PROTOTYPES/gb_plane.ch b/PROTOTYPES/gb_plane.ch
+index d76d4b3..a42f68f 100644
+--- a/PROTOTYPES/gb_plane.ch
++++ b/PROTOTYPES/gb_plane.ch
+@@ -251,12 +251,47 @@ static long jj(
+ {@+long vx=v->x_coord, wy=w->y_coord;
+ @z
+ 
++@x [25] l.594
++typedef struct a_struct {
++@y
++typedef struct a_struct arc;
++  /* \&{arc\_struct} already taken by {\mc GB\_GRAPH}'s \&{Arc} */
++typedef struct node_struct node;
++typedef struct a_struct {
++@z
++
++@x [25] l.596
++  struct a_struct *next; /* the arc from |v| that shares
++@y
++  arc *next; /* the arc from |v| that shares
++@z
++
++@x [25] l.598
++  struct n_struct *inst; /* instruction to change
++@y
++  node *inst; /* instruction to change
++@z
++
+ @x [26] l.619
+ register siz_t reg; /* used while computing mates */
+ @y
+ siz_t reg; /* used while computing mates */
+ @z
+ 
++@x [29] l.649
++typedef struct n_struct {
++@y
++typedef struct node_struct {
++@z
++
++@x [29] l.653
++  struct n_struct *l; /* go here if |w| lies to the left of $uv$ */
++  struct n_struct *r; /* go here if |w| lies to the right of $uv$ */
++@y
++  node *l; /* go here if |w| lies to the left of $uv$ */
++  node *r; /* go here if |w| lies to the right of $uv$ */
++@z
++
+ @x [35] l.751
+ do@+{
+ @y
+diff --git a/PROTOTYPES/gb_rand.ch b/PROTOTYPES/gb_rand.ch
+index 877091f..2334daa 100644
+--- a/PROTOTYPES/gb_rand.ch
++++ b/PROTOTYPES/gb_rand.ch
+@@ -161,6 +161,19 @@ else {@+Arc *a;
+   long uu=gb_next_rand(); /* uniform random number */
+ @z
+ 
++@x [17] l.360
++typedef struct node_struct {
++@y
++typedef struct node_struct node;
++typedef struct node_struct {
++@z
++
++@x [17] l.362
++  struct node_struct *link; /* the next node on the list */
++@y
++  node *link; /* the next node on the list */
++@z
++
+ @x [18] l.369
+ static magic_entry *walker(n,nn,dist,g)
+   long n; /* length of |dist| vector */
+diff --git a/PROTOTYPES/gb_sort.ch b/PROTOTYPES/gb_sort.ch
+index dea017b..1aae5b4 100644
+--- a/PROTOTYPES/gb_sort.ch
++++ b/PROTOTYPES/gb_sort.ch
+@@ -14,6 +14,12 @@
+ #include <stddef.h> /* the \.{NULL} pointer (|NULL|) is defined here */
+ @z
+ 
++@x [2] l.66
++  struct node_struct *link; /* the next node on a list */
++@y
++  node *link; /* the next node on a list */
++@z
++
+ @x [3] l.69
+ @ In the header file, |gb_sorted| is declared to be
+ an array of pointers to |char|, since
+diff --git a/PROTOTYPES/gb_words.ch b/PROTOTYPES/gb_words.ch
+index 3235eba..f973ecb 100644
+--- a/PROTOTYPES/gb_words.ch
++++ b/PROTOTYPES/gb_words.ch
+@@ -70,6 +70,19 @@ register long wt; /* the weight of the current word */
+ long wt; /* the weight of the current word */
+ @z
+ 
++@x [15] l.281
++@<Type...@>=
++@y
++@s node int
++@<Type...@>=
++@z
++
++@x [15] l.284
++  struct node_struct *link; /* links the nodes together */
++@y
++  node *link; /* links the nodes together */
++@z
++
+ @x [19] l.311
+ {@+register long j; /* position in |word| */
+ @y
+-- 
+2.55.0
+

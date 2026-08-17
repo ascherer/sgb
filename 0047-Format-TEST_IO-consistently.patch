@@ -1,7 +1,7 @@
-From f46983d729935db7c0cf45d34f864bb8fec49542 Mon Sep 17 00:00:00 2001
+From 2eb48112f2d63c87a3bb78149662ca9a3cbdfb1a Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Tue, 24 Mar 2026 17:57:51 +0100
-Subject: [PATCH 47/49] Format TEST_IO consistently.
+Subject: [PATCH 47/50] Format TEST_IO consistently.
 
 ---
  PROTOTYPES/gb_io.ch | 13 ++++++-------
@@ -37,5 +37,5 @@ index 3012799..705cb29 100644
  @z
  
 -- 
-2.54.0
+2.55.0
 

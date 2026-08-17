@@ -1,7 +1,7 @@
-From bfc3e340afbb4d89bc049b2b1c264869e1416de6 Mon Sep 17 00:00:00 2001
+From e7c628ac416f49e099ea4edeee8af4be97742c00 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Wed, 3 Sep 2025 13:19:51 +0200
-Subject: [PATCH 42/49] Simpler signed/unsigned patches.
+Subject: [PATCH 42/50] Simpler signed/unsigned patches.
 
 ---
  PROTOTYPES/gb_gates.ch | 72 ++----------------------------------------
@@ -168,5 +168,5 @@ index 840b196..559ea22 100644
        }@+else if (f[l]==l) *apos=-1-*apos,regs++; /* new region found */
  @y
 -- 
-2.54.0
+2.55.0
 
