@@ -1,7 +1,7 @@
-From 55d6834ba84fd82d2ded595ae58ca621c6097dac Mon Sep 17 00:00:00 2001
+From 4996d555bc54893bbee5f6160b05437f53fb83fa Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 1 Jan 2026 12:11:49 +0100
-Subject: [PATCH 44/50] Restore wording in section 4 of GB_GRAPH.
+Subject: [PATCH 44/51] Restore wording in section 4 of GB_GRAPH.
 
 We keep the standard headers in gb_graph.h, because it would be
 terrible repetitive to move the necessary #include directives to

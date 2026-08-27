@@ -1,7 +1,7 @@
-From a49638ffb2872f2f5424feccf02f64c9d8881f76 Mon Sep 17 00:00:00 2001
+From c13ff6b36f09ffdcb07a63e4df4ed48ea06fa66f Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Tue, 26 Aug 2025 17:47:10 +0200
-Subject: [PATCH 38/50] Shuffle sections 15 and 16 of GB_MILES.
+Subject: [PATCH 38/51] Shuffle sections 15 and 16 of GB_MILES.
 
 ---
  PROTOTYPES/gb_miles.ch | 33 ++++++++++++++++++++++++++++++++-

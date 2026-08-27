@@ -1,7 +1,7 @@
-From 0bf3d42c7e1f3dc942abd3f1199252ad7020a7bb Mon Sep 17 00:00:00 2001
+From 0d64ea8a6d186dfc225303bf1960eb7ae016d6ab Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Mon, 17 Aug 2026 18:31:52 +0200
-Subject: [PATCH 50/50] Forward declare struct types.
+Subject: [PATCH 50/51] Forward declare struct types.
 
 Note that gb_sort actually makes 'struct_node' public as a placeholder
 for concrete local 'node' types.

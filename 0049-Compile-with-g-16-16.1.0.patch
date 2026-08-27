@@ -1,7 +1,7 @@
-From 147e05587d5ec35df81451b836a872e33666985c Mon Sep 17 00:00:00 2001
+From 9ced5256d7837f950be4b03ee398496797720f41 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Thu, 18 Jun 2026 17:11:30 +0200
-Subject: [PATCH 49/50] Compile with g++-16 16.1.0.
+Subject: [PATCH 49/51] Compile with g++-16 16.1.0.
 
 A few more buffer warnings.
 ---

@@ -1,0 +1,39 @@
+From f68c40628d12658e5925a34918efdf956d73af8a Mon Sep 17 00:00:00 2001
+From: debbuild <debbuild>
+Date: Thu, 27 Aug 2026 11:28:51 +0200
+Subject: [PATCH 51/51] Add info about PDF illustrations.
+
+---
+ PROTOTYPES/assign_lisa.ch | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/PROTOTYPES/assign_lisa.ch b/PROTOTYPES/assign_lisa.ch
+index 9ec0c19..4c9fb1a 100644
+--- a/PROTOTYPES/assign_lisa.ch
++++ b/PROTOTYPES/assign_lisa.ch
+@@ -197,6 +197,22 @@ if (complement==0)
+   for (k=0; k<(long)m; k++)
+ @z
+ 
++@x [1] l.1
++a box that is 10 centimeters wide.
++@y
++a box that is 10 centimeters wide.
++
++Extended \TeX\ engines can not handle PostScript files directly. For the
++\.{pdftex} and \.{luatex} output drivers, file \.{lisa.eps} has to be converted
++@.pdftex@>@.luatex@>
++into \.{lisa.pdf} in {\mc PDF} format.
++The associated macros are called \.{graphicx.tex}.
++@.epsf.tex@>@.graphicx.tex@>
++Within the \TeX\ document one can say
++$$\.{\\includegraphics[width=10cm]\{lisa\}}$$
++to achieve the same result.
++@z
++
+ @x [28] l.670
+     for (k=0;k<m;k++) @<Output row |k| as a hexadecimal string@>;
+ @y
+-- 
+2.55.0
+

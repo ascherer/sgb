@@ -1,7 +1,7 @@
-From c5718f7ff0854b0904f4b05f17fba8f0d466dd2b Mon Sep 17 00:00:00 2001
+From 6151911d75000163550c8adbc98a8b67311b75df Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Thu, 26 Feb 2026 17:18:40 +0100
-Subject: [PATCH 46/50] Move defines after include.
+Subject: [PATCH 46/51] Move defines after include.
 
 ---
  PROTOTYPES/gb_flip.ch | 1 +

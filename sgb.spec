@@ -8,7 +8,7 @@ Summary: The Stanford GraphBase
 License: Copyright 1993 Stanford University
 URL: http://www-cs-faculty.stanford.edu/~uno/sgb.html
 Packager: Andreas Scherer <https://ascherer.github.io>
-Release: 50
+Release: 51
 
 %if "%{_vendor}" == "debbuild"
 Version: 2:20251228
@@ -80,6 +80,7 @@ Patch47: 0047-Format-TEST_IO-consistently.patch
 Patch48: 0048-Prepare-SGB-for-CPLUSPLUS23.patch
 Patch49: 0049-Compile-with-g-16-16.1.0.patch
 Patch50: 0050-Forward-declare-struct-types.patch
+Patch51: 0051-Add-info-about-PDF-illustrations.patch
 %endif
 
 %description

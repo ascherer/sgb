@@ -1,7 +1,7 @@
-From 727f2c3026fb15ac79f7cd6193bb66e66aba509f Mon Sep 17 00:00:00 2001
+From 1909a79beef53b2458a95b19b00091788e801a31 Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Fri, 30 Nov 2018 11:06:08 +0100
-Subject: [PATCH 11/50] Try to fix 'INF'inity.
+Subject: [PATCH 11/51] Try to fix 'INF'inity.
 
 See https://www-cs-staff.stanford.edu/~knuth/sgb.html for details.
 ---

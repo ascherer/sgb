@@ -1,7 +1,7 @@
-From 83137ef184a06f8c7ed5258f9940a70bd9186554 Mon Sep 17 00:00:00 2001
+From 825607f268a97e282121dde6dbbd40304df938ed Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 10 Jan 2017 10:19:52 +0100
-Subject: [PATCH 10/50] Fix compiler warnings when optimizing.
+Subject: [PATCH 10/51] Fix compiler warnings when optimizing.
 
 'gcc -O' issues a few extra warnings.
 ---
