@@ -1,0 +1,21 @@
+@x [3]
+@(gb_dijk.h@>=
+@y
+@(gb_dijk.h@>=
+@-GB_DIJK_H@>
+@-p_dijkstra_result@>
+@z
+
+@x [6]
+@ The priority queue is implemented by four procedures:
+@y
+@r @ The priority queue is implemented by four procedures:
+@-d@> @-v@>
+@z
+
+@x [8]
+dummy function that simply returns 0 in all cases.
+@y
+dummy function that simply returns 0 in all cases.
+@-v@>
+@z

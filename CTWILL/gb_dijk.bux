@@ -1,0 +1,18 @@
+@$verbose {GB\_\,GRAPH}5 \&{long}@>
+@$V {GB\_\,GRAPH}8 \&{Vertex} ${}{*}{}$@>
+@$A {GB\_\,GRAPH}8 \&{Arc} ${}{*}{}$@>
+@$G {GB\_\,GRAPH}8 \&{Graph} ${}{*}{}$@>
+@$S {GB\_\,GRAPH}8 \&{char} ${}{*}{}$@>
+@$I {GB\_\,GRAPH}8 \&{long}@>
+@$vertex_struct {GB\_\,GRAPH}9 \&{struct}@>
+@$arcs {GB\_\,GRAPH}9 \&{Arc} ${}{*}{}$@>
+@$name {GB\_\,GRAPH}9 \&{char} ${}{*}{}$@>
+@$tip {GB\_\,GRAPH}10 \&{Vertex} ${}{*}{}$@>
+@$next {GB\_\,GRAPH}10 \&{Arc} ${}{*}{}$@>
+@$len {GB\_\,GRAPH}10 \&{long}@>
+@$graph_struct {GB\_\,GRAPH}20 \&{struct}@>
+@$vertices {GB\_\,GRAPH}20 \&{Vertex} ${}{*}{}$@>
+
+@$backlink {GB_DIJK}5 =\\{y.V}@>
+@$dist {GB_DIJK}5 =\\{z.I}@>
+@$hh_val {GB_DIJK}7 =\\{x.I}@>
