@@ -1,14 +1,1 @@
-@$V {GB\_\,GRAPH}8 \&{Vertex}${*}$@>
-@$A {GB\_\,GRAPH}8 \&{Arc}${*}$@>
-@$G {GB\_\,GRAPH}8 \&{Graph}${*}$@>
-@$S {GB\_\,GRAPH}8 \&{char}${*}$@>
-@$I {GB\_\,GRAPH}8 \&{long}@>
-
-@$name {GB\_\,GRAPH}9 \&{char}${*}$@>
-
-@$ID_FIELD_SIZE {GB\_\,GRAPH}20 =161@>
-@$graph_struct {GB\_\,GRAPH}20 \&{struct}@>
-@$id {GB\_\,GRAPH}20 \&{char} ${[\,]}$@>
-@$util_types {GB\_\,GRAPH}20 \&{char} ${[\,]}$@>
-@$data {GB\_\,GRAPH}20 \&{Area}@>
-@$aux_data {GB\_\,GRAPH}20 \&{Area}@>
+@i gb_graph.bux

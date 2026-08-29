@@ -1,3 +1,5 @@
+@$verbose {GB\_\,GRAPH}5 \&{long}@>
+
 @$alloc_fault {GB\_\,GRAPH}7 =$(-1)$@>
 @$no_room {GB\_\,GRAPH}7 =1@>
 @$early_data_fault {GB\_\,GRAPH}7 =10@>
@@ -8,14 +10,46 @@
 @$missing_operand {GB\_\,GRAPH}7 =50@>
 @$invalid_operand {GB\_\,GRAPH}7 =60@>
 @$impossible {GB\_\,GRAPH}7 =90@>
+
+@$V {GB\_\,GRAPH}8 \&{Vertex} ${}{*}{}$@>
+@$A {GB\_\,GRAPH}8 \&{Arc} ${}{*}{}$@>
+@$G {GB\_\,GRAPH}8 \&{Graph} ${}{*}{}$@>
+@$S {GB\_\,GRAPH}8 \&{char} ${}{*}{}$@>
+@$I {GB\_\,GRAPH}8 \&{long}@>
+
+@$vertex_struct {GB\_\,GRAPH}9 \&{struct}@>
+@$arcs {GB\_\,GRAPH}9 \&{Arc} ${}{*}{}$@>
+@$name {GB\_\,GRAPH}9 \&{char} ${}{*}{}$@>
+@$x {GB\_\,GRAPH}9 \&{util}@>
+@$y {GB\_\,GRAPH}9 \&{util}@>
+@$z {GB\_\,GRAPH}9 \&{util}@>
+
+@$tip {GB\_\,GRAPH}10 \&{Vertex} ${}{*}{}$@>
+@$next {GB\_\,GRAPH}10 \&{Arc} ${}{*}{}$@>
+@$len {GB\_\,GRAPH}10 \&{long}@>
+
 @$gb_typed_alloc {GB\_\,GRAPH}11 =macro $(\,)$@>
+
 @$init_area {GB\_\,GRAPH}12 =macro $(\,)$@>
+
 @$ID_FIELD_SIZE {GB\_\,GRAPH}20 =161@>
+@$graph_struct {GB\_\,GRAPH}20 \&{struct}@>
+@$vertices {GB\_\,GRAPH}20 \&{Vertex} ${}{*}{}$@>
+@$n {GB\_\,GRAPH}20 \&{long}@>
+@$id {GB\_\,GRAPH}20 \&{char} ${[\,]}$@>
+@$util_types {GB\_\,GRAPH}20 \&{char} ${[\,]}$@>
+@$data {GB\_\,GRAPH}20 \&{Area}@>
+@$aux_data {GB\_\,GRAPH}20 \&{Area}@>
+
 @$n_1 {GB\_\,GRAPH}22 =macro@>
 @$mark_bipartite {GB\_\,GRAPH}22 =macro $(\,)$@>
+
 @$make_compound_id {GB\_\,GRAPH}26 \&{void} $(\,)$@>
+
 @$make_double_compound_id {GB\_\,GRAPH}27 \&{void} $(\,)$@>
+
 @$gb_new_arc {GB\_\,GRAPH}30 \&{void} $(\,)$@>
+
 @$gb_new_edge {GB\_\,GRAPH}31 \&{void} $(\,)$@>
 
 @$io_errors {GB\_\,IO}5 \&{long}@>

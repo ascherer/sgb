@@ -1,2 +1,3 @@
-@$gb_next_rand {GB\_\,FLIP}6 =macro ${}(\,){}$@>
+@i gb_flip.bux
+
 @$words {GB\_\,WORDS}7 \&{Graph} ${}{*}(\,){}$@>

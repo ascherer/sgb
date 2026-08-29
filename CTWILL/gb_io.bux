@@ -1,4 +1,5 @@
 @$exit_test {GB\_\,IO}2 =macro (\,)@>
 @$unexpected_char {GB\_\,IO}13 =127@>
 @$STR_BUF_LENGTH {GB\_\,IO}25 =160@>
+
 @$restore_graph {GB\_\,SAVE}4 \&{Graph}${*}$@>
