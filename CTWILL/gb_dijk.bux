@@ -7,12 +7,19 @@
 @$vertex_struct {GB\_\,GRAPH}9 \&{struct}@>
 @$arcs {GB\_\,GRAPH}9 \&{Arc} ${}{*}{}$@>
 @$name {GB\_\,GRAPH}9 \&{char} ${}{*}{}$@>
+@$x {GB\_\,GRAPH}9 \&{util}@>
+@$y {GB\_\,GRAPH}9 \&{util}@>
+@$z {GB\_\,GRAPH}9 \&{util}@>
 @$tip {GB\_\,GRAPH}10 \&{Vertex} ${}{*}{}$@>
 @$next {GB\_\,GRAPH}10 \&{Arc} ${}{*}{}$@>
 @$len {GB\_\,GRAPH}10 \&{long}@>
 @$graph_struct {GB\_\,GRAPH}20 \&{struct}@>
 @$vertices {GB\_\,GRAPH}20 \&{Vertex} ${}{*}{}$@>
+@$n {GB\_\,GRAPH}20 \&{long}@>
 
-@$backlink {GB_DIJK}5 =\\{y.V}@>
-@$dist {GB_DIJK}5 =\\{z.I}@>
-@$hh_val {GB_DIJK}7 =\\{x.I}@>
+@$backlink {GB\_\,DIJK}5 =\\{y.V}@>
+@$dist {GB\_\,DIJK}5 =\\{z.I}@>
+@$hh_val {GB\_\,DIJK}7 =\\{x.I}@>
+@$hh {GB\_\,DIJK}9 \&{long} ${}({*}){}(\,){}$@>
+@$enqueue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>
+@$requeue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>

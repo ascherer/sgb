@@ -1,9 +1,47 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\def\startpdf{\def\pagemode{/PageMode /UseOutlines}
+  \ifpdflua\pdfcatalog{\pagemode}
+  \else\special{pdf: docview << \pagemode >>}\fi}
+@z
+
+@x [1]
+|d-hh(u)+hh(v)|, obtaining a graph with nonnegative arc lengths.
+@y
+|d-hh(u)+hh(v)|, obtaining a graph with nonnegative arc lengths.
+@-d@> @-u@> @-v@>
+@z
+
 @x [3]
 @(gb_dijk.h@>=
 @y
 @(gb_dijk.h@>=
 @-GB_DIJK_H@>
 @-p_dijkstra_result@>
+@-dijkstra@>
+@%
+@$dijkstra {GB\_\,DIJK}9 \&{long} (\,)@>
+@z
+
+@x [4]
+and greater radius from the starting point. Thus, if |v|~is a known
+@y
+and greater radius from the starting point. Thus, if |v|~is a known
+@-d@> @-v@>
+@z
+
+@x [5]
+fields in vertex records. Each vertex~|v| has a |dist| field |v->dist|,
+@y
+fields in vertex records. Each vertex~|v| has a |dist| field |v->dist|,
+@-v@>
 @z
 
 @x [6]
@@ -13,9 +51,69 @@
 @-d@> @-v@>
 @z
 
+@x [7]
+recomputation by storing |hh(v)| in another utility field |v->hh_val|
+@y
+recomputation by storing |hh(v)| in another utility field |v->hh_val|
+@-v@>
+@z
+
 @x [8]
 dummy function that simply returns 0 in all cases.
 @y
 dummy function that simply returns 0 in all cases.
 @-v@>
+@z
+
+@x [9]
+  long @[@] (*hh)(Vertex *)) /* heuristic function */
+@y
+  long @[@] (*hh)(Vertex *)) /* heuristic function */
+@-hh@>
+@z
+
+@x [11]
+    }@+else { /* |v| hasn't been seen before */
+@y
+    }@+else @# { /* |v| hasn't been seen before */
+@z
+
+@x [14]
+@<The |print_dijkstra_result| procedure@>=
+@y
+@<The |print_dijkstra_result| procedure@>=
+@-vv@>
+@z
+
+@x [15]
+The two queue links occupy two of a vertex's remaining utility fields.
+@y
+The two queue links occupy two of a vertex's remaining utility fields.
+@-enqueue@>
+@-requeue@>
+@%
+@$v {GB\_\,GRAPH}9 \&{util}@>
+@$w {GB\_\,GRAPH}9 \&{util}@>
+@z
+
+@x [20]
+quickly. Suppose the only lengths are 0, 1, \dots,~|k-1|; then we can
+@y
+quickly. Suppose the only lengths are 0, 1, \dots,~|k-1|; then we can
+@-k@>
+@z
+
+@x [25]
+#endif /* |GB_DIJK_H| */
+@y
+#endif /* |GB_DIJK_H| */
+@-GB_DIJK_H@>
+@z
+
+@x [26]
+@* Index. Here is a list that shows where the identifiers of this program are
+defined and used.
+
+@y
+@* Index.
 @z
