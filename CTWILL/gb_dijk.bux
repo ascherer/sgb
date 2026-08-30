@@ -1,10 +1,10 @@
 @i gb_graph.bux
 
-@$backlink {GB\_\,DIJK}5 =\\{y.V}@>
-@$dist {GB\_\,DIJK}5 =\\{z.I}@>
-@$hh_val {GB\_\,DIJK}7 =\\{x.I}@>
+@$backlink {GB\_\,DIJK}5 =${}\|y.\|V{}$@>
+@$dist {GB\_\,DIJK}5 =${}\|z.\|I{}$@>
+@$hh_val {GB\_\,DIJK}7 =${}\|x.\|I{}$@>
 @$hh {GB\_\,DIJK}9 \&{long} ${}({*}){}(\,){}$@>
 @$enqueue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>
 @$requeue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>
-@$llink {GB\_\,DIJK}15 =\\{v.V}@>
-@$rlink {GB\_\,DIJK}15 =\\{w.V}@>
+@$llink {GB\_\,DIJK}15 =${}\|v.\|V{}$@>
+@$rlink {GB\_\,DIJK}15 =${}\|w.\|V{}$@>
