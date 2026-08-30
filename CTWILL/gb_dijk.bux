@@ -6,3 +6,5 @@
 @$hh {GB\_\,DIJK}9 \&{long} ${}({*}){}(\,){}$@>
 @$enqueue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>
 @$requeue {GB\_\,DIJK}15 \&{void} ${}({*}){}(\,){}$@>
+@$llink {GB\_\,DIJK}15 =\\{v.V}@>
+@$rlink {GB\_\,DIJK}15 =\\{w.V}@>

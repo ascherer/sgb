@@ -89,6 +89,8 @@ dummy function that simply returns 0 in all cases.
 The two queue links occupy two of a vertex's remaining utility fields.
 @y
 The two queue links occupy two of a vertex's remaining utility fields.
+@-llink@>
+@-rlink@>
 @-enqueue@>
 @-requeue@>
 @%
