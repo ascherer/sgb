@@ -121,9 +121,9 @@ diff -u test.correct test.gb
 
 %{__install} -d %{buildroot}%{_bindir} \
 	%{buildroot}%{_datadir}/%{name} \
+	%{buildroot}%{_datadir}/cweb \
 	%{buildroot}%{_includedir}/%{name} \
-	%{buildroot}%{_libdir}/%{name} \
-	%{buildroot}%{_libdir}/cweb
+	%{buildroot}%{_libdir}/%{name}
 
 %{?with_tex:%{__install} -d %{buildroot}%{_docdir}/%{name}}
 
@@ -142,7 +142,7 @@ diff -u test.correct test.gb
 %{__install} -m 644 libgb.a %{buildroot}%{_libdir}/%{name}
 %endif
 
-%{__install} -m 644 gb_types.w %{buildroot}%{_libdir}/cweb
+%{__install} -m 644 gb_types.w %{buildroot}%{_datadir}/cweb
 
 %{?with_tex:%{__install} -m 644 abstract.pdf %{buildroot}%{_docdir}/%{name}}
 
@@ -150,6 +150,7 @@ diff -u test.correct test.gb
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_datadir}/%{name}/*
+%{_datadir}/cweb/gb_types.w
 %{_includedir}/%{name}/*
 %if %{with patches}
 %{_libdir}/%{name}/libgb.so
@@ -157,7 +158,6 @@ diff -u test.correct test.gb
 %else
 %{_libdir}/%{name}/libgb.a
 %endif
-%{_libdir}/cweb/gb_types.w
 %{?with_tex:%doc %{_docdir}/%{name}/*}
 
 %post
